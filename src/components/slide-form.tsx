@@ -1,7 +1,5 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { UseFormReturn, useForm } from "react-hook-form";
+import { UseFormReturn } from "react-hook-form";
 import * as z from "zod";
-import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -14,24 +12,16 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import useFormPersist from "react-hook-form-persist";
+
 import { Textarea } from "@/components/ui/textarea";
-import { SidebarMenu } from "@/components/ui/menu-bar";
+import { SlideSchema } from "@/lib/validation/slide-schema";
 
 export function SlideForm({
   form,
 }: {
-  form: UseFormReturn<z.infer<typeof FormSchema>, any, undefined>;
+  form: UseFormReturn<z.infer<typeof SlideSchema>, any, undefined>;
 }) {
-  function onSubmit(data: z.infer<typeof FormSchema>) {
+  function onSubmit(data: z.infer<typeof SlideSchema>) {
     toast({
       title: "You submitted the following values:",
       description: (
