@@ -2,6 +2,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UseFormReturn, useForm } from "react-hook-form";
 import * as z from "zod";
+import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -24,6 +25,7 @@ import {
 } from "@/components/ui/card";
 import useFormPersist from "react-hook-form-persist";
 import { Textarea } from "@/components/ui/textarea";
+import { SidebarMenu } from "@/components/ui/menu-bar";
 
 const FormSchema = z.object({
   title: z
@@ -45,6 +47,8 @@ const FormSchema = z.object({
   description: z.string(),
 });
 
+const ALL_FORMS = ["slide", "settings"] as const;
+
 export default function Home() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -55,6 +59,7 @@ export default function Home() {
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, dolorum.",
     },
   });
+  const [selectedForm, setSelectedForm] = useState(ALL_FORMS[0]);
 
   const { watch, setValue } = form;
 
@@ -72,7 +77,12 @@ export default function Home() {
         <div className="col-span-1 border p-4 rounded shadow flex flex-col items-center ">
           <Carousel values={values} />
         </div>
-        <div className="col-span-1 border p-4 rounded shadow">
+        <div className="col-span-1 border p-4 flex flex-col gap-6 rounded shadow">
+          <SidebarMenu
+            items={ALL_FORMS}
+            selectedForm={selectedForm}
+            setSelectedForm={setSelectedForm}
+          />
           <TextareaForm form={form} />
         </div>
       </div>
