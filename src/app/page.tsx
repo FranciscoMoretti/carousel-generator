@@ -13,7 +13,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import useFormPersist from "react-hook-form-persist";
-import { SidebarMenu } from "@/components/ui/menu-bar";
+import { SidebarMenu } from "@/components/menu-bar";
 import { SlideForm } from "@/components/slide-form";
 
 const FormSchema = z.object({
