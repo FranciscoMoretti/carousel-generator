@@ -1,0 +1,68 @@
+{
+  // Use workspace typescript version
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+
+  // Prettier
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // Eslint
+  "eslint.codeActionsOnSave.mode": "all",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+
+  // Pretty TS Errors - Run in different process until perf issues are solved by extension maintainers
+  "extensions.experimental.affinity": {
+    "yoavbls.pretty-ts-errors": 1
+  },
+
+  // Ignore content
+  "cSpell.ignorePaths": [
+    "node_modules", // this will ignore anything the node_modules directory
+    "**/node_modules", // the same for this one
+    "**/node_modules/**", // the same for this one
+    "node_modules/**", // Doesn't currently work due to how the current working directory is determined.
+    "vscode-extension", //
+    ".contentlayer",
+    ".husky",
+    ".next",
+    ".vercel",
+    ".vscode",
+    ".git", // Ignore the .git directory
+    "*.dll", // Ignore all .dll files.
+    "**/*.dll", // Ignore all .dll files
+    "content"
+  ],
+
+  // Edit open and close HTML tags together
+  "editor.linkedEditing": true,
+
+  // Don't autofold classes by default. ctrl+alt+a fold/unfolds
+  "tailwind-fold.autoFold": false,
+
+  "tailwindCSS.emmetCompletions": true,
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["[clsx|cn]\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ],
+  "editor.wordWrap": "on",
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "cSpell.words": [
+    "callees",
+    "classname",
+    "contentlayer",
+    "fmoretti",
+    "franmoretti",
+    "Lucide",
+    "routepath",
+    "tailwindcss",
+    "upsert"
+  ]
+}
