@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -9,7 +7,7 @@ import { buttonVariants } from "@/components/ui/button";
 interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
   items: string[];
   selectedForm: string;
-  setSelectedForm: (form: string) => null;
+  setSelectedForm: (form: string) => void;
 }
 
 export function SidebarMenu({

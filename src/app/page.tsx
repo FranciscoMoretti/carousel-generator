@@ -47,7 +47,7 @@ const FormSchema = z.object({
   description: z.string(),
 });
 
-const ALL_FORMS = ["slide", "settings"] as const;
+const ALL_FORMS = ["slide", "settings"];
 
 export default function Home() {
   const form = useForm<z.infer<typeof FormSchema>>({
