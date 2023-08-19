@@ -1,21 +1,14 @@
 import * as z from "zod";
 
 export const SettingsSchema = z.object({
-  title: z
+  avatar: z.string(),
+  name: z
     .string()
-    .min(10, {
-      message: "Title must be at least 10 characters.",
+    .min(2, {
+      message: "Name be at least 2 characters.",
     })
-    .max(160, {
-      message: "Title must not be longer than 30 characters.",
+    .max(30, {
+      message: "Name must not be longer than 30 characters.",
     }),
-  subtitle: z
-    .string()
-    .min(10, {
-      message: "Subtitle must be at least 10 characters.",
-    })
-    .max(160, {
-      message: "Subtitle must not be longer than 30 characters.",
-    }),
-  description: z.string(),
+  handle: z.string(),
 });

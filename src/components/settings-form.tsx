@@ -14,14 +14,14 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 
 import { Textarea } from "@/components/ui/textarea";
-import { SlideSchema } from "@/lib/validation/slide-schema";
+import { SettingsSchema } from "@/lib/validation/settings-schema";
 
 export function SettingsForm({
   form,
 }: {
-  form: UseFormReturn<z.infer<typeof SlideSchema>, any, undefined>;
+  form: UseFormReturn<z.infer<typeof SettingsSchema>, any, undefined>;
 }) {
-  function onSubmit(data: z.infer<typeof SlideSchema>) {
+  function onSubmit(data: z.infer<typeof SettingsSchema>) {
     toast({
       title: "You submitted the following values:",
       description: (
@@ -37,16 +37,12 @@ export function SettingsForm({
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 w-full">
         <FormField
           control={form.control}
-          name="title"
+          name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Title</FormLabel>
+              <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="Your super cool title"
-                  className=""
-                  {...field}
-                />
+                <Input placeholder="Your name" className="" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -54,16 +50,12 @@ export function SettingsForm({
         />
         <FormField
           control={form.control}
-          name="subtitle"
+          name="handle"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Subtitle</FormLabel>
+              <FormLabel>Handle</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="Subtitle for more clarity"
-                  className=""
-                  {...field}
-                />
+                <Input placeholder="Your handle" className="" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -71,13 +63,13 @@ export function SettingsForm({
         />
         <FormField
           control={form.control}
-          name="description"
+          name="avatar"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Bio</FormLabel>
+              <FormLabel>Avatar</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Tell us a little bit about yourself"
+                  placeholder="A link to your avatar"
                   className="resize-none"
                   {...field}
                 />

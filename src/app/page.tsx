@@ -39,10 +39,9 @@ export default function Home() {
   const settingsForm = useForm<z.infer<typeof SettingsSchema>>({
     resolver: zodResolver(SettingsSchema),
     defaultValues: {
-      title: "YOUR TITLE",
-      subtitle: "Your awesome subtitle",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, dolorum.",
+      avatar: "https://thispersondoesnotexist.com",
+      name: "My name",
+      handle: "@name",
     },
   });
 
@@ -59,7 +58,7 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 max-w-5xl grid grid-cols-1 xl:grid-cols-2 gap-8 font-mono text-sm ">
         <div className="col-span-1 border p-4 rounded shadow flex flex-col items-center ">
-          <CarouselSlide values={slideValues} />
+          <CarouselSlide slide={slideValues} settings={settingsValues} />
         </div>
         <div className="col-span-1 border p-4 flex flex-col gap-6 rounded shadow">
           <SidebarMenu
