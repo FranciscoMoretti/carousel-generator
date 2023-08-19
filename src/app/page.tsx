@@ -3,19 +3,20 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import * as z from "zod";
-import useFormPersist from "react-hook-form-persist";
 import { SidebarMenu } from "@/components/menu-bar";
 import { SlideForm } from "@/components/slide-form";
 import { SlideSchema } from "@/lib/validation/slide-schema";
 import { CarouselSlide } from "@/components/carousel-slide";
 import { SettingsSchema } from "@/lib/validation/settings-schema";
 import { SettingsForm } from "@/components/settings-form";
+import { usePersistFormWithKey } from "@/lib/hooks/use-persist-form-with-key";
+import { ThemeSchema } from "@/lib/validation/theme-schema";
+import { ThemeForm } from "@/components/theme-form";
 
-const ALL_FORMS = ["slide", "settings"];
+const ALL_FORMS = ["slide", "settings", "theme"];
 
 export default function Home() {
   const [selectedForm, setSelectedForm] = useState(ALL_FORMS[0]);
-  // Slide form
   const slideForm = useForm<z.infer<typeof SlideSchema>>({
     resolver: zodResolver(SlideSchema),
     defaultValues: {
@@ -25,17 +26,9 @@ export default function Home() {
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, dolorum.",
     },
   });
-
-  const { watch: slideWatch, setValue: slideSetValue } = slideForm;
-
-  useFormPersist("slideFormKey", {
-    watch: slideWatch,
-    setValue: slideSetValue,
-    storage: window.localStorage, // default window.sessionStorage
-  });
+  usePersistFormWithKey(slideForm, "slideFormKey");
   const slideValues = slideForm.watch();
 
-  // Settings Form
   const settingsForm = useForm<z.infer<typeof SettingsSchema>>({
     resolver: zodResolver(SettingsSchema),
     defaultValues: {
@@ -44,15 +37,19 @@ export default function Home() {
       handle: "@name",
     },
   });
-
-  const { watch: settingsWatch, setValue: settingsSetValue } = settingsForm;
-
-  useFormPersist("settingsFormKey", {
-    watch: settingsWatch,
-    setValue: settingsSetValue,
-    storage: window.localStorage, // default window.sessionStorage
-  });
+  usePersistFormWithKey(settingsForm, "settingsFormKey");
   const settingsValues = settingsForm.watch();
+
+  const themeForm = useForm<z.infer<typeof ThemeSchema>>({
+    resolver: zodResolver(ThemeSchema),
+    defaultValues: {
+      primary: "#005B8C",
+      secondary: "#FFCC4A",
+      accent: "#FDF8EC",
+    },
+  });
+  usePersistFormWithKey(themeForm, "settingsFormKey");
+  const themeValues = themeForm.watch();
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -68,6 +65,7 @@ export default function Home() {
           />
           {selectedForm == "slide" && <SlideForm form={slideForm} />}
           {selectedForm == "settings" && <SettingsForm form={settingsForm} />}
+          {selectedForm == "theme" && <ThemeForm form={themeForm} />}
         </div>
       </div>
     </main>
