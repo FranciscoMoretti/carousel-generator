@@ -12,6 +12,8 @@ import { SettingsForm } from "@/components/settings-form";
 import { usePersistFormWithKey } from "@/lib/hooks/use-persist-form-with-key";
 import { ThemeSchema } from "@/lib/validation/theme-schema";
 import { ThemeForm } from "@/components/theme-form";
+import { PdfSlide } from "@/components/pdf-slide";
+import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
 
 const ALL_FORMS = ["slide", "settings", "theme"];
 
@@ -54,6 +56,36 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 max-w-5xl grid grid-cols-1 xl:grid-cols-2 gap-8 font-mono text-sm ">
+        {process.env.NODE_ENV && (
+          <div className="col-span-1 border p-4 rounded shadow flex flex-col items-center ">
+            <PDFViewer
+              showToolbar={false}
+              height={560}
+              width={448}
+              className="w-[448px] h-[560px] bg-blue-100 p-0 m-0"
+            >
+              <PdfSlide
+                slide={slideValues}
+                settings={settingsValues}
+                theme={themeValues}
+              />
+            </PDFViewer>
+            <PDFDownloadLink
+              document={
+                <PdfSlide
+                  slide={slideValues}
+                  settings={settingsValues}
+                  theme={themeValues}
+                />
+              }
+              fileName="carousel.pdf"
+            >
+              {({ blob, url, loading, error }) =>
+                loading ? "Loading document..." : "Download now!"
+              }
+            </PDFDownloadLink>
+          </div>
+        )}
         <div className="col-span-1 border p-4 rounded shadow flex flex-col items-center ">
           <CarouselSlide
             slide={slideValues}
