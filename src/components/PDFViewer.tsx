@@ -59,7 +59,7 @@ export const PDFViewer = ({ value, onUrlChange }) => {
       )}
 
       <div className="flex flex-1 p-4 items-center justify-center relative z-50">
-        {shouldShowPreviousDocument && previousRenderValue ? (
+        {!isLatestValueRendered && previousRenderValue ? (
           <Document
             key={previousRenderValue}
             file={previousRenderValue}
