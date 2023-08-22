@@ -13,12 +13,15 @@ import { usePersistFormWithKey } from "@/lib/hooks/use-persist-form-with-key";
 import { ThemeSchema } from "@/lib/validation/theme-schema";
 import { ThemeForm } from "@/components/theme-form";
 import { PdfSlide } from "@/components/pdf-slide";
-import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
+import { PDFViewer } from "@/components/PDFViewer";
+import { BlobProvider, PDFDownloadLink } from "@react-pdf/renderer";
 
 const ALL_FORMS = ["slide", "settings", "theme"];
 
 export default function Home() {
   const [selectedForm, setSelectedForm] = useState(ALL_FORMS[0]);
+  const [documentUrl, setDocumentUrl] = useState(null);
+
   const slideForm = useForm<z.infer<typeof SlideSchema>>({
     resolver: zodResolver(SlideSchema),
     defaultValues: {
@@ -52,38 +55,28 @@ export default function Home() {
   });
   usePersistFormWithKey(themeForm, "settingsFormKey");
   const themeValues = themeForm.watch();
+  const pdfDocument = (
+    <PdfSlide
+      slide={slideValues}
+      settings={settingsValues}
+      theme={themeValues}
+    />
+  );
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 max-w-5xl grid grid-cols-1 xl:grid-cols-2 gap-8 font-mono text-sm ">
         {process.env.NODE_ENV && (
           <div className="col-span-1 border p-4 rounded shadow flex flex-col items-center ">
-            <PDFViewer
+            {/* <PDFViewer
               showToolbar={false}
               height={560}
               width={448}
               className="w-[448px] h-[560px] bg-blue-100 p-0 m-0"
-            >
-              <PdfSlide
-                slide={slideValues}
-                settings={settingsValues}
-                theme={themeValues}
-              />
-            </PDFViewer>
-            <PDFDownloadLink
-              document={
-                <PdfSlide
-                  slide={slideValues}
-                  settings={settingsValues}
-                  theme={themeValues}
-                />
-              }
-              fileName="carousel.pdf"
-            >
-              {({ blob, url, loading, error }) =>
-                loading ? "Loading document..." : "Download now!"
-              }
-            </PDFDownloadLink>
+            > */}
+            {/* </PDFViewer> */}
+
+            <PDFViewer value={pdfDocument} onUrlChange={console.log} />
           </div>
         )}
         <div className="col-span-1 border p-4 rounded shadow flex flex-col items-center ">
@@ -104,6 +97,9 @@ export default function Home() {
           {selectedForm == "theme" && <ThemeForm form={themeForm} />}
         </div>
       </div>
+      <a href={documentUrl || ""} download="document.pdf">
+        <button>Download</button>
+      </a>
     </main>
   );
 }
