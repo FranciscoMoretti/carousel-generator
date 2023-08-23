@@ -1,7 +1,7 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import * as z from "zod";
 import { SidebarMenu } from "@/components/menu-bar";
 import { SlideForm } from "@/components/slide-form";
@@ -14,14 +14,13 @@ import { ThemeSchema } from "@/lib/validation/theme-schema";
 import { ThemeForm } from "@/components/theme-form";
 import { PdfSlide } from "@/components/pdf-slide";
 import { PDFViewer } from "@/components/PDFViewer";
-import { BlobProvider, PDFDownloadLink } from "@react-pdf/renderer";
+import { BlobProvider, PDFDownloadLink, usePDF } from "@react-pdf/renderer";
 
 const ALL_FORMS = ["slide", "settings", "theme"];
 
 export default function Home() {
   const [selectedForm, setSelectedForm] = useState(ALL_FORMS[0]);
-  const [documentUrl, setDocumentUrl] = useState(null);
-
+  const [pdfUrl, setPdfUrl] = useState<string>("");
   const slideForm = useForm<z.infer<typeof SlideSchema>>({
     resolver: zodResolver(SlideSchema),
     defaultValues: {
@@ -55,13 +54,28 @@ export default function Home() {
   });
   usePersistFormWithKey(themeForm, "settingsFormKey");
   const themeValues = themeForm.watch();
-  const pdfDocument = (
-    <PdfSlide
-      slide={slideValues}
-      settings={settingsValues}
-      theme={themeValues}
-    />
+  const pdfDocument = useMemo(
+    () => (
+      <PdfSlide
+        slide={slideValues}
+        settings={settingsValues}
+        theme={themeValues}
+      />
+    ),
+    [slideValues, settingsValues, themeValues]
   );
+  const [instance, updateInstance] = usePDF({ document: pdfDocument });
+  const { loading: instanceLoading, url: isntanceUrl } = instance;
+
+  useEffect(() => {
+    updateInstance(pdfDocument);
+  }, [pdfDocument, updateInstance]);
+
+  useEffect(() => {
+    if (!instanceLoading && isntanceUrl) {
+      setPdfUrl(isntanceUrl);
+    }
+  }, [instanceLoading, setPdfUrl, isntanceUrl]);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -76,7 +90,7 @@ export default function Home() {
             > */}
             {/* </PDFViewer> */}
 
-            <PDFViewer value={pdfDocument} onUrlChange={console.log} />
+            <PDFViewer pdfUrl={isntanceUrl} />
           </div>
         )}
         <div className="col-span-1 border p-4 rounded shadow flex flex-col items-center ">
@@ -97,9 +111,15 @@ export default function Home() {
           {selectedForm == "theme" && <ThemeForm form={themeForm} />}
         </div>
       </div>
-      <a href={documentUrl || ""} download="document.pdf">
-        <button>Download</button>
-      </a>
+      <FooterLink documentUrl={instance.url} />
     </main>
+  );
+}
+
+function FooterLink({ documentUrl }: { documentUrl: string | null }) {
+  return (
+    <a href={documentUrl || ""} download="document.pdf">
+      <button>Download</button>
+    </a>
   );
 }

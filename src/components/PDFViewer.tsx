@@ -13,22 +13,22 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   import.meta.url
 ).toString();
 
-export const PDFViewer = ({ value, onUrlChange }) => {
+export const PDFViewer = ({ pdfUrl }: { pdfUrl: string }) => {
   const [numPages, setNumPages] = useState(null);
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  const [previousRenderValue, setPreviousRenderValue] = useState(null);
+  const [previousRenderValue, setPreviousRenderValue] = useState("");
 
-  const render = useAsync(async () => {
-    if (!value) return null;
+  // const render = useAsync(async () => {
+  //   if (!value) return null;
 
-    const blob = await pdf(value).toBlob();
-    const url = URL.createObjectURL(blob);
-    return url;
-  }, [value]);
+  //   const blob = await pdf(value).toBlob();
+  //   const url = URL.createObjectURL(blob);
+  //   return url;
+  // }, [value]);
 
-  useEffect(() => onUrlChange(render.value), [render.value]);
+  // useEffect(() => onUrlChange(render.value), [render.value]);
 
   const onPreviousPage = () => {
     setCurrentPage((prev) => prev - 1);
@@ -45,18 +45,20 @@ export const PDFViewer = ({ value, onUrlChange }) => {
 
   const isFirstRendering = !previousRenderValue;
 
-  const isLatestValueRendered = previousRenderValue === render.value;
-  const isBusy = render.loading || !isLatestValueRendered;
+  const isLatestValueRendered = previousRenderValue === pdfUrl;
+  const isBusy = !isLatestValueRendered;
+  // const isBusy = false;
 
   const shouldShowTextLoader = isFirstRendering && isBusy;
   const shouldShowPreviousDocument = !isFirstRendering && isBusy;
+  // const shouldShowPreviousDocument = false;
 
   return (
     <div className="flex flex-1 h-full flex-col relative">
       {shouldShowTextLoader && <div>Rendering PDF...</div>}
-      {!render.loading && !value && (
+      {/* {!render.loading && !value && (
         <div>You are not rendering a valid document</div>
-      )}
+      )} */}
 
       <div className="flex flex-1 p-4 items-center justify-center relative z-50">
         {!isLatestValueRendered && previousRenderValue ? (
@@ -67,22 +69,24 @@ export const PDFViewer = ({ value, onUrlChange }) => {
           >
             <Page
               className={shouldShowPreviousDocument ? "opacity-50 " : null}
+              width={448}
               key={currentPage}
               pageNumber={currentPage}
             />
           </Document>
         ) : null}
         <Document
-          key={render.value}
-          className={shouldShowPreviousDocument ? "absolute " : null}
-          file={render.value}
+          key={pdfUrl}
+          className={shouldShowPreviousDocument ? "absolute opacity-0" : null}
+          file={pdfUrl}
           loading={null}
           onLoadSuccess={onDocumentLoad}
         >
           <Page
             key={currentPage}
             pageNumber={currentPage}
-            onRenderSuccess={() => setPreviousRenderValue(render.value)}
+            width={448}
+            onRenderSuccess={() => setPreviousRenderValue(pdfUrl)}
           />
         </Document>
       </div>
