@@ -21,20 +21,9 @@ export function SlideForm({
 }: {
   form: UseFormReturn<z.infer<typeof SlideSchema>, any, undefined>;
 }) {
-  function onSubmit(data: z.infer<typeof SlideSchema>) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-full rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
-  }
-
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 w-full">
+      <form className="space-y-6 w-full">
         <FormField
           control={form.control}
           name="title"
@@ -86,7 +75,6 @@ export function SlideForm({
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
       </form>
     </Form>
   );
