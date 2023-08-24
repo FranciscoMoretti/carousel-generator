@@ -87,19 +87,9 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 max-w-5xl grid grid-cols-1 xl:grid-cols-2 gap-8 font-mono text-sm ">
-        {process.env.NODE_ENV && (
-          <div className="col-span-1 border p-4 rounded shadow flex flex-col items-center ">
-            {/* <PDFViewer
-              showToolbar={false}
-              height={560}
-              width={448}
-              className="w-[448px] h-[560px] bg-blue-100 p-0 m-0"
-            > */}
-            {/* </PDFViewer> */}
-
-            <PDFViewer pdfUrl={isntanceUrl} />
-          </div>
-        )}
+        <div className="col-span-1 border p-4 rounded shadow flex flex-col items-center ">
+          <PDFViewer pdfUrl={isntanceUrl} />
+        </div>
         <div className="col-span-1 border p-4 rounded shadow flex flex-col items-center ">
           <CarouselSlide
             slide={slidesValues.slides[1]}
