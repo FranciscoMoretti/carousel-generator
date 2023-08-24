@@ -29,14 +29,12 @@ export default function Home() {
   const slidesForm = useForm<z.infer<typeof MultiSlideSchema>>({
     resolver: zodResolver(MultiSlideSchema),
     defaultValues: {
-      slides: [
-        {
-          title: "YOUR TITLE",
-          subtitle: "Your awesome subtitle",
-          description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, dolorum.",
-        },
-      ],
+      slides: Array.from({ length: 5 }).fill({
+        title: "YOUR TITLE",
+        subtitle: "Your awesome subtitle",
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, dolorum.",
+      }) as (typeof SlideSchema)[],
     },
   });
   usePersistFormWithKey(slidesForm, "slideFormKey");
@@ -66,7 +64,7 @@ export default function Home() {
   const pdfDocument = useMemo(
     () => (
       <PdfSlide
-        slide={slidesValues.slides[0]}
+        document={slidesValues}
         settings={settingsValues}
         theme={themeValues}
       />
@@ -104,7 +102,7 @@ export default function Home() {
         )}
         <div className="col-span-1 border p-4 rounded shadow flex flex-col items-center ">
           <CarouselSlide
-            slide={slidesValues.slides[0]}
+            slide={slidesValues.slides[1]}
             settings={settingsValues}
             theme={themeValues}
           />

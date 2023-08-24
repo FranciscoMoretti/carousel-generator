@@ -14,7 +14,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 ).toString();
 
 export const PDFViewer = ({ pdfUrl }: { pdfUrl: string }) => {
-  const [numPages, setNumPages] = useState(null);
+  const [numPages, setNumPages] = useState<number | null>(null);
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -38,9 +38,9 @@ export const PDFViewer = ({ pdfUrl }: { pdfUrl: string }) => {
     setCurrentPage((prev) => prev + 1);
   };
 
-  const onDocumentLoad = (d) => {
-    setNumPages(d.numPages);
-    setCurrentPage((prev) => Math.min(prev, d.numPages));
+  const onDocumentLoad = ({ numPages }: { numPages: number }) => {
+    setNumPages(numPages);
+    setCurrentPage((prev) => Math.min(prev, numPages));
   };
 
   const isFirstRendering = !previousRenderValue;
@@ -67,12 +67,14 @@ export const PDFViewer = ({ pdfUrl }: { pdfUrl: string }) => {
             file={previousRenderValue}
             loading={null}
           >
-            <Page
-              className={shouldShowPreviousDocument ? "opacity-50 " : null}
-              width={448}
-              key={currentPage}
-              pageNumber={currentPage}
-            />
+            {Array.from(new Array(numPages), (el, index) => (
+              <Page
+                className={shouldShowPreviousDocument ? "opacity-50 " : null}
+                width={448}
+                key={`page_${index + 1}`}
+                pageNumber={index + 1}
+              />
+            ))}
           </Document>
         ) : null}
         <Document
@@ -82,12 +84,14 @@ export const PDFViewer = ({ pdfUrl }: { pdfUrl: string }) => {
           loading={null}
           onLoadSuccess={onDocumentLoad}
         >
-          <Page
-            key={currentPage}
-            pageNumber={currentPage}
-            width={448}
-            onRenderSuccess={() => setPreviousRenderValue(pdfUrl)}
-          />
+          {Array.from(new Array(numPages), (el, index) => (
+            <Page
+              key={`page_${index + 1}`}
+              pageNumber={index + 1}
+              width={448}
+              onRenderSuccess={() => setPreviousRenderValue(pdfUrl)}
+            />
+          ))}
         </Document>
       </div>
 
