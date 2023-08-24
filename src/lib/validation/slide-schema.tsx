@@ -19,3 +19,5 @@ export const SlideSchema = z.object({
     }),
   description: z.string(),
 });
+
+export const MultiSlideSchema = z.array(SlideSchema);
