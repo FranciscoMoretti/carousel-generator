@@ -4,8 +4,8 @@ import { useForm } from "react-hook-form";
 import { useEffect, useMemo, useState } from "react";
 import * as z from "zod";
 import { SidebarMenu } from "@/components/menu-bar";
-import { SlideForm } from "@/components/slide-form";
-import { SlideSchema } from "@/lib/validation/slide-schema";
+import { SlidesForm } from "@/components/slides-form";
+import { MultiSlideSchema, SlideSchema } from "@/lib/validation/slide-schema";
 import { CarouselSlide } from "@/components/carousel-slide";
 import { SettingsSchema } from "@/lib/validation/settings-schema";
 import { SettingsForm } from "@/components/settings-form";
@@ -26,17 +26,21 @@ const ALL_FORMS = ["slide", "settings", "theme"];
 export default function Home() {
   const [selectedForm, setSelectedForm] = useState(ALL_FORMS[0]);
   const [pdfUrl, setPdfUrl] = useState<string>("");
-  const slideForm = useForm<z.infer<typeof SlideSchema>>({
-    resolver: zodResolver(SlideSchema),
+  const slidesForm = useForm<z.infer<typeof MultiSlideSchema>>({
+    resolver: zodResolver(MultiSlideSchema),
     defaultValues: {
-      title: "YOUR TITLE",
-      subtitle: "Your awesome subtitle",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, dolorum.",
+      slides: [
+        {
+          title: "YOUR TITLE",
+          subtitle: "Your awesome subtitle",
+          description:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, dolorum.",
+        },
+      ],
     },
   });
-  usePersistFormWithKey(slideForm, "slideFormKey");
-  const slideValues = slideForm.watch();
+  usePersistFormWithKey(slidesForm, "slideFormKey");
+  const slidesValues = slidesForm.watch();
 
   const settingsForm = useForm<z.infer<typeof SettingsSchema>>({
     resolver: zodResolver(SettingsSchema),
@@ -62,12 +66,12 @@ export default function Home() {
   const pdfDocument = useMemo(
     () => (
       <PdfSlide
-        slide={slideValues}
+        slide={slidesValues.slides[0]}
         settings={settingsValues}
         theme={themeValues}
       />
     ),
-    [slideValues, settingsValues, themeValues]
+    [slidesValues, settingsValues, themeValues]
   );
   const [instance, updateInstance] = usePDF({ document: pdfDocument });
   const { loading: instanceLoading, url: isntanceUrl } = instance;
@@ -100,7 +104,7 @@ export default function Home() {
         )}
         <div className="col-span-1 border p-4 rounded shadow flex flex-col items-center ">
           <CarouselSlide
-            slide={slideValues}
+            slide={slidesValues.slides[0]}
             settings={settingsValues}
             theme={themeValues}
           />
@@ -111,7 +115,7 @@ export default function Home() {
             selectedForm={selectedForm}
             setSelectedForm={setSelectedForm}
           />
-          {selectedForm == "slide" && <SlideForm form={slideForm} />}
+          {selectedForm == "slide" && <SlidesForm form={slidesForm} />}
           {selectedForm == "settings" && <SettingsForm form={settingsForm} />}
           {selectedForm == "theme" && <ThemeForm form={themeForm} />}
         </div>
