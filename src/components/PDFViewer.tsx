@@ -54,18 +54,19 @@ export const PDFViewer = ({ pdfUrl }: { pdfUrl: string }) => {
   // const shouldShowPreviousDocument = false;
 
   return (
-    <div className="flex flex-1 h-full flex-col relative">
+    <div className="flex flex-1 h-full flex-col relative ">
       {shouldShowTextLoader && <div>Rendering PDF...</div>}
       {/* {!render.loading && !value && (
         <div>You are not rendering a valid document</div>
       )} */}
 
-      <div className="flex flex-1 items-center justify-center relative z-50">
+      <div className="flex flex-1 items-center justify-center relative ">
         {!isLatestValueRendered && previousRenderValue ? (
           <Document
             key={previousRenderValue}
             file={previousRenderValue}
             loading={null}
+            className="flex flex-row gap-2 "
           >
             {Array.from(new Array(numPages), (el, index) => (
               <Page
@@ -79,14 +80,17 @@ export const PDFViewer = ({ pdfUrl }: { pdfUrl: string }) => {
         ) : null}
         <Document
           key={pdfUrl}
-          className={shouldShowPreviousDocument ? "absolute opacity-0" : null}
           file={pdfUrl}
           loading={null}
           onLoadSuccess={onDocumentLoad}
+          className="flex flex-row gap-2"
         >
           {Array.from(new Array(numPages), (el, index) => (
             <Page
               key={`page_${index + 1}`}
+              className={
+                shouldShowPreviousDocument ? "absolute opacity-0" : null
+              }
               pageNumber={index + 1}
               width={448}
               onRenderSuccess={() => setPreviousRenderValue(pdfUrl)}

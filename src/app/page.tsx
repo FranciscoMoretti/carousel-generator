@@ -86,18 +86,18 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl grid grid-cols-1 xl:grid-cols-2 gap-8 font-mono text-sm ">
-        <div className="col-span-1 border p-4 rounded shadow flex flex-col items-center ">
+      <div className="z-10 max-w-5xl flex flex-col justify-start gap-8 font-mono text-sm ">
+        <div className=" border p-4 rounded shadow flex flex-col items-center overflow-hidden ">
           <PDFViewer pdfUrl={isntanceUrl} />
         </div>
-        <div className="col-span-1 border p-4 rounded shadow flex flex-col items-center ">
+        <div className="border p-4 rounded shadow flex flex-col items-center ">
           <CarouselSlide
             slide={slidesValues.slides[1]}
             settings={settingsValues}
             theme={themeValues}
           />
         </div>
-        <div className="col-span-1 border p-4 flex flex-col gap-6 rounded shadow">
+        <div className=" border p-4 flex flex-col gap-6 rounded shadow">
           <SidebarMenu
             items={ALL_FORMS}
             selectedForm={selectedForm}
