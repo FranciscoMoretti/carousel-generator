@@ -14,7 +14,12 @@ import { ThemeSchema } from "@/lib/validation/theme-schema";
 import { ThemeForm } from "@/components/theme-form";
 import { PdfSlide } from "@/components/pdf-slide";
 import { PDFViewer } from "@/components/PDFViewer";
-import { BlobProvider, PDFDownloadLink, usePDF } from "@react-pdf/renderer";
+import {
+  BlobProvider,
+  PDFDownloadLink,
+  usePDF,
+  // @ts-ignore: Library import from inner module to avoid thinking we are on node
+} from "@react-pdf/renderer/lib/react-pdf.browser.es";
 
 const ALL_FORMS = ["slide", "settings", "theme"];
 

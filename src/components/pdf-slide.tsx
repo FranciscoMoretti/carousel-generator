@@ -53,7 +53,7 @@ export function PdfSlide({
           ...tw("p-8 flex flex-col justify-between"),
         }}
       >
-        <View style={tw("flex flex-col py-6")}>
+        <View style={tw("flex flex-col")}>
           <Text
             style={{
               color: theme.primary,
@@ -81,20 +81,32 @@ export function PdfSlide({
             {slide.description}
           </Text>
         </View>
-        <View style={tw("flex justify-start gap-3")}>
+        <View style={tw("flex justify-start flex-row gap-3 items-center")}>
           {/* eslint-disable-next-line jsx-a11y/alt-text */}
-          {/* <Image
-            src={"www.react-pdf.org/test.jpg"}
-            style={tw("w-12 h-12 mx-auto")}
-          /> */}
-          <Text
-            style={{
-              color: theme.secondary,
-              ...tw("text-sm"),
-            }}
-          >
-            {slide.subtitle}
-          </Text>
+          <Image
+            src={
+              "https://fastly.picsum.photos/id/760/536/354.jpg?hmac=k8_iypkz8Qgdy6OnLw4KUKduMcWi01nc2sgJBAKWSq8"
+            }
+            style={tw("w-12 h-12 rounded-full")}
+          />
+          <View style={tw("flex items-start gap-2 flex-col")}>
+            <Text
+              style={{
+                color: theme.primary,
+                ...tw("text-xs "),
+              }}
+            >
+              {settings.name}
+            </Text>
+            <Text
+              style={{
+                color: theme.secondary,
+                ...tw("text-xs"),
+              }}
+            >
+              {settings.handle}
+            </Text>
+          </View>
         </View>
       </Page>
     </Document>

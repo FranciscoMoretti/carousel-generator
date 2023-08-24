@@ -60,7 +60,7 @@ export const PDFViewer = ({ pdfUrl }: { pdfUrl: string }) => {
         <div>You are not rendering a valid document</div>
       )} */}
 
-      <div className="flex flex-1 p-4 items-center justify-center relative z-50">
+      <div className="flex flex-1 items-center justify-center relative z-50">
         {!isLatestValueRendered && previousRenderValue ? (
           <Document
             key={previousRenderValue}
