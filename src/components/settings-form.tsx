@@ -15,18 +15,19 @@ import { toast } from "@/components/ui/use-toast";
 
 import { Textarea } from "@/components/ui/textarea";
 import { SettingsSchema } from "@/lib/validation/settings-schema";
+import { DocumentSchema } from "@/lib/validation/document-schema";
 
 export function SettingsForm({
   form,
 }: {
-  form: UseFormReturn<z.infer<typeof SettingsSchema>, any, undefined>;
+  form: UseFormReturn<z.infer<typeof DocumentSchema>, any, undefined>;
 }) {
   return (
     <Form {...form}>
       <form className="space-y-6 w-full">
         <FormField
           control={form.control}
-          name="name"
+          name="settings.name"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Name</FormLabel>
@@ -39,7 +40,7 @@ export function SettingsForm({
         />
         <FormField
           control={form.control}
-          name="handle"
+          name="settings.handle"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Handle</FormLabel>
@@ -52,7 +53,7 @@ export function SettingsForm({
         />
         <FormField
           control={form.control}
-          name="avatar"
+          name="settings.avatar"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Avatar</FormLabel>

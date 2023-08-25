@@ -53,17 +53,6 @@ export default function Home() {
   usePersistFormWithKey(documentForm, "documentKey");
   const documentValues = documentForm.watch();
 
-  const settingsForm = useForm<z.infer<typeof SettingsSchema>>({
-    resolver: zodResolver(SettingsSchema),
-    defaultValues: {
-      avatar: "https://thispersondoesnotexist.com",
-      name: "My name",
-      handle: "@name",
-    },
-  });
-  usePersistFormWithKey(settingsForm, "settingsFormKey");
-  const settingsValues = settingsForm.watch();
-
   const themeForm = useForm<z.infer<typeof ThemeSchema>>({
     resolver: zodResolver(ThemeSchema),
     defaultValues: {
@@ -78,11 +67,11 @@ export default function Home() {
     () => (
       <PdfSlide
         slides={documentValues.slides}
-        settings={settingsValues}
+        settings={documentValues.settings}
         theme={themeValues}
       />
     ),
-    [documentValues.slides, settingsValues, themeValues]
+    [documentValues.slides, documentValues.settings, themeValues]
   );
   const [instance, updateInstance] = usePDF({ document: pdfDocument });
   const { loading: instanceLoading, url: isntanceUrl } = instance;
@@ -115,7 +104,7 @@ export default function Home() {
           {selectedForm == "slide" && (
             <SlidesForm form={documentForm} currentSlide={currentSlide} />
           )}
-          {selectedForm == "settings" && <SettingsForm form={settingsForm} />}
+          {selectedForm == "settings" && <SettingsForm form={documentForm} />}
           {selectedForm == "theme" && <ThemeForm form={themeForm} />}
         </div>
       </div>
