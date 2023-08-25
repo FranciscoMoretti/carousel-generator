@@ -54,7 +54,7 @@ export const PDFViewer = ({ pdfUrl }: { pdfUrl: string }) => {
   // const shouldShowPreviousDocument = false;
 
   return (
-    <div className="flex flex-1 h-full flex-col relative ">
+    <div className="">
       {shouldShowTextLoader && <div>Rendering PDF...</div>}
       {/* {!render.loading && !value && (
         <div>You are not rendering a valid document</div>

@@ -25,6 +25,7 @@ const ALL_FORMS = ["slide", "settings", "theme"];
 
 export default function Home() {
   const [selectedForm, setSelectedForm] = useState(ALL_FORMS[0]);
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [pdfUrl, setPdfUrl] = useState<string>("");
   const slidesForm = useForm<z.infer<typeof MultiSlideSchema>>({
     resolver: zodResolver(MultiSlideSchema),
@@ -87,23 +88,26 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 max-w-5xl flex flex-col justify-start gap-8 font-mono text-sm ">
-        <div className=" border p-4 rounded shadow flex flex-col items-center overflow-hidden ">
-          <PDFViewer pdfUrl={isntanceUrl} />
-        </div>
-        <div className="border p-4 rounded shadow flex flex-col items-center ">
+        {/* React Slide for debug purposes */}
+        {/* <div className="border p-4 rounded shadow flex flex-col items-center ">
           <CarouselSlide
             slide={slidesValues.slides[1]}
             settings={settingsValues}
             theme={themeValues}
           />
+        </div> */}
+        <div className=" border p-4 rounded shadow flex flex-col overflow-hidden items-start ">
+          <PDFViewer pdfUrl={isntanceUrl} />
         </div>
-        <div className=" border p-4 flex flex-col gap-6 rounded shadow">
+        <div className=" border p-4 flex flex-col gap-6 rounded shadow w-[448px] h-[560px]">
           <SidebarMenu
             items={ALL_FORMS}
             selectedForm={selectedForm}
             setSelectedForm={setSelectedForm}
           />
-          {selectedForm == "slide" && <SlidesForm form={slidesForm} />}
+          {selectedForm == "slide" && (
+            <SlidesForm form={slidesForm} currentSlide={currentSlide} />
+          )}
           {selectedForm == "settings" && <SettingsForm form={settingsForm} />}
           {selectedForm == "theme" && <ThemeForm form={themeForm} />}
         </div>
