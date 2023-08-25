@@ -13,10 +13,17 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   import.meta.url
 ).toString();
 
-export const PDFViewer = ({ pdfUrl }: { pdfUrl: string }) => {
-  const [numPages, setNumPages] = useState<number | null>(null);
+const PAGE_GAP_PX = 8;
+const PAGE_WIDTH_PX = 448;
 
-  const [currentPage, setCurrentPage] = useState(1);
+export const PDFViewer = ({
+  pdfUrl,
+  currentPage,
+}: {
+  pdfUrl: string;
+  currentPage: number;
+}) => {
+  const [numPages, setNumPages] = useState<number | null>(null);
 
   const [previousRenderValue, setPreviousRenderValue] = useState("");
 
@@ -30,17 +37,8 @@ export const PDFViewer = ({ pdfUrl }: { pdfUrl: string }) => {
 
   // useEffect(() => onUrlChange(render.value), [render.value]);
 
-  const onPreviousPage = () => {
-    setCurrentPage((prev) => prev - 1);
-  };
-
-  const onNextPage = () => {
-    setCurrentPage((prev) => prev + 1);
-  };
-
   const onDocumentLoad = ({ numPages }: { numPages: number }) => {
     setNumPages(numPages);
-    setCurrentPage((prev) => Math.min(prev, numPages));
   };
 
   const isFirstRendering = !previousRenderValue;
@@ -60,18 +58,26 @@ export const PDFViewer = ({ pdfUrl }: { pdfUrl: string }) => {
         <div>You are not rendering a valid document</div>
       )} */}
 
-      <div className="flex flex-1 items-center justify-center relative ">
+      <div
+        className={`items-center justify-center relative`}
+        style={{
+          left: `-${currentPage * (PAGE_WIDTH_PX + PAGE_GAP_PX)}px`,
+        }}
+      >
         {!isLatestValueRendered && previousRenderValue ? (
           <Document
             key={previousRenderValue}
             file={previousRenderValue}
             loading={null}
             className="flex flex-row gap-2 "
+            style={{
+              gap: `${PAGE_GAP_PX}px`,
+            }}
           >
             {Array.from(new Array(numPages), (el, index) => (
               <Page
                 className={shouldShowPreviousDocument ? "opacity-50 " : null}
-                width={448}
+                width={PAGE_WIDTH_PX}
                 key={`page_${index + 1}`}
                 pageNumber={index + 1}
               />
@@ -92,7 +98,7 @@ export const PDFViewer = ({ pdfUrl }: { pdfUrl: string }) => {
                 shouldShowPreviousDocument ? "absolute opacity-0" : null
               }
               pageNumber={index + 1}
-              width={448}
+              width={PAGE_WIDTH_PX}
               onRenderSuccess={() => setPreviousRenderValue(pdfUrl)}
             />
           ))}

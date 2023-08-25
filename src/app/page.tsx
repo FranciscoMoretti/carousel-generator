@@ -98,8 +98,8 @@ export default function Home() {
             theme={themeValues}
           />
         </div> */}
-        <div className=" border p-4 rounded shadow flex flex-col overflow-hidden items-start ">
-          <PDFViewer pdfUrl={isntanceUrl} />
+        <div className=" border p-4 rounded shadow overflow-clip ">
+          <PDFViewer pdfUrl={isntanceUrl} currentPage={currentSlide} />
         </div>
         <div className=" border p-4 flex flex-col gap-6 rounded shadow w-[448px] h-[560px]">
           <SidebarMenu
