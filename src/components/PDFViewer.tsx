@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { pdf } from "@react-pdf/renderer";
 import { Document, Page } from "react-pdf";
 import { pdfjs } from "react-pdf";
-import { useAsync } from "react-use";
 
-// import PageNavigator from "./PageNavigator";
 import "react-pdf/dist/Page/TextLayer.css";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 
@@ -26,16 +23,6 @@ export const PDFViewer = ({
   const [numPages, setNumPages] = useState<number | null>(null);
 
   const [previousRenderValue, setPreviousRenderValue] = useState("");
-
-  // const render = useAsync(async () => {
-  //   if (!value) return null;
-
-  //   const blob = await pdf(value).toBlob();
-  //   const url = URL.createObjectURL(blob);
-  //   return url;
-  // }, [value]);
-
-  // useEffect(() => onUrlChange(render.value), [render.value]);
 
   const onDocumentLoad = ({ numPages }: { numPages: number }) => {
     setNumPages(numPages);
@@ -106,13 +93,6 @@ export const PDFViewer = ({
           ))}
         </Document>
       </div>
-
-      {/* <PageNavigator
-        currentPage={currentPage}
-        numPages={numPages}
-        onNextPage={onNextPage}
-        onPreviousPage={onPreviousPage}
-      /> */}
     </div>
   );
 };
