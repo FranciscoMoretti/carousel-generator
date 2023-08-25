@@ -20,12 +20,14 @@ import {
   usePDF,
   // @ts-ignore: Library import from inner module to avoid thinking we are on node
 } from "@react-pdf/renderer/lib/react-pdf.browser.es";
+import Pager from "@/components/pager";
 
 const ALL_FORMS = ["slide", "settings", "theme"];
 
 export default function Home() {
   const [selectedForm, setSelectedForm] = useState(ALL_FORMS[0]);
   const [currentSlide, setCurrentSlide] = useState(0);
+  // TODO Consistently get the length of pages from a common state
   const [pdfUrl, setPdfUrl] = useState<string>("");
   const slidesForm = useForm<z.infer<typeof MultiSlideSchema>>({
     resolver: zodResolver(MultiSlideSchema),
@@ -113,6 +115,12 @@ export default function Home() {
         </div>
       </div>
       <FooterLink documentUrl={instance.url} />
+      <Pager
+        currentPage={currentSlide}
+        numPages={slidesValues.slides.length} // TODO: Replace with num pages state
+        onPreviousClick={() => setCurrentSlide(currentSlide - 1)}
+        onNextClick={() => setCurrentSlide(currentSlide + 1)}
+      />
     </main>
   );
 }
