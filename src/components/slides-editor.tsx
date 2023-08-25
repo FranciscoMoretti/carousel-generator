@@ -14,7 +14,7 @@ export function SlidesEditor({
 
   return (
     <div>
-      <div className="z-10 max-w-5xl flex flex-col items-center justify-start gap-8 font-mono text-sm ">
+      <div className="z-10 max-w-5xl flex flex-col items-center justify-start gap-8 font-mono text-sm">
         {/* React Slide for debug purposes */}
         {/* <div className="border p-4 rounded shadow flex flex-col items-center ">
         <CarouselSlide
