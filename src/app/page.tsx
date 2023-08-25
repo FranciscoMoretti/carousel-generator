@@ -53,25 +53,15 @@ export default function Home() {
   usePersistFormWithKey(documentForm, "documentKey");
   const documentValues = documentForm.watch();
 
-  const themeForm = useForm<z.infer<typeof ThemeSchema>>({
-    resolver: zodResolver(ThemeSchema),
-    defaultValues: {
-      primary: "#005B8C",
-      secondary: "#FFCC4A",
-      accent: "#FDF8EC",
-    },
-  });
-  usePersistFormWithKey(themeForm, "settingsFormKey");
-  const themeValues = themeForm.watch();
   const pdfDocument = useMemo(
     () => (
       <PdfSlide
         slides={documentValues.slides}
         settings={documentValues.settings}
-        theme={themeValues}
+        theme={documentValues.theme}
       />
     ),
-    [documentValues.slides, documentValues.settings, themeValues]
+    [documentValues]
   );
   const [instance, updateInstance] = usePDF({ document: pdfDocument });
   const { loading: instanceLoading, url: isntanceUrl } = instance;
@@ -105,7 +95,7 @@ export default function Home() {
             <SlidesForm form={documentForm} currentSlide={currentSlide} />
           )}
           {selectedForm == "settings" && <SettingsForm form={documentForm} />}
-          {selectedForm == "theme" && <ThemeForm form={themeForm} />}
+          {selectedForm == "theme" && <ThemeForm form={documentForm} />}
         </div>
       </div>
       <FooterLink documentUrl={instance.url} />

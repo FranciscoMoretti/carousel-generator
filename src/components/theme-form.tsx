@@ -1,7 +1,6 @@
 import { UseFormReturn } from "react-hook-form";
 import * as z from "zod";
 
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -11,21 +10,20 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { toast } from "@/components/ui/use-toast";
 
-import { ThemeSchema } from "@/lib/validation/theme-schema";
+import { DocumentSchema } from "@/lib/validation/document-schema";
 
 export function ThemeForm({
   form,
 }: {
-  form: UseFormReturn<z.infer<typeof ThemeSchema>, any, undefined>;
+  form: UseFormReturn<z.infer<typeof DocumentSchema>, any, undefined>;
 }) {
   return (
     <Form {...form}>
       <form className="space-y-6 w-full">
         <FormField
           control={form.control}
-          name="primary"
+          name="theme.primary"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Primary</FormLabel>
@@ -38,7 +36,7 @@ export function ThemeForm({
         />
         <FormField
           control={form.control}
-          name="secondary"
+          name="theme.secondary"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Secondary</FormLabel>
@@ -51,7 +49,7 @@ export function ThemeForm({
         />
         <FormField
           control={form.control}
-          name="accent"
+          name="theme.accent"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Accent</FormLabel>
