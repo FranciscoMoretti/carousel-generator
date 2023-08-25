@@ -1,6 +1,6 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { useEffect, useMemo, useState } from "react";
 import * as z from "zod";
 import { SidebarMenu } from "@/components/menu-bar";
@@ -49,7 +49,6 @@ export default function Home() {
       },
     },
   });
-
   usePersistFormWithKey(documentForm, "documentKey");
   const documentValues = documentForm.watch();
 
@@ -71,41 +70,43 @@ export default function Home() {
   }, [pdfDocument, updateInstance]);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl flex flex-col items-center justify-start gap-8 font-mono text-sm ">
-        {/* React Slide for debug purposes */}
-        {/* <div className="border p-4 rounded shadow flex flex-col items-center ">
+    <FormProvider {...documentForm}>
+      <main className="flex min-h-screen flex-col items-center justify-between p-24">
+        <div className="z-10 max-w-5xl flex flex-col items-center justify-start gap-8 font-mono text-sm ">
+          {/* React Slide for debug purposes */}
+          {/* <div className="border p-4 rounded shadow flex flex-col items-center ">
           <CarouselSlide
             slide={slidesValues.slides[1]}
             settings={settingsValues}
             theme={themeValues}
           />
         </div> */}
-        <div className=" border p-4 rounded shadow overflow-clip w-[1024px]">
-          {/* TODO: Make the width responsive */}
-          <PDFViewer pdfUrl={isntanceUrl} currentPage={currentSlide} />
+          <div className=" border p-4 rounded shadow overflow-clip w-[1024px]">
+            {/* TODO: Make the width responsive */}
+            <PDFViewer pdfUrl={isntanceUrl} currentPage={currentSlide} />
+          </div>
+          <div className=" border p-4 flex flex-col gap-6 rounded shadow w-[448px] h-[560px]">
+            <SidebarMenu
+              items={ALL_FORMS}
+              selectedForm={selectedForm}
+              setSelectedForm={setSelectedForm}
+            />
+            {selectedForm == "slide" && (
+              <SlidesForm currentSlide={currentSlide} />
+            )}
+            {selectedForm == "settings" && <SettingsForm />}
+            {selectedForm == "theme" && <ThemeForm />}
+          </div>
         </div>
-        <div className=" border p-4 flex flex-col gap-6 rounded shadow w-[448px] h-[560px]">
-          <SidebarMenu
-            items={ALL_FORMS}
-            selectedForm={selectedForm}
-            setSelectedForm={setSelectedForm}
-          />
-          {selectedForm == "slide" && (
-            <SlidesForm form={documentForm} currentSlide={currentSlide} />
-          )}
-          {selectedForm == "settings" && <SettingsForm form={documentForm} />}
-          {selectedForm == "theme" && <ThemeForm form={documentForm} />}
-        </div>
-      </div>
-      <FooterLink documentUrl={instance.url} />
-      <Pager
-        currentPage={currentSlide}
-        numPages={documentValues.slides.length} // TODO: Replace with num pages state
-        onPreviousClick={() => setCurrentSlide(currentSlide - 1)}
-        onNextClick={() => setCurrentSlide(currentSlide + 1)}
-      />
-    </main>
+        <FooterLink documentUrl={instance.url} />
+        <Pager
+          currentPage={currentSlide}
+          numPages={documentValues.slides.length} // TODO: Replace with num pages state
+          onPreviousClick={() => setCurrentSlide(currentSlide - 1)}
+          onNextClick={() => setCurrentSlide(currentSlide + 1)}
+        />
+      </main>
+    </FormProvider>
   );
 }
 

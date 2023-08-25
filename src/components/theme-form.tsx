@@ -1,4 +1,4 @@
-import { UseFormReturn } from "react-hook-form";
+import { UseFormReturn, useFormContext } from "react-hook-form";
 import * as z from "zod";
 
 import {
@@ -13,11 +13,13 @@ import { Input } from "@/components/ui/input";
 
 import { DocumentSchema } from "@/lib/validation/document-schema";
 
-export function ThemeForm({
-  form,
-}: {
-  form: UseFormReturn<z.infer<typeof DocumentSchema>, any, undefined>;
-}) {
+export function ThemeForm({}: {}) {
+  const form: UseFormReturn<
+    z.infer<typeof DocumentSchema>,
+    any,
+    undefined
+  > = useFormContext(); // retrieve those props
+
   return (
     <Form {...form}>
       <form className="space-y-6 w-full">

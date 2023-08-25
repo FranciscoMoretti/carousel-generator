@@ -1,4 +1,4 @@
-import { UseFormReturn, useFieldArray } from "react-hook-form";
+import { UseFormReturn, useFieldArray, useFormContext } from "react-hook-form";
 import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
@@ -17,13 +17,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { MultiSlideSchema, SlideSchema } from "@/lib/validation/slide-schema";
 import { DocumentSchema } from "@/lib/validation/document-schema";
 
-export function SlidesForm({
-  form,
-  currentSlide,
-}: {
-  form: UseFormReturn<z.infer<typeof DocumentSchema>, any, undefined>;
-  currentSlide: number;
-}) {
+export function SlidesForm({ currentSlide }: { currentSlide: number }) {
+  const form: UseFormReturn<
+    z.infer<typeof DocumentSchema>,
+    any,
+    undefined
+  > = useFormContext(); // retrieve those props
+
   const { control } = form;
   const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
     {
