@@ -27,7 +27,7 @@ const ALL_FORMS = ["slide", "settings", "theme"];
 export default function Home() {
   const [selectedForm, setSelectedForm] = useState(ALL_FORMS[0]);
   const [currentSlide, setCurrentSlide] = useState(0);
-  // TODO Consistently get the length of pages from a common state
+  // The forms are the source of truth
   const slidesForm = useForm<z.infer<typeof MultiSlideSchema>>({
     resolver: zodResolver(MultiSlideSchema),
     defaultValues: {
@@ -91,7 +91,8 @@ export default function Home() {
             theme={themeValues}
           />
         </div> */}
-        <div className=" border p-4 rounded shadow overflow-clip ">
+        <div className=" border p-4 rounded shadow overflow-clip w-[1024px]">
+          {/* TODO: Make the width responsive */}
           <PDFViewer pdfUrl={isntanceUrl} currentPage={currentSlide} />
         </div>
         <div className=" border p-4 flex flex-col gap-6 rounded shadow w-[448px] h-[560px]">
