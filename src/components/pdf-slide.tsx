@@ -1,11 +1,3 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { SettingsSchema } from "@/lib/validation/settings-schema";
 import { MultiSlideSchema, SlideSchema } from "@/lib/validation/slide-schema";
 import { ThemeSchema } from "@/lib/validation/theme-schema";
@@ -36,17 +28,17 @@ const tw = createTw({
 });
 
 export function PdfSlide({
-  document,
+  slides,
   settings,
   theme,
 }: {
-  document: z.infer<typeof MultiSlideSchema>;
+  slides: z.infer<typeof MultiSlideSchema>;
   settings: z.infer<typeof SettingsSchema>;
   theme: z.infer<typeof ThemeSchema>;
 }) {
   return (
     <Document>
-      {document.slides.map((slide, index) => (
+      {slides.map((slide, index) => (
         <Page
           key={index}
           size={[300, 375]}

@@ -21,15 +21,15 @@ import {
   // @ts-ignore: Library import from inner module to avoid thinking we are on node
 } from "@react-pdf/renderer/lib/react-pdf.browser.es";
 import Pager from "@/components/pager";
+import { DocumentSchema } from "@/lib/validation/document-schema";
 
 const ALL_FORMS = ["slide", "settings", "theme"];
 
 export default function Home() {
   const [selectedForm, setSelectedForm] = useState(ALL_FORMS[0]);
   const [currentSlide, setCurrentSlide] = useState(0);
-  // The forms are the source of truth
-  const slidesForm = useForm<z.infer<typeof MultiSlideSchema>>({
-    resolver: zodResolver(MultiSlideSchema),
+  const documentForm = useForm<z.infer<typeof DocumentSchema>>({
+    resolver: zodResolver(DocumentSchema),
     defaultValues: {
       slides: Array.from({ length: 5 }).fill({
         title: "YOUR TITLE",
@@ -37,10 +37,21 @@ export default function Home() {
         description:
           "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, dolorum.",
       }) as (typeof SlideSchema)[],
+      settings: {
+        avatar: "https://thispersondoesnotexist.com",
+        name: "My name",
+        handle: "@name",
+      },
+      theme: {
+        primary: "#005B8C",
+        secondary: "#FFCC4A",
+        accent: "#FDF8EC",
+      },
     },
   });
-  usePersistFormWithKey(slidesForm, "slideFormKey");
-  const slidesValues = slidesForm.watch();
+
+  usePersistFormWithKey(documentForm, "documentKey");
+  const documentValues = documentForm.watch();
 
   const settingsForm = useForm<z.infer<typeof SettingsSchema>>({
     resolver: zodResolver(SettingsSchema),
@@ -66,12 +77,12 @@ export default function Home() {
   const pdfDocument = useMemo(
     () => (
       <PdfSlide
-        document={slidesValues}
+        slides={documentValues.slides}
         settings={settingsValues}
         theme={themeValues}
       />
     ),
-    [slidesValues, settingsValues, themeValues]
+    [documentValues.slides, settingsValues, themeValues]
   );
   const [instance, updateInstance] = usePDF({ document: pdfDocument });
   const { loading: instanceLoading, url: isntanceUrl } = instance;
@@ -102,7 +113,7 @@ export default function Home() {
             setSelectedForm={setSelectedForm}
           />
           {selectedForm == "slide" && (
-            <SlidesForm form={slidesForm} currentSlide={currentSlide} />
+            <SlidesForm form={documentForm} currentSlide={currentSlide} />
           )}
           {selectedForm == "settings" && <SettingsForm form={settingsForm} />}
           {selectedForm == "theme" && <ThemeForm form={themeForm} />}
@@ -111,7 +122,7 @@ export default function Home() {
       <FooterLink documentUrl={instance.url} />
       <Pager
         currentPage={currentSlide}
-        numPages={slidesValues.slides.length} // TODO: Replace with num pages state
+        numPages={documentValues.slides.length} // TODO: Replace with num pages state
         onPreviousClick={() => setCurrentSlide(currentSlide - 1)}
         onNextClick={() => setCurrentSlide(currentSlide + 1)}
       />

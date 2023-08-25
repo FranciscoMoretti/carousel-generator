@@ -20,20 +20,9 @@ export function ThemeForm({
 }: {
   form: UseFormReturn<z.infer<typeof ThemeSchema>, any, undefined>;
 }) {
-  function onSubmit(data: z.infer<typeof ThemeSchema>) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-full rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
-  }
-
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 w-full">
+      <form className="space-y-6 w-full">
         <FormField
           control={form.control}
           name="primary"
@@ -73,7 +62,6 @@ export function ThemeForm({
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
       </form>
     </Form>
   );

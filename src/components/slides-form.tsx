@@ -15,12 +15,13 @@ import { toast } from "@/components/ui/use-toast";
 
 import { Textarea } from "@/components/ui/textarea";
 import { MultiSlideSchema, SlideSchema } from "@/lib/validation/slide-schema";
+import { DocumentSchema } from "@/lib/validation/document-schema";
 
 export function SlidesForm({
   form,
   currentSlide,
 }: {
-  form: UseFormReturn<z.infer<typeof MultiSlideSchema>, any, undefined>;
+  form: UseFormReturn<z.infer<typeof DocumentSchema>, any, undefined>;
   currentSlide: number;
 }) {
   const { control } = form;

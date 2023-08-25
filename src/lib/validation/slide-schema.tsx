@@ -20,6 +20,4 @@ export const SlideSchema = z.object({
   description: z.string(),
 });
 
-export const MultiSlideSchema = z.object({
-  slides: z.array(SlideSchema),
-});
+export const MultiSlideSchema = z.array(SlideSchema);
