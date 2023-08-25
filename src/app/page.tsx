@@ -28,7 +28,6 @@ export default function Home() {
   const [selectedForm, setSelectedForm] = useState(ALL_FORMS[0]);
   const [currentSlide, setCurrentSlide] = useState(0);
   // TODO Consistently get the length of pages from a common state
-  const [pdfUrl, setPdfUrl] = useState<string>("");
   const slidesForm = useForm<z.infer<typeof MultiSlideSchema>>({
     resolver: zodResolver(MultiSlideSchema),
     defaultValues: {
@@ -81,15 +80,9 @@ export default function Home() {
     updateInstance(pdfDocument);
   }, [pdfDocument, updateInstance]);
 
-  useEffect(() => {
-    if (!instanceLoading && isntanceUrl) {
-      setPdfUrl(isntanceUrl);
-    }
-  }, [instanceLoading, setPdfUrl, isntanceUrl]);
-
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl flex flex-col justify-start gap-8 font-mono text-sm ">
+      <div className="z-10 max-w-5xl flex flex-col items-center justify-start gap-8 font-mono text-sm ">
         {/* React Slide for debug purposes */}
         {/* <div className="border p-4 rounded shadow flex flex-col items-center ">
           <CarouselSlide

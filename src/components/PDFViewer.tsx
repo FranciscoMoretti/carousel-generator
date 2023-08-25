@@ -59,9 +59,11 @@ export const PDFViewer = ({
       )} */}
 
       <div
-        className={`items-center justify-center relative`}
+        className={` relative`}
         style={{
-          left: `-${currentPage * (PAGE_WIDTH_PX + PAGE_GAP_PX)}px`,
+          left: `calc(50% - ${
+            currentPage * (PAGE_WIDTH_PX + PAGE_GAP_PX)
+          }px - ${(PAGE_WIDTH_PX + PAGE_GAP_PX) * 0.5}px)`,
         }}
       >
         {!isLatestValueRendered && previousRenderValue ? (
