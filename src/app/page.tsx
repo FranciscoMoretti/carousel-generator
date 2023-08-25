@@ -25,9 +25,60 @@ import { DocumentSchema } from "@/lib/validation/document-schema";
 
 const ALL_FORMS = ["slide", "settings", "theme"];
 
-export default function Home() {
+function SlidePanel({ currentSlide }: { currentSlide: number }) {
   const [selectedForm, setSelectedForm] = useState(ALL_FORMS[0]);
+
+  return (
+    <div className=" border p-4 flex flex-col gap-6 rounded shadow w-[448px] h-[560px]">
+      <SidebarMenu
+        items={ALL_FORMS}
+        selectedForm={selectedForm}
+        setSelectedForm={setSelectedForm}
+      />
+      {selectedForm == "slide" && <SlidesForm currentSlide={currentSlide} />}
+      {selectedForm == "settings" && <SettingsForm />}
+      {selectedForm == "theme" && <ThemeForm />}
+    </div>
+  );
+}
+
+function SlideEditor({
+  isntanceUrl,
+  length,
+}: {
+  isntanceUrl: string;
+  length: number;
+}) {
   const [currentSlide, setCurrentSlide] = useState(0);
+
+  return (
+    <div>
+      <div className="z-10 max-w-5xl flex flex-col items-center justify-start gap-8 font-mono text-sm ">
+        {/* React Slide for debug purposes */}
+        {/* <div className="border p-4 rounded shadow flex flex-col items-center ">
+      <CarouselSlide
+       slide={slidesValues.slides[1]}
+       settings={settingsValues}
+       theme={themeValues}
+      />
+      </div> */}
+        <div className=" border p-4 rounded shadow overflow-clip w-[1024px]">
+          {/* TODO: Make the width responsive */}
+          <PDFViewer pdfUrl={isntanceUrl} currentPage={currentSlide} />
+        </div>
+        <SlidePanel currentSlide={currentSlide}></SlidePanel>
+      </div>
+      <Pager
+        currentPage={currentSlide}
+        numPages={length} // TODO: Replace with num pages state
+        onPreviousClick={() => setCurrentSlide(currentSlide - 1)}
+        onNextClick={() => setCurrentSlide(currentSlide + 1)}
+      />
+    </div>
+  );
+}
+
+export default function Home() {
   const documentForm = useForm<z.infer<typeof DocumentSchema>>({
     resolver: zodResolver(DocumentSchema),
     defaultValues: {
@@ -72,39 +123,11 @@ export default function Home() {
   return (
     <FormProvider {...documentForm}>
       <main className="flex min-h-screen flex-col items-center justify-between p-24">
-        <div className="z-10 max-w-5xl flex flex-col items-center justify-start gap-8 font-mono text-sm ">
-          {/* React Slide for debug purposes */}
-          {/* <div className="border p-4 rounded shadow flex flex-col items-center ">
-          <CarouselSlide
-            slide={slidesValues.slides[1]}
-            settings={settingsValues}
-            theme={themeValues}
-          />
-        </div> */}
-          <div className=" border p-4 rounded shadow overflow-clip w-[1024px]">
-            {/* TODO: Make the width responsive */}
-            <PDFViewer pdfUrl={isntanceUrl} currentPage={currentSlide} />
-          </div>
-          <div className=" border p-4 flex flex-col gap-6 rounded shadow w-[448px] h-[560px]">
-            <SidebarMenu
-              items={ALL_FORMS}
-              selectedForm={selectedForm}
-              setSelectedForm={setSelectedForm}
-            />
-            {selectedForm == "slide" && (
-              <SlidesForm currentSlide={currentSlide} />
-            )}
-            {selectedForm == "settings" && <SettingsForm />}
-            {selectedForm == "theme" && <ThemeForm />}
-          </div>
-        </div>
+        <SlideEditor
+          length={documentValues.slides.length}
+          isntanceUrl={isntanceUrl}
+        ></SlideEditor>
         <FooterLink documentUrl={instance.url} />
-        <Pager
-          currentPage={currentSlide}
-          numPages={documentValues.slides.length} // TODO: Replace with num pages state
-          onPreviousClick={() => setCurrentSlide(currentSlide - 1)}
-          onNextClick={() => setCurrentSlide(currentSlide + 1)}
-        />
       </main>
     </FormProvider>
   );
