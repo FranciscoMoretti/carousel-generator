@@ -3,22 +3,40 @@ import { SidebarMenu } from "./menu-bar";
 import { SlidesForm } from "./slides-form";
 import { SettingsForm } from "./settings-form";
 import { ThemeForm } from "./theme-form";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 
 const ALL_FORMS = ["slide", "settings", "theme"];
 
 export function SlidePanel({ currentSlide }: { currentSlide: number }) {
-  const [selectedForm, setSelectedForm] = useState(ALL_FORMS[0]);
-
   return (
-    <div className=" border p-4 flex flex-col gap-6 rounded shadow w-[448px] h-[560px]">
-      <SidebarMenu
-        items={ALL_FORMS}
-        selectedForm={selectedForm}
-        setSelectedForm={setSelectedForm}
-      />
-      {selectedForm == "slide" && <SlidesForm currentSlide={currentSlide} />}
-      {selectedForm == "settings" && <SettingsForm />}
-      {selectedForm == "theme" && <ThemeForm />}
-    </div>
+    <Tabs defaultValue="slide" className="flex-1">
+      <div className="flex flex-col gap-6 w-[448px] h-[560px] ">
+        <TabsList className="grid grid-cols-3 shadow">
+          <TabsTrigger value="slide">
+            <span className="sr-only">Slide</span>
+            Slide
+          </TabsTrigger>
+          <TabsTrigger value="settings">
+            <span className="sr-only">Settings</span>
+            Settings
+          </TabsTrigger>
+          <TabsTrigger value="theme">
+            <span className="sr-only">Theme</span>
+            Theme
+          </TabsTrigger>
+        </TabsList>
+        <div className="border p-4 rounded  shadow">
+          <TabsContent value="slide" className="mt-0 border-0 p-0 ">
+            <SlidesForm currentSlide={currentSlide} />
+          </TabsContent>
+          <TabsContent value="settings" className="mt-0 border-0 p-0">
+            <SettingsForm />
+          </TabsContent>
+          <TabsContent value="theme" className="mt-0 border-0 p-0">
+            <ThemeForm />
+          </TabsContent>
+        </div>
+      </div>
+    </Tabs>
   );
 }
