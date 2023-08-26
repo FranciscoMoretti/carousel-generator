@@ -22,6 +22,8 @@ import {
 import { DocumentSchema } from "@/lib/validation/document-schema";
 import { SlidesEditor } from "@/components/slides-editor";
 import EditorLayout from "./editor";
+import { usePager } from "@/lib/hooks/use-pager";
+import { PagerProvider } from "@/lib/providers/pager-context";
 
 export default function Home() {
   const documentForm = useForm<z.infer<typeof DocumentSchema>>({
@@ -65,15 +67,19 @@ export default function Home() {
     updateInstance(pdfDocument);
   }, [pdfDocument, updateInstance]);
 
+  const pager = usePager(0, documentValues.slides.length); // Provide the initial page and numPages
+
   return (
     <FormProvider {...documentForm}>
-      <main className="flex min-h-screen flex-col w-full items-stretch justify-between">
-        <EditorLayout
-          length={documentValues.slides.length}
-          isntanceUrl={isntanceUrl}
-        />
-        <FooterLink documentUrl={instance.url} />
-      </main>
+      <PagerProvider value={pager}>
+        <main className="flex min-h-screen flex-col w-full items-stretch justify-between">
+          <EditorLayout
+            length={documentValues.slides.length}
+            isntanceUrl={isntanceUrl}
+          />
+          <FooterLink documentUrl={instance.url} />
+        </main>
+      </PagerProvider>
     </FormProvider>
   );
 }
