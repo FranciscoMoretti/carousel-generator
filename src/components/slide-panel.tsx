@@ -21,7 +21,7 @@ const ALL_FORMS = {
 export function SlidePanel({ currentSlide }: { currentSlide: number }) {
   return (
     <Tabs defaultValue="slide" className="flex-1">
-      <div className="flex flex-col gap-6 w-[448px] h-[560px] ">
+      <div className="flex flex-col gap-6 w-[448px] h-[440px] ">
         <TabsList className="grid grid-cols-3 shadow">
           <TabsTrigger value={ALL_FORMS.slide.value}>
             <span className="sr-only">{ALL_FORMS.slide.name}</span>

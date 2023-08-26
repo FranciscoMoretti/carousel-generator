@@ -3,18 +3,17 @@ import PDFViewer from "./PDFViewer";
 import { SlidePanel } from "./slide-panel";
 import Pager from "./pager";
 
-export function SlidesEditor({
-  isntanceUrl,
-  length,
-}: {
+interface SlidesEditorProps {
   isntanceUrl: string;
   length: number;
-}) {
+}
+
+export function SlidesEditor({ isntanceUrl, length }: SlidesEditorProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   return (
     <div>
-      <div className="z-10 max-w-5xl flex flex-col items-center justify-start gap-8 font-mono text-sm">
+      <div className="z-10 flex flex-col items-center justify-start rounded gap-8 font-mono text-sm border p-4 m-4 shadow">
         {/* React Slide for debug purposes */}
         {/* <div className="border p-4 rounded shadow flex flex-col items-center ">
         <CarouselSlide
@@ -23,7 +22,7 @@ export function SlidesEditor({
          theme={themeValues}
         />
         </div> */}
-        <div className=" border p-4 rounded shadow overflow-clip w-[1024px]">
+        <div className="overflow-clip w-full">
           {/* TODO: Make the width responsive */}
           <PDFViewer pdfUrl={isntanceUrl} currentPage={currentSlide} />
         </div>
