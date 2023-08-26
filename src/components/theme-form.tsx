@@ -51,12 +51,12 @@ export function ThemeForm({}: {}) {
         />
         <FormField
           control={form.control}
-          name="theme.accent"
+          name="theme.background"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Accent</FormLabel>
+              <FormLabel>Background</FormLabel>
               <FormControl>
-                <Input placeholder="Accent color" className="" {...field} />
+                <Input placeholder="Background color" className="" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

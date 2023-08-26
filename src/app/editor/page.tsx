@@ -36,14 +36,14 @@ export default function Home() {
           "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, dolorum.",
       }) as (typeof SlideSchema)[],
       settings: {
-        avatar: "https://thispersondoesnotexist.com",
+        avatar: "https://www.franciscomoretti.com/profile_picture.jpg",
         name: "My name",
         handle: "@name",
       },
       theme: {
         primary: "#005B8C",
         secondary: "#FFCC4A",
-        accent: "#FDF8EC",
+        background: "#FDF8EC",
       },
     },
   });

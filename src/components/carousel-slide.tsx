@@ -23,7 +23,7 @@ export function CarouselSlide({
   return (
     <Card
       className="w-[448px] h-[560px] aspect-[4/5] p-8 flex flex-col justify-between"
-      style={{ backgroundColor: theme.accent }}
+      style={{ backgroundColor: theme.background }}
     >
       <CardHeader>
         <CardTitle style={{ color: theme.primary }}>{slide.title}</CardTitle>
