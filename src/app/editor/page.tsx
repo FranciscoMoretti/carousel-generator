@@ -19,7 +19,6 @@ import {
   usePDF,
   // @ts-ignore: Library import from inner module to avoid thinking we are on node
 } from "@react-pdf/renderer/lib/react-pdf.browser.es";
-import Pager from "@/components/pager";
 import { DocumentSchema } from "@/lib/validation/document-schema";
 import { SlidesEditor } from "@/components/slides-editor";
 import EditorLayout from "./editor";
