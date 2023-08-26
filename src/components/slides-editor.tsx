@@ -36,7 +36,7 @@ export function SlidesEditor({ isntanceUrl, length }: SlidesEditorProps) {
         </div> */}
         <div className="overflow-clip w-full">
           {/* TODO: Make the width responsive */}
-          <PDFViewer pdfUrl={isntanceUrl} currentPage={currentPage} />
+          <PDFViewer pdfUrl={isntanceUrl} />
         </div>
         <SlidePanel currentSlide={currentPage}></SlidePanel>
       </div>

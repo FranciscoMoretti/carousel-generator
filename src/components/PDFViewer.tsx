@@ -4,6 +4,8 @@ import { pdfjs } from "react-pdf";
 
 import "react-pdf/dist/Page/TextLayer.css";
 import "react-pdf/dist/Page/AnnotationLayer.css";
+import { usePagerContext } from "@/lib/providers/pager-context";
+import { cn } from "@/lib/utils";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.js",
@@ -13,13 +15,8 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 const PAGE_GAP_PX = 8;
 const PAGE_WIDTH_PX = 448;
 
-export const PDFViewer = ({
-  pdfUrl,
-  currentPage,
-}: {
-  pdfUrl: string;
-  currentPage: number;
-}) => {
+export const PDFViewer = ({ pdfUrl }: { pdfUrl: string }) => {
+  const { currentPage, setPage } = usePagerContext();
   const [numPages, setNumPages] = useState<number | null>(null);
 
   const [previousRenderValue, setPreviousRenderValue] = useState("");
@@ -65,7 +62,11 @@ export const PDFViewer = ({
           >
             {Array.from(new Array(numPages), (el, index) => (
               <Page
-                className={shouldShowPreviousDocument ? "opacity-50 " : null}
+                className={cn(
+                  index != currentPage &&
+                    "hover:brightness-90  hover:cursor-pointer",
+                  shouldShowPreviousDocument && "opacity-50 "
+                )}
                 width={PAGE_WIDTH_PX}
                 key={`page_${index + 1}`}
                 pageNumber={index + 1}
@@ -83,12 +84,15 @@ export const PDFViewer = ({
           {Array.from(new Array(numPages), (el, index) => (
             <Page
               key={`page_${index + 1}`}
-              className={
-                shouldShowPreviousDocument ? "absolute opacity-0" : null
-              }
+              className={cn(
+                index != currentPage &&
+                  "hover:brightness-90  hover:cursor-pointer",
+                shouldShowPreviousDocument && "absolute opacity-0"
+              )}
               pageNumber={index + 1}
               width={PAGE_WIDTH_PX}
               onRenderSuccess={() => setPreviousRenderValue(pdfUrl)}
+              onClick={() => setPage(index)}
             />
           ))}
         </Document>
