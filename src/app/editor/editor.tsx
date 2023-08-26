@@ -15,6 +15,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { EditorSidebar } from "@/components/editor-sidebar";
 import { SlidesEditor } from "@/components/slides-editor";
+import { EditorMenubar } from "@/components/menubar";
 
 // import { CodeViewer } from "./components/code-viewer";
 // import { MaxLengthSelector } from "./components/maxlength-selector";
@@ -69,7 +70,7 @@ function EditorCanvas({ length, isntanceUrl }: EditorCanvasProps) {
     <>
       <div className="h-full flex-col flex">
         <div className="w-full flex flex-col items-start justify-between space-y-2 py-4 sm:flex-row sm:items-center sm:space-y-0 md:h-16">
-          <h2 className="text-lg font-semibold">Canvas</h2>
+          <EditorMenubar />
           <div className="ml-auto flex w-full space-x-2 sm:justify-end">
             {/* <PresetSelector presets={presets} />
             <PresetSave /> */}

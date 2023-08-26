@@ -16,7 +16,7 @@ export function usePager(initialPage: number, numPages: number) {
   };
 
   const setPage = (pageNum: number) => {
-    if (pageNum < numPages - 1) {
+    if (pageNum < numPages) {
       setCurrentPage(pageNum);
     }
   };
