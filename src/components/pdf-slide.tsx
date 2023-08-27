@@ -22,7 +22,7 @@ const tw = createTw({
     },
     extend: {
       colors: {
-        custom: "#bada55",
+        custom: "#bada55", // TODO: Use this class to style components with tailwind (primary, secondary, etc)
       },
     },
   },
