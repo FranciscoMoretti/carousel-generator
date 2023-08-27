@@ -10,11 +10,15 @@ export default function SlideMenubar({}: Props) {
   const { currentPage, numPages } = usePagerContext();
   const {
     control,
+    watch,
   }: UseFormReturn<
     z.infer<typeof DocumentSchema>,
     any,
     undefined
   > = useFormContext(); // retrieve those props
+
+  const currentSlidesValues = watch("slides");
+
   const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
     {
       control, // control props comes from useForm (optional: if you are using FormContext)
@@ -32,10 +36,14 @@ export default function SlideMenubar({}: Props) {
       >
         Reorder
       </Button>
-      <Button onClick={() => null} variant="outline" size="sm">
+      <Button
+        onClick={() => insert(currentPage, currentSlidesValues[currentPage])}
+        variant="outline"
+        size="sm"
+      >
         Duplicate
       </Button>
-      <Button onClick={() => null} variant="outline" size="sm">
+      <Button onClick={() => remove(currentPage)} variant="outline" size="sm">
         Delete
       </Button>
       <Button
