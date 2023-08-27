@@ -22,16 +22,12 @@ export function EditorSidebar() {
           )}
         </div>
       ))} */}
-      <div className={cn("pb-4")}>
-        <h4 className="mb-1 rounded-md px-2 py-1 text-sm font-semibold">
-          Settings
-        </h4>
+      <div className={cn("pb-5")}>
+        <h4 className="mb-1 rounded-md py-1 text-lg font-semibold">Settings</h4>
         <SettingsForm />
       </div>
-      <div className={cn("pb-4")}>
-        <h4 className="mb-1 rounded-md px-2 py-1 text-sm font-semibold">
-          Theme
-        </h4>
+      <div className={cn("pb-5")}>
+        <h4 className="mb-1 rounded-md py-1 text-lg font-semibold">Theme</h4>
         <ThemeForm />
       </div>
     </div>
