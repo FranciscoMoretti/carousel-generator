@@ -15,7 +15,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { EditorSidebar } from "@/components/editor-sidebar";
 import { SlidesEditor } from "@/components/slides-editor";
-import { EditorMenubar } from "@/components/menubar";
+import { EditorMenubar } from "@/components/editor-menubar";
 
 // import { CodeViewer } from "./components/code-viewer";
 // import { MaxLengthSelector } from "./components/maxlength-selector";

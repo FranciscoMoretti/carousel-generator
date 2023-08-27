@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PDFViewer from "./PDFViewer";
 import { SlidePanel } from "./slide-panel";
-import { EditorMenubar } from "./menubar";
+import { EditorMenubar } from "./editor-menubar";
 import { usePager } from "@/lib/hooks/use-pager";
 import { usePagerContext } from "@/lib/providers/pager-context";
 
