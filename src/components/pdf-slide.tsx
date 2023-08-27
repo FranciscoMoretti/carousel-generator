@@ -44,16 +44,15 @@ export function PdfSlide({
           size={[300, 375]}
           style={{
             backgroundColor: theme.background,
-            ...tw("p-8 flex flex-col justify-between"),
+            ...tw("p-8 flex flex-col justify-between "),
           }}
         >
           <View style={tw("flex flex-col")}>
             <Text
               style={{
                 color: theme.primary,
-                ...tw(
-                  "text-2xl font-semibold mb-3 leading-none tracking-tight"
-                ),
+                fontFamily: "Helvetica-Bold",
+                ...tw("text-4xl font-bold mb-3 leading-none tracking-tight"),
               }}
             >
               {slide.title}
