@@ -27,7 +27,6 @@ export function SlidesEditor({ isntanceUrl, length }: SlidesEditorProps) {
         <div className="overflow-clip w-full">
           {/* TODO: Make the width responsive */}
           <PDFViewer pdfUrl={isntanceUrl} />
-          SlideMenubar
         </div>
         <SlidePanel />
       </div>
