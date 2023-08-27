@@ -3,6 +3,13 @@ import { usePagerContext } from "@/lib/providers/pager-context";
 import { DocumentSchema } from "@/lib/validation/document-schema";
 import { UseFormReturn, useFieldArray, useFormContext } from "react-hook-form";
 import * as z from "zod";
+import {
+  ArrowLeftFromLine,
+  ArrowRightFromLineIcon,
+  ArrowRightFromLine,
+  X,
+  Copy,
+} from "lucide-react";
 
 interface Props extends React.HTMLAttributes<HTMLElement> {}
 
@@ -31,28 +38,28 @@ export default function SlideMenubar({}: Props) {
       <Button
         onClick={() => swap(currentPage, currentPage - 1)}
         variant="outline"
-        size="sm"
+        size="icon"
         disabled={currentPage == 0}
       >
-        Reorder
+        <ArrowLeftFromLine className="w-4 h-4" />
       </Button>
       <Button
         onClick={() => insert(currentPage, currentSlidesValues[currentPage])}
         variant="outline"
-        size="sm"
+        size="icon"
       >
-        Duplicate
+        <Copy className="w-4 h-4" />
       </Button>
-      <Button onClick={() => remove(currentPage)} variant="outline" size="sm">
-        Delete
+      <Button onClick={() => remove(currentPage)} variant="outline" size="icon">
+        <X className="w-4 h-4" />
       </Button>
       <Button
         onClick={() => swap(currentPage, currentPage + 1)}
         variant="outline"
-        size="sm"
+        size="icon"
         disabled={currentPage == numPages - 1}
       >
-        Reorder
+        <ArrowRightFromLine className="w-4 h-4" />
       </Button>
     </div>
   );
