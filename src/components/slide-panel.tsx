@@ -1,23 +1,5 @@
 import { SlidesForm } from "./slides-form";
-import { SettingsForm } from "./settings-form";
-import { ThemeForm } from "./theme-form";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
-import { usePagerContext } from "@/lib/providers/pager-context";
-
-const ALL_FORMS = {
-  slide: {
-    name: "Slide",
-    value: "slide",
-  },
-  settings: {
-    name: "Settings",
-    value: "settings",
-  },
-  theme: {
-    name: "Theme",
-    value: "theme",
-  },
-};
+import { Tabs } from "./ui/tabs";
 
 export function SlidePanel() {
   return (
