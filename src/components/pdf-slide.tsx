@@ -10,6 +10,7 @@ import {
   View,
   StyleSheet,
   Image,
+  Font,
 } from "@react-pdf/renderer";
 import { createTw } from "react-pdf-tailwind";
 
@@ -25,6 +26,11 @@ const tw = createTw({
       },
     },
   },
+});
+
+Font.registerHyphenationCallback((word) => {
+  // Return entire word as unique part
+  return [word];
 });
 
 export function PdfSlide({
