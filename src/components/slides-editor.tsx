@@ -4,6 +4,7 @@ import { SlidePanel } from "./slide-panel";
 import { EditorMenubar } from "./editor-menubar";
 import { usePager } from "@/lib/hooks/use-pager";
 import { usePagerContext } from "@/lib/providers/pager-context";
+import SlideMenubar from "./slide-menubar";
 
 interface SlidesEditorProps {
   isntanceUrl: string;
@@ -22,11 +23,13 @@ export function SlidesEditor({ isntanceUrl, length }: SlidesEditorProps) {
          theme={themeValues}
         />
         </div> */}
+        <SlideMenubar />
         <div className="overflow-clip w-full">
           {/* TODO: Make the width responsive */}
           <PDFViewer pdfUrl={isntanceUrl} />
+          SlideMenubar
         </div>
-        <SlidePanel></SlidePanel>
+        <SlidePanel />
       </div>
     </div>
   );
