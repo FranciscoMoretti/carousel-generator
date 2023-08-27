@@ -14,6 +14,7 @@ import { Separator } from "./ui/separator";
 export function EditorSidebar() {
   return (
     <div className="w-full">
+      {/* TODO: Add a title here */}
       {/* return items.length ? ( */}
       {/* {items.map((item, index) => (
         <div key={index} className={cn("pb-4")}>
