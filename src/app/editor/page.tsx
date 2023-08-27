@@ -43,7 +43,7 @@ export default function Home() {
       theme: {
         primary: "#005B8C",
         secondary: "#FFCC4A",
-        background: "#FDF8EC",
+        background: "#FAFAFA",
       },
     },
   });
