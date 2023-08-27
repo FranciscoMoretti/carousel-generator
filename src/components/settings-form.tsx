@@ -1,7 +1,6 @@
 import { UseFormReturn, useFormContext } from "react-hook-form";
 import * as z from "zod";
 
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -11,10 +10,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { toast } from "@/components/ui/use-toast";
 
 import { Textarea } from "@/components/ui/textarea";
-import { SettingsSchema } from "@/lib/validation/settings-schema";
 import { DocumentSchema } from "@/lib/validation/document-schema";
 
 export function SettingsForm({}: {}) {
