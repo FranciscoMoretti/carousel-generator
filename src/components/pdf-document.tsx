@@ -15,6 +15,7 @@ import {
 import { createTw } from "react-pdf-tailwind";
 import { FontsSchema } from "@/lib/validation/fonts-schema";
 import { fontsMap } from "@/lib/fonts-map";
+import { DocumentSchema } from "@/lib/validation/document-schema";
 
 // The 'theme' object is your Tailwind theme config
 const tw = createTw({
@@ -51,17 +52,13 @@ Object.entries(fontsMap).forEach(([fontFamilyName, variants]) => {
   });
 });
 
-export function PdfSlide({
-  slides,
-  settings,
-  theme,
-  fonts,
+export function PdfDocument({
+  document,
 }: {
-  slides: z.infer<typeof MultiSlideSchema>;
-  settings: z.infer<typeof SettingsSchema>;
-  theme: z.infer<typeof ThemeSchema>;
-  fonts: z.infer<typeof FontsSchema>;
+  document: z.infer<typeof DocumentSchema>;
 }) {
+  const { slides, settings, theme, fonts, intro, outro } = document;
+
   return (
     <Document>
       {slides.map((slide, index) => (

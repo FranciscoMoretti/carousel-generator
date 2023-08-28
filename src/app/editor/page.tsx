@@ -5,7 +5,7 @@ import { useEffect, useMemo } from "react";
 import * as z from "zod";
 import { SlideSchema, SlideType } from "@/lib/validation/slide-schema";
 import { usePersistFormWithKey } from "@/lib/hooks/use-persist-form-with-key";
-import { PdfSlide } from "@/components/pdf-slide";
+import { PdfDocument } from "@/components/pdf-document";
 import {
   usePDF,
   // @ts-ignore: Library import from inner module to avoid thinking we are on node
@@ -58,14 +58,7 @@ export default function Home() {
   const documentValues = documentForm.watch();
 
   const pdfDocument = useMemo(
-    () => (
-      <PdfSlide
-        slides={documentValues.slides}
-        settings={documentValues.settings}
-        theme={documentValues.theme}
-        fonts={documentValues.fonts}
-      />
-    ),
+    () => <PdfDocument document={documentValues} />,
     [documentValues]
   );
   const [instance, updateInstance] = usePDF({ document: pdfDocument });
