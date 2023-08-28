@@ -2,14 +2,21 @@ import { Document, Page, Text, View, Image, Font } from "@react-pdf/renderer";
 import { DocumentSchema } from "@/lib/validation/document-schema";
 import { tw } from "@/lib/pdf-values";
 import { z } from "zod";
+import { cn } from "@/lib/utils";
 
 export function PdfSignature({
   document,
+  className,
 }: {
   document: z.infer<typeof DocumentSchema>;
+  className?: string;
 }) {
   return (
-    <View style={tw("flex justify-start flex-row gap-3 items-center")}>
+    <View
+      style={tw(
+        cn("flex justify-start flex-row gap-3 items-center", className)
+      )}
+    >
       {/* eslint-disable-next-line jsx-a11y/alt-text */}
       <Image
         src={document.settings.avatar}

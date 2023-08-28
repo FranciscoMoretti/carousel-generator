@@ -16,10 +16,10 @@ export function PdfIntroPage({
       size={PAGE_SIZE}
       style={{
         backgroundColor: document.theme.background,
-        ...tw("p-8 flex flex-col justify-between"),
+        ...tw("p-8 flex flex-col"),
       }}
     >
-      <View style={tw("flex flex-col")}>
+      <View style={tw("flex flex-col justify-center object-center grow")}>
         <Text
           style={{
             color: document.theme.primary,
@@ -41,7 +41,7 @@ export function PdfIntroPage({
         </Text>
         <Text
           style={{
-            color: document.theme.secondary,
+            // color: document.theme.secondary,
             ...tw("text-sm"),
           }}
         >

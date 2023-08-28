@@ -53,12 +53,18 @@ export default function SlideMenubar({}: Props) {
         onClick={() =>
           insert(currentContentSlide, currentSlidesValues[currentContentSlide])
         }
+        disabled={currentPage == 0 || currentPage == numPages - 1}
         variant="outline"
         size="icon"
       >
         <Copy className="w-4 h-4" />
       </Button>
-      <Button onClick={() => remove(currentPage)} variant="outline" size="icon">
+      <Button
+        onClick={() => remove(currentPage)}
+        disabled={currentPage == 0 || currentPage == numPages - 1}
+        variant="outline"
+        size="icon"
+      >
         <X className="w-4 h-4" />
       </Button>
       <Button
