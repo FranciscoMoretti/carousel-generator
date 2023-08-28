@@ -13,13 +13,11 @@ import {
   Font,
 } from "@react-pdf/renderer";
 import { createTw } from "react-pdf-tailwind";
+import { FontsSchema } from "@/lib/validation/fonts-schema";
 
 // The 'theme' object is your Tailwind theme config
 const tw = createTw({
   theme: {
-    fontFamily: {
-      sans: ["Comic Sans"],
-    },
     extend: {
       colors: {
         custom: "#bada55", // TODO: Use this class to style components with tailwind (primary, secondary, etc)
@@ -33,14 +31,51 @@ Font.registerHyphenationCallback((word) => {
   return [word];
 });
 
+Font.register({
+  family: "Inter",
+  fonts: [
+    {
+      src: `/fonts/Inter-Regular.ttf`,
+    },
+    // {
+    //   src: "http://localhost:3000/fonts/Inter-Bold.ttf",
+    //   fontWeight: "bold",
+    // },
+  ],
+});
+
+Font.register({
+  family: "BlackOps",
+  fonts: [
+    {
+      src: `/fonts/BlackOpsOne-Regular.ttf`,
+    },
+  ],
+});
+
+Font.register({
+  family: "Roboto",
+  fonts: [
+    {
+      src: `/fonts/Roboto-Regular.ttf`,
+    },
+    {
+      src: "/fonts/Roboto-Bold.ttf",
+      fontWeight: "bold",
+    },
+  ],
+});
+
 export function PdfSlide({
   slides,
   settings,
   theme,
+  fonts,
 }: {
   slides: z.infer<typeof MultiSlideSchema>;
   settings: z.infer<typeof SettingsSchema>;
   theme: z.infer<typeof ThemeSchema>;
+  fonts: z.infer<typeof FontsSchema>;
 }) {
   return (
     <Document>
@@ -50,19 +85,38 @@ export function PdfSlide({
           size={[300, 375]}
           style={{
             backgroundColor: theme.background,
-            ...tw("p-8 flex flex-col justify-between "),
+            ...tw("p-8 flex flex-col justify-between"),
           }}
         >
           <View style={tw("flex flex-col")}>
             <Text
               style={{
                 color: theme.primary,
-                fontFamily: "Helvetica-Bold",
-                ...tw("text-4xl font-bold mb-3 leading-none tracking-tight"),
+                fontFamily: fonts.font1,
+                // fontWeight: "bold",
+                // ...tw("text-5xl mb-3 leading-none tracking-tight"),
               }}
             >
               {slide.title}
             </Text>
+            <Text
+              style={{
+                fontFamily: fonts.font2,
+                color: theme.primary,
+                // ...tw("text-5xl mb-3 leading-none tracking-tight"),
+              }}
+            >
+              {slide.title}
+            </Text>
+            <Text
+              style={{
+                color: theme.primary,
+                // ...tw("text-5xl mb-3 leading-none tracking-tight"),
+              }}
+            >
+              {slide.title}
+            </Text>
+
             <Text
               style={{
                 color: theme.secondary,
@@ -89,7 +143,7 @@ export function PdfSlide({
               <Text
                 style={{
                   color: theme.primary,
-                  ...tw("text-xs "),
+                  ...tw("text-xs"),
                 }}
               >
                 {settings.name}

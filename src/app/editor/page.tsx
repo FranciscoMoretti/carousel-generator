@@ -1,29 +1,19 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import * as z from "zod";
-import { SlidesForm } from "@/components/slides-form";
-import { MultiSlideSchema, SlideSchema } from "@/lib/validation/slide-schema";
-import { CarouselSlide } from "@/components/carousel-slide";
-import { SettingsSchema } from "@/lib/validation/settings-schema";
-import { SettingsForm } from "@/components/settings-form";
+import { SlideSchema } from "@/lib/validation/slide-schema";
 import { usePersistFormWithKey } from "@/lib/hooks/use-persist-form-with-key";
-import { ThemeSchema } from "@/lib/validation/theme-schema";
-import { ThemeForm } from "@/components/theme-form";
 import { PdfSlide } from "@/components/pdf-slide";
-import { PDFViewer } from "@/components/PDFViewer";
 import {
-  BlobProvider,
-  PDFDownloadLink,
   usePDF,
   // @ts-ignore: Library import from inner module to avoid thinking we are on node
 } from "@react-pdf/renderer/lib/react-pdf.browser.es";
 import { DocumentSchema } from "@/lib/validation/document-schema";
-import { SlidesEditor } from "@/components/slides-editor";
-import EditorLayout from "./editor";
-import { usePager } from "@/lib/hooks/use-pager";
 import { PagerProvider } from "@/lib/providers/pager-context";
+import { usePager } from "@/lib/hooks/use-pager";
+import EditorLayout from "./editor";
 
 export default function Home() {
   const documentForm = useForm<z.infer<typeof DocumentSchema>>({
@@ -45,6 +35,10 @@ export default function Home() {
         secondary: "#FFCC4A",
         background: "#FAFAFA",
       },
+      fonts: {
+        font1: "Inter",
+        font2: "Roboto",
+      },
     },
   });
   usePersistFormWithKey(documentForm, "documentFormKey");
@@ -56,6 +50,7 @@ export default function Home() {
         slides={documentValues.slides}
         settings={documentValues.settings}
         theme={documentValues.theme}
+        fonts={documentValues.fonts}
       />
     ),
     [documentValues]
