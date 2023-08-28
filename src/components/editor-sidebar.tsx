@@ -50,7 +50,7 @@ const ALL_FORMS = {
 export function SidebarFormsPanel() {
   return (
     <Tabs defaultValue={ALL_FORMS.settings.value} className="flex-1">
-      <div className="flex flex-col gap-6 ">
+      <div className="flex flex-col gap-6 p-2">
         <TabsList className="grid grid-cols-3 shadow">
           <TabsTrigger value={ALL_FORMS.settings.value}>
             <span className="sr-only">{ALL_FORMS.settings.name}</span>
@@ -67,38 +67,36 @@ export function SidebarFormsPanel() {
         </TabsList>
         <Separator />
 
-        <div className="">
-          <TabsContent
-            value={ALL_FORMS.settings.value}
-            className="mt-0 border-0 p-0"
-          >
-            <h4 className="mb-1 rounded-md py-1 text-lg font-semibold">
-              {ALL_FORMS.settings.name}
-            </h4>
+        <TabsContent
+          value={ALL_FORMS.settings.value}
+          className="mt-0 border-0 p-0"
+        >
+          <h4 className="mb-1 rounded-md py-1 text-lg font-semibold">
+            {ALL_FORMS.settings.name}
+          </h4>
 
-            <SettingsForm />
-          </TabsContent>
-          <TabsContent
-            value={ALL_FORMS.theme.value}
-            className="mt-0 border-0 p-0"
-          >
-            <h4 className="mb-1 rounded-md py-1 text-lg font-semibold">
-              {ALL_FORMS.theme.name}
-            </h4>
+          <SettingsForm />
+        </TabsContent>
+        <TabsContent
+          value={ALL_FORMS.theme.value}
+          className="mt-0 border-0 p-0"
+        >
+          <h4 className="mb-1 rounded-md py-1 text-lg font-semibold">
+            {ALL_FORMS.theme.name}
+          </h4>
 
-            <ThemeForm />
-          </TabsContent>
-          <TabsContent
-            value={ALL_FORMS.fonts.value}
-            className="mt-0 border-0 p-0"
-          >
-            <h4 className="mb-1 rounded-md py-1 text-lg font-semibold">
-              {ALL_FORMS.fonts.name}
-            </h4>
+          <ThemeForm />
+        </TabsContent>
+        <TabsContent
+          value={ALL_FORMS.fonts.value}
+          className="mt-0 border-0 p-0"
+        >
+          <h4 className="mb-1 rounded-md py-1 text-lg font-semibold">
+            {ALL_FORMS.fonts.name}
+          </h4>
 
-            <FontsForm />
-          </TabsContent>
-        </div>
+          <FontsForm />
+        </TabsContent>
       </div>
     </Tabs>
   );
