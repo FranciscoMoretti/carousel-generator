@@ -1,4 +1,4 @@
-import PDFViewer from "./PDFViewer";
+import PDFViewer from "./pdf-viewer";
 import { SlidePanel } from "./slide-panel";
 import SlideMenubar from "./slide-menubar";
 
