@@ -18,9 +18,7 @@ import { MultiSlideSchema, SlideSchema } from "@/lib/validation/slide-schema";
 import { DocumentSchema } from "@/lib/validation/document-schema";
 import { usePagerContext } from "@/lib/providers/pager-context";
 
-export function SlidesForm() {
-  const { currentPage: currentSlide } = usePagerContext();
-
+export function SlidesForm({ currentSlide }: { currentSlide: number }) {
   const form: UseFormReturn<
     z.infer<typeof DocumentSchema>,
     any,

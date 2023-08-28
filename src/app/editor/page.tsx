@@ -68,7 +68,11 @@ export default function Home() {
     updateInstance(pdfDocument);
   }, [pdfDocument, updateInstance]);
 
-  const pager = usePager(0, documentValues.slides.length); // Provide the initial page and numPages
+  const INTRO_OUTRO_PAGES_COUNT = 2;
+  const pager = usePager(
+    0,
+    documentValues.slides.length + INTRO_OUTRO_PAGES_COUNT
+  ); // num
 
   return (
     <FormProvider {...documentForm}>

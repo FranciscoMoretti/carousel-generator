@@ -4,6 +4,8 @@ import { Document, Font } from "@react-pdf/renderer";
 import { fontsMap } from "@/lib/fonts-map";
 import { DocumentSchema } from "@/lib/validation/document-schema";
 import { PdfContentPage } from "./pdf-content-page";
+import { PdfIntroPage } from "./pdf-intro-page";
+import { PdfOutroPage } from "./pdf-outro-page";
 
 Font.registerHyphenationCallback((word) => {
   // Return entire word as unique part
@@ -36,9 +38,11 @@ export function PdfDocument({
 }) {
   return (
     <Document>
+      <PdfIntroPage document={document} />
       {document.slides.map((slide, index) => (
         <PdfContentPage key={index} index={index} document={document} />
       ))}
+      <PdfOutroPage document={document} />
     </Document>
   );
 }

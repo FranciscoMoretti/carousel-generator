@@ -25,6 +25,8 @@ export default function SlideMenubar({}: Props) {
   > = useFormContext(); // retrieve those props
 
   const currentSlidesValues = watch("slides");
+  const INTRO_PAGE_SHIFT = 1;
+  const OUTRO_PAGE_SHIFT = 1;
 
   const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
     {
@@ -33,18 +35,24 @@ export default function SlideMenubar({}: Props) {
     }
   );
 
+  const currentContentSlide = currentPage - INTRO_PAGE_SHIFT;
   return (
     <div className="flex flex-row gap-1">
       <Button
-        onClick={() => swap(currentPage, currentPage - 1)}
+        onClick={() => swap(currentContentSlide, currentContentSlide - 1)}
         variant="outline"
         size="icon"
-        disabled={currentPage == 0}
+        disabled={
+          currentPage <= 0 + INTRO_PAGE_SHIFT ||
+          currentPage > numPages - 1 - OUTRO_PAGE_SHIFT
+        }
       >
         <ArrowLeftFromLine className="w-4 h-4" />
       </Button>
       <Button
-        onClick={() => insert(currentPage, currentSlidesValues[currentPage])}
+        onClick={() =>
+          insert(currentContentSlide, currentSlidesValues[currentContentSlide])
+        }
         variant="outline"
         size="icon"
       >
@@ -54,10 +62,13 @@ export default function SlideMenubar({}: Props) {
         <X className="w-4 h-4" />
       </Button>
       <Button
-        onClick={() => swap(currentPage, currentPage + 1)}
+        onClick={() => swap(currentContentSlide, currentContentSlide + 1)}
         variant="outline"
         size="icon"
-        disabled={currentPage == numPages - 1}
+        disabled={
+          currentPage < INTRO_PAGE_SHIFT ||
+          currentPage >= numPages - 1 - OUTRO_PAGE_SHIFT
+        }
       >
         <ArrowRightFromLine className="w-4 h-4" />
       </Button>
