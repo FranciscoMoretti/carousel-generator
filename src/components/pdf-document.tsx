@@ -1,17 +1,6 @@
-import { SettingsSchema } from "@/lib/validation/settings-schema";
-import { MultiSlideSchema, SlideSchema } from "@/lib/validation/slide-schema";
-import { ThemeSchema } from "@/lib/validation/theme-schema";
 import * as z from "zod";
 import React from "react";
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  Image,
-  Font,
-} from "@react-pdf/renderer";
+import { Document, Page, Text, View, Image, Font } from "@react-pdf/renderer";
 import { createTw } from "react-pdf-tailwind";
 import { FontsSchema } from "@/lib/validation/fonts-schema";
 import { fontsMap } from "@/lib/fonts-map";
@@ -57,24 +46,22 @@ export function PdfDocument({
 }: {
   document: z.infer<typeof DocumentSchema>;
 }) {
-  const { slides, settings, theme, fonts, intro, outro } = document;
-
   return (
     <Document>
-      {slides.map((slide, index) => (
+      {document.slides.map((slide, index) => (
         <Page
           key={index}
           size={[300, 375]}
           style={{
-            backgroundColor: theme.background,
+            backgroundColor: document.theme.background,
             ...tw("p-8 flex flex-col justify-between"),
           }}
         >
           <View style={tw("flex flex-col")}>
             <Text
               style={{
-                color: theme.primary,
-                fontFamily: fonts.font1,
+                color: document.theme.primary,
+                fontFamily: document.fonts.font1,
                 fontWeight: "bold",
                 ...tw("text-5xl mb-3 leading-none tracking-tight"),
               }}
@@ -84,42 +71,35 @@ export function PdfDocument({
 
             <Text
               style={{
-                color: theme.secondary,
+                color: document.theme.secondary,
                 ...tw("text-sm"),
               }}
             >
               {slide.subtitle}
             </Text>
           </View>
-          <View style={tw("py-6 pt-0")}>
-            <Text
-              style={{
-                color: "black",
-                ...tw("text-sm"),
-              }}
-            >
-              {slide.description}
-            </Text>
-          </View>
           <View style={tw("flex justify-start flex-row gap-3 items-center")}>
             {/* eslint-disable-next-line jsx-a11y/alt-text */}
-            <Image src={settings.avatar} style={tw("w-12 h-12 rounded-full")} />
+            <Image
+              src={document.settings.avatar}
+              style={tw("w-12 h-12 rounded-full")}
+            />
             <View style={tw("flex items-start gap-2 flex-col")}>
               <Text
                 style={{
-                  color: theme.primary,
+                  color: document.theme.primary,
                   ...tw("text-xs"),
                 }}
               >
-                {settings.name}
+                {document.settings.name}
               </Text>
               <Text
                 style={{
-                  color: theme.secondary,
+                  color: document.theme.secondary,
                   ...tw("text-xs"),
                 }}
               >
-                {settings.handle}
+                {document.settings.handle}
               </Text>
             </View>
           </View>
