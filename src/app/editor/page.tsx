@@ -36,8 +36,8 @@ export default function Home() {
         background: "#FAFAFA",
       },
       fonts: {
-        font1: "Inter",
-        font2: "Roboto",
+        font1: "DM_Sans",
+        font2: "DM_Serif_Display",
       },
     },
   });

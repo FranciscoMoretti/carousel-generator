@@ -9,7 +9,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 
 import { DocumentSchema } from "@/lib/validation/document-schema";
 import {
@@ -19,6 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { fontsMap } from "@/lib/fonts-map";
 
 export function FontsForm({}: {}) {
   const form: UseFormReturn<
@@ -42,10 +42,7 @@ export function FontsForm({}: {}) {
                     <SelectValue placeholder="Select primary font" />
                   </SelectTrigger>
                 </FormControl>
-                <SelectContent>
-                  <SelectItem value="Roboto">Roboto</SelectItem>
-                  <SelectItem value="Inter">Inter</SelectItem>
-                </SelectContent>
+                <FontSelectContent />
               </Select>
               <FormMessage />
             </FormItem>
@@ -63,10 +60,7 @@ export function FontsForm({}: {}) {
                     <SelectValue placeholder="Select a secondary font" />
                   </SelectTrigger>
                 </FormControl>
-                <SelectContent>
-                  <SelectItem value="Roboto">Roboto</SelectItem>
-                  <SelectItem value="Inter">Inter</SelectItem>
-                </SelectContent>
+                <FontSelectContent />
               </Select>
               <FormMessage />
             </FormItem>
@@ -74,5 +68,16 @@ export function FontsForm({}: {}) {
         />
       </form>
     </Form>
+  );
+}
+function FontSelectContent() {
+  return (
+    <SelectContent>
+      {Object.keys(fontsMap).map((familyName) => (
+        <SelectItem key={familyName} value={familyName}>
+          {familyName}
+        </SelectItem>
+      ))}
+    </SelectContent>
   );
 }
