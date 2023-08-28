@@ -47,7 +47,7 @@ export const PDFViewer = ({ pdfUrl }: { pdfUrl: string }) => {
         style={{
           left: `calc(50% - ${
             currentPage * (PAGE_WIDTH_PX + PAGE_GAP_PX)
-          }px - ${(PAGE_WIDTH_PX + PAGE_GAP_PX) * 0.5}px)`,
+          }px - ${PAGE_WIDTH_PX * 0.5}px)`,
         }}
       >
         {!isLatestValueRendered && previousRenderValue ? (
@@ -56,9 +56,6 @@ export const PDFViewer = ({ pdfUrl }: { pdfUrl: string }) => {
             file={previousRenderValue}
             loading={null}
             className="flex flex-row gap-2 "
-            style={{
-              gap: `${PAGE_GAP_PX}px`,
-            }}
           >
             {Array.from(new Array(numPages), (el, index) => (
               <Page
