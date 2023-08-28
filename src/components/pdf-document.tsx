@@ -37,11 +37,7 @@ export function PdfDocument({
   return (
     <Document>
       {document.slides.map((slide, index) => (
-        <PdfContentPage
-          key={index}
-          index={index}
-          document={document}
-        ></PdfContentPage>
+        <PdfContentPage key={index} index={index} document={document} />
       ))}
     </Document>
   );
