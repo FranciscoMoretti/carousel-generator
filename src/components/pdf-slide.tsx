@@ -37,18 +37,9 @@ Font.register({
     {
       src: `/fonts/Inter-Regular.ttf`,
     },
-    // {
-    //   src: "http://localhost:3000/fonts/Inter-Bold.ttf",
-    //   fontWeight: "bold",
-    // },
-  ],
-});
-
-Font.register({
-  family: "BlackOps",
-  fonts: [
     {
-      src: `/fonts/BlackOpsOne-Regular.ttf`,
+      src: `/fonts/Inter-Bold.ttf`,
+      fontWeight: "bold",
     },
   ],
 });
@@ -93,8 +84,8 @@ export function PdfSlide({
               style={{
                 color: theme.primary,
                 fontFamily: fonts.font1,
-                // fontWeight: "bold",
-                // ...tw("text-5xl mb-3 leading-none tracking-tight"),
+                fontWeight: "bold",
+                ...tw("text-5xl mb-3 leading-none tracking-tight"),
               }}
             >
               {slide.title}
@@ -103,15 +94,7 @@ export function PdfSlide({
               style={{
                 fontFamily: fonts.font2,
                 color: theme.primary,
-                // ...tw("text-5xl mb-3 leading-none tracking-tight"),
-              }}
-            >
-              {slide.title}
-            </Text>
-            <Text
-              style={{
-                color: theme.primary,
-                // ...tw("text-5xl mb-3 leading-none tracking-tight"),
+                ...tw("text-5xl mb-3 leading-none tracking-tight"),
               }}
             >
               {slide.title}

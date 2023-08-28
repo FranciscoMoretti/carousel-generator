@@ -12,6 +12,13 @@ import {
 import { Input } from "@/components/ui/input";
 
 import { DocumentSchema } from "@/lib/validation/document-schema";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export function FontsForm({}: {}) {
   const form: UseFormReturn<
@@ -29,9 +36,17 @@ export function FontsForm({}: {}) {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Font 1</FormLabel>
-              <FormControl>
-                <Input placeholder="Primary font" className="" {...field} />
-              </FormControl>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select primary font" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="Roboto">Roboto</SelectItem>
+                  <SelectItem value="Inter">Inter</SelectItem>
+                </SelectContent>
+              </Select>
               <FormMessage />
             </FormItem>
           )}
@@ -42,9 +57,17 @@ export function FontsForm({}: {}) {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Font 2</FormLabel>
-              <FormControl>
-                <Input placeholder="Secondary font" className="" {...field} />
-              </FormControl>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a secondary font" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="Roboto">Roboto</SelectItem>
+                  <SelectItem value="Inter">Inter</SelectItem>
+                </SelectContent>
+              </Select>
               <FormMessage />
             </FormItem>
           )}
