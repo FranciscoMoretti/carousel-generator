@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { useEffect, useMemo } from "react";
 import * as z from "zod";
-import { SlideSchema } from "@/lib/validation/slide-schema";
+import { SlideSchema, SlideType } from "@/lib/validation/slide-schema";
 import { usePersistFormWithKey } from "@/lib/hooks/use-persist-form-with-key";
 import { PdfSlide } from "@/components/pdf-slide";
 import {
@@ -19,11 +19,24 @@ export default function Home() {
   const documentForm = useForm<z.infer<typeof DocumentSchema>>({
     resolver: zodResolver(DocumentSchema),
     defaultValues: {
-      slides: Array.from({ length: 5 }).fill({
+      intro: {
+        type: SlideType.enum.Intro,
         title: "YOUR TITLE",
         subtitle: "Your awesome subtitle",
         description:
           "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, dolorum.",
+      },
+      outro: {
+        type: SlideType.enum.Outro,
+        title: "YOUR TITLE",
+        subtitle: "Your awesome subtitle",
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, dolorum.",
+      },
+      slides: Array.from({ length: 5 }).fill({
+        type: SlideType.enum.Content,
+        title: "YOUR TITLE",
+        subtitle: "Your awesome subtitle",
       }) as (typeof SlideSchema)[],
       settings: {
         avatar: "https://www.franciscomoretti.com/profile_picture.jpg",

@@ -75,23 +75,6 @@ export function SlidesForm() {
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name={`slides.${currentSlide}.description`}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Bio</FormLabel>
-                <FormControl>
-                  <Textarea
-                    placeholder="Tell us a little bit about yourself"
-                    className="resize-none"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
         </div>
       </form>
     </Form>
