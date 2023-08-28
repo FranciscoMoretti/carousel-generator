@@ -9,8 +9,8 @@ type FontMap = {
 
 export const fontsMap: FontMap = {
   DM_Sans: {
-    regular: "public/fonts/DM_Sans/DMSans-Regular.ttf",
-    bold: "public/fonts/DM_Sans/DMSans-Bold.ttf",
+    regular: "/fonts/DM_Sans/DMSans-Regular.ttf",
+    bold: "/fonts/DM_Sans/DMSans-Bold.ttf",
   },
   DM_Serif_Display: {
     regular: "/fonts/DM_Serif_Display/DMSerifDisplay-Regular.ttf",
