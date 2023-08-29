@@ -19,7 +19,7 @@ export function PdfOutroPage({
         ...tw("p-8 flex flex-col justify-between"),
       }}
     >
-      <View style={tw("flex flex-col")}>
+      <View style={tw("flex flex-col justify-center grow")}>
         <Text
           style={{
             color: document.theme.primary,
@@ -30,17 +30,19 @@ export function PdfOutroPage({
         >
           {document.outro.title}
         </Text>
-
         <Text
           style={{
+            fontFamily: document.fonts.font1,
             color: document.theme.secondary,
-            ...tw("text-sm"),
+            fontWeight: "bold",
+            ...tw("text-base"),
           }}
         >
           {document.outro.subtitle}
         </Text>
         <Text
           style={{
+            fontFamily: document.fonts.font2,
             color: document.theme.secondary,
             ...tw("text-sm"),
           }}
