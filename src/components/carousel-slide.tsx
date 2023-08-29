@@ -28,7 +28,7 @@ export function CarouselSlide({
       <CardHeader>
         <CardTitle style={{ color: theme.primary }}>{slide.title}</CardTitle>
         <CardDescription style={{ color: theme.secondary }}>
-          {slide.subtitle}
+          {slide.description}
         </CardDescription>
       </CardHeader>
       <CardContent>

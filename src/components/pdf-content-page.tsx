@@ -35,11 +35,11 @@ export function PdfContentPage({
 
         <Text
           style={{
-            color: document.theme.secondary,
+            // color: document.theme.secondary,
             ...tw("text-sm"),
           }}
         >
-          {document.slides[index].subtitle}
+          {document.slides[index].description}
         </Text>
       </View>
       <PdfSignature document={document}></PdfSignature>

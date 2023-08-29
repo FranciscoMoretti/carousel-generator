@@ -58,13 +58,13 @@ export function SlidesForm({ currentSlide }: { currentSlide: number }) {
           />
           <FormField
             control={form.control}
-            name={`slides.${currentSlide}.subtitle`}
+            name={`slides.${currentSlide}.description`}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Subtitle</FormLabel>
+                <FormLabel>Description</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="Subtitle for more clarity"
+                    placeholder="Description for this slide"
                     className=""
                     {...field}
                   />
