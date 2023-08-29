@@ -20,7 +20,7 @@ export function PdfIntroPage({
       }}
     >
       {/* TODO: Make justify-start a config for this slide, and text-center / text-start a global config*/}
-      <View style={tw("flex flex-col justify-center object-center grow")}>
+      <View style={tw("flex flex-col justify-center grow")}>
         <Text
           style={{
             color: document.theme.primary,
@@ -31,18 +31,20 @@ export function PdfIntroPage({
         >
           {document.intro.title}
         </Text>
-
         <Text
           style={{
+            fontFamily: document.fonts.font1,
             color: document.theme.secondary,
-            ...tw("text-sm"),
+            fontWeight: "bold",
+            ...tw("text-base"),
           }}
         >
           {document.intro.subtitle}
         </Text>
         <Text
           style={{
-            // color: document.theme.secondary,
+            fontFamily: document.fonts.font2,
+            color: document.theme.secondary,
             ...tw("text-sm"),
           }}
         >

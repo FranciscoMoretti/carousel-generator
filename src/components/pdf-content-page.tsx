@@ -21,13 +21,13 @@ export function PdfContentPage({
         ...tw("p-8 flex flex-col justify-between"),
       }}
     >
-      <View style={tw("flex flex-col")}>
+      <View style={tw("flex flex-col justify-center grow")}>
         <Text
           style={{
             color: document.theme.primary,
             fontFamily: document.fonts.font1,
             fontWeight: "bold",
-            ...tw("text-5xl mb-3 leading-none tracking-tight"),
+            ...tw("text-3xl mb-3 leading-none tracking-tight"),
           }}
         >
           {document.slides[index].title}
@@ -35,7 +35,8 @@ export function PdfContentPage({
 
         <Text
           style={{
-            // color: document.theme.secondary,
+            color: document.theme.secondary,
+            fontFamily: document.fonts.font2,
             ...tw("text-sm"),
           }}
         >

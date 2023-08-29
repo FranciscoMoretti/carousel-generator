@@ -26,6 +26,7 @@ export function PdfSignature({
         <Text
           style={{
             color: document.theme.primary,
+            fontFamily: document.fonts.font2,
             ...tw("text-xs"),
           }}
         >
@@ -34,6 +35,8 @@ export function PdfSignature({
         <Text
           style={{
             color: document.theme.secondary,
+            fontFamily: document.fonts.font2,
+            fontWeight: "normal",
             ...tw("text-xs"),
           }}
         >

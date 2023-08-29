@@ -35,8 +35,9 @@ export default function Home() {
       },
       slides: Array.from({ length: 5 }).fill({
         type: SlideType.enum.Content,
-        title: "YOUR TITLE",
-        subtitle: "Your awesome subtitle",
+        title: "A cool title for this slide",
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, recusandae.",
       }) as (typeof SlideSchema)[],
       settings: {
         avatar: "https://www.franciscomoretti.com/profile_picture.jpg",
@@ -44,13 +45,13 @@ export default function Home() {
         handle: "@name",
       },
       theme: {
-        primary: "#005B8C",
-        secondary: "#FFCC4A",
-        background: "#FAFAFA",
+        primary: "#927adb",
+        secondary: "#e6dae1",
+        background: "#0f0a0c",
       },
       fonts: {
-        font1: "DM_Sans",
-        font2: "DM_Serif_Display",
+        font1: "DM_Serif_Display",
+        font2: "DM_Sans",
       },
     },
   });
