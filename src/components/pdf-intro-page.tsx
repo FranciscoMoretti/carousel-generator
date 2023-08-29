@@ -19,6 +19,7 @@ export function PdfIntroPage({
         ...tw("p-8 flex flex-col"),
       }}
     >
+      {/* TODO: Make justify-start a config for this slide, and text-center / text-start a global config*/}
       <View style={tw("flex flex-col justify-center object-center grow")}>
         <Text
           style={{
