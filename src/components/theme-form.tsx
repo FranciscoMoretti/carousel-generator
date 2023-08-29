@@ -21,6 +21,7 @@ export function ThemeForm({}: {}) {
   > = useFormContext(); // retrieve those props
 
   return (
+    // TODO: popover with picker from github.com/casesandberg/react-color or github.com/omgovich/react-colorful
     <Form {...form}>
       <form className="space-y-6 w-full">
         <FormField
