@@ -45,9 +45,11 @@ export default function Home() {
         handle: "@name",
       },
       theme: {
-        primary: "#927adb",
-        secondary: "#e6dae1",
-        background: "#0f0a0c",
+        isCustom: true,
+        pallette: "huemint-1",
+        primary: "#b1e4cc",
+        secondary: "#9ac141",
+        background: "#202624",
       },
       fonts: {
         font1: "DM_Serif_Display",

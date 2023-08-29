@@ -1,6 +1,6 @@
 import { Document, Page, Text, View, Image, Font } from "@react-pdf/renderer";
 import { DocumentSchema } from "@/lib/validation/document-schema";
-import { tw } from "@/lib/pdf-values";
+import { tw } from "@/lib/pdf-resources";
 import { z } from "zod";
 import { cn } from "@/lib/utils";
 

@@ -2,7 +2,7 @@ import * as z from "zod";
 import React from "react";
 import { Page, Text, View, Image } from "@react-pdf/renderer";
 import { DocumentSchema } from "@/lib/validation/document-schema";
-import { PAGE_SIZE, tw } from "@/lib/pdf-values";
+import { PAGE_SIZE, tw } from "@/lib/pdf-resources";
 import { PdfSignature } from "@/components/pdf-signature";
 
 export function PdfContentPage({
