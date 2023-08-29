@@ -46,7 +46,7 @@ export default function Home() {
       },
       theme: {
         isCustom: true,
-        pallette: "huemint-1",
+        pallette: "pallette-1",
         primary: "#b1e4cc",
         secondary: "#9ac141",
         background: "#202624",

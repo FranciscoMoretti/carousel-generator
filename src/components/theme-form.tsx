@@ -29,7 +29,7 @@ export function ThemeForm({}: {}) {
   const { setValue } = form;
 
   return (
-    // TODO: popover with picker from github.com/casesandberg/react-color or github.com/omgovich/react-colorful
+    // TODO: popover with picker from github.com/casesandberg/react-color or github.com/omgovich/
     <Form {...form}>
       <FormField
         control={form.control}
