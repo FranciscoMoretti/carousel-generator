@@ -5,8 +5,9 @@ import { UseFormReturn, useFieldArray, useFormContext } from "react-hook-form";
 import * as z from "zod";
 import {
   ArrowLeftFromLine,
-  ArrowRightFromLineIcon,
   ArrowRightFromLine,
+  ArrowLeftRight,
+  ArrowRightLeft,
   X,
   Copy,
 } from "lucide-react";
@@ -47,7 +48,7 @@ export default function SlideMenubar({}: Props) {
           currentPage > numPages - 1 - OUTRO_PAGE_SHIFT
         }
       >
-        <ArrowLeftFromLine className="w-4 h-4" />
+        <ArrowLeftRight className="w-4 h-4" />
       </Button>
       <Button
         onClick={() =>
@@ -76,7 +77,7 @@ export default function SlideMenubar({}: Props) {
           currentPage >= numPages - 1 - OUTRO_PAGE_SHIFT
         }
       >
-        <ArrowRightFromLine className="w-4 h-4" />
+        <ArrowRightLeft className="w-4 h-4" />
       </Button>
     </div>
   );
