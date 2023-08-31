@@ -66,6 +66,57 @@ function PalletteSelector({
   );
 }
 
+function CustomColors({
+  form,
+}: {
+  form: UseFormReturn<z.infer<typeof DocumentSchema>, any, undefined>;
+}) {
+  // TODO: popover with picker from github.com/casesandberg/react-color or github.com/omgovich/react-colorful
+  return (
+    <>
+      <FormField
+        control={form.control}
+        name="theme.primary"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Primary</FormLabel>
+            <FormControl>
+              <Input placeholder="Primary color" className="" {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <FormField
+        control={form.control}
+        name="theme.secondary"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Secondary</FormLabel>
+            <FormControl>
+              <Input placeholder="Secondary color" className="" {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <FormField
+        control={form.control}
+        name="theme.background"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Background</FormLabel>
+            <FormControl>
+              <Input placeholder="Background color" className="" {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+    </>
+  );
+}
+
 export function ThemeForm({}: {}) {
   const form: UseFormReturn<
     z.infer<typeof DocumentSchema>,
@@ -74,50 +125,11 @@ export function ThemeForm({}: {}) {
   > = useFormContext(); // retrieve those props
 
   return (
-    // TODO: popover with picker from github.com/casesandberg/react-color or github.com/omgovich/react-colorful
     // TODO: check on custom color to enable/disable pallette custom colors
     <Form {...form}>
       <form className="space-y-6 w-full">
         <PalletteSelector form={form} />
-        <FormField
-          control={form.control}
-          name="theme.primary"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Primary</FormLabel>
-              <FormControl>
-                <Input placeholder="Primary color" className="" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="theme.secondary"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Secondary</FormLabel>
-              <FormControl>
-                <Input placeholder="Secondary color" className="" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="theme.background"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Background</FormLabel>
-              <FormControl>
-                <Input placeholder="Background color" className="" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <CustomColors form={form} />
       </form>
     </Form>
   );
