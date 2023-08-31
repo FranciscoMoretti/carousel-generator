@@ -91,11 +91,7 @@ export default function Home() {
     updateInstance(pdfDocument);
   }, [pdfDocument, updateInstance]);
 
-  const INTRO_OUTRO_PAGES_COUNT = 2;
-  const pager = usePager(
-    0,
-    documentValues.slides.length + INTRO_OUTRO_PAGES_COUNT
-  ); // num
+  const pager = usePager(0, documentValues.slides.length); // num
 
   return (
     <FormProvider {...documentForm}>
