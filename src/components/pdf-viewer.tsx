@@ -17,6 +17,7 @@ const PAGE_WIDTH_PX = 448;
 
 export const PDFViewer = ({ pdfUrl }: { pdfUrl: string }) => {
   const { currentPage, setPage } = usePagerContext();
+  const [previousNumPages, setPreviousNumPages] = useState<number | null>(null);
   const [numPages, setNumPages] = useState<number | null>(null);
 
   const [previousRenderValue, setPreviousRenderValue] = useState("");
@@ -57,7 +58,7 @@ export const PDFViewer = ({ pdfUrl }: { pdfUrl: string }) => {
             loading={null}
             className="flex flex-row gap-2 "
           >
-            {Array.from(new Array(numPages), (el, index) => (
+            {Array.from(new Array(previousNumPages), (el, index) => (
               <Page
                 className={cn(
                   index != currentPage &&
@@ -83,12 +84,15 @@ export const PDFViewer = ({ pdfUrl }: { pdfUrl: string }) => {
               key={`page_${index + 1}`}
               className={cn(
                 index != currentPage &&
-                  "hover:brightness-90  hover:cursor-pointer",
+                  "hover:brightness-90 hover:cursor-pointer",
                 shouldShowPreviousDocument && "absolute opacity-0"
               )}
               pageNumber={index + 1}
               width={PAGE_WIDTH_PX}
-              onRenderSuccess={() => setPreviousRenderValue(pdfUrl)}
+              onRenderSuccess={() => {
+                setPreviousRenderValue(pdfUrl);
+                setPreviousNumPages(numPages);
+              }}
               onClick={() => setPage(index)}
             />
           ))}
