@@ -45,7 +45,7 @@ export default function Home() {
         handle: "@name",
       },
       theme: {
-        isCustom: true,
+        isCustom: false,
         pallette: "pallette-1",
         primary: "#b1e4cc",
         secondary: "#9ac141",

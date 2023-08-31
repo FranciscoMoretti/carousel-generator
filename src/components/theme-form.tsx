@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-import { DocumentSchema } from "@/lib/validation/document-schema";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { pallettes } from "@/lib/pallettes";
 import {
@@ -19,6 +18,7 @@ import {
   ColorsRadioGroupItem,
 } from "./pallette-radio-group-item";
 import { DocumentFormReturn } from "@/lib/document-form-types";
+import { Checkbox } from "./ui/checkbox";
 
 function PalletteSelector({ form }: { form: DocumentFormReturn }) {
   const { control, setValue } = form;
@@ -112,13 +112,34 @@ function CustomColors({ form }: { form: DocumentFormReturn }) {
 
 export function ThemeForm({}: {}) {
   const form: DocumentFormReturn = useFormContext(); // retrieve those props
-
+  const { watch } = form;
+  const isCustom = watch("theme.isCustom");
   return (
     // TODO: check on custom color to enable/disable pallette custom colors
     <Form {...form}>
-      <form className="space-y-6 w-full">
-        <PalletteSelector form={form} />
-        <CustomColors form={form} />
+      <form className="space-y-6 w-full py-4">
+        <FormField
+          control={form.control}
+          name="theme.isCustom"
+          render={({ field }) => (
+            <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+              <FormControl>
+                <Checkbox
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </FormControl>
+              <div className="space-y-1 leading-none text-base">
+                <FormLabel>Use custom colors</FormLabel>
+              </div>
+            </FormItem>
+          )}
+        />
+        {isCustom ? (
+          <CustomColors form={form} />
+        ) : (
+          <PalletteSelector form={form} />
+        )}
       </form>
     </Form>
   );
