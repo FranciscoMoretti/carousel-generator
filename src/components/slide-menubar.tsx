@@ -1,8 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { usePagerContext } from "@/lib/providers/pager-context";
 import { DocumentSchema } from "@/lib/validation/document-schema";
-import { UseFormReturn, useFieldArray, useFormContext } from "react-hook-form";
-import * as z from "zod";
+import { useFieldArray, useFormContext } from "react-hook-form";
 import {
   ArrowLeftFromLine,
   ArrowRightFromLine,
@@ -11,19 +10,13 @@ import {
   X,
   Copy,
 } from "lucide-react";
+import { DocumentFormReturn } from "@/lib/document-form-types";
 
 interface Props extends React.HTMLAttributes<HTMLElement> {}
 
 export default function SlideMenubar({}: Props) {
   const { currentPage, numPages } = usePagerContext();
-  const {
-    control,
-    watch,
-  }: UseFormReturn<
-    z.infer<typeof DocumentSchema>,
-    any,
-    undefined
-  > = useFormContext(); // retrieve those props
+  const { control, watch }: DocumentFormReturn = useFormContext(); // retrieve those props
 
   const currentSlidesValues = watch("slides");
   const INTRO_PAGE_SHIFT = 1;

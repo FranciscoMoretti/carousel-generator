@@ -1,18 +1,12 @@
 import Pager from "@/components/pager";
-import { UseFormReturn, useFormContext } from "react-hook-form";
-import * as z from "zod";
+import { useFormContext } from "react-hook-form";
 
 import { DocumentSchema } from "@/lib/validation/document-schema";
 import { Button } from "./ui/button";
+import { DocumentFormReturn } from "@/lib/document-form-types";
 
 export function EditorMenubar() {
-  const {
-    reset,
-  }: UseFormReturn<
-    z.infer<typeof DocumentSchema>,
-    any,
-    undefined
-  > = useFormContext(); // retrieve those props
+  const { reset }: DocumentFormReturn = useFormContext(); // retrieve those props
 
   return (
     <div className="container flex flex-col items-start justify-between space-y-2 py-4 sm:flex-row sm:items-center sm:space-y-0 md:h-16">

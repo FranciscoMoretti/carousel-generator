@@ -1,4 +1,4 @@
-import { UseFormReturn, useFormContext } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import * as z from "zod";
 
 import {
@@ -18,12 +18,9 @@ import {
   ColorsDisplay,
   ColorsRadioGroupItem,
 } from "./pallette-radio-group-item";
+import { DocumentFormReturn } from "@/lib/document-form-types";
 
-function PalletteSelector({
-  form,
-}: {
-  form: UseFormReturn<z.infer<typeof DocumentSchema>, any, undefined>;
-}) {
+function PalletteSelector({ form }: { form: DocumentFormReturn }) {
   const { control, setValue } = form;
 
   return (
@@ -66,11 +63,7 @@ function PalletteSelector({
   );
 }
 
-function CustomColors({
-  form,
-}: {
-  form: UseFormReturn<z.infer<typeof DocumentSchema>, any, undefined>;
-}) {
+function CustomColors({ form }: { form: DocumentFormReturn }) {
   // TODO: popover with picker from github.com/casesandberg/react-color or github.com/omgovich/react-colorful
   return (
     <>
@@ -118,11 +111,7 @@ function CustomColors({
 }
 
 export function ThemeForm({}: {}) {
-  const form: UseFormReturn<
-    z.infer<typeof DocumentSchema>,
-    any,
-    undefined
-  > = useFormContext(); // retrieve those props
+  const form: DocumentFormReturn = useFormContext(); // retrieve those props
 
   return (
     // TODO: check on custom color to enable/disable pallette custom colors

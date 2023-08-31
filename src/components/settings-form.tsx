@@ -1,4 +1,4 @@
-import { UseFormReturn, useFormContext } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import * as z from "zod";
 
 import {
@@ -13,13 +13,10 @@ import { Input } from "@/components/ui/input";
 
 import { Textarea } from "@/components/ui/textarea";
 import { DocumentSchema } from "@/lib/validation/document-schema";
+import { DocumentFormReturn } from "@/lib/document-form-types";
 
 export function SettingsForm({}: {}) {
-  const form: UseFormReturn<
-    z.infer<typeof DocumentSchema>,
-    any,
-    undefined
-  > = useFormContext(); // retrieve those props
+  const form: DocumentFormReturn = useFormContext(); // retrieve those props
 
   return (
     <Form {...form}>

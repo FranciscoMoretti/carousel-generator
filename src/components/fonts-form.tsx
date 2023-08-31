@@ -1,4 +1,4 @@
-import { UseFormReturn, useFormContext } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import * as z from "zod";
 
 import {
@@ -19,13 +19,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { fontsMap } from "@/lib/fonts-map";
+import { DocumentFormReturn } from "@/lib/document-form-types";
 
 export function FontsForm({}: {}) {
-  const form: UseFormReturn<
-    z.infer<typeof DocumentSchema>,
-    any,
-    undefined
-  > = useFormContext(); // retrieve those props
+  const form: DocumentFormReturn = useFormContext(); // retrieve those props
 
   return (
     <Form {...form}>
