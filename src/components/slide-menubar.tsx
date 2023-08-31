@@ -19,8 +19,8 @@ export default function SlideMenubar({}: Props) {
   const { control, watch }: DocumentFormReturn = useFormContext(); // retrieve those props
 
   const currentSlidesValues = watch("slides");
-  const INTRO_PAGE_SHIFT = 1;
-  const OUTRO_PAGE_SHIFT = 1;
+
+  // TODO Shifts need to be replaced with dynamic checking of slide types
 
   const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
     {
@@ -29,46 +29,31 @@ export default function SlideMenubar({}: Props) {
     }
   );
 
-  const currentContentSlide = currentPage - INTRO_PAGE_SHIFT;
   return (
     <div className="flex flex-row gap-1">
       <Button
-        onClick={() => swap(currentContentSlide, currentContentSlide - 1)}
+        onClick={() => swap(currentPage, currentPage - 1)}
         variant="outline"
         size="icon"
-        disabled={
-          currentPage <= 0 + INTRO_PAGE_SHIFT ||
-          currentPage > numPages - 1 - OUTRO_PAGE_SHIFT
-        }
+        disabled={currentPage <= 0 || currentPage > numPages - 1}
       >
         <ArrowLeftRight className="w-4 h-4" />
       </Button>
       <Button
-        onClick={() =>
-          insert(currentContentSlide, currentSlidesValues[currentContentSlide])
-        }
-        disabled={currentPage == 0 || currentPage == numPages - 1}
+        onClick={() => insert(currentPage, currentSlidesValues[currentPage])}
         variant="outline"
         size="icon"
       >
         <Copy className="w-4 h-4" />
       </Button>
-      <Button
-        onClick={() => remove(currentPage)}
-        disabled={currentPage == 0 || currentPage == numPages - 1}
-        variant="outline"
-        size="icon"
-      >
+      <Button onClick={() => remove(currentPage)} variant="outline" size="icon">
         <X className="w-4 h-4" />
       </Button>
       <Button
-        onClick={() => swap(currentContentSlide, currentContentSlide + 1)}
+        onClick={() => swap(currentPage, currentPage + 1)}
         variant="outline"
         size="icon"
-        disabled={
-          currentPage < INTRO_PAGE_SHIFT ||
-          currentPage >= numPages - 1 - OUTRO_PAGE_SHIFT
-        }
+        disabled={currentPage >= numPages - 1}
       >
         <ArrowRightLeft className="w-4 h-4" />
       </Button>
