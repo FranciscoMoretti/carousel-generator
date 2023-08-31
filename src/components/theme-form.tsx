@@ -19,6 +19,53 @@ import {
   ColorsRadioGroupItem,
 } from "./pallette-radio-group-item";
 
+function PalletteSelector({
+  form,
+}: {
+  form: UseFormReturn<z.infer<typeof DocumentSchema>, any, undefined>;
+}) {
+  const { control, setValue } = form;
+
+  return (
+    <FormField
+      control={control}
+      name="theme.pallette"
+      render={({ field }) => (
+        <FormItem className="space-y-3">
+          <FormLabel>Select a pallette</FormLabel>
+          <FormControl>
+            <RadioGroup
+              onValueChange={(value) => {
+                const colors = pallettes[value];
+                setValue("theme.primary", colors.primary);
+                setValue("theme.secondary", colors.secondary);
+                setValue("theme.background", colors.background);
+              }}
+              defaultValue={field.value}
+              className="grid grid-cols-3 space-y-1"
+            >
+              {Object.entries(pallettes).map(([palletteName, colors]) => (
+                <FormItem
+                  className="flex items-center space-x-3 space-y-0"
+                  key={palletteName}
+                >
+                  <FormControl>
+                    <ColorsRadioGroupItem value={palletteName}>
+                      <ColorsDisplay colors={colors} />
+                    </ColorsRadioGroupItem>
+                  </FormControl>
+                  {/* <FormLabel className="font-normal">Huemint 1</FormLabel> */}
+                </FormItem>
+              ))}
+            </RadioGroup>
+          </FormControl>
+          <FormMessage />
+        </FormItem>
+      )}
+    />
+  );
+}
+
 export function ThemeForm({}: {}) {
   const form: UseFormReturn<
     z.infer<typeof DocumentSchema>,
@@ -26,48 +73,12 @@ export function ThemeForm({}: {}) {
     undefined
   > = useFormContext(); // retrieve those props
 
-  const { setValue } = form;
-
   return (
-    // TODO: popover with picker from github.com/casesandberg/react-color or github.com/omgovich/
+    // TODO: popover with picker from github.com/casesandberg/react-color or github.com/omgovich/react-colorful
+    // TODO: check on custom color to enable/disable pallette custom colors
     <Form {...form}>
-      <FormField
-        control={form.control}
-        name="theme.pallette"
-        render={({ field }) => (
-          <FormItem className="space-y-3">
-            <FormLabel>Select a pallete</FormLabel>
-            <FormControl>
-              <RadioGroup
-                onValueChange={(value) => {
-                  const colors = pallettes[value];
-                  setValue("theme.primary", colors.primary);
-                  setValue("theme.secondary", colors.secondary);
-                  setValue("theme.background", colors.background);
-                }}
-                defaultValue={field.value}
-                className="grid grid-cols-3 space-y-1"
-              >
-                {Object.entries(pallettes).map(([palletteName, colors]) => (
-                  <FormItem
-                    className="flex items-center space-x-3 space-y-0"
-                    key={palletteName}
-                  >
-                    <FormControl>
-                      <ColorsRadioGroupItem value={palletteName}>
-                        <ColorsDisplay colors={colors} />
-                      </ColorsRadioGroupItem>
-                    </FormControl>
-                    {/* <FormLabel className="font-normal">Huemint 1</FormLabel> */}
-                  </FormItem>
-                ))}
-              </RadioGroup>
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
       <form className="space-y-6 w-full">
+        <PalletteSelector form={form} />
         <FormField
           control={form.control}
           name="theme.primary"
