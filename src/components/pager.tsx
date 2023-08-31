@@ -1,5 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { usePagerContext } from "@/lib/providers/pager-context";
+import {
+  ChevronFirst,
+  ChevronLast,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 
 interface Props extends React.HTMLAttributes<HTMLElement> {}
 
@@ -15,7 +21,7 @@ export default function Pager({}: Props) {
         size="sm"
         disabled={currentPage == 0}
       >
-        First
+        <ChevronFirst className="w-4 h-4" />
       </Button>
       <Button
         onClick={onPreviousClick}
@@ -23,7 +29,7 @@ export default function Pager({}: Props) {
         size="sm"
         disabled={currentPage == 0}
       >
-        Previous
+        <ChevronLeft className="w-4 h-4" />
       </Button>
       <Button
         onClick={onNextClick}
@@ -31,7 +37,7 @@ export default function Pager({}: Props) {
         size="sm"
         disabled={currentPage == numPages - 1}
       >
-        Next
+        <ChevronRight className="w-4 h-4" />
       </Button>
       <Button
         onClick={() => setPage(numPages - 1)}
@@ -39,7 +45,7 @@ export default function Pager({}: Props) {
         size="sm"
         disabled={currentPage == numPages - 1}
       >
-        Last
+        <ChevronLast className="w-4 h-4" />
       </Button>
     </div>
   );
