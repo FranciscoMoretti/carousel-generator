@@ -1,6 +1,3 @@
-import { useFormContext } from "react-hook-form";
-import * as z from "zod";
-
 import {
   Form,
   FormControl,
@@ -11,10 +8,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-import { Textarea } from "@/components/ui/textarea";
 import { DocumentFormReturn } from "@/lib/document-form-types";
 
-export function OutroSlideForm({
+export function ContentSlideForm({
   currentSlide,
   form,
 }: {
@@ -42,31 +38,14 @@ export function OutroSlideForm({
       />
       <FormField
         control={form.control}
-        name={`slides.${currentSlide}.subtitle`}
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Subtitle</FormLabel>
-            <FormControl>
-              <Input
-                placeholder="Subtitle for more clarity"
-                className=""
-                {...field}
-              />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-      <FormField
-        control={form.control}
         name={`slides.${currentSlide}.description`}
         render={({ field }) => (
           <FormItem>
             <FormLabel>Description</FormLabel>
             <FormControl>
-              <Textarea
-                placeholder="Tell us a little bit about yourself"
-                className="resize-none"
+              <Input
+                placeholder="Description for this slide"
+                className=""
                 {...field}
               />
             </FormControl>

@@ -1,23 +1,12 @@
 import { useFieldArray, useFormContext } from "react-hook-form";
-import * as z from "zod";
 
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { toast } from "@/components/ui/use-toast";
+import { Form } from "@/components/ui/form";
 
-import { Textarea } from "@/components/ui/textarea";
-import { MultiSlideSchema, SlideSchema } from "@/lib/validation/slide-schema";
-import { DocumentSchema } from "@/lib/validation/document-schema";
-import { usePagerContext } from "@/lib/providers/pager-context";
 import { DocumentFormReturn } from "@/lib/document-form-types";
+import { SlideType } from "@/lib/validation/slide-schema";
+import { ContentSlideForm } from "./content-slide-form";
+import { OutroSlideForm } from "./outro-slide-form";
+import { IntroSlideForm } from "./intro-slide-form";
 
 export function SlidesForm({ currentSlide }: { currentSlide: number }) {
   const form: DocumentFormReturn = useFormContext(); // retrieve those props
@@ -30,47 +19,30 @@ export function SlidesForm({ currentSlide }: { currentSlide: number }) {
     }
   );
 
-  const field = fields[currentSlide];
+  const currentFields = fields[currentSlide];
 
   return (
     <Form {...form}>
       <form>
-        <div className="space-y-6 w-full" key={field.id}>
-          <FormField
-            control={form.control}
-            name={`slides.${currentSlide}.title`}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Title</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Your super cool title"
-                    className=""
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+        {currentFields.type == SlideType.enum.Content ? (
+          <ContentSlideForm
+            key={currentFields.id}
+            currentSlide={currentSlide}
+            form={form}
+          ></ContentSlideForm>
+        ) : currentFields.type == SlideType.enum.Intro ? (
+          <IntroSlideForm
+            key={currentFields.id}
+            currentSlide={currentSlide}
+            form={form}
           />
-          <FormField
-            control={form.control}
-            name={`slides.${currentSlide}.description`}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Description</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Description for this slide"
-                    className=""
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+        ) : currentFields.type == SlideType.enum.Outro ? (
+          <OutroSlideForm
+            key={currentFields.id}
+            currentSlide={currentSlide}
+            form={form}
           />
-        </div>
+        ) : null}
       </form>
     </Form>
   );

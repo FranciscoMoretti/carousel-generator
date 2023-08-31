@@ -6,20 +6,18 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { SettingsSchema } from "@/lib/validation/settings-schema";
-import { SlideSchema } from "@/lib/validation/slide-schema";
-import { ThemeSchema } from "@/lib/validation/theme-schema";
+import { DocumentSchema } from "@/lib/validation/document-schema";
 import * as z from "zod";
 
 export function CarouselSlide({
-  slide,
-  settings,
-  theme,
+  document,
+  index,
 }: {
-  slide: z.infer<typeof SlideSchema>;
-  settings: z.infer<typeof SettingsSchema>;
-  theme: z.infer<typeof ThemeSchema>;
+  document: z.infer<typeof DocumentSchema>;
+  index: number;
 }) {
+  const { slides, settings, theme } = document;
+  const slide = slides[index];
   return (
     <Card
       className="w-[448px] h-[560px] aspect-[4/5] p-8 flex flex-col justify-between"

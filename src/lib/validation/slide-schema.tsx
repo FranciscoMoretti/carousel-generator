@@ -3,8 +3,8 @@ import * as z from "zod";
 export const SlideType = z.enum(["Intro", "Content", "Outro"]);
 export type SlideType = z.infer<typeof SlideType>;
 
-export const SlideSchema = z.object({
-  type: SlideType,
+export const ContentSlideSchema = z.object({
+  type: z.literal(SlideType.enum.Content),
   title: z
     .string()
     .min(10, {
@@ -17,7 +17,7 @@ export const SlideSchema = z.object({
 });
 
 export const IntroSlideSchema = z.object({
-  type: SlideType,
+  type: z.literal(SlideType.enum.Intro),
   title: z
     .string()
     .min(10, {
@@ -38,7 +38,7 @@ export const IntroSlideSchema = z.object({
 });
 
 export const OutroSlideSchema = z.object({
-  type: SlideType,
+  type: z.literal(SlideType.enum.Outro),
   title: z
     .string()
     .min(10, {
@@ -57,5 +57,11 @@ export const OutroSlideSchema = z.object({
     }),
   description: z.string(),
 });
+
+export const SlideSchema = z.discriminatedUnion("type", [
+  ContentSlideSchema,
+  IntroSlideSchema,
+  OutroSlideSchema,
+]);
 
 export const MultiSlideSchema = z.array(SlideSchema);

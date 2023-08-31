@@ -6,6 +6,7 @@ import { DocumentSchema } from "@/lib/validation/document-schema";
 import { PdfContentPage } from "./pdf-content-page";
 import { PdfIntroPage } from "./pdf-intro-page";
 import { PdfOutroPage } from "./pdf-outro-page";
+import { SlideType } from "@/lib/validation/slide-schema";
 
 Font.registerHyphenationCallback((word) => {
   // Return entire word as unique part
@@ -38,11 +39,15 @@ export function PdfDocument({
 }) {
   return (
     <Document>
-      <PdfIntroPage document={document} />
-      {document.slides.map((slide, index) => (
-        <PdfContentPage key={index} index={index} document={document} />
-      ))}
-      <PdfOutroPage document={document} />
+      {document.slides.map((slide, index) =>
+        slide.type == SlideType.enum.Content ? (
+          <PdfContentPage key={index} index={index} document={document} />
+        ) : slide.type == SlideType.enum.Intro ? (
+          <PdfIntroPage key={index} index={index} document={document} />
+        ) : slide.type == SlideType.enum.Outro ? (
+          <PdfOutroPage key={index} index={index} document={document} />
+        ) : null
+      )}
     </Document>
   );
 }

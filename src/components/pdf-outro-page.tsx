@@ -6,8 +6,10 @@ import { PAGE_SIZE, tw } from "@/lib/pdf-resources";
 import { PdfSignature } from "@/components/pdf-signature";
 
 export function PdfOutroPage({
+  index,
   document,
 }: {
+  index: number;
   document: z.infer<typeof DocumentSchema>;
 }) {
   return (
@@ -28,7 +30,7 @@ export function PdfOutroPage({
             ...tw("text-5xl mb-3 leading-none tracking-tight"),
           }}
         >
-          {document.outro.title}
+          {document.slides[index].title}
         </Text>
         <Text
           style={{
@@ -38,7 +40,7 @@ export function PdfOutroPage({
             ...tw("text-base"),
           }}
         >
-          {document.outro.subtitle}
+          {document.slides[index].subtitle}
         </Text>
         <Text
           style={{
@@ -47,7 +49,7 @@ export function PdfOutroPage({
             ...tw("text-sm"),
           }}
         >
-          {document.outro.description}
+          {document.slides[index].description}
         </Text>
       </View>
       <PdfSignature document={document}></PdfSignature>
