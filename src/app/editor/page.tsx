@@ -90,7 +90,7 @@ export default function Home() {
     [documentValues]
   );
   const [instance, updateInstance] = usePDF({ document: pdfDocument });
-  const { loading: instanceLoading, url: isntanceUrl } = instance;
+  const { loading: instanceLoading, url: instanceUrl } = instance;
 
   useEffect(() => {
     updateInstance(pdfDocument);
@@ -102,18 +102,9 @@ export default function Home() {
     <FormProvider {...documentForm}>
       <PagerProvider value={pager}>
         <main className="flex min-h-screen flex-col w-full items-stretch justify-between">
-          <EditorLayout isntanceUrl={isntanceUrl} />
-          <FooterLink documentUrl={instance.url} />
+          <EditorLayout instanceUrl={instanceUrl} />
         </main>
       </PagerProvider>
     </FormProvider>
-  );
-}
-
-function FooterLink({ documentUrl }: { documentUrl: string | null }) {
-  return (
-    <a href={documentUrl || ""} download="document.pdf">
-      <button>Download</button>
-    </a>
   );
 }

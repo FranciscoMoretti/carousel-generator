@@ -35,10 +35,10 @@ export const metadata: Metadata = {
 };
 
 interface EditorLayoutProps {
-  isntanceUrl: string;
+  instanceUrl: string;
 }
 
-export default function EditorLayout({ isntanceUrl }: EditorLayoutProps) {
+export default function EditorLayout({ instanceUrl }: EditorLayoutProps) {
   return (
     <div className="border-b">
       <div className=" flex-1 flex flex-row items-start md:grid md:grid-cols-[280px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[300px_minmax(0,1fr)] lg:gap-10">
@@ -49,7 +49,7 @@ export default function EditorLayout({ isntanceUrl }: EditorLayoutProps) {
         </aside>
         {/* Change hidden for below for flex col for mobile screens (below) */}
         <div className="">
-          <EditorCanvas isntanceUrl={isntanceUrl} />
+          <EditorCanvas instanceUrl={instanceUrl} />
         </div>
       </div>
     </div>
@@ -57,15 +57,15 @@ export default function EditorLayout({ isntanceUrl }: EditorLayoutProps) {
 }
 
 interface EditorCanvasProps {
-  isntanceUrl: string;
+  instanceUrl: string;
 }
 
-function EditorCanvas({ isntanceUrl }: EditorCanvasProps) {
+function EditorCanvas({ instanceUrl }: EditorCanvasProps) {
   return (
     <>
       <div className="h-full flex-col flex">
         <div className="w-full flex flex-col items-start justify-between space-y-2 py-4 sm:flex-row sm:items-center sm:space-y-0 md:h-16">
-          <EditorMenubar />
+          <EditorMenubar instanceUrl={instanceUrl} />
           <div className="ml-auto flex w-full space-x-2 sm:justify-end">
             {/* <PresetSelector presets={presets} />
             <PresetSave /> */}
@@ -77,7 +77,7 @@ function EditorCanvas({ isntanceUrl }: EditorCanvasProps) {
           </div>
         </div>
         <Separator />
-        <SlidesEditor isntanceUrl={isntanceUrl}></SlidesEditor>
+        <SlidesEditor instanceUrl={instanceUrl}></SlidesEditor>
       </div>
     </>
   );

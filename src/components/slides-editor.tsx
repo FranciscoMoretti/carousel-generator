@@ -8,10 +8,10 @@ import {
 } from "@/lib/document-form-types";
 
 interface SlidesEditorProps {
-  isntanceUrl: string;
+  instanceUrl: string;
 }
 
-export function SlidesEditor({ isntanceUrl }: SlidesEditorProps) {
+export function SlidesEditor({ instanceUrl }: SlidesEditorProps) {
   const { control }: DocumentFormReturn = useFormContext(); // retrieve those props
 
   const slidesFieldArray: SlidesFieldArrayReturn = useFieldArray({
@@ -33,7 +33,7 @@ export function SlidesEditor({ isntanceUrl }: SlidesEditorProps) {
         <SlideMenubar slidesFieldArray={slidesFieldArray} />
         <div className="overflow-clip w-full">
           {/* TODO: Make the width responsive */}
-          <PDFViewer pdfUrl={isntanceUrl} />
+          <PDFViewer pdfUrl={instanceUrl} />
         </div>
         <SlidePanel slidesFieldArray={slidesFieldArray} />
       </div>
