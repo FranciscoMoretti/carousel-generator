@@ -55,7 +55,7 @@ const ALL_FORMS = {
 export function SidebarFormsPanel() {
   return (
     <Tabs defaultValue={ALL_FORMS.settings.value} className="flex-1">
-      <div className="flex flex-col gap-6 p-2">
+      <div className="flex flex-col p-2 gap-6">
         <TabsList className="grid grid-cols-2 gap-2 shadow h-20">
           <TabsTrigger value={ALL_FORMS.settings.value}>
             <span className="sr-only">{ALL_FORMS.settings.name}</span>
