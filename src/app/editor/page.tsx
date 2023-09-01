@@ -59,21 +59,23 @@ export default function Home() {
     resolver: zodResolver(DocumentSchema),
     defaultValues: {
       slides: defaultSlideValues,
-      settings: {
-        avatar: "https://www.franciscomoretti.com/profile_picture.jpg",
-        name: "My name",
-        handle: "@name",
-      },
-      theme: {
-        isCustom: false,
-        pallette: "pallette-1",
-        primary: "#b1e4cc",
-        secondary: "#9ac141",
-        background: "#202624",
-      },
-      fonts: {
-        font1: "DM_Serif_Display",
-        font2: "DM_Sans",
+      config: {
+        settings: {
+          avatar: "https://www.franciscomoretti.com/profile_picture.jpg",
+          name: "My name",
+          handle: "@name",
+        },
+        theme: {
+          isCustom: false,
+          pallette: "pallette-1",
+          primary: "#b1e4cc",
+          secondary: "#9ac141",
+          background: "#202624",
+        },
+        fonts: {
+          font1: "DM_Serif_Display",
+          font2: "DM_Sans",
+        },
       },
     },
   });
@@ -91,16 +93,13 @@ export default function Home() {
     updateInstance(pdfDocument);
   }, [pdfDocument, updateInstance]);
 
-  const pager = usePager(0, documentValues.slides.length); // num
+  const pager = usePager(0); // num
 
   return (
     <FormProvider {...documentForm}>
       <PagerProvider value={pager}>
         <main className="flex min-h-screen flex-col w-full items-stretch justify-between">
-          <EditorLayout
-            length={documentValues.slides.length}
-            isntanceUrl={isntanceUrl}
-          />
+          <EditorLayout isntanceUrl={isntanceUrl} />
           <FooterLink documentUrl={instance.url} />
         </main>
       </PagerProvider>

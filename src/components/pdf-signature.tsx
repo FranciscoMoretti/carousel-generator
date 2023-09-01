@@ -19,28 +19,28 @@ export function PdfSignature({
     >
       {/* eslint-disable-next-line jsx-a11y/alt-text */}
       <Image
-        src={document.settings.avatar}
+        src={document.config.settings.avatar}
         style={tw("w-12 h-12 rounded-full")}
       />
       <View style={tw("flex items-start gap-2 flex-col")}>
         <Text
           style={{
-            color: document.theme.primary,
-            fontFamily: document.fonts.font2,
+            color: document.config.theme.primary,
+            fontFamily: document.config.fonts.font2,
             ...tw("text-xs"),
           }}
         >
-          {document.settings.name}
+          {document.config.settings.name}
         </Text>
         <Text
           style={{
-            color: document.theme.secondary,
-            fontFamily: document.fonts.font2,
+            color: document.config.theme.secondary,
+            fontFamily: document.config.fonts.font2,
             fontWeight: "normal",
             ...tw("text-xs"),
           }}
         >
-          {document.settings.handle}
+          {document.config.settings.handle}
         </Text>
       </View>
     </View>

@@ -17,15 +17,15 @@ export function PdfContentPage({
       // @ts-ignore array size 2 is hardcoded
       size={PAGE_SIZE}
       style={{
-        backgroundColor: document.theme.background,
+        backgroundColor: document.config.theme.background,
         ...tw("p-8 flex flex-col justify-between"),
       }}
     >
       <View style={tw("flex flex-col justify-center grow")}>
         <Text
           style={{
-            color: document.theme.primary,
-            fontFamily: document.fonts.font1,
+            color: document.config.theme.primary,
+            fontFamily: document.config.fonts.font1,
             fontWeight: "bold",
             ...tw("text-3xl mb-3 leading-none tracking-tight"),
           }}
@@ -35,8 +35,8 @@ export function PdfContentPage({
 
         <Text
           style={{
-            color: document.theme.secondary,
-            fontFamily: document.fonts.font2,
+            color: document.config.theme.secondary,
+            fontFamily: document.config.fonts.font2,
             ...tw("text-sm"),
           }}
         >

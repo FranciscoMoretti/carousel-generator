@@ -1,31 +1,25 @@
 import { useState } from "react";
+import { DocumentFormReturn } from "../document-form-types";
 
-export function usePager(initialPage: number, numPages: number) {
-  const [currentPage, setCurrentPage] = useState(initialPage);
+export function usePager(initialPage: number) {
+  const [currentPage, _setCurrentPage] = useState(initialPage);
 
   const onPreviousClick = () => {
-    if (currentPage > 0) {
-      setCurrentPage(currentPage - 1);
-    }
+    _setCurrentPage(currentPage - 1);
   };
 
   const onNextClick = () => {
-    if (currentPage < numPages - 1) {
-      setCurrentPage(currentPage + 1);
-    }
+    _setCurrentPage(currentPage + 1);
   };
 
-  const setPage = (pageNum: number) => {
-    if (pageNum < numPages) {
-      setCurrentPage(pageNum);
-    }
+  const setCurrentPage = (pageNum: number) => {
+    _setCurrentPage(pageNum);
   };
 
   return {
     currentPage,
     onPreviousClick,
     onNextClick,
-    setPage,
-    numPages,
+    setCurrentPage,
   };
 }

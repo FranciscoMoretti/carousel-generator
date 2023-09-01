@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { usePagerContext } from "@/lib/providers/pager-context";
 import { DocumentSchema } from "@/lib/validation/document-schema";
@@ -10,24 +11,27 @@ import {
   X,
   Copy,
 } from "lucide-react";
-import { DocumentFormReturn } from "@/lib/document-form-types";
+import {
+  DocumentFormReturn,
+  SlidesFieldArrayReturn,
+} from "@/lib/document-form-types";
+import { useFieldArrayValues } from "@/lib/hooks/use-field-array-values";
 
-interface Props extends React.HTMLAttributes<HTMLElement> {}
-
-export default function SlideMenubar({}: Props) {
-  const { currentPage, numPages } = usePagerContext();
-  const { control, watch }: DocumentFormReturn = useFormContext(); // retrieve those props
+export default function SlideMenubar({
+  slidesFieldArray,
+}: {
+  slidesFieldArray: SlidesFieldArrayReturn;
+}) {
+  const { currentPage, setCurrentPage } = usePagerContext();
+  const { numPages } = useFieldArrayValues("slides");
+  const { watch }: DocumentFormReturn = useFormContext(); // retrieve those props
 
   const currentSlidesValues = watch("slides");
 
   // TODO Shifts need to be replaced with dynamic checking of slide types
 
-  const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
-    {
-      control, // control props comes from useForm (optional: if you are using FormContext)
-      name: "slides", // unique name for your Field Array
-    }
-  );
+  const { remove, swap, insert } = slidesFieldArray;
+  console.log(numPages);
 
   return (
     <div className="flex flex-row gap-1">
@@ -40,13 +44,29 @@ export default function SlideMenubar({}: Props) {
         <ArrowLeftRight className="w-4 h-4" />
       </Button>
       <Button
-        onClick={() => insert(currentPage, currentSlidesValues[currentPage])}
+        onClick={() => {
+          insert(currentPage, currentSlidesValues[currentPage]);
+        }}
         variant="outline"
         size="icon"
       >
         <Copy className="w-4 h-4" />
       </Button>
-      <Button onClick={() => remove(currentPage)} variant="outline" size="icon">
+      <Button
+        onClick={() => {
+          remove(currentPage);
+          if (currentPage > 0) {
+            // setNumPages(numPages - 1);
+            setCurrentPage(currentPage - 1);
+          } else if (currentPage == 0 && numPages > 0) {
+            setCurrentPage(0);
+          } else if (currentPage < 0 || currentPage >= numPages) {
+            console.error("Current page number not valid: ", currentPage);
+          }
+        }}
+        variant="outline"
+        size="icon"
+      >
         <X className="w-4 h-4" />
       </Button>
       <Button

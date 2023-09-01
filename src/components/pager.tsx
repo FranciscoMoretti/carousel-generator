@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { useFieldArrayValues } from "@/lib/hooks/use-field-array-values";
 import { usePagerContext } from "@/lib/providers/pager-context";
 import {
   ChevronFirst,
@@ -10,13 +11,14 @@ import {
 interface Props extends React.HTMLAttributes<HTMLElement> {}
 
 export default function Pager({}: Props) {
-  const { currentPage, onPreviousClick, onNextClick, numPages, setPage } =
+  const { currentPage, onPreviousClick, onNextClick, setCurrentPage } =
     usePagerContext();
+  const { numPages } = useFieldArrayValues("slides");
 
   return (
     <div className="flex flex-row gap-1">
       <Button
-        onClick={() => setPage(0)}
+        onClick={() => setCurrentPage(0)}
         variant="outline"
         size="sm"
         disabled={currentPage == 0}
@@ -40,7 +42,7 @@ export default function Pager({}: Props) {
         <ChevronRight className="w-4 h-4" />
       </Button>
       <Button
-        onClick={() => setPage(numPages - 1)}
+        onClick={() => setCurrentPage(numPages - 1)}
         variant="outline"
         size="sm"
         disabled={currentPage == numPages - 1}

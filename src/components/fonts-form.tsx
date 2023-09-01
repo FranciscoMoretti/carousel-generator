@@ -29,7 +29,7 @@ export function FontsForm({}: {}) {
       <form className="space-y-6 w-full">
         <FormField
           control={form.control}
-          name="fonts.font1"
+          name="config.fonts.font1"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Font 1</FormLabel>
@@ -47,7 +47,7 @@ export function FontsForm({}: {}) {
         />
         <FormField
           control={form.control}
-          name="fonts.font2"
+          name="config.fonts.font2"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Font 2</FormLabel>

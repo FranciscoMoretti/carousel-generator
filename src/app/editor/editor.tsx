@@ -36,13 +36,9 @@ export const metadata: Metadata = {
 
 interface EditorLayoutProps {
   isntanceUrl: string;
-  length: number;
 }
 
-export default function EditorLayout({
-  length,
-  isntanceUrl,
-}: EditorLayoutProps) {
+export default function EditorLayout({ isntanceUrl }: EditorLayoutProps) {
   return (
     <div className="border-b">
       <div className=" flex-1 flex flex-row items-start md:grid md:grid-cols-[280px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[300px_minmax(0,1fr)] lg:gap-10">
@@ -53,7 +49,7 @@ export default function EditorLayout({
         </aside>
         {/* Change hidden for below for flex col for mobile screens (below) */}
         <div className="">
-          <EditorCanvas length={length} isntanceUrl={isntanceUrl} />
+          <EditorCanvas isntanceUrl={isntanceUrl} />
         </div>
       </div>
     </div>
@@ -62,10 +58,9 @@ export default function EditorLayout({
 
 interface EditorCanvasProps {
   isntanceUrl: string;
-  length: number;
 }
 
-function EditorCanvas({ length, isntanceUrl }: EditorCanvasProps) {
+function EditorCanvas({ isntanceUrl }: EditorCanvasProps) {
   return (
     <>
       <div className="h-full flex-col flex">
@@ -82,7 +77,7 @@ function EditorCanvas({ length, isntanceUrl }: EditorCanvasProps) {
           </div>
         </div>
         <Separator />
-        <SlidesEditor length={length} isntanceUrl={isntanceUrl}></SlidesEditor>
+        <SlidesEditor isntanceUrl={isntanceUrl}></SlidesEditor>
       </div>
     </>
   );

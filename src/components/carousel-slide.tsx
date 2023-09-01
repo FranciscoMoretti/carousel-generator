@@ -16,7 +16,10 @@ export function CarouselSlide({
   document: z.infer<typeof DocumentSchema>;
   index: number;
 }) {
-  const { slides, settings, theme } = document;
+  const {
+    slides,
+    config: { settings, theme },
+  } = document;
   const slide = slides[index];
   return (
     <Card

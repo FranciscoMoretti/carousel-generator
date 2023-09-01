@@ -26,7 +26,7 @@ function PalletteSelector({ form }: { form: DocumentFormReturn }) {
   return (
     <FormField
       control={control}
-      name="theme.pallette"
+      name="config.theme.pallette"
       render={({ field }) => (
         <FormItem className="space-y-3">
           <FormLabel>Select a pallette</FormLabel>
@@ -34,9 +34,9 @@ function PalletteSelector({ form }: { form: DocumentFormReturn }) {
             <RadioGroup
               onValueChange={(value) => {
                 const colors = pallettes[value];
-                setValue("theme.primary", colors.primary);
-                setValue("theme.secondary", colors.secondary);
-                setValue("theme.background", colors.background);
+                setValue("config.theme.primary", colors.primary);
+                setValue("config.theme.secondary", colors.secondary);
+                setValue("config.theme.background", colors.background);
               }}
               defaultValue={field.value}
               className="grid grid-cols-3 space-y-1"
@@ -69,7 +69,7 @@ function CustomColors({ form }: { form: DocumentFormReturn }) {
     <>
       <FormField
         control={form.control}
-        name="theme.primary"
+        name="config.theme.primary"
         render={({ field }) => (
           <FormItem>
             <FormLabel>Primary</FormLabel>
@@ -82,7 +82,7 @@ function CustomColors({ form }: { form: DocumentFormReturn }) {
       />
       <FormField
         control={form.control}
-        name="theme.secondary"
+        name="config.theme.secondary"
         render={({ field }) => (
           <FormItem>
             <FormLabel>Secondary</FormLabel>
@@ -95,7 +95,7 @@ function CustomColors({ form }: { form: DocumentFormReturn }) {
       />
       <FormField
         control={form.control}
-        name="theme.background"
+        name="config.theme.background"
         render={({ field }) => (
           <FormItem>
             <FormLabel>Background</FormLabel>
@@ -113,14 +113,14 @@ function CustomColors({ form }: { form: DocumentFormReturn }) {
 export function ThemeForm({}: {}) {
   const form: DocumentFormReturn = useFormContext(); // retrieve those props
   const { watch } = form;
-  const isCustom = watch("theme.isCustom");
+  const isCustom = watch("config.theme.isCustom");
   return (
     // TODO: check on custom color to enable/disable pallette custom colors
     <Form {...form}>
       <form className="space-y-6 w-full py-4">
         <FormField
           control={form.control}
-          name="theme.isCustom"
+          name="config.theme.isCustom"
           render={({ field }) => (
             <FormItem className="flex flex-row items-start space-x-3 space-y-0">
               <FormControl>

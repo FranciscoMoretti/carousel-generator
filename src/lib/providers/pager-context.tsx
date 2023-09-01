@@ -4,8 +4,7 @@ interface PagerContextValue {
   currentPage: number;
   onPreviousClick: () => void;
   onNextClick: () => void;
-  setPage: (pageNum: number) => void;
-  numPages: number;
+  setCurrentPage: (pageNum: number) => void;
 }
 
 const PagerContext = React.createContext<PagerContextValue | undefined>(

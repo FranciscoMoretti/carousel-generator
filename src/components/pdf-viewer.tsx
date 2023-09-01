@@ -16,7 +16,7 @@ const PAGE_GAP_PX = 8;
 const PAGE_WIDTH_PX = 448;
 
 export const PDFViewer = ({ pdfUrl }: { pdfUrl: string }) => {
-  const { currentPage, setPage } = usePagerContext();
+  const { currentPage, setCurrentPage } = usePagerContext();
   const [previousNumPages, setPreviousNumPages] = useState<number | null>(null);
   const [numPages, setNumPages] = useState<number | null>(null);
 
@@ -93,7 +93,7 @@ export const PDFViewer = ({ pdfUrl }: { pdfUrl: string }) => {
                 setPreviousRenderValue(pdfUrl);
                 setPreviousNumPages(numPages);
               }}
-              onClick={() => setPage(index)}
+              onClick={() => setCurrentPage(index)}
             />
           ))}
         </Document>

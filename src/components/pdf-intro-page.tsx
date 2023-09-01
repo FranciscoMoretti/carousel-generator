@@ -17,7 +17,7 @@ export function PdfIntroPage({
       // @ts-ignore array size 2 is hardcoded
       size={PAGE_SIZE}
       style={{
-        backgroundColor: document.theme.background,
+        backgroundColor: document.config.theme.background,
         ...tw("p-8 flex flex-col"),
       }}
     >
@@ -25,8 +25,8 @@ export function PdfIntroPage({
       <View style={tw("flex flex-col justify-center grow")}>
         <Text
           style={{
-            color: document.theme.primary,
-            fontFamily: document.fonts.font1,
+            color: document.config.theme.primary,
+            fontFamily: document.config.fonts.font1,
             fontWeight: "bold",
             ...tw("text-5xl mb-3 leading-none tracking-tight"),
           }}
@@ -35,8 +35,8 @@ export function PdfIntroPage({
         </Text>
         <Text
           style={{
-            fontFamily: document.fonts.font1,
-            color: document.theme.secondary,
+            fontFamily: document.config.fonts.font1,
+            color: document.config.theme.secondary,
             fontWeight: "bold",
             ...tw("text-base"),
           }}
@@ -45,8 +45,8 @@ export function PdfIntroPage({
         </Text>
         <Text
           style={{
-            fontFamily: document.fonts.font2,
-            color: document.theme.secondary,
+            fontFamily: document.config.fonts.font2,
+            color: document.config.theme.secondary,
             ...tw("text-sm"),
           }}
         >

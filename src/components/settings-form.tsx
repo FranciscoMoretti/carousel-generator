@@ -1,5 +1,4 @@
 import { useFormContext } from "react-hook-form";
-import * as z from "zod";
 
 import {
   Form,
@@ -12,7 +11,6 @@ import {
 import { Input } from "@/components/ui/input";
 
 import { Textarea } from "@/components/ui/textarea";
-import { DocumentSchema } from "@/lib/validation/document-schema";
 import { DocumentFormReturn } from "@/lib/document-form-types";
 
 export function SettingsForm({}: {}) {
@@ -23,7 +21,7 @@ export function SettingsForm({}: {}) {
       <form className="space-y-6 w-full">
         <FormField
           control={form.control}
-          name="settings.name"
+          name="config.settings.name"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Name</FormLabel>
@@ -36,7 +34,7 @@ export function SettingsForm({}: {}) {
         />
         <FormField
           control={form.control}
-          name="settings.handle"
+          name="config.settings.handle"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Handle</FormLabel>
@@ -49,7 +47,7 @@ export function SettingsForm({}: {}) {
         />
         <FormField
           control={form.control}
-          name="settings.avatar"
+          name="config.settings.avatar"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Avatar</FormLabel>
