@@ -28,10 +28,7 @@ export default function SlideMenubar({
 
   const currentSlidesValues = watch("slides");
 
-  // TODO Shifts need to be replaced with dynamic checking of slide types
-
   const { remove, swap, insert } = slidesFieldArray;
-  console.log(numPages);
 
   return (
     <div className="flex flex-row gap-1">
