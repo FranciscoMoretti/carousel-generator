@@ -16,7 +16,9 @@ export function PdfFooter({
   return (
     <View style={tw("flex flex-row justify-between items-center")}>
       <PdfSignature document={document} />
-      <PdfPageNumber document={document} number={number} />
+      {document.config.pageNumber.showNumbers && (
+        <PdfPageNumber document={document} number={number} />
+      )}
     </View>
   );
 }
