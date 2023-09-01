@@ -76,6 +76,9 @@ export default function Home() {
           font1: "DM_Serif_Display",
           font2: "DM_Sans",
         },
+        pageNumber: {
+          showNumbers: true,
+        },
       },
     },
   });

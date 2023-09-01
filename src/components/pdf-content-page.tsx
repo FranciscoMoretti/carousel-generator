@@ -4,6 +4,8 @@ import { Page, Text, View, Image } from "@react-pdf/renderer";
 import { DocumentSchema } from "@/lib/validation/document-schema";
 import { PAGE_SIZE, tw } from "@/lib/pdf-resources";
 import { PdfSignature } from "@/components/pdf-signature";
+import { PdfPageNumber } from "./pdf-page-number";
+import { PdfFooter } from "./pdf-footer";
 
 export function PdfContentPage({
   index,
@@ -43,7 +45,8 @@ export function PdfContentPage({
           {document.slides[index].description}
         </Text>
       </View>
-      <PdfSignature document={document}></PdfSignature>
+      {/* TODO: better number calculation */}
+      <PdfFooter number={index + 1} document={document} />
     </Page>
   );
 }

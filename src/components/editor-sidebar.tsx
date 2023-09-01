@@ -11,6 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { usePagerContext } from "@/lib/providers/pager-context";
 import { Separator } from "@/components/ui/separator";
 import { FontsForm } from "@/components/fonts-form";
+import { PageNumberForm } from "./page-number-form";
 
 export function EditorSidebar() {
   return (
@@ -45,13 +46,17 @@ const ALL_FORMS = {
     name: "Fonts",
     value: "fonts",
   },
+  pageNumber: {
+    name: "Page Numbers",
+    value: "page_number",
+  },
 };
 
 export function SidebarFormsPanel() {
   return (
     <Tabs defaultValue={ALL_FORMS.settings.value} className="flex-1">
       <div className="flex flex-col gap-6 p-2">
-        <TabsList className="grid grid-cols-3 shadow">
+        <TabsList className="grid grid-cols-2 gap-2 shadow h-20">
           <TabsTrigger value={ALL_FORMS.settings.value}>
             <span className="sr-only">{ALL_FORMS.settings.name}</span>
             {ALL_FORMS.settings.name}
@@ -63,6 +68,10 @@ export function SidebarFormsPanel() {
           <TabsTrigger value={ALL_FORMS.fonts.value}>
             <span className="sr-only">{ALL_FORMS.fonts.name}</span>
             {ALL_FORMS.fonts.name}
+          </TabsTrigger>
+          <TabsTrigger value={ALL_FORMS.pageNumber.value}>
+            <span className="sr-only">{ALL_FORMS.pageNumber.name}</span>
+            {ALL_FORMS.pageNumber.name}
           </TabsTrigger>
         </TabsList>
         <Separator />
@@ -96,6 +105,16 @@ export function SidebarFormsPanel() {
           </h4>
 
           <FontsForm />
+        </TabsContent>
+        <TabsContent
+          value={ALL_FORMS.pageNumber.value}
+          className="mt-0 border-0 p-0"
+        >
+          <h4 className="mb-1 rounded-md py-1 text-lg font-semibold">
+            {ALL_FORMS.pageNumber.name}
+          </h4>
+
+          <PageNumberForm />
         </TabsContent>
       </div>
     </Tabs>
