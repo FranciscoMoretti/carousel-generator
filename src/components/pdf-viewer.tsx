@@ -44,7 +44,7 @@ export const PDFViewer = ({ pdfUrl }: { pdfUrl: string }) => {
       )} */}
 
       <div
-        className={` relative`}
+        className={`relative transition-all`}
         style={{
           left: `calc(50% - ${
             currentPage * (PAGE_WIDTH_PX + PAGE_GAP_PX)
