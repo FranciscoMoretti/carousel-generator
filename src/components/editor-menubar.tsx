@@ -9,7 +9,7 @@ export function EditorMenubar({ instanceUrl }: { instanceUrl: string }) {
   const { reset }: DocumentFormReturn = useFormContext(); // retrieve those props
 
   return (
-    <div className="ml-auto flex w-full space-x-2 sm:justify-between">
+    <div className="ml-auto flex w-full gap-2 sm:justify-between">
       {/* <PresetSelector presets={presets} /> */}
       {/* <PresetSave /> */}
       {/* <div className="hidden space-x-2 md:flex">
@@ -18,14 +18,16 @@ export function EditorMenubar({ instanceUrl }: { instanceUrl: string }) {
       </div> */}
       {/* <PresetActions /> */}
       <Pager />
-      <Button onClick={() => reset()} variant="outline" size="sm">
-        Reset
-      </Button>
-      <a href={instanceUrl || ""} download="document.pdf">
-        <Button variant="outline" size="sm">
-          Download
+      <div className="flex flex-row gap-2">
+        <Button onClick={() => reset()} variant="outline" size="sm">
+          Reset
         </Button>
-      </a>
+        <a href={instanceUrl || ""} download="document.pdf">
+          <Button variant="outline" size="sm">
+            Download
+          </Button>
+        </a>
+      </div>
     </div>
   );
 }
