@@ -8,6 +8,8 @@ import {
   ArrowRightFromLine,
   ArrowLeftRight,
   ArrowRightLeft,
+  CornerUpRight,
+  CornerUpLeft,
   X,
   Copy,
 } from "lucide-react";
@@ -33,12 +35,15 @@ export default function SlideMenubar({
   return (
     <div className="flex flex-row gap-1">
       <Button
-        onClick={() => swap(currentPage, currentPage - 1)}
+        onClick={() => {
+          swap(currentPage, currentPage - 1);
+          setCurrentPage(currentPage - 1);
+        }}
         variant="outline"
         size="icon"
         disabled={currentPage <= 0 || currentPage > numPages - 1}
       >
-        <ArrowLeftRight className="w-4 h-4" />
+        <CornerUpLeft className="w-4 h-4" />
       </Button>
       <Button
         onClick={() => {
@@ -67,12 +72,15 @@ export default function SlideMenubar({
         <X className="w-4 h-4" />
       </Button>
       <Button
-        onClick={() => swap(currentPage, currentPage + 1)}
+        onClick={() => {
+          swap(currentPage, currentPage + 1);
+          setCurrentPage(currentPage + 1);
+        }}
         variant="outline"
         size="icon"
         disabled={currentPage >= numPages - 1}
       >
-        <ArrowRightLeft className="w-4 h-4" />
+        <CornerUpRight className="w-4 h-4" />
       </Button>
     </div>
   );
