@@ -16,7 +16,8 @@ export default function Pager({}: Props) {
   const { numPages } = useFieldArrayValues("slides");
 
   return (
-    <div className="flex flex-row gap-1">
+    <div className="flex flex-row gap-1 items-center ">
+      <p className="px-2">{`Slide ${currentPage + 1} of ${numPages}`}</p>
       <Button
         onClick={() => setCurrentPage(0)}
         variant="outline"
