@@ -64,19 +64,19 @@ function EditorCanvas({ instanceUrl }: EditorCanvasProps) {
   return (
     <>
       <div className="h-full flex-col flex">
-        <div className="w-full flex flex-col items-start justify-between space-y-2 py-4 sm:flex-row sm:items-center sm:space-y-0 md:h-16">
-          <EditorMenubar instanceUrl={instanceUrl} />
-          <div className="ml-auto flex w-full space-x-2 sm:justify-end">
-            {/* <PresetSelector presets={presets} />
-            <PresetSave /> */}
-            <div className="hidden space-x-2 md:flex">
-              {/* <CodeViewer />
-              <PresetShare /> */}
-            </div>
-            {/* <PresetActions /> */}
-          </div>
-        </div>
         <Separator />
+        <div className="w-full flex flex-col items-start justify-between space-y-2 py-1 my-4 bg-accent rounded-full container">
+          <EditorMenubar instanceUrl={instanceUrl} />
+          {/* <div className="ml-auto flex w-full space-x-2 sm:justify-end">
+            <PresetSelector presets={presets} />
+            <PresetSave />
+            <div className="hidden space-x-2 md:flex">
+              <CodeViewer />
+              <PresetShare />
+            </div>
+            <PresetActions />
+          </div> */}
+        </div>
         <SlidesEditor instanceUrl={instanceUrl}></SlidesEditor>
       </div>
     </>
