@@ -21,7 +21,7 @@ export function SettingsForm({}: {}) {
       <form className="space-y-6 w-full">
         <FormField
           control={form.control}
-          name="config.settings.name"
+          name="config.brand.name"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Name</FormLabel>
@@ -34,7 +34,7 @@ export function SettingsForm({}: {}) {
         />
         <FormField
           control={form.control}
-          name="config.settings.handle"
+          name="config.brand.handle"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Handle</FormLabel>
@@ -47,7 +47,7 @@ export function SettingsForm({}: {}) {
         />
         <FormField
           control={form.control}
-          name="config.settings.avatar"
+          name="config.brand.avatar"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Avatar</FormLabel>

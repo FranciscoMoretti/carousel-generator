@@ -60,7 +60,7 @@ export default function Home() {
     defaultValues: {
       slides: defaultSlideValues,
       config: {
-        settings: {
+        brand: {
           avatar: "https://www.franciscomoretti.com/profile_picture.jpg",
           name: "My name",
           handle: "@name",

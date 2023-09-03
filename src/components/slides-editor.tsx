@@ -26,7 +26,7 @@ export function SlidesEditor({ instanceUrl }: SlidesEditorProps) {
         {/* <div className="border p-4 rounded shadow flex flex-col items-center ">
         <CarouselSlide
          slide={slidesValues.slides[1]}
-         settings={settingsValues}
+         brand={settingsValues}
          theme={themeValues}
         />
         </div> */}

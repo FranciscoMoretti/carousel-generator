@@ -19,7 +19,7 @@ export function PdfSignature({
     >
       {/* eslint-disable-next-line jsx-a11y/alt-text */}
       <Image
-        src={document.config.settings.avatar}
+        src={document.config.brand.avatar}
         style={tw("w-12 h-12 rounded-full")}
       />
       <View style={tw("flex items-start gap-2 flex-col")}>
@@ -30,7 +30,7 @@ export function PdfSignature({
             ...tw("text-xs"),
           }}
         >
-          {document.config.settings.name}
+          {document.config.brand.name}
         </Text>
         <Text
           style={{
@@ -40,7 +40,7 @@ export function PdfSignature({
             ...tw("text-xs"),
           }}
         >
-          {document.config.settings.handle}
+          {document.config.brand.handle}
         </Text>
       </View>
     </View>

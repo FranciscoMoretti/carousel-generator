@@ -1,6 +1,6 @@
 import * as z from "zod";
 
-export const SettingsSchema = z.object({
+export const BrandSchema = z.object({
   avatar: z.string(),
   name: z
     .string()

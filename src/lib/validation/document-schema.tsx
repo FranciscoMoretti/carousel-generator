@@ -1,12 +1,12 @@
 import * as z from "zod";
 import { MultiSlideSchema } from "./slide-schema";
 import { ThemeSchema } from "./theme-schema";
-import { SettingsSchema } from "./settings-schema";
+import { BrandSchema } from "./brand-schema";
 import { FontsSchema } from "./fonts-schema";
-import { PageNumberSchema } from "./page-number-scchema";
+import { PageNumberSchema } from "./page-number-schema";
 
 export const ConfigSchema = z.object({
-  settings: SettingsSchema,
+  brand: BrandSchema,
   theme: ThemeSchema,
   fonts: FontsSchema,
   pageNumber: PageNumberSchema,

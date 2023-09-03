@@ -4,7 +4,7 @@ import Link from "next/link";
 // import { SidebarNavItem } from "types/nav";
 
 import { cn } from "@/lib/utils";
-import { SettingsForm } from "@/components/settings-form";
+import { SettingsForm } from "@/components/brand-form";
 import { SlidesForm } from "@/components/slides-form";
 import { ThemeForm } from "@/components/theme-form";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -36,9 +36,9 @@ export function EditorSidebar() {
 }
 
 const ALL_FORMS = {
-  settings: {
-    name: "Settings",
-    value: "settings",
+  brand: {
+    name: "Brand",
+    value: "brand",
   },
   theme: {
     name: "Theme",
@@ -56,12 +56,12 @@ const ALL_FORMS = {
 
 export function SidebarFormsPanel() {
   return (
-    <Tabs defaultValue={ALL_FORMS.settings.value} className="flex-1">
+    <Tabs defaultValue={ALL_FORMS.brand.value} className="flex-1">
       <div className="flex flex-col p-2 gap-6">
         <TabsList className="grid grid-cols-2 gap-2 shadow h-20">
-          <TabsTrigger value={ALL_FORMS.settings.value}>
-            <span className="sr-only">{ALL_FORMS.settings.name}</span>
-            {ALL_FORMS.settings.name}
+          <TabsTrigger value={ALL_FORMS.brand.value}>
+            <span className="sr-only">{ALL_FORMS.brand.name}</span>
+            {ALL_FORMS.brand.name}
           </TabsTrigger>
           <TabsTrigger value={ALL_FORMS.theme.value}>
             <span className="sr-only">{ALL_FORMS.theme.name}</span>
@@ -79,11 +79,11 @@ export function SidebarFormsPanel() {
         <Separator />
 
         <TabsContent
-          value={ALL_FORMS.settings.value}
+          value={ALL_FORMS.brand.value}
           className="mt-0 border-0 p-0"
         >
           <h4 className="mb-1 rounded-md py-1 text-lg font-semibold">
-            {ALL_FORMS.settings.name}
+            {ALL_FORMS.brand.name}
           </h4>
 
           <SettingsForm />

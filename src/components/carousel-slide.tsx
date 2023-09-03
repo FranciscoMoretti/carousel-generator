@@ -18,7 +18,7 @@ export function CarouselSlide({
 }) {
   const {
     slides,
-    config: { settings, theme },
+    config: { brand, theme },
   } = document;
   const slide = slides[index];
   return (
@@ -41,16 +41,16 @@ export function CarouselSlide({
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={settings.avatar}
+          src={brand.avatar}
           alt="Avatar"
           className="w-12 h-12 rounded-full"
         />
         <div className="flex flex-col">
           <span className="" style={{ color: theme.primary }}>
-            {settings.name}
+            {brand.name}
           </span>
           <span className="" style={{ color: theme.secondary }}>
-            {settings.handle}
+            {brand.handle}
           </span>
         </div>
       </CardFooter>
