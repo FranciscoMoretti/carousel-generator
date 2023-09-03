@@ -15,8 +15,10 @@ import { PageNumberForm } from "./page-number-form";
 
 export function EditorSidebar() {
   return (
-    <div className="w-full">
-      {/* TODO: Add a title here */}
+    <div className="w-full flex flex-col gap-2">
+      <h2 className="text-xl font-semibold">Settings</h2>
+      <Separator />
+
       {/* return items.length ? ( */}
       {/* {items.map((item, index) => (
         <div key={index} className={cn("pb-4")}>
