@@ -11,3 +11,8 @@ export const tw = createTw({
     },
   },
 });
+
+export const SIZE = {
+  width: 448,
+  height: 560,
+};
