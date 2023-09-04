@@ -73,7 +73,7 @@ export default function Home() {
           background: "#202624",
         },
         fonts: {
-          font1: "DM_Serif_Display",
+          font1: "DM_Sans",
           font2: "DM_Sans",
         },
         pageNumber: {

@@ -6,6 +6,7 @@ import {
   DocumentFormReturn,
   SlidesFieldArrayReturn,
 } from "@/lib/document-form-types";
+import { PrintableWrapper } from "./printable-wrapper";
 
 interface SlidesEditorProps {
   instanceUrl: string;
@@ -34,6 +35,7 @@ export function SlidesEditor({ instanceUrl }: SlidesEditorProps) {
         <div className="overflow-clip w-full">
           {/* TODO: Make the width responsive */}
           <PDFViewer pdfUrl={instanceUrl} />
+          <PrintableWrapper />
         </div>
         <SlidePanel slidesFieldArray={slidesFieldArray} />
       </div>

@@ -23,13 +23,12 @@ export function PdfContentPage({
         ...tw("p-8 flex flex-col justify-between"),
       }}
     >
-      <View style={tw("flex flex-col justify-center grow")}>
+      <View style={tw("flex flex-col justify-center items-start grow")}>
         <Text
           style={{
             color: document.config.theme.primary,
             fontFamily: document.config.fonts.font1,
-            fontWeight: "bold",
-            ...tw("text-3xl mb-3 leading-none tracking-tight"),
+            ...tw("text-3xl tracking-tight font-bold"),
           }}
         >
           {document.slides[index].title}
