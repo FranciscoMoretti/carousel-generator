@@ -1,7 +1,6 @@
 import React from "react";
 import * as z from "zod";
 import { DocumentSchema } from "@/lib/validation/document-schema";
-import { PdfFooter } from "./pdf-footer";
 import { cn } from "@/lib/utils";
 import { Footer } from "./react-footer";
 
@@ -20,7 +19,7 @@ export function ContentPage({
 }) {
   return (
     <div
-      className={cn("p-8 flex flex-col justify-between", className)}
+      className={cn("p-8 flex flex-col", className)}
       onClick={handleClick}
       style={{
         backgroundColor: document.config.theme.background,

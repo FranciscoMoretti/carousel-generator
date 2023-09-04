@@ -19,7 +19,7 @@ export function IntroPage({
 }) {
   return (
     <div
-      className={cn("p-8 flex flex-col justify-between", className)}
+      className={cn("p-8 flex flex-col", className)}
       onClick={handleClick}
       style={{
         backgroundColor: document.config.theme.background,
@@ -31,7 +31,7 @@ export function IntroPage({
     >
       <div className={`flex flex-col justify-center grow`}>
         <h2
-          className={`text-5xl mb-3 leading-none tracking-tight font-bold font-dmsans`}
+          className={`text-5xl mb-3 leading-none tracking-tight  font-dmsans`}
           style={{
             color: document.config.theme.primary,
             // fontFamily: document.config.fonts.font1,

@@ -12,6 +12,7 @@ export function PageNumber({
   number: number;
   className?: string;
 }) {
+  // TODO: Use the view to optionally add a circle around it
   return (
     <div
       className={`flex flex-row gap-3 items-center ${cn(className)}`}
@@ -20,8 +21,10 @@ export function PageNumber({
       }}
     >
       <p
+        className="text-lg"
         style={{
           color: document.config.theme.primary,
+          // fontFamily: document.config.fonts.font2,
         }}
       >
         {number}

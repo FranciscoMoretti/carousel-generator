@@ -1,7 +1,6 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
-import { useEffect, useMemo } from "react";
 import * as z from "zod";
 import {
   MultiSlideSchema,
@@ -9,11 +8,7 @@ import {
   SlideType,
 } from "@/lib/validation/slide-schema";
 import { usePersistFormWithKey } from "@/lib/hooks/use-persist-form-with-key";
-import { PdfDocument } from "@/components/pdf-document";
-import {
-  usePDF,
-  // @ts-ignore: Library import from inner module to avoid thinking we are on node
-} from "@react-pdf/renderer/lib/react-pdf.browser.es";
+
 import { DocumentSchema } from "@/lib/validation/document-schema";
 import { PagerProvider } from "@/lib/providers/pager-context";
 import { usePager } from "@/lib/hooks/use-pager";
@@ -85,24 +80,13 @@ export default function Home() {
   usePersistFormWithKey(documentForm, "documentFormKey");
   const documentValues = documentForm.watch();
 
-  const pdfDocument = useMemo(
-    () => <PdfDocument document={documentValues} />,
-    [documentValues]
-  );
-  const [instance, updateInstance] = usePDF({ document: pdfDocument });
-  const { loading: instanceLoading, url: instanceUrl } = instance;
-
-  useEffect(() => {
-    updateInstance(pdfDocument);
-  }, [pdfDocument, updateInstance]);
-
   const pager = usePager(0); // num
 
   return (
     <FormProvider {...documentForm}>
       <PagerProvider value={pager}>
         <main className="flex min-h-screen flex-col w-full items-stretch justify-between">
-          <EditorLayout instanceUrl={instanceUrl} />
+          <EditorLayout instanceUrl={""} />
         </main>
       </PagerProvider>
     </FormProvider>

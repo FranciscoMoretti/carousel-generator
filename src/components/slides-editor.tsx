@@ -14,7 +14,7 @@ interface SlidesEditorProps {
 }
 
 export function SlidesEditor({ instanceUrl, docReference }: SlidesEditorProps) {
-  const { control, watch }: DocumentFormReturn = useFormContext(); // retrieve those props
+  const { control, watch }: DocumentFormReturn = useFormContext();
   const document = watch();
 
   const slidesFieldArray: SlidesFieldArrayReturn = useFieldArray({

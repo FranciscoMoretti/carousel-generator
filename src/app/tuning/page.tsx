@@ -7,7 +7,6 @@ import {
   SlideSchema,
   SlideType,
 } from "@/lib/validation/slide-schema";
-import { PdfDocument } from "@/components/pdf-document";
 
 import { DocumentSchema } from "@/lib/validation/document-schema";
 import { PagerProvider } from "@/lib/providers/pager-context";

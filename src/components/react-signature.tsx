@@ -27,14 +27,17 @@ export function Signature({
       />
       <div className={`flex items-start gap-2 flex-col`}>
         <p
+          className="text-sm"
           style={{
             color: document.config.theme.primary,
+            // fontFamily: document.config.fonts.font2,
             fontWeight: "bold",
           }}
         >
           {document.config.brand.name}
         </p>
         <p
+          className="text-sm"
           style={{
             color: document.config.theme.secondary,
             fontWeight: "normal",
