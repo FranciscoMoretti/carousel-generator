@@ -7,12 +7,12 @@ import { useFormContext } from "react-hook-form";
 import { DocumentFormReturn } from "@/lib/document-form-types";
 
 export function PrintableWrapper({}: {}) {
-  const componentRef = React.useRef(null);
   const { watch }: DocumentFormReturn = useFormContext(); // retrieve those props
   const document = watch();
 
   const [loading, setLoading] = React.useState(false);
 
+  const componentRef = React.useRef(null);
   const reactToPrintContent = React.useCallback(() => {
     const current = componentRef.current;
     if (current && typeof current === "object") {

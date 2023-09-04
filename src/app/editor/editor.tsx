@@ -16,6 +16,11 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { EditorSidebar } from "@/components/editor-sidebar";
 import { SlidesEditor } from "@/components/slides-editor";
 import { EditorMenubar } from "@/components/editor-menubar";
+import { useFormContext } from "react-hook-form";
+import { DocumentFormReturn } from "@/lib/document-form-types";
+import React from "react";
+import { useReactToPrint } from "react-to-print";
+import { SIZE } from "@/lib/pdf-resources";
 
 // import { CodeViewer } from "./components/code-viewer";
 // import { MaxLengthSelector } from "./components/maxlength-selector";
@@ -61,12 +66,42 @@ interface EditorCanvasProps {
 }
 
 function EditorCanvas({ instanceUrl }: EditorCanvasProps) {
+  const { control, watch }: DocumentFormReturn = useFormContext(); // retrieve those props
+
+  const document = watch();
+  const [loading, setLoading] = React.useState(false);
+  // TODO: Show animation on loading
+  const componentRef = React.useRef(null);
+  const reactToPrintContent = React.useCallback(() => {
+    const current = componentRef.current;
+    if (current && typeof current === "object") {
+      // @ts-ignore should type narrow more precisely
+      const clone = current.cloneNode(true);
+      // Change from horizontal to vertical for printing
+      clone.className = "flex flex-col";
+      return clone;
+    }
+
+    return componentRef.current;
+  }, []);
+  // }, [componentRef.current]); // TODO: Remove comment if not needed
+
+  const handlePrint = useReactToPrint({
+    content: reactToPrintContent,
+    documentTitle: "AwesomeFileName",
+    removeAfterPrint: true,
+    onBeforePrint: () => setLoading(true),
+    onAfterPrint: () => setLoading(false),
+    pageStyle: `@page { size: ${SIZE.width}px ${SIZE.height}px;  margin: 0mm; } @media print { body { -webkit-print-color-adjust: exact; }}`,
+    // fonts: CUSTOM_FONTS,
+  });
+
   return (
     <>
       <div className="h-full flex-col flex">
         <Separator />
         <div className="w-full flex flex-col items-start justify-between space-y-2 py-1 my-4 bg-accent rounded-full container">
-          <EditorMenubar instanceUrl={instanceUrl} />
+          <EditorMenubar handlePrint={handlePrint} />
           {/* <div className="ml-auto flex w-full space-x-2 sm:justify-end">
             <PresetSelector presets={presets} />
             <PresetSave />
@@ -77,7 +112,7 @@ function EditorCanvas({ instanceUrl }: EditorCanvasProps) {
             <PresetActions />
           </div> */}
         </div>
-        <SlidesEditor instanceUrl={instanceUrl}></SlidesEditor>
+        <SlidesEditor instanceUrl={instanceUrl} docReference={componentRef} />
       </div>
     </>
   );

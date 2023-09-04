@@ -1,4 +1,3 @@
-import PDFViewer from "./pdf-viewer";
 import { SlidePanel } from "./slide-panel";
 import SlideMenubar from "./slide-menubar";
 import { useFieldArray, useFormContext } from "react-hook-form";
@@ -6,14 +5,17 @@ import {
   DocumentFormReturn,
   SlidesFieldArrayReturn,
 } from "@/lib/document-form-types";
-import { PrintableWrapper } from "./printable-wrapper";
+import { ReactDocument } from "./react-document";
+import React from "react";
 
 interface SlidesEditorProps {
   instanceUrl: string;
+  docReference: React.MutableRefObject<null>;
 }
 
-export function SlidesEditor({ instanceUrl }: SlidesEditorProps) {
-  const { control }: DocumentFormReturn = useFormContext(); // retrieve those props
+export function SlidesEditor({ instanceUrl, docReference }: SlidesEditorProps) {
+  const { control, watch }: DocumentFormReturn = useFormContext(); // retrieve those props
+  const document = watch();
 
   const slidesFieldArray: SlidesFieldArrayReturn = useFieldArray({
     control, // control props comes from useForm (optional: if you are using FormContext)
@@ -33,9 +35,7 @@ export function SlidesEditor({ instanceUrl }: SlidesEditorProps) {
         </div> */}
         <SlideMenubar slidesFieldArray={slidesFieldArray} />
         <div className="overflow-clip w-full">
-          {/* TODO: Make the width responsive */}
-          <PDFViewer pdfUrl={instanceUrl} />
-          <PrintableWrapper />
+          <ReactDocument document={document} docReference={docReference} />
         </div>
         <SlidePanel slidesFieldArray={slidesFieldArray} />
       </div>
