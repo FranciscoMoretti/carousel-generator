@@ -25,14 +25,6 @@ export function SlidesEditor({ instanceUrl, docReference }: SlidesEditorProps) {
   return (
     <div className="flex flex-col w-full items-center justify-start gap-4 p-4">
       <div className=" flex flex-col p-4 w-full items-center justify-start gap-3 rounded font-mono text-sm border shadow">
-        {/* React Slide for debug purposes */}
-        {/* <div className="border p-4 rounded shadow flex flex-col items-center ">
-        <CarouselSlide
-         slide={slidesValues.slides[1]}
-         brand={settingsValues}
-         theme={themeValues}
-        />
-        </div> */}
         <SlideMenubar slidesFieldArray={slidesFieldArray} />
         <div className="overflow-clip w-full">
           <ReactDocument document={document} docReference={docReference} />
