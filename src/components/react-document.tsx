@@ -7,6 +7,7 @@ import { SIZE } from "@/lib/pdf-resources";
 import { usePagerContext } from "@/lib/providers/pager-context";
 import { IntroPage } from "./react-intro-page";
 import { OutroPage } from "./react-outro-page";
+import { cn } from "@/lib/utils";
 
 export function ReactDocument({
   document,
@@ -36,7 +37,10 @@ export function ReactDocument({
               key={index}
               index={index}
               size={SIZE}
-              className="hover:brightness-90 hover:cursor-pointer"
+              className={cn(
+                currentPage != index &&
+                  "hover:brightness-90 hover:cursor-pointer"
+              )}
               handleClick={() => setCurrentPage(index)}
             />
           ) : slide.type == SlideType.enum.Intro ? (
@@ -45,7 +49,10 @@ export function ReactDocument({
               key={index}
               index={index}
               size={SIZE}
-              className="hover:brightness-90 hover:cursor-pointer"
+              className={cn(
+                currentPage != index &&
+                  "hover:brightness-90 hover:cursor-pointer"
+              )}
               handleClick={() => setCurrentPage(index)}
             />
           ) : slide.type == SlideType.enum.Outro ? (
@@ -54,7 +61,10 @@ export function ReactDocument({
               key={index}
               index={index}
               size={SIZE}
-              className="hover:brightness-90 hover:cursor-pointer"
+              className={cn(
+                currentPage != index &&
+                  "hover:brightness-90 hover:cursor-pointer"
+              )}
               handleClick={() => setCurrentPage(index)}
             />
           ) : null
