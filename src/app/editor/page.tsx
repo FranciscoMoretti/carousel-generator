@@ -12,7 +12,7 @@ import { usePersistFormWithKey } from "@/lib/hooks/use-persist-form-with-key";
 import { DocumentSchema } from "@/lib/validation/document-schema";
 import { PagerProvider } from "@/lib/providers/pager-context";
 import { usePager } from "@/lib/hooks/use-pager";
-import EditorLayout from "./editor";
+import EditorLayout from "@/components/editor";
 
 const defaultSlideValues: z.infer<typeof MultiSlideSchema> = [
   {
