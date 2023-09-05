@@ -1,13 +1,6 @@
 import { Metadata } from "next";
 import Image from "next/image";
-// import { CounterClockwiseClockIcon } from "@radix-ui/react-icons";
 
-import { Button } from "@/components/ui/button";
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@/components/ui/hover-card";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
