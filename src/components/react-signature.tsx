@@ -2,6 +2,7 @@ import React from "react";
 import { DocumentSchema } from "@/lib/validation/document-schema";
 import { z } from "zod";
 import { cn } from "@/lib/utils";
+import { fontIdToClassName } from "@/lib/fonts-map";
 
 export function Signature({
   document,
@@ -15,9 +16,6 @@ export function Signature({
       className={`flex justify-start flex-row gap-3 items-center ${cn(
         className
       )}`}
-      style={{
-        fontFamily: document.config.fonts.font2,
-      }}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
@@ -27,20 +25,23 @@ export function Signature({
       />
       <div className={`flex items-start gap-2 flex-col`}>
         <p
-          className="text-sm"
+          className={cn(
+            `text-sm font-bold`,
+            fontIdToClassName(document.config.fonts.font2)
+          )}
           style={{
             color: document.config.theme.primary,
-            // fontFamily: document.config.fonts.font2,
-            fontWeight: "bold",
           }}
         >
           {document.config.brand.name}
         </p>
         <p
-          className="text-sm"
+          className={cn(
+            `text-sm font-normal`,
+            fontIdToClassName(document.config.fonts.font2)
+          )}
           style={{
             color: document.config.theme.secondary,
-            fontWeight: "normal",
           }}
         >
           {document.config.brand.handle}

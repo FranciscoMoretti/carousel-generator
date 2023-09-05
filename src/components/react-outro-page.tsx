@@ -3,6 +3,7 @@ import * as z from "zod";
 import { DocumentSchema } from "@/lib/validation/document-schema";
 import { Footer } from "./react-footer"; // Replace with your non-PDF footer component
 import { cn } from "@/lib/utils";
+import { fontIdToClassName } from "@/lib/fonts-map";
 
 export function OutroPage({
   index,
@@ -31,29 +32,33 @@ export function OutroPage({
     >
       <div className={`flex flex-col justify-center grow`}>
         <h2
-          className={`text-5xl mb-3 leading-none tracking-tight  font-dm-sans`}
+          className={cn(
+            `text-5xl mb-3 leading-none tracking-tight font-bold`,
+            fontIdToClassName(document.config.fonts.font1)
+          )}
           style={{
             color: document.config.theme.primary,
-            // fontFamily: document.config.fonts.font1,
-            fontWeight: "bold",
           }}
         >
           {document.slides[index].title}
         </h2>
         <h3
-          className={`text-lg font-dm-sans`}
+          className={cn(
+            `text-lg font-bold`,
+            fontIdToClassName(document.config.fonts.font1)
+          )}
           style={{
-            // fontFamily: document.config.fonts.font1,
             color: document.config.theme.secondary,
-            fontWeight: "bold",
           }}
         >
           {document.slides[index].subtitle}
         </h3>
         <p
-          className={`text-base font-dm-sans`}
+          className={cn(
+            `text-base`,
+            fontIdToClassName(document.config.fonts.font2)
+          )}
           style={{
-            // fontFamily: document.config.fonts.font2,
             color: document.config.theme.secondary,
           }}
         >

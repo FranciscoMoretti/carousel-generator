@@ -33,3 +33,7 @@ export const fontsMap: FontMap = {
     name: "Ultra",
   },
 };
+
+export function fontIdToClassName(fontId: string) {
+  return fontsMap[fontId].className;
+}
