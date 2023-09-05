@@ -78,7 +78,6 @@ export default function Home() {
     },
   });
   usePersistFormWithKey(documentForm, "documentFormKey");
-  const documentValues = documentForm.watch();
 
   const pager = usePager(0); // num
 
