@@ -1,33 +1,35 @@
-type FontVariants = {
-  regular: string;
-  bold?: string;
+type FontInfo = {
+  name: string;
+  className: string;
 };
 
 type FontMap = {
-  [fontFamilyName: string]: FontVariants;
+  [fontFamilyName: string]: FontInfo;
 };
 
 export const fontsMap: FontMap = {
   DM_Sans: {
-    regular: "/fonts/DM_Sans/DMSans-Regular.ttf",
-    bold: "/fonts/DM_Sans/DMSans-Bold.ttf",
+    className: "font-dm-sans",
+    name: "DM Sans",
   },
   DM_Serif_Display: {
-    regular: "/fonts/DM_Serif_Display/DMSerifDisplay-Regular.ttf",
+    className: "font-dm-serif-display",
+    name: "DM Serif Display",
   },
   PT_Serif: {
-    regular: "/fonts/PT_Serif/PTSerif-Regular.ttf",
-    bold: "/fonts/PT_Serif/PTSerif-Bold.ttf",
+    className: "font-pt-serif",
+    name: "PT Serif",
   },
   Roboto: {
-    regular: "/fonts/Roboto/Roboto-Regular.ttf",
-    bold: "/fonts/Roboto/Roboto-Bold.ttf",
+    className: "font-roboto",
+    name: "Roboto",
   },
   Roboto_Condensed: {
-    regular: "/fonts/Roboto_Condensed/RobotoCondensed-Regular.ttf",
-    bold: "/fonts/Roboto_Condensed/RobotoCondensed-Bold.ttf",
+    className: "font-roboto-condensed",
+    name: "Roboto Condensed",
   },
   Ultra: {
-    regular: "/fonts/Ultra/Ultra-Regular.ttf",
+    className: "font-ultra",
+    name: "Ultra",
   },
 };

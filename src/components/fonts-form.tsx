@@ -66,12 +66,13 @@ export function FontsForm({}: {}) {
     </Form>
   );
 }
+
 function FontSelectContent() {
   return (
     <SelectContent>
-      {Object.keys(fontsMap).map((familyName) => (
-        <SelectItem key={familyName} value={familyName}>
-          {familyName}
+      {Object.keys(fontsMap).map((fontId) => (
+        <SelectItem key={fontId} value={fontId}>
+          <p className={fontsMap[fontId].className}>{fontsMap[fontId].name}</p>
         </SelectItem>
       ))}
     </SelectContent>

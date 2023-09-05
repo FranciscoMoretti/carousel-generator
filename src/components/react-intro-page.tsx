@@ -3,6 +3,7 @@ import * as z from "zod";
 import { DocumentSchema } from "@/lib/validation/document-schema";
 import { Footer } from "./react-footer"; // Replace with your non-PDF footer component
 import { cn } from "@/lib/utils";
+import { fontsMap } from "@/lib/fonts-map";
 
 export function IntroPage({
   index,
@@ -31,7 +32,10 @@ export function IntroPage({
     >
       <div className={`flex flex-col justify-center grow`}>
         <h2
-          className={`text-5xl mb-3 leading-none tracking-tight  font-dmsans`}
+          className={cn(
+            `text-5xl mb-3 leading-none tracking-tight`,
+            fontsMap[document.config.fonts.font1].className
+          )}
           style={{
             color: document.config.theme.primary,
             // fontFamily: document.config.fonts.font1,
@@ -41,7 +45,7 @@ export function IntroPage({
           {document.slides[index].title}
         </h2>
         <h3
-          className={`text-lg font-dmsans`}
+          className={`text-lg font-dm-sans`}
           style={{
             // fontFamily: document.config.fonts.font1,
             color: document.config.theme.secondary,
@@ -51,7 +55,7 @@ export function IntroPage({
           {document.slides[index].subtitle}
         </h3>
         <p
-          className={`text-base font-dmsans`}
+          className={`text-base font-dm-sans`}
           style={{
             // fontFamily: document.config.fonts.font2,
             color: document.config.theme.secondary,

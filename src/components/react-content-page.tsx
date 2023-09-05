@@ -31,7 +31,7 @@ export function ContentPage({
     >
       <div className="flex flex-col justify-center items-start  grow">
         <h2
-          className={`text-3xl tracking-tight font-dmsans font-bold`}
+          className={`text-3xl tracking-tight font-dm-sans font-bold`}
           style={{
             color: document.config.theme.primary,
             // fontFamily: document.config.fonts.font1,
@@ -42,7 +42,7 @@ export function ContentPage({
         </h2>
 
         <p
-          className={`text-base font-dmsans`}
+          className={`text-base font-dm-sans`}
           style={{
             color: document.config.theme.secondary,
             // fontFamily: document.config.fonts.font2,

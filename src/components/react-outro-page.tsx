@@ -31,7 +31,7 @@ export function OutroPage({
     >
       <div className={`flex flex-col justify-center grow`}>
         <h2
-          className={`text-5xl mb-3 leading-none tracking-tight  font-dmsans`}
+          className={`text-5xl mb-3 leading-none tracking-tight  font-dm-sans`}
           style={{
             color: document.config.theme.primary,
             // fontFamily: document.config.fonts.font1,
@@ -41,7 +41,7 @@ export function OutroPage({
           {document.slides[index].title}
         </h2>
         <h3
-          className={`text-lg font-dmsans`}
+          className={`text-lg font-dm-sans`}
           style={{
             // fontFamily: document.config.fonts.font1,
             color: document.config.theme.secondary,
@@ -51,7 +51,7 @@ export function OutroPage({
           {document.slides[index].subtitle}
         </h3>
         <p
-          className={`text-base font-dmsans`}
+          className={`text-base font-dm-sans`}
           style={{
             // fontFamily: document.config.fonts.font2,
             color: document.config.theme.secondary,
