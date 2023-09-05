@@ -56,7 +56,7 @@ export default function Home() {
       slides: defaultSlideValues,
       config: {
         brand: {
-          avatar: "https://thispersondoesnotexist.com",
+          avatar: "https://github.com/FranciscoMoretti.png",
           name: "My name",
           handle: "@name",
         },
