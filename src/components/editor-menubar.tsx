@@ -23,7 +23,7 @@ export function EditorMenubar({ handlePrint }: { handlePrint: () => void }) {
           Reset
         </Button>
         <Button variant="outline" size="sm" onClick={handlePrint}>
-          Download
+          Print
         </Button>
       </div>
     </div>

@@ -56,7 +56,7 @@ export default function Home() {
       slides: defaultSlideValues,
       config: {
         brand: {
-          avatar: "https://www.franciscomoretti.com/profile_picture.jpg",
+          avatar: "https://thispersondoesnotexist.com",
           name: "My name",
           handle: "@name",
         },
@@ -68,7 +68,7 @@ export default function Home() {
           background: "#202624",
         },
         fonts: {
-          font1: "DM_Sans",
+          font1: "DM_Serif_Display",
           font2: "DM_Sans",
         },
         pageNumber: {
