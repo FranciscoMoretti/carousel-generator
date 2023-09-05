@@ -87,7 +87,6 @@ function EditorCanvas({ instanceUrl }: EditorCanvasProps) {
   return (
     <>
       <div className="h-full flex-col flex">
-        <Separator />
         <div className="w-full flex flex-col items-start justify-between space-y-2 py-1 my-4 bg-accent rounded-full container">
           <EditorMenubar handlePrint={handlePrint} isPrinting={isPrinting} />
           {/* <div className="ml-auto flex w-full space-x-2 sm:justify-end">
