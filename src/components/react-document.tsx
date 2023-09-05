@@ -34,7 +34,8 @@ export function ReactDocument({
           // TODO: Write a wrapper Page class to remove duplication
           slide.type == SlideType.enum.Content ? (
             <ContentPage
-              document={document}
+              config={document.config}
+              slide={slide}
               key={index}
               index={index}
               size={SIZE}
@@ -46,7 +47,8 @@ export function ReactDocument({
             />
           ) : slide.type == SlideType.enum.Intro ? (
             <IntroPage
-              document={document}
+              config={document.config}
+              slide={slide}
               key={index}
               index={index}
               size={SIZE}
@@ -58,7 +60,8 @@ export function ReactDocument({
             />
           ) : slide.type == SlideType.enum.Outro ? (
             <OutroPage
-              document={document}
+              config={document.config}
+              slide={slide}
               key={index}
               index={index}
               size={SIZE}

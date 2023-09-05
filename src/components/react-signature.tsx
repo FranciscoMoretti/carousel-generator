@@ -1,14 +1,14 @@
 import React from "react";
-import { DocumentSchema } from "@/lib/validation/document-schema";
+import { ConfigSchema, DocumentSchema } from "@/lib/validation/document-schema";
 import { z } from "zod";
 import { cn } from "@/lib/utils";
 import { fontIdToClassName } from "@/lib/fonts-map";
 
 export function Signature({
-  document,
+  config,
   className,
 }: {
-  document: z.infer<typeof DocumentSchema>;
+  config: z.infer<typeof ConfigSchema>;
   className?: string;
 }) {
   return (
@@ -19,32 +19,32 @@ export function Signature({
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={document.config.brand.avatar}
-        alt={document.config.brand.name}
+        src={config.brand.avatar}
+        alt={config.brand.name}
         className={`w-12 h-12 rounded-full `}
       />
       <div className={`flex items-start gap-2 flex-col`}>
         <p
           className={cn(
             `text-sm font-bold`,
-            fontIdToClassName(document.config.fonts.font2)
+            fontIdToClassName(config.fonts.font2)
           )}
           style={{
-            color: document.config.theme.primary,
+            color: config.theme.primary,
           }}
         >
-          {document.config.brand.name}
+          {config.brand.name}
         </p>
         <p
           className={cn(
             `text-sm font-normal`,
-            fontIdToClassName(document.config.fonts.font2)
+            fontIdToClassName(config.fonts.font2)
           )}
           style={{
-            color: document.config.theme.secondary,
+            color: config.theme.secondary,
           }}
         >
-          {document.config.brand.handle}
+          {config.brand.handle}
         </p>
       </div>
     </div>

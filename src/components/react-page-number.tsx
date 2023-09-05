@@ -1,15 +1,15 @@
 import React from "react";
-import { DocumentSchema } from "@/lib/validation/document-schema";
+import { ConfigSchema } from "@/lib/validation/document-schema";
 import { z } from "zod";
 import { cn } from "@/lib/utils";
 import { fontIdToClassName } from "@/lib/fonts-map";
 
 export function PageNumber({
-  document,
+  config,
   number,
   className,
 }: {
-  document: z.infer<typeof DocumentSchema>;
+  config: z.infer<typeof ConfigSchema>;
   number: number;
   className?: string;
 }) {
@@ -17,12 +17,9 @@ export function PageNumber({
   return (
     <div className={`flex flex-row gap-3 items-center ${cn(className)}`}>
       <p
-        className={cn(
-          `text-lg`,
-          fontIdToClassName(document.config.fonts.font2)
-        )}
+        className={cn(`text-lg`, fontIdToClassName(config.fonts.font2))}
         style={{
-          color: document.config.theme.primary,
+          color: config.theme.primary,
         }}
       >
         {number}

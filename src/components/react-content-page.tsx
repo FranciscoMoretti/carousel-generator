@@ -1,19 +1,22 @@
 import React from "react";
 import * as z from "zod";
-import { DocumentSchema } from "@/lib/validation/document-schema";
+import { ConfigSchema, DocumentSchema } from "@/lib/validation/document-schema";
 import { cn } from "@/lib/utils";
 import { Footer } from "./react-footer";
 import { fontIdToClassName } from "@/lib/fonts-map";
+import { ContentSlideSchema } from "@/lib/validation/slide-schema";
 
 export function ContentPage({
   index,
-  document,
+  config,
+  slide,
   size,
   className,
   handleClick = undefined,
 }: {
   index: number;
-  document: z.infer<typeof DocumentSchema>;
+  config: z.infer<typeof ConfigSchema>;
+  slide: z.infer<typeof ContentSlideSchema>;
   size: { width: number; height: number };
   className?: string;
   handleClick?: React.MouseEventHandler<HTMLDivElement> | undefined;
@@ -23,7 +26,7 @@ export function ContentPage({
       className={cn("p-8 flex flex-col", className)}
       onClick={handleClick}
       style={{
-        backgroundColor: document.config.theme.background,
+        backgroundColor: config.theme.background,
         width: `${size.width}px`,
         height: `${size.height}px`,
         minWidth: `${size.width}px`,
@@ -34,28 +37,25 @@ export function ContentPage({
         <h2
           className={cn(
             `text-3xl tracking-tight font-bold`,
-            fontIdToClassName(document.config.fonts.font1)
+            fontIdToClassName(config.fonts.font1)
           )}
           style={{
-            color: document.config.theme.primary,
+            color: config.theme.primary,
           }}
         >
-          {document.slides[index].title}
+          {slide.title}
         </h2>
 
         <p
-          className={cn(
-            `text-base`,
-            fontIdToClassName(document.config.fonts.font2)
-          )}
+          className={cn(`text-base`, fontIdToClassName(config.fonts.font2))}
           style={{
-            color: document.config.theme.secondary,
+            color: config.theme.secondary,
           }}
         >
-          {document.slides[index].description}
+          {slide.description}
         </p>
       </div>
-      <Footer number={index + 1} document={document} />
+      <Footer number={index + 1} config={config} />
       {/* TODO: better number calculation */}
     </div>
   );
