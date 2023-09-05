@@ -57,7 +57,7 @@ function EditorCanvas({ instanceUrl }: EditorCanvasProps) {
   const { control, watch }: DocumentFormReturn = useFormContext(); // retrieve those props
 
   const document = watch();
-  const [loading, setLoading] = React.useState(false);
+  const [isPrinting, setIsPrinting] = React.useState(false);
   // TODO: Show animation on loading
   const componentRef = React.useRef(null);
   const reactToPrintContent = React.useCallback(() => {
@@ -78,8 +78,8 @@ function EditorCanvas({ instanceUrl }: EditorCanvasProps) {
     content: reactToPrintContent,
     documentTitle: "AwesomeFileName",
     removeAfterPrint: true,
-    onBeforePrint: () => setLoading(true),
-    onAfterPrint: () => setLoading(false),
+    onBeforePrint: () => setIsPrinting(true),
+    onAfterPrint: () => setIsPrinting(false),
     pageStyle: `@page { size: ${SIZE.width}px ${SIZE.height}px;  margin: 0mm; } @media print { body { -webkit-print-color-adjust: exact; }}`,
     // fonts: CUSTOM_FONTS,
   });
@@ -89,7 +89,7 @@ function EditorCanvas({ instanceUrl }: EditorCanvasProps) {
       <div className="h-full flex-col flex">
         <Separator />
         <div className="w-full flex flex-col items-start justify-between space-y-2 py-1 my-4 bg-accent rounded-full container">
-          <EditorMenubar handlePrint={handlePrint} />
+          <EditorMenubar handlePrint={handlePrint} isPrinting={isPrinting} />
           {/* <div className="ml-auto flex w-full space-x-2 sm:justify-end">
             <PresetSelector presets={presets} />
             <PresetSave />

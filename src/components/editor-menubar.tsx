@@ -4,8 +4,15 @@ import { useFormContext } from "react-hook-form";
 import { DocumentSchema } from "@/lib/validation/document-schema";
 import { Button } from "./ui/button";
 import { DocumentFormReturn } from "@/lib/document-form-types";
+import { Loader2Icon } from "lucide-react";
 
-export function EditorMenubar({ handlePrint }: { handlePrint: () => void }) {
+export function EditorMenubar({
+  handlePrint,
+  isPrinting,
+}: {
+  handlePrint: () => void;
+  isPrinting: boolean;
+}) {
   const { reset }: DocumentFormReturn = useFormContext(); // retrieve those props
 
   return (
@@ -23,7 +30,10 @@ export function EditorMenubar({ handlePrint }: { handlePrint: () => void }) {
           Reset
         </Button>
         <Button variant="outline" size="sm" onClick={handlePrint}>
-          Print
+          <div className="flex flex-row gap-1 items-center">
+            <span>Print</span>
+            {isPrinting && <Loader2Icon className="w-4 h-4 animate-spin" />}
+          </div>
         </Button>
       </div>
     </div>
