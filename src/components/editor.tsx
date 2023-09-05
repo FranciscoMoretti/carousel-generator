@@ -26,17 +26,15 @@ interface EditorLayoutProps {
 
 export default function EditorLayout({ instanceUrl }: EditorLayoutProps) {
   return (
-    <div className="border-b">
-      <div className=" flex-1 flex flex-row items-start md:grid md:grid-cols-[280px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[300px_minmax(0,1fr)] lg:gap-10">
-        <aside className="top-14 z-30 hidden h-[calc(100vh-3.5rem)] w-full shrink-0 md:sticky md:block border-r">
-          <ScrollArea className="py-6  px-6 lg:py-8">
-            <EditorSidebar />
-          </ScrollArea>
-        </aside>
-        {/* Change hidden for below for flex col for mobile screens (below) */}
-        <div className="">
-          <EditorCanvas instanceUrl={instanceUrl} />
-        </div>
+    <div className=" flex-1 flex flex-row items-start md:grid md:grid-cols-[280px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[300px_minmax(0,1fr)] lg:gap-10">
+      <aside className="top-14 z-30 hidden h-full w-full shrink-0 md:sticky md:block border-r">
+        <ScrollArea className="py-6  px-6 lg:py-8">
+          <EditorSidebar />
+        </ScrollArea>
+      </aside>
+      {/* Change hidden for below for flex col for mobile screens (below) */}
+      <div className="">
+        <EditorCanvas instanceUrl={instanceUrl} />
       </div>
     </div>
   );
