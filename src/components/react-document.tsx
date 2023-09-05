@@ -31,6 +31,7 @@ export function ReactDocument({
     >
       <div ref={docReference} className="flex flex-row gap-2">
         {document.slides.map((slide, index) =>
+          // TODO: Write a wrapper Page class to remove duplication
           slide.type == SlideType.enum.Content ? (
             <ContentPage
               document={document}
