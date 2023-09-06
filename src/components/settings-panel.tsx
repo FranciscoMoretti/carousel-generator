@@ -13,9 +13,9 @@ import { Separator } from "@/components/ui/separator";
 import { FontsForm } from "@/components/fonts-form";
 import { PageNumberForm } from "./page-number-form";
 
-export function EditorSidebar() {
+export function SettingsPanel({ className }: { className?: string }) {
   return (
-    <div className="w-full flex flex-col gap-2">
+    <div className={cn("w-full flex flex-col gap-2", className)}>
       <h2 className="text-xl font-semibold">Settings</h2>
       <Separator />
 
