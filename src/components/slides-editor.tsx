@@ -23,7 +23,7 @@ export function SlidesEditor({ instanceUrl, docReference }: SlidesEditorProps) {
   });
 
   return (
-    <div className="flex flex-col w-full items-center justify-start gap-4 p-4">
+    <div className="flex flex-col w-full items-center justify-start">
       <div className=" flex flex-col p-4 w-full items-center justify-start gap-3 rounded font-mono text-sm border shadow">
         <SlideMenubar slidesFieldArray={slidesFieldArray} />
         <div className="overflow-clip w-full">

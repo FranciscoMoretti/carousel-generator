@@ -25,14 +25,12 @@ export function MainNav({ items, className }: MainNavProps) {
 
   return (
     <div className={cn("flex gap-6 md:gap-10", className)}>
-      <Link href="/" className="hidden items-center space-x-2 md:flex">
+      <Link href="/" className="items-center space-x-2 flex">
         <Icons.logo />
-        <span className="hidden font-bold sm:inline-block">
-          Carousel Generator
-        </span>
+        <span className="font-bold inline-block">Carousel Generator</span>
       </Link>
       {items?.length ? (
-        <nav className="hidden gap-6 md:flex">
+        <nav className="gap-6 flex">
           {items?.map((item, index) => (
             <Link
               key={index}
