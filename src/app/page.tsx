@@ -13,40 +13,15 @@ import { DocumentSchema } from "@/lib/validation/document-schema";
 import { PagerProvider } from "@/lib/providers/pager-context";
 import { usePager } from "@/lib/hooks/use-pager";
 import EditorLayout from "@/components/editor";
+import { INTRO, getDefaultSlideOfType } from "@/lib/default-slides";
 
 const defaultSlideValues: z.infer<typeof MultiSlideSchema> = [
-  {
-    type: SlideType.enum.Intro,
-    title: "YOUR TITLE",
-    subtitle: "Your awesome subtitle",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, dolorum.",
-  },
-  {
-    type: SlideType.enum.Content,
-    title: "A cool title for this slide",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, recusandae.",
-  },
-  {
-    type: SlideType.enum.Content,
-    title: "A cool title for this slide",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, recusandae.",
-  },
-  {
-    type: SlideType.enum.Content,
-    title: "A cool title for this slide",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, recusandae.",
-  },
-  {
-    type: SlideType.enum.Outro,
-    title: "YOUR TITLE",
-    subtitle: "Your awesome subtitle",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, dolorum.",
-  },
+  getDefaultSlideOfType(SlideType.enum.Intro),
+  getDefaultSlideOfType(SlideType.enum.Content),
+  getDefaultSlideOfType(SlideType.enum.Content),
+  getDefaultSlideOfType(SlideType.enum.Content),
+  getDefaultSlideOfType(SlideType.enum.Content),
+  getDefaultSlideOfType(SlideType.enum.Outro),
 ];
 
 export default function Home() {

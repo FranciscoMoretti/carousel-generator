@@ -8,17 +8,23 @@ import { usePagerContext } from "@/lib/providers/pager-context";
 import { IntroPage } from "./react-intro-page";
 import { OutroPage } from "./react-outro-page";
 import { cn } from "@/lib/utils";
+import { NewPage } from "./react-new-page";
+import { SlidesFieldArrayReturn } from "@/lib/document-form-types";
+import { getDefaultSlideOfType } from "@/lib/default-slides";
 
 export function ReactDocument({
   document,
   docReference,
+  slidesFieldArray,
 }: {
   document: z.infer<typeof DocumentSchema>;
   docReference: React.MutableRefObject<null>;
+  slidesFieldArray: SlidesFieldArrayReturn;
 }) {
   const { currentPage, setCurrentPage } = usePagerContext();
 
   const PAGE_GAP_PX = 8;
+  const { append } = slidesFieldArray;
 
   return (
     <div
@@ -73,6 +79,13 @@ export function ReactDocument({
             />
           ) : null
         )}
+        <NewPage
+          size={SIZE}
+          handleAddPage={(pageType: SlideType) => {
+            // TODO: Should add with index at different locations and set as current page the index
+            append(getDefaultSlideOfType(pageType));
+          }}
+        />
       </div>
     </div>
   );

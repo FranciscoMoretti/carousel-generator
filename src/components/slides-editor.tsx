@@ -27,7 +27,11 @@ export function SlidesEditor({ instanceUrl, docReference }: SlidesEditorProps) {
       <div className=" flex flex-col p-4 w-full items-center justify-start gap-3 rounded font-mono text-sm border shadow">
         <SlideMenubar slidesFieldArray={slidesFieldArray} />
         <div className="overflow-clip w-full">
-          <ReactDocument document={document} docReference={docReference} />
+          <ReactDocument
+            document={document}
+            docReference={docReference}
+            slidesFieldArray={slidesFieldArray}
+          />
         </div>
         <SlidePanel slidesFieldArray={slidesFieldArray} />
       </div>
