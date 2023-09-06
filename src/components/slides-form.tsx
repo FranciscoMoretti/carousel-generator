@@ -24,6 +24,10 @@ export function SlidesForm({
 
   const currentFields = fields[currentPage];
 
+  if (!currentFields) {
+    return <p>Add a slide to start editing</p>;
+  }
+
   return (
     <Form {...form}>
       <form>

@@ -49,6 +49,7 @@ export default function SlideMenubar({
         onClick={() => {
           insert(currentPage, currentSlidesValues[currentPage]);
         }}
+        disabled={currentPage == 0 && numPages == 0}
         variant="outline"
         size="icon"
       >
@@ -66,6 +67,7 @@ export default function SlideMenubar({
             console.error("Current page number not valid: ", currentPage);
           }
         }}
+        disabled={currentPage == 0 && numPages == 0}
         variant="outline"
         size="icon"
       >
