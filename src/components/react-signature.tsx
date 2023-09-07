@@ -17,12 +17,14 @@ export function Signature({
         className
       )}`}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={config.brand.avatar}
-        alt={config.brand.name}
-        className={`w-12 h-12 rounded-full `}
-      />
+      {config.brand.avatar && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={config.brand.avatar}
+          alt={config.brand.name}
+          className={`w-12 h-12 rounded-full `}
+        />
+      )}
       <div className={`flex items-start gap-2 flex-col`}>
         <p
           className={cn(
