@@ -68,7 +68,7 @@ export default function RootLayout({
       <body
         className={`${dm_sans.variable} ${dm_serif_display.variable} ${pt_serif.variable} ${roboto.variable} ${roboto_condensed.variable} ${ultra.variable} h-screen `}
       >
-        <MainNav items={[]} className="h-10 border-b px-10" />
+        <MainNav items={[]} className="h-10 border-b px-6" />
         <div className="">{children}</div>
         <Toaster />
       </body>

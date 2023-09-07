@@ -6,6 +6,7 @@ import { useSelectedLayoutSegment } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import { Icons } from "@/components/icons";
+import { buttonVariants } from "./ui/button";
 
 export type NavItem = {
   title: string;
@@ -24,7 +25,7 @@ export function MainNav({ items, className }: MainNavProps) {
   const segment = useSelectedLayoutSegment();
 
   return (
-    <div className={cn("flex gap-6 md:gap-10", className)}>
+    <div className={cn("flex gap-6 md:gap-10 justify-between", className)}>
       <Link href="/" className="items-center space-x-2 flex">
         <Icons.logo />
         <span className="font-bold inline-block">Carousel Generator</span>
@@ -48,6 +49,23 @@ export function MainNav({ items, className }: MainNavProps) {
           ))}
         </nav>
       ) : null}
+      <Link
+        href={"https://github.com/FranciscoMoretti/carousel-generator"}
+        target="_blank"
+        rel="noreferrer"
+      >
+        <div
+          className={cn(
+            buttonVariants({
+              variant: "ghost",
+            }),
+            "w-9 px-0"
+          )}
+        >
+          <Icons.gitHub className="h-5 w-5" />
+          <span className="sr-only">GitHub</span>
+        </div>
+      </Link>
     </div>
   );
 }
