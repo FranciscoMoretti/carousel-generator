@@ -44,7 +44,7 @@ export function NewPage({
           }}
         >
           <div className={`flex flex-col justify-center items-center`}>
-            <Plus />
+            <Plus className="w-6 h-6" />
           </div>
         </Button>
       </DialogTrigger>
