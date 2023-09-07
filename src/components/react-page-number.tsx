@@ -17,7 +17,7 @@ export function PageNumber({
   return (
     <div className={`flex flex-row gap-3 items-center ${cn(className)}`}>
       <p
-        className={cn(`text-lg`, fontIdToClassName(config.fonts.font2))}
+        className={cn(`text-xl`, fontIdToClassName(config.fonts.font2))}
         style={{
           color: config.theme.primary,
         }}

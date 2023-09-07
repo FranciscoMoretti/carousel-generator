@@ -39,50 +39,52 @@ export function ReactDocument({
         }px)`,
       }}
     >
-      <div ref={docReference} className="flex flex-row gap-2">
-        {document.slides.map((slide, index) =>
-          // TODO: Write a wrapper Page class to remove duplication
-          slide.type == SlideType.enum.Content ? (
-            <ContentPage
-              config={document.config}
-              slide={slide}
-              key={index}
-              index={index}
-              size={SIZE}
-              className={cn(
-                currentPage != index &&
-                  "hover:brightness-90 hover:cursor-pointer"
-              )}
-              handleClick={() => setCurrentPage(index)}
-            />
-          ) : slide.type == SlideType.enum.Intro ? (
-            <IntroPage
-              config={document.config}
-              slide={slide}
-              key={index}
-              index={index}
-              size={SIZE}
-              className={cn(
-                currentPage != index &&
-                  "hover:brightness-90 hover:cursor-pointer"
-              )}
-              handleClick={() => setCurrentPage(index)}
-            />
-          ) : slide.type == SlideType.enum.Outro ? (
-            <OutroPage
-              config={document.config}
-              slide={slide}
-              key={index}
-              index={index}
-              size={SIZE}
-              className={cn(
-                currentPage != index &&
-                  "hover:brightness-90 hover:cursor-pointer"
-              )}
-              handleClick={() => setCurrentPage(index)}
-            />
-          ) : null
-        )}
+      <div className="flex flex-row gap-2">
+        <div ref={docReference} className="flex flex-row gap-2">
+          {document.slides.map((slide, index) =>
+            // TODO: Write a wrapper Page class to remove duplication
+            slide.type == SlideType.enum.Content ? (
+              <ContentPage
+                config={document.config}
+                slide={slide}
+                key={index}
+                index={index}
+                size={SIZE}
+                className={cn(
+                  currentPage != index &&
+                    "hover:brightness-90 hover:cursor-pointer"
+                )}
+                handleClick={() => setCurrentPage(index)}
+              />
+            ) : slide.type == SlideType.enum.Intro ? (
+              <IntroPage
+                config={document.config}
+                slide={slide}
+                key={index}
+                index={index}
+                size={SIZE}
+                className={cn(
+                  currentPage != index &&
+                    "hover:brightness-90 hover:cursor-pointer"
+                )}
+                handleClick={() => setCurrentPage(index)}
+              />
+            ) : slide.type == SlideType.enum.Outro ? (
+              <OutroPage
+                config={document.config}
+                slide={slide}
+                key={index}
+                index={index}
+                size={SIZE}
+                className={cn(
+                  currentPage != index &&
+                    "hover:brightness-90 hover:cursor-pointer"
+                )}
+                handleClick={() => setCurrentPage(index)}
+              />
+            ) : null
+          )}
+        </div>
         <NewPage
           size={SIZE}
           handleAddPage={(pageType: SlideType) => {

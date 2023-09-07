@@ -75,7 +75,10 @@ function EditorCanvas({ instanceUrl }: EditorCanvasProps) {
     removeAfterPrint: true,
     onBeforePrint: () => setIsPrinting(true),
     onAfterPrint: () => setIsPrinting(false),
-    pageStyle: `@page { size: ${SIZE.width}px ${SIZE.height}px;  margin: 0mm; } @media print { body { -webkit-print-color-adjust: exact; }}`,
+    pageStyle: `@page { size: ${SIZE.width}px ${SIZE.height}px;  margin: 0; } @media print { body { -webkit-print-color-adjust: exact; }}`,
+    // fonts: [
+    // { family: string, source: string; weight?: string; style?: string; }
+    // ],
     // fonts: CUSTOM_FONTS,
   });
 

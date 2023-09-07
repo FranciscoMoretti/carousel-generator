@@ -33,7 +33,7 @@ export function ContentPage({
         minHeight: `${size.height}px`,
       }}
     >
-      <div className="flex flex-col justify-center items-start  grow">
+      <div className="flex flex-col justify-center items-start row grow gap-1">
         <h2
           className={cn(
             `text-3xl tracking-tight font-bold`,

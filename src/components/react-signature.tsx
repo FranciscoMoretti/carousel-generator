@@ -25,12 +25,9 @@ export function Signature({
           className={`w-12 h-12 rounded-full `}
         />
       )}
-      <div className={`flex items-start gap-2 flex-col`}>
+      <div className={`flex items-start flex-col`}>
         <p
-          className={cn(
-            `text-sm font-bold`,
-            fontIdToClassName(config.fonts.font2)
-          )}
+          className={cn(`text-base`, fontIdToClassName(config.fonts.font2))}
           style={{
             color: config.theme.primary,
           }}

@@ -19,9 +19,9 @@ export const pallettes: Pallette = {
     background: "#1e1e1c",
   },
   "pallette-3": {
-    primary: "#a85322",
+    primary: "#040200",
     secondary: "#2d3555",
-    background: "#040200",
+    background: "#a85322",
   },
   "pallette-4": {
     primary: "#fbfffe",

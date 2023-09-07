@@ -43,7 +43,15 @@ export function PrintableWrapper({}: {}) {
       <button onClick={handlePrint}>
         Print using a Functional Component with the useReactToPrint hook
       </button>
-      <ReactDocument document={document} docReference={componentRef} />
+      <ReactDocument
+        document={document}
+        docReference={componentRef}
+        slidesFieldArray={{
+          append: () => {
+            throw Error("Not defined yet");
+          },
+        }}
+      />
     </div>
   );
 }
