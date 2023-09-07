@@ -25,10 +25,12 @@ export function NewPage({
   size,
   className,
   handleAddPage,
+  isSideButton,
 }: {
   size: { width: number; height: number };
   className?: string;
   handleAddPage: (pageType: SlideType) => void;
+  isSideButton: boolean;
 }) {
   return (
     <Dialog>
@@ -37,9 +39,9 @@ export function NewPage({
           className="border-dashed border-2"
           variant={"outline"}
           style={{
-            width: `${size.width}px`,
+            width: `${isSideButton ? size.width / 3 : size.width}px`,
             height: `${size.height}px`,
-            minWidth: `${size.width}px`,
+            minWidth: `${isSideButton ? size.width / 3 : size.width}px`,
             minHeight: `${size.height}px`,
           }}
         >

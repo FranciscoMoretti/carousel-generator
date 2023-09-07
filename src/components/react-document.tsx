@@ -1,3 +1,4 @@
+"use client";
 import * as z from "zod";
 import React from "react";
 import { DocumentSchema } from "@/lib/validation/document-schema";
@@ -11,6 +12,7 @@ import { cn } from "@/lib/utils";
 import { NewPage } from "./react-new-page";
 import { SlidesFieldArrayReturn } from "@/lib/document-form-types";
 import { getDefaultSlideOfType } from "@/lib/default-slides";
+import { useFieldArrayValues } from "@/lib/hooks/use-field-array-values";
 
 export function ReactDocument({
   document,
@@ -22,9 +24,11 @@ export function ReactDocument({
   slidesFieldArray: SlidesFieldArrayReturn;
 }) {
   const { currentPage, setCurrentPage } = usePagerContext();
+  const { numPages } = useFieldArrayValues("slides");
 
   const PAGE_GAP_PX = 8;
   const { append } = slidesFieldArray;
+  const newPageAsSideButton = numPages > 0;
 
   return (
     <div
@@ -85,6 +89,7 @@ export function ReactDocument({
             // TODO: Should add with index at different locations and set as current page the index
             append(getDefaultSlideOfType(pageType));
           }}
+          isSideButton={newPageAsSideButton}
         />
       </div>
     </div>

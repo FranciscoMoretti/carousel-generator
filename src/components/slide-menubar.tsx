@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { usePagerContext } from "@/lib/providers/pager-context";
 import { DocumentSchema } from "@/lib/validation/document-schema";
-import { useFieldArray, useFormContext } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import {
   ArrowLeftFromLine,
   ArrowRightFromLine,
