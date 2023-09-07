@@ -34,6 +34,7 @@ export function NewPage({
     <Dialog>
       <DialogTrigger asChild>
         <Button
+          className="border-dashed border-2"
           variant={"outline"}
           style={{
             width: `${size.width}px`,

@@ -36,7 +36,7 @@ export function OutroPage({
       <div className={`flex flex-col justify-center grow`}>
         <h2
           className={cn(
-            `text-5xl mb-3 leading-none tracking-tight font-bold`,
+            `text-6xl mb-3 leading-none tracking-tight font-bold`,
             fontIdToClassName(config.fonts.font1)
           )}
           style={{
@@ -47,7 +47,7 @@ export function OutroPage({
         </h2>
         <h3
           className={cn(
-            `text-lg font-bold`,
+            `text-xl font-bold`,
             fontIdToClassName(config.fonts.font1)
           )}
           style={{
