@@ -80,7 +80,7 @@ async function getImageWithAxios(imageUrl: string): Promise<any> {
   const apiRequestURL = new URL(`${url}/api/proxy`);
   apiRequestURL.searchParams.set("url", imageUrl);
   // TODO: Consider using the cache
-  return fetch(apiRequestURL.toString())
+  return fetch(apiRequestURL.toString(), { mode: "no-cors" }) // TODO: Maybe disable
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
