@@ -45,6 +45,53 @@ export default function EditorLayout({ instanceUrl }: EditorLayoutProps) {
   );
 }
 
+async function fetchAndConvertImages(html: HTMLElement) {
+  // @ts-ignore
+  const images = Array.from(
+    html.getElementsByTagName("img")
+  ) as HTMLImageElement[];
+
+  const base64Promises = images.map(async (image) => {
+    const src = image.src;
+    const blobUrl = await getImageWithAxios(src)
+      .then((blob) => URL.createObjectURL(blob))
+      .catch((error) => console.error(error))
+      .then((blobUrl) => {
+        return blobUrl;
+      })
+      .catch((error) => console.error(error));
+    if (!blobUrl) {
+      console.error("blob url not created");
+      return;
+    }
+    image.src = blobUrl;
+  });
+
+  await Promise.all(base64Promises);
+}
+
+async function getImageWithAxios(imageUrl: string): Promise<any> {
+  if (!imageUrl) {
+    console.error("Please enter a valid image URL.");
+    return "";
+  }
+  const url = process.env.NEXT_PUBLIC_APP_URL;
+
+  const apiRequestURL = new URL(`${url}/api/proxy`);
+  apiRequestURL.searchParams.set("url", imageUrl);
+  // TODO: Consider using the cache
+  return fetch(apiRequestURL.toString())
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.blob();
+    })
+    .catch((error) => {
+      console.error("Error fetching image:", error);
+    });
+}
+
 interface EditorCanvasProps {
   instanceUrl: string;
 }
@@ -94,9 +141,14 @@ function EditorCanvas({ instanceUrl }: EditorCanvasProps) {
           scale: 2,
           width: SIZE.width,
           height: SIZE.height * numPages,
+          logging: true,
+          imageTimeout: 0,
+          useCORS: true,
         },
         jsPDF: { unit: "px", format: [SIZE.width, SIZE.height] },
       };
+      await fetchAndConvertImages(html);
+
       // @ts-ignore
       await import("html2pdf.js")
         .then((html2pdf) => {
