@@ -40,7 +40,11 @@ export function ReactDocument({
       }}
     >
       <div className="flex flex-row gap-2">
-        <div ref={docReference} className="flex flex-row gap-2">
+        <div
+          ref={docReference}
+          className="flex flex-row gap-2"
+          id="element-to-download-as-pdf"
+        >
           {document.slides.map((slide, index) =>
             // TODO: Write a wrapper Page class to remove duplication
             slide.type == SlideType.enum.Content ? (

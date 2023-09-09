@@ -20,9 +20,11 @@ export function Signature({
       {config.brand.avatar && (
         // eslint-disable-next-line @next/next/no-img-element
         <img
+          // // TODO: Fix problem with pulling
+          // src={"/profile.jpg"}
           src={config.brand.avatar}
           alt={config.brand.name}
-          className={`w-12 h-12 rounded-full`}
+          className={`w-12 h-12 rounded-full z-10`}
         />
       )}
       <div className={`flex items-start flex-col`}>

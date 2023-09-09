@@ -14,7 +14,6 @@ import { DocumentFormReturn } from "@/lib/document-form-types";
 import React from "react";
 import { useReactToPrint } from "react-to-print";
 import { SIZE } from "@/lib/pdf-resources";
-import * as html2pdf from "html2pdf.js";
 import { useFieldArrayValues } from "@/lib/hooks/use-field-array-values";
 
 export const metadata: Metadata = {
@@ -77,23 +76,42 @@ function EditorCanvas({ instanceUrl }: EditorCanvasProps) {
     pageStyle: `@page { size: ${SIZE.width}px ${SIZE.height}px;  margin: 0; } @media print { body { -webkit-print-color-adjust: exact; }}`,
     print: async (printIframe) => {
       const document = printIframe.contentDocument;
-      if (document) {
-        const html = document.getElementById("element-to-download-as-pdf");
-
-        const options = {
-          margin: 0,
-          filename: "myfile.pdf",
-          image: { type: "jpeg", quality: 0.98 },
-          html2canvas: {
-            scale: 2,
-            width: SIZE.width,
-            height: SIZE.height * numPages,
-          },
-          jsPDF: { unit: "px", format: [SIZE.width, SIZE.height] },
-        };
-
-        html2pdf().set(options).from(html).save();
+      if (!document) {
+        console.error("iFrame does not have a document content");
+        return;
       }
+
+      const html = document.getElementById("element-to-download-as-pdf");
+      if (!html) {
+        console.error("Couldn't find element to convert to PDF");
+        return;
+      }
+      const options = {
+        margin: 0,
+        filename: "myfile.pdf",
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: {
+          scale: 2,
+          width: SIZE.width,
+          height: SIZE.height * numPages,
+        },
+        jsPDF: { unit: "px", format: [SIZE.width, SIZE.height] },
+      };
+      // @ts-ignore
+      await import("html2pdf.js")
+        .then((html2pdf) => {
+          html2pdf
+            .default()
+            .set(options)
+            .from(html)
+            .save()
+            .catch((error: string) =>
+              console.error("Failed to PDF processing: ", error)
+            );
+        })
+        .catch((error) =>
+          console.error("Failed to import PDF conversion library: ", error)
+        );
     },
   });
 
