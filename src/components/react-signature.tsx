@@ -22,7 +22,7 @@ export function Signature({
         <img
           src={config.brand.avatar}
           alt={config.brand.name}
-          className={`w-12 h-12 rounded-full `}
+          className={`w-12 h-12 rounded-full`}
         />
       )}
       <div className={`flex items-start flex-col`}>

@@ -1,5 +1,5 @@
+"use client";
 import { Metadata } from "next";
-import Image from "next/image";
 
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
@@ -14,6 +14,8 @@ import { DocumentFormReturn } from "@/lib/document-form-types";
 import React from "react";
 import { useReactToPrint } from "react-to-print";
 import { SIZE } from "@/lib/pdf-resources";
+import * as html2pdf from "html2pdf.js";
+import { useFieldArrayValues } from "@/lib/hooks/use-field-array-values";
 
 export const metadata: Metadata = {
   title: "Playground",
@@ -49,9 +51,7 @@ interface EditorCanvasProps {
 }
 
 function EditorCanvas({ instanceUrl }: EditorCanvasProps) {
-  const { control, watch }: DocumentFormReturn = useFormContext(); // retrieve those props
-
-  const document = watch();
+  const { numPages } = useFieldArrayValues("slides");
   const [isPrinting, setIsPrinting] = React.useState(false);
   // TODO: Show animation on loading
   const componentRef = React.useRef(null);
@@ -60,14 +60,13 @@ function EditorCanvas({ instanceUrl }: EditorCanvasProps) {
     if (current && typeof current === "object") {
       // @ts-ignore should type narrow more precisely
       const clone = current.cloneNode(true);
-      // Change from horizontal to vertical for printing
+      // Change from horizontal to vertical for printing and remove gap
       clone.className = "flex flex-col";
       return clone;
     }
 
     return componentRef.current;
   }, []);
-  // }, [componentRef.current]); // TODO: Remove comment if not needed
 
   const handlePrint = useReactToPrint({
     content: reactToPrintContent,
@@ -76,10 +75,26 @@ function EditorCanvas({ instanceUrl }: EditorCanvasProps) {
     onBeforePrint: () => setIsPrinting(true),
     onAfterPrint: () => setIsPrinting(false),
     pageStyle: `@page { size: ${SIZE.width}px ${SIZE.height}px;  margin: 0; } @media print { body { -webkit-print-color-adjust: exact; }}`,
-    // fonts: [
-    // { family: string, source: string; weight?: string; style?: string; }
-    // ],
-    // fonts: CUSTOM_FONTS,
+    print: async (printIframe) => {
+      const document = printIframe.contentDocument;
+      if (document) {
+        const html = document.getElementById("element-to-download-as-pdf");
+
+        const options = {
+          margin: 0,
+          filename: "myfile.pdf",
+          image: { type: "jpeg", quality: 0.98 },
+          html2canvas: {
+            scale: 2,
+            width: SIZE.width,
+            height: SIZE.height * numPages,
+          },
+          jsPDF: { unit: "px", format: [SIZE.width, SIZE.height] },
+        };
+
+        html2pdf().set(options).from(html).save();
+      }
+    },
   });
 
   return (
@@ -87,15 +102,6 @@ function EditorCanvas({ instanceUrl }: EditorCanvasProps) {
       <div className="h-full flex-col flex">
         <div className="w-full flex flex-col items-start justify-between py-1 my-4 bg-accent rounded-full">
           <EditorMenubar handlePrint={handlePrint} isPrinting={isPrinting} />
-          {/* <div className="ml-auto flex w-full space-x-2 sm:justify-end">
-            <PresetSelector presets={presets} />
-            <PresetSave />
-            <div className="hidden space-x-2 md:flex">
-              <CodeViewer />
-              <PresetShare />
-            </div>
-            <PresetActions />
-          </div> */}
         </div>
         <SlidesEditor instanceUrl={instanceUrl} docReference={componentRef} />
       </div>

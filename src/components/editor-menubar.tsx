@@ -31,7 +31,7 @@ export function EditorMenubar({
         </Button>
         <Button variant="outline" size="sm" onClick={handlePrint}>
           <div className="flex flex-row gap-1 items-center">
-            <span>Print</span>
+            <span>Download</span>
             {isPrinting && <Loader2Icon className="w-4 h-4 animate-spin" />}
           </div>
         </Button>
