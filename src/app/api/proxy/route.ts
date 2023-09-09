@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
     const response = await fetch(imageUrl);
     const blob = await response.blob();
     const headers = new Headers();
-
+    headers.set("Access-Control-Allow-Origin", "*");
     headers.set("Content-Type", "image/*");
     // Return the response as-is
     return new NextResponse(blob, { status: 200, statusText: "OK", headers });
