@@ -1,16 +1,10 @@
 "use client";
 import { Metadata } from "next";
 
-import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { SettingsPanel } from "@/components/settings-panel";
 import { SlidesEditor } from "@/components/slides-editor";
 import { EditorMenubar } from "@/components/editor-menubar";
-import { useFormContext } from "react-hook-form";
-import { DocumentFormReturn } from "@/lib/document-form-types";
 import React from "react";
 import { useReactToPrint } from "react-to-print";
 import { SIZE } from "@/lib/pdf-resources";
@@ -45,12 +39,11 @@ export default function EditorLayout({ instanceUrl }: EditorLayoutProps) {
   );
 }
 
-function imagesSrcToProxy(html: HTMLElement) {
+function proxyImgSources(html: HTMLElement) {
   // @ts-ignore
   const images = Array.from(
     html.getElementsByTagName("img")
   ) as HTMLImageElement[];
-  console.log(process.env.NEXT_PUBLIC_APP_URL);
   const url = process.env.NEXT_PUBLIC_APP_URL;
 
   images.map((image) => {
@@ -59,71 +52,6 @@ function imagesSrcToProxy(html: HTMLElement) {
     // TODO: Consider using the cache of fetch
     image.src = apiRequestURL.toString();
   });
-}
-
-async function fetchAndConvertImages(html: HTMLElement) {
-  // @ts-ignore
-  const images = Array.from(
-    html.getElementsByTagName("img")
-  ) as HTMLImageElement[];
-
-  const base64Promises = images.map(async (image) => {
-    const src = image.src;
-    const blobUrl = await getImageFromProxy(src)
-      .then((blob) => URL.createObjectURL(blob))
-      .catch((error) => console.error(error))
-      .then((blobUrl) => {
-        return blobUrl;
-      })
-      .catch((error) => console.error(error));
-
-    // const blobUrl = await fetch("https://github.com/FranciscoMoretti.png", {
-    //   method: "GET",
-    //   redirect: "follow",
-    //   mode: "no-cors",
-    // })
-    //   .then((result) => {
-    //     console.log(result);
-    //     return result.blob();
-    //   })
-    //   .catch((error) => console.log("error", error))
-    //   .then((blob) => URL.createObjectURL(blob))
-    //   .catch((error) => console.error(error))
-    //   .then((blobUrl) => {
-    //     return blobUrl;
-    //   })
-    //   .catch((error) => console.error(error));
-
-    if (!blobUrl) {
-      console.error("blob url not created");
-      return;
-    }
-    image.src = blobUrl;
-  });
-
-  await Promise.all(base64Promises);
-}
-const url = process.env.NEXT_PUBLIC_APP_URL;
-
-async function getImageFromProxy(imageUrl: string): Promise<any> {
-  if (!imageUrl) {
-    console.error("Please enter a valid image URL.");
-    return "";
-  }
-
-  const apiRequestURL = new URL(`${url}/api/proxy`);
-  apiRequestURL.searchParams.set("url", imageUrl);
-  // TODO: Consider using the cache
-  return fetch(apiRequestURL.toString()) // TODO: Maybe disable
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.blob();
-    })
-    .catch((error) => {
-      console.error("Error fetching image:", error);
-    });
 }
 
 interface EditorCanvasProps {
@@ -142,7 +70,7 @@ function EditorCanvas({ instanceUrl }: EditorCanvasProps) {
       const clone = current.cloneNode(true);
       // Change from horizontal to vertical for printing and remove gap
       clone.className = "flex flex-col";
-      imagesSrcToProxy(clone);
+      proxyImgSources(clone);
       return clone;
     }
 
@@ -182,8 +110,6 @@ function EditorCanvas({ instanceUrl }: EditorCanvasProps) {
         },
         jsPDF: { unit: "px", format: [SIZE.width, SIZE.height] },
       };
-      // await fetchAndConvertImages(html);
-      console.log(html);
 
       // @ts-ignore
       await import("html2pdf.js")
