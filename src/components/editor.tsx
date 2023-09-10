@@ -56,7 +56,7 @@ function imagesSrcToProxy(html: HTMLElement) {
   images.map((image) => {
     const apiRequestURL = new URL(`${url}/api/proxy`);
     apiRequestURL.searchParams.set("url", image.src);
-    // TODO: Consider using the cache
+    // TODO: Consider using the cache of fetch
     image.src = apiRequestURL.toString();
   });
 }
