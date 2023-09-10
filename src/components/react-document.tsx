@@ -13,7 +13,6 @@ import { NewPage } from "./react-new-page";
 import { SlidesFieldArrayReturn } from "@/lib/document-form-types";
 import { getDefaultSlideOfType } from "@/lib/default-slides";
 import { useFieldArrayValues } from "@/lib/hooks/use-field-array-values";
-import useWindowDimensions from "@/lib/hooks/use-window-dimensions";
 
 export function ReactDocument({
   document,
