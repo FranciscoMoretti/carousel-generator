@@ -13,15 +13,18 @@ import { NewPage } from "./react-new-page";
 import { SlidesFieldArrayReturn } from "@/lib/document-form-types";
 import { getDefaultSlideOfType } from "@/lib/default-slides";
 import { useFieldArrayValues } from "@/lib/hooks/use-field-array-values";
+import useWindowDimensions from "@/lib/hooks/use-window-dimensions";
 
 export function ReactDocument({
   document,
   docReference,
   slidesFieldArray,
+  scale,
 }: {
   document: z.infer<typeof DocumentSchema>;
   docReference: React.MutableRefObject<null>;
   slidesFieldArray: SlidesFieldArrayReturn;
+  scale: number;
 }) {
   const { currentPage, setCurrentPage } = usePagerContext();
   const { numPages } = useFieldArrayValues("slides");
@@ -34,9 +37,11 @@ export function ReactDocument({
     <div
       className={`relative transition-all`}
       style={{
-        left: `calc(50% - ${currentPage * (SIZE.width + PAGE_GAP_PX)}px - ${
-          SIZE.width * 0.5
-        }px)`,
+        left: `calc(${50 * scale}% - ${
+          currentPage * (SIZE.width + PAGE_GAP_PX) * scale
+        }px - ${SIZE.width * 0.5 * scale}px)`,
+        transform: `scale(${scale})`,
+        transformOrigin: "top",
       }}
     >
       <div className="flex flex-row gap-2">
@@ -55,8 +60,9 @@ export function ReactDocument({
                 index={index}
                 size={SIZE}
                 className={cn(
+                  "",
                   currentPage != index &&
-                    "hover:brightness-90 hover:cursor-pointer"
+                    "hover:brightness-90 hover:cursor-pointer "
                 )}
                 handleClick={() => setCurrentPage(index)}
               />
