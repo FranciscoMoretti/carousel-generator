@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { ImageResponse, NextRequest, NextResponse } from "next/server";
 
 export const runtime = "edge"; // 'nodejs' is the default
 
@@ -14,12 +14,23 @@ export async function GET(request: NextRequest) {
 
     // Make a GET request to the external URL
     const response = await fetch(imageUrl);
-    const blob = await response.blob();
+    const contentType = response.headers.get("Content-Type");
+    if (
+      !(typeof contentType === "string") ||
+      !contentType.startsWith("image")
+    ) {
+      return new NextResponse("Content type must be image", { status: 500 });
+    }
+
     const headers = new Headers();
     headers.set("Access-Control-Allow-Origin", siteUrl);
-    headers.set("Content-Type", "image/*");
+    headers.set("Content-Type", contentType);
     // Return the response as-is
-    return new NextResponse(blob, { status: 200, statusText: "OK", headers });
+    return new NextResponse(response.body, {
+      status: 200,
+      statusText: "OK",
+      headers,
+    });
   } catch (error) {
     // Handle errors gracefully
     console.error("Proxy error:", error);
