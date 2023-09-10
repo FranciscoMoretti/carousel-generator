@@ -50,6 +50,7 @@ function imagesSrcToProxy(html: HTMLElement) {
   const images = Array.from(
     html.getElementsByTagName("img")
   ) as HTMLImageElement[];
+  console.log(process.env.NEXT_PUBLIC_APP_URL);
   const url = process.env.NEXT_PUBLIC_APP_URL;
 
   images.map((image) => {
