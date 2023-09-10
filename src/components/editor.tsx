@@ -63,6 +63,13 @@ function EditorCanvas({ instanceUrl }: EditorCanvasProps) {
   const [isPrinting, setIsPrinting] = React.useState(false);
   // TODO: Show animation on loading
   const componentRef = React.useRef(null);
+
+  // Packages and references
+  // react-to-print: https://github.com/gregnb/react-to-print
+  // html2pdf.js: https://ekoopmans.github.io/html2pdf.js/
+  // html2canvas: https://html2canvas.hertzen.com/configuration
+  // jsPDF: https://rawgit.com/MrRio/jsPDF/master/docs/jsPDF.html
+
   const reactToPrintContent = React.useCallback(() => {
     const current = componentRef.current;
     if (current && typeof current === "object") {
