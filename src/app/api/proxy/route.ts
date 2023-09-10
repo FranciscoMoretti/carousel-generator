@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
+export const runtime = "edge"; // 'nodejs' is the default
+
 export async function GET(request: NextRequest) {
   try {
     let url = new URL(request.url);
