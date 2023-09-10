@@ -9,6 +9,7 @@ import { ReactDocument } from "./react-document";
 import React from "react";
 import useWindowDimensions from "@/lib/hooks/use-window-dimensions";
 import { SIZE } from "@/lib/pdf-resources";
+import { LoadingSpinner } from "./loading-spinner";
 
 interface SlidesEditorProps {
   instanceUrl: string;
@@ -21,13 +22,24 @@ export function SlidesEditor({ instanceUrl, docReference }: SlidesEditorProps) {
   const { width: windowWidth } = useWindowDimensions();
   // Screen with larger than md side have smaller slides because the sidebar is present
   const mdWindowWidthPx = 770;
-  const screenToSlideMinRatio = windowWidth > mdWindowWidthPx ? 2.5 : 1.8;
-  const SCALE = Math.min(1, windowWidth / screenToSlideMinRatio / SIZE.width);
+  const isLoadingWidth = !windowWidth;
 
   const slidesFieldArray: SlidesFieldArrayReturn = useFieldArray({
     control, // control props comes from useForm (optional: if you are using FormContext)
     name: "slides", // unique name for your Field Array
   });
+
+  // TODO: Replace with better loading indicator (sized skeleton from shadcn/ui)
+  if (isLoadingWidth) {
+    return (
+      <div className="w-full flex items-center justify-center min-h-screen">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
+  const screenToSlideMinRatio = windowWidth > mdWindowWidthPx ? 2.5 : 2.0;
+  const SCALE = Math.min(1, windowWidth / screenToSlideMinRatio / SIZE.width);
 
   return (
     <div className="flex flex-col w-full items-center justify-start">
