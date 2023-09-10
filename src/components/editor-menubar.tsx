@@ -16,7 +16,7 @@ export function EditorMenubar({
   const { reset }: DocumentFormReturn = useFormContext(); // retrieve those props
 
   return (
-    <div className="ml-auto flex w-full gap-2 sm:justify-between px-6">
+    <div className="ml-auto flex w-full gap-2 items-center flex-col-reverse md:flex-row md:justify-between px-6 flex-wrap">
       {/* <PresetSelector presets={presets} /> */}
       {/* <PresetSave /> */}
       {/* <div className="hidden space-x-2 md:flex">
@@ -25,7 +25,7 @@ export function EditorMenubar({
       </div> */}
       {/* <PresetActions /> */}
       <Pager />
-      <div className="flex flex-row gap-2">
+      <div className="flex flex-row gap-2 ">
         <Button onClick={() => reset()} variant="outline" size="sm">
           Reset
         </Button>
