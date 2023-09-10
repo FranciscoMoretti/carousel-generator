@@ -139,7 +139,7 @@ function EditorCanvas({ instanceUrl }: EditorCanvasProps) {
   return (
     <>
       <div className="h-full flex-col flex">
-        <div className="w-full flex flex-col items-start justify-between py-1 my-4 bg-accent rounded-full">
+        <div className="w-full flex flex-col items-start justify-between py-1 my-4 bg-accent md:rounded-full">
           <EditorMenubar handlePrint={handlePrint} isPrinting={isPrinting} />
         </div>
         <SlidesEditor instanceUrl={instanceUrl} docReference={componentRef} />

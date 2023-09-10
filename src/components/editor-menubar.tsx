@@ -16,7 +16,7 @@ export function EditorMenubar({
   const { reset }: DocumentFormReturn = useFormContext(); // retrieve those props
 
   return (
-    <div className="ml-auto flex w-full gap-2 items-center flex-col-reverse md:flex-row md:justify-between px-6 flex-wrap">
+    <div className="ml-auto flex w-full gap-2 items-center flex-col-reverse md:flex-row lg:justify-between md:justify-center px-6 flex-wrap">
       {/* <PresetSelector presets={presets} /> */}
       {/* <PresetSave /> */}
       {/* <div className="hidden space-x-2 md:flex">
