@@ -59,7 +59,7 @@ export default function Home() {
   return (
     <FormProvider {...documentForm}>
       <PagerProvider value={pager}>
-        <main className="flex min-h-screen flex-col w-full items-stretch justify-between">
+        <main className="flex min-h-screen flex-col w-full items-stretch justify-between my-4">
           <EditorLayout instanceUrl={""} />
         </main>
       </PagerProvider>
