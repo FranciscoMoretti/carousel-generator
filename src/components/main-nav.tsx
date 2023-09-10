@@ -25,7 +25,12 @@ export function MainNav({ items, className }: MainNavProps) {
   const segment = useSelectedLayoutSegment();
 
   return (
-    <div className={cn("flex gap-6 md:gap-10 justify-between", className)}>
+    <div
+      className={cn(
+        "flex gap-6 md:gap-10 justify-between items-center",
+        className
+      )}
+    >
       <Link href="/" className="items-center space-x-2 flex">
         <Icons.logo />
         <span className="font-bold inline-block">Carousel Generator</span>

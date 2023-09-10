@@ -69,7 +69,7 @@ export default function RootLayout({
       <body
         className={`${dm_sans.variable} ${dm_serif_display.variable} ${pt_serif.variable} ${roboto.variable} ${roboto_condensed.variable} ${ultra.variable} flex flex-col`}
       >
-        <MainNav items={[]} className="h-10 border-b px-6" />
+        <MainNav items={[]} className="h-12 border-b px-6" />
         <div className="flex-1">{children}</div>
         <SiteFooter />
         <Toaster />
