@@ -45,6 +45,21 @@ export default function EditorLayout({ instanceUrl }: EditorLayoutProps) {
   );
 }
 
+function imagesSrcToProxy(html: HTMLElement) {
+  // @ts-ignore
+  const images = Array.from(
+    html.getElementsByTagName("img")
+  ) as HTMLImageElement[];
+  const url = process.env.NEXT_PUBLIC_APP_URL;
+
+  images.map((image) => {
+    const apiRequestURL = new URL(`${url}/api/proxy`);
+    apiRequestURL.searchParams.set("url", image.src);
+    // TODO: Consider using the cache
+    image.src = apiRequestURL.toString();
+  });
+}
+
 async function fetchAndConvertImages(html: HTMLElement) {
   // @ts-ignore
   const images = Array.from(
@@ -53,13 +68,31 @@ async function fetchAndConvertImages(html: HTMLElement) {
 
   const base64Promises = images.map(async (image) => {
     const src = image.src;
-    const blobUrl = await getImageWithAxios(src)
+    const blobUrl = await getImageFromProxy(src)
       .then((blob) => URL.createObjectURL(blob))
       .catch((error) => console.error(error))
       .then((blobUrl) => {
         return blobUrl;
       })
       .catch((error) => console.error(error));
+
+    // const blobUrl = await fetch("https://github.com/FranciscoMoretti.png", {
+    //   method: "GET",
+    //   redirect: "follow",
+    //   mode: "no-cors",
+    // })
+    //   .then((result) => {
+    //     console.log(result);
+    //     return result.blob();
+    //   })
+    //   .catch((error) => console.log("error", error))
+    //   .then((blob) => URL.createObjectURL(blob))
+    //   .catch((error) => console.error(error))
+    //   .then((blobUrl) => {
+    //     return blobUrl;
+    //   })
+    //   .catch((error) => console.error(error));
+
     if (!blobUrl) {
       console.error("blob url not created");
       return;
@@ -69,18 +102,18 @@ async function fetchAndConvertImages(html: HTMLElement) {
 
   await Promise.all(base64Promises);
 }
+const url = process.env.NEXT_PUBLIC_APP_URL;
 
-async function getImageWithAxios(imageUrl: string): Promise<any> {
+async function getImageFromProxy(imageUrl: string): Promise<any> {
   if (!imageUrl) {
     console.error("Please enter a valid image URL.");
     return "";
   }
-  const url = process.env.NEXT_PUBLIC_APP_URL;
 
   const apiRequestURL = new URL(`${url}/api/proxy`);
   apiRequestURL.searchParams.set("url", imageUrl);
   // TODO: Consider using the cache
-  return fetch(apiRequestURL.toString(), { mode: "no-cors" }) // TODO: Maybe disable
+  return fetch(apiRequestURL.toString()) // TODO: Maybe disable
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -108,6 +141,7 @@ function EditorCanvas({ instanceUrl }: EditorCanvasProps) {
       const clone = current.cloneNode(true);
       // Change from horizontal to vertical for printing and remove gap
       clone.className = "flex flex-col";
+      imagesSrcToProxy(clone);
       return clone;
     }
 
@@ -147,7 +181,8 @@ function EditorCanvas({ instanceUrl }: EditorCanvasProps) {
         },
         jsPDF: { unit: "px", format: [SIZE.width, SIZE.height] },
       };
-      await fetchAndConvertImages(html);
+      // await fetchAndConvertImages(html);
+      console.log(html);
 
       // @ts-ignore
       await import("html2pdf.js")

@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
     const siteUrl = process.env.NEXT_PUBLIC_APP_URL || "";
 
     // Make a GET request to the external URL
-    const response = await fetch(imageUrl, { mode: "no-cors" }); // TODO: Is this valid?
+    const response = await fetch(imageUrl);
     const blob = await response.blob();
     const headers = new Headers();
     headers.set("Access-Control-Allow-Origin", siteUrl);
