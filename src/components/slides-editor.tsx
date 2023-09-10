@@ -19,7 +19,10 @@ export function SlidesEditor({ instanceUrl, docReference }: SlidesEditorProps) {
   const { control, watch }: DocumentFormReturn = useFormContext();
   const document = watch();
   const { width: windowWidth } = useWindowDimensions();
-  const SCALE = Math.min(1, windowWidth / 2.0 / SIZE.width);
+  // Screen with larger than md side have smaller slides because the sidebar is present
+  const mdWindowWidthPx = 770;
+  const screenToSlideMinRatio = windowWidth > mdWindowWidthPx ? 2.5 : 2.0;
+  const SCALE = Math.min(1, windowWidth / screenToSlideMinRatio / SIZE.width);
 
   const slidesFieldArray: SlidesFieldArrayReturn = useFieldArray({
     control, // control props comes from useForm (optional: if you are using FormContext)
