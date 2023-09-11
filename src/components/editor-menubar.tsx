@@ -1,11 +1,12 @@
 import Pager from "@/components/pager";
 import { useFormContext } from "react-hook-form";
 
-import { DocumentSchema } from "@/lib/validation/document-schema";
 import { Button } from "./ui/button";
 import { DocumentFormReturn } from "@/lib/document-form-types";
 import { Loader2Icon } from "lucide-react";
+import React from "react";
 import { JsonExporter } from "./json-exporter";
+import { JsonImporter } from "./json-importer";
 
 export function EditorMenubar({
   handlePrint,
@@ -14,8 +15,11 @@ export function EditorMenubar({
   handlePrint: () => void;
   isPrinting: boolean;
 }) {
-  const { reset, watch, setValue }: DocumentFormReturn = useFormContext(); // retrieve those props
+  const { reset, watch }: DocumentFormReturn = useFormContext(); // retrieve those props
 
+  // TODO: Show filename form in menubar
+  // TODO: Move import/export to menubar File menu
+  // TODO: Refactor import/export
   return (
     <div className="ml-auto flex w-full gap-2 items-center flex-col-reverse md:flex-row lg:justify-between md:justify-center px-6 flex-wrap">
       {/* <PresetSelector presets={presets} /> */}
@@ -47,6 +51,9 @@ export function EditorMenubar({
             Export Content
           </Button>
         </JsonExporter>
+
+        <JsonImporter fields="config" />
+        <JsonImporter fields="slides" />
 
         <Button variant="outline" size="sm" onClick={handlePrint}>
           <div className="flex flex-row gap-1 items-center">

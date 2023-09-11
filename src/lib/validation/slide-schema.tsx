@@ -20,17 +20,17 @@ export const IntroSlideSchema = z.object({
   type: z.literal(SlideType.enum.Intro),
   title: z
     .string()
-    .min(10, {
-      message: "Title must be at least 10 characters.",
-    })
+    // .min(10, {
+    //   message: "Title must be at least 10 characters.",
+    // })
     .max(160, {
       message: "Title must not be longer than 30 characters.",
     }),
   subtitle: z
     .string()
-    .min(10, {
-      message: "Subtitle must be at least 10 characters.",
-    })
+    // .min(10, {
+    //   message: "Subtitle must be at least 10 characters.",
+    // })
     .max(160, {
       message: "Subtitle must not be longer than 30 characters.",
     }),
@@ -41,17 +41,17 @@ export const OutroSlideSchema = z.object({
   type: z.literal(SlideType.enum.Outro),
   title: z
     .string()
-    .min(10, {
-      message: "Title must be at least 10 characters.",
-    })
+    // .min(10, {
+    //   message: "Title must be at least 10 characters.",
+    // })
     .max(160, {
       message: "Title must not be longer than 30 characters.",
     }),
   subtitle: z
     .string()
-    .min(10, {
-      message: "Subtitle must be at least 10 characters.",
-    })
+    // .min(10, {
+    //   message: "Subtitle must be at least 10 characters.",
+    // })
     .max(160, {
       message: "Subtitle must not be longer than 30 characters.",
     }),
