@@ -9,17 +9,17 @@ import React from "react";
 import { useReactToPrint } from "react-to-print";
 import { SIZE } from "@/lib/pdf-resources";
 import { useFieldArrayValues } from "@/lib/hooks/use-field-array-values";
+import { useFormContext } from "react-hook-form";
+import { DocumentFormReturn } from "@/lib/document-form-types";
 
 export const metadata: Metadata = {
   title: "Playground",
   description: "The OpenAI Playground built using the components.",
 };
 
-interface EditorLayoutProps {
-  instanceUrl: string;
-}
+interface EditorLayoutProps {}
 
-export default function EditorLayout({ instanceUrl }: EditorLayoutProps) {
+export default function EditorLayout({}: EditorLayoutProps) {
   return (
     <div className=" flex-1 grid grid-cols-1 items-start md:grid md:grid-cols-[260px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[300px_minmax(0,1fr)] lg:gap-10">
       <aside className="top-14 z-30 hidden h-full w-full shrink-0 md:sticky md:block border-r">
@@ -30,7 +30,7 @@ export default function EditorLayout({ instanceUrl }: EditorLayoutProps) {
 
       {/* Change hidden for below for flex col for mobile screens (below) */}
       <div className="">
-        <EditorCanvas instanceUrl={instanceUrl} />
+        <EditorCanvas />
       </div>
       <div className="md:hidden p-4">
         <SettingsPanel />
@@ -54,12 +54,12 @@ function proxyImgSources(html: HTMLElement) {
   });
 }
 
-interface EditorCanvasProps {
-  instanceUrl: string;
-}
+interface EditorCanvasProps {}
 
-function EditorCanvas({ instanceUrl }: EditorCanvasProps) {
+function EditorCanvas({}: EditorCanvasProps) {
   const { numPages } = useFieldArrayValues("slides");
+  const { watch }: DocumentFormReturn = useFormContext();
+
   const [isPrinting, setIsPrinting] = React.useState(false);
   // TODO: Show animation on loading
   const componentRef = React.useRef(null);
@@ -105,7 +105,7 @@ function EditorCanvas({ instanceUrl }: EditorCanvasProps) {
       }
       const options = {
         margin: 0,
-        filename: "myfile.pdf",
+        filename: watch("filename"),
         image: { type: "jpeg", quality: 0.98 },
         html2canvas: {
           scale: 2,
@@ -142,7 +142,7 @@ function EditorCanvas({ instanceUrl }: EditorCanvasProps) {
         <div className="w-full flex flex-col items-start justify-between py-1 bg-accent lg:rounded-full">
           <EditorMenubar handlePrint={handlePrint} isPrinting={isPrinting} />
         </div>
-        <SlidesEditor instanceUrl={instanceUrl} docReference={componentRef} />
+        <SlidesEditor docReference={componentRef} />
       </div>
     </>
   );

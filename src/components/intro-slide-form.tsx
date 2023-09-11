@@ -19,6 +19,7 @@ export function IntroSlideForm({
   currentSlide: number;
   form: DocumentFormReturn;
 }) {
+  // TODO: Validate fields with zod on change (e.g. Max character)
   return (
     <div className="space-y-6 w-full">
       <FormField

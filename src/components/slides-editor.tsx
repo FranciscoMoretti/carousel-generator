@@ -12,11 +12,10 @@ import { SIZE } from "@/lib/pdf-resources";
 import { LoadingSpinner } from "./loading-spinner";
 
 interface SlidesEditorProps {
-  instanceUrl: string;
   docReference: React.MutableRefObject<null>;
 }
 
-export function SlidesEditor({ instanceUrl, docReference }: SlidesEditorProps) {
+export function SlidesEditor({ docReference }: SlidesEditorProps) {
   const { control, watch }: DocumentFormReturn = useFormContext();
   const document = watch();
   const { width: windowWidth } = useWindowDimensions();

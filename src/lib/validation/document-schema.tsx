@@ -14,4 +14,5 @@ export const ConfigSchema = z.object({
 export const DocumentSchema = z.object({
   slides: MultiSlideSchema,
   config: ConfigSchema,
+  filename: z.string(),
 });
