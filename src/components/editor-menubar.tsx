@@ -116,7 +116,7 @@ export function EditorMenubar({
 
               <MenubarItem onClick={() => reset()}>
                 {/* TODO: This should have a confirmation alert dialog */}
-                Reset
+                Reset to defaults
               </MenubarItem>
               {/* <MenubarSeparator /> */}
               {/* <MenubarItem>Print</MenubarItem> */}
