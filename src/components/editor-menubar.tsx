@@ -56,37 +56,6 @@ export function EditorMenubar({
               >
                 <MenubarItem>Export Settings</MenubarItem>
               </JsonExporter>
-              <JsonExporter
-                values={watch("slides")}
-                filename={"carousel-content.json"}
-              >
-                <MenubarItem>Export Content</MenubarItem>
-              </JsonExporter>
-              <MenubarSeparator />
-              <Dialog
-                open={isContentDialogOpen}
-                onOpenChange={setIsContentDialogOpen}
-              >
-                <DialogTrigger asChild>
-                  <MenubarItem onSelect={(e) => e.preventDefault()}>
-                    Import Content
-                  </MenubarItem>
-                </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Load a file with content</DialogTitle>
-                  </DialogHeader>
-
-                  <FileInputForm
-                    handleSubmit={(files) => {
-                      handleContentFileSubmission(files);
-                      setIsContentDialogOpen(false);
-                    }}
-                    label={"Content File"}
-                    description="Select a json file to load"
-                  />
-                </DialogContent>
-              </Dialog>
               <Dialog
                 open={isConfigDialogOpen}
                 onOpenChange={setIsConfigDialogOpen}
@@ -111,6 +80,38 @@ export function EditorMenubar({
                   />
                 </DialogContent>
               </Dialog>
+              <MenubarSeparator />
+              <JsonExporter
+                values={watch("slides")}
+                filename={"carousel-content.json"}
+              >
+                <MenubarItem>Export Content</MenubarItem>
+              </JsonExporter>
+              <Dialog
+                open={isContentDialogOpen}
+                onOpenChange={setIsContentDialogOpen}
+              >
+                <DialogTrigger asChild>
+                  <MenubarItem onSelect={(e) => e.preventDefault()}>
+                    Import Content
+                  </MenubarItem>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>Load a file with content</DialogTitle>
+                  </DialogHeader>
+
+                  <FileInputForm
+                    handleSubmit={(files) => {
+                      handleContentFileSubmission(files);
+                      setIsContentDialogOpen(false);
+                    }}
+                    label={"Content File"}
+                    description="Select a json file to load"
+                  />
+                </DialogContent>
+              </Dialog>
+
               <MenubarSeparator />
 
               <MenubarItem onClick={() => reset()}>
