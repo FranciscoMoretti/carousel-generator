@@ -12,6 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
+import { useFieldsFileImporter } from "@/lib/hooks/use-fields-file-importer";
 
 export function JsonImporter({
   fields,
@@ -22,50 +23,7 @@ export function JsonImporter({
 }) {
   const [open, setOpen] = useState(false);
 
-  const { setValue }: DocumentFormReturn = useFormContext(); // retrieve those props
-  const [fileReader, setFileReader] = useState<FileReader | null>(null);
-  const [fileReaderIsConfigured, setFileReaderIsConfigured] = useState(false);
-
-  useEffect(() => {
-    setFileReader(new FileReader());
-  }, []);
-
-  if (fileReader && !fileReaderIsConfigured) {
-    setFileReaderIsConfigured(true);
-    fileReader.onload = function (e: ProgressEvent) {
-      if (!e.target) {
-        console.error("Failed to load file input");
-        return;
-      }
-
-      // @ts-ignore file has result
-      const result = JSON.parse(e.target.result);
-      // Validate input and add to form
-      if (fields == "config") {
-        const parsedValues = ConfigSchema.parse(result);
-        if (parsedValues) {
-          setValue("config", parsedValues);
-        }
-      } else if (fields == "slides") {
-        const parsedValues = MultiSlideSchema.parse(result);
-        if (parsedValues) {
-          setValue("slides", parsedValues);
-        }
-      } else {
-        console.error("field provided is incorrect");
-      }
-    };
-  }
-
-  const handleFileSubmission = (files: FileList) => {
-    if (files && files.length > 0) {
-      if (fileReader) {
-        fileReader.readAsText(files[0]);
-      }
-    }
-
-    setOpen(false);
-  };
+  const { handleFileSubmission } = useFieldsFileImporter(fields);
   // TODO: Make this component more generic by splitting dependencies of config and slides
 
   return (
