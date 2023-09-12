@@ -5,6 +5,13 @@ import { Input } from "./ui/input";
 import { ConfigSchema } from "@/lib/validation/document-schema";
 import { MultiSlideSchema } from "@/lib/validation/slide-schema";
 import FileInputForm from "./file-input-form";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./ui/dialog";
 
 export function JsonImporter({
   fields,
@@ -13,6 +20,8 @@ export function JsonImporter({
   fields: "config" | "slides";
   children?: React.ReactNode;
 }) {
+  const [open, setOpen] = useState(false);
+
   const { setValue }: DocumentFormReturn = useFormContext(); // retrieve those props
   const [fileReader, setFileReader] = useState<FileReader | null>(null);
   const [fileReaderIsConfigured, setFileReaderIsConfigured] = useState(false);
@@ -54,16 +63,25 @@ export function JsonImporter({
         fileReader.readAsText(files[0]);
       }
     }
+
+    setOpen(false);
   };
   // TODO: Make this component more generic by splitting dependencies of config and slides
 
   return (
-    <div className="grid w-full max-w-sm items-center gap-1.5">
-      <FileInputForm
-        handleSubmit={handleFileSubmission}
-        label={"Input File"}
-        description="Select a json file to load"
-      />
-    </div>
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger>Open</DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Load a file with Config/Content</DialogTitle>
+        </DialogHeader>
+
+        <FileInputForm
+          handleSubmit={handleFileSubmission}
+          label={"Input File"}
+          description="Select a json file to load"
+        />
+      </DialogContent>
+    </Dialog>
   );
 }
