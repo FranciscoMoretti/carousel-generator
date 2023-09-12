@@ -117,8 +117,8 @@ export function EditorMenubar({
                 {/* TODO: This should have a confirmation alert dialog */}
                 Reset
               </MenubarItem>
-              <MenubarSeparator />
-              <MenubarItem>Print</MenubarItem>
+              {/* <MenubarSeparator /> */}
+              {/* <MenubarItem>Print</MenubarItem> */}
             </MenubarContent>
           </MenubarMenu>
         </Menubar>
