@@ -16,7 +16,7 @@ export default function Pager({}: Props) {
   const { numPages } = useFieldArrayValues("slides");
 
   return (
-    <div className="flex flex-col gap-2  md:flex-row  items-center ">
+    <div className="flex flex-col gap-2 items-center ">
       <p className="px-2">{`Slide ${Math.min(
         currentPage + 1,
         numPages

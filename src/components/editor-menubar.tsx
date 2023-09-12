@@ -44,7 +44,7 @@ export function EditorMenubar({
 
   // TODO: Show filename form in menubar
   return (
-    <div className="ml-auto flex w-full gap-2 items-center flex-col md:flex-row lg:justify-between md:justify-center px-6 flex-wrap">
+    <div className="ml-auto flex w-full md:gap-2 items-center flex-col md:flex-row gap-4 lg:justify-between md:justify-center px-6 flex-wrap">
       <div className="flex flex-row gap-2">
         <Menubar>
           <MenubarMenu>
