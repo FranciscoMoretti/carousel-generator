@@ -4,6 +4,7 @@ import { useFormContext } from "react-hook-form";
 import { Input } from "./ui/input";
 import { ConfigSchema } from "@/lib/validation/document-schema";
 import { MultiSlideSchema } from "@/lib/validation/slide-schema";
+import FileInputForm from "./file-input-form";
 
 export function JsonImporter({
   fields,
@@ -47,21 +48,22 @@ export function JsonImporter({
     };
   }
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      console.log(e.target.files[0]);
+  const handleFileSubmission = (files: FileList) => {
+    if (files && files.length > 0) {
       if (fileReader) {
-        fileReader.readAsText(e.target.files[0]);
+        fileReader.readAsText(files[0]);
       }
     }
   };
+  // TODO: Make this component more generic by splitting dependencies of config and slides
 
   return (
-    <Input
-      type="file"
-      accept="application/JSON"
-      multiple={false}
-      onChange={handleFileChange}
-    />
+    <div className="grid w-full max-w-sm items-center gap-1.5">
+      <FileInputForm
+        handleSubmit={handleFileSubmission}
+        label={"Input File"}
+        description="Select a json file to load"
+      />
+    </div>
   );
 }
