@@ -7,6 +7,15 @@ import { Loader2Icon } from "lucide-react";
 import React from "react";
 import { JsonExporter } from "./json-exporter";
 import { JsonImporter } from "./json-importer";
+import {
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarSeparator,
+  MenubarShortcut,
+  MenubarTrigger,
+} from "@/components/ui/menubar";
 
 export function EditorMenubar({
   handlePrint,
@@ -22,46 +31,50 @@ export function EditorMenubar({
   // TODO: Refactor import/export
   return (
     <div className="ml-auto flex w-full gap-2 items-center flex-col-reverse md:flex-row lg:justify-between md:justify-center px-6 flex-wrap">
-      {/* <PresetSelector presets={presets} /> */}
-      {/* <PresetSave /> */}
-      {/* <div className="hidden space-x-2 md:flex">
-        <CodeViewer />
-        <PresetShare />
-      </div> */}
-      {/* <PresetActions /> */}
-      <Pager />
       <div className="flex flex-row gap-2 ">
-        <Button onClick={() => reset()} variant="outline" size="sm">
-          Reset
-        </Button>
-        {/* TODO extract config importerinto components to be able to use them fro content too */}
-        <JsonExporter
-          values={watch("config")}
-          filename={"carousel-config.json"}
-        >
-          <Button variant="outline" size="sm">
-            Export Config
-          </Button>
-        </JsonExporter>
-        <JsonExporter
-          values={watch("slides")}
-          filename={"carousel-content.json"}
-        >
-          <Button variant="outline" size="sm">
-            Export Content
-          </Button>
-        </JsonExporter>
+        <Menubar>
+          <MenubarMenu>
+            <MenubarTrigger>File</MenubarTrigger>
+            <MenubarContent>
+              <MenubarItem>
+                <JsonExporter
+                  values={watch("config")}
+                  filename={"carousel-config.json"}
+                >
+                  Export Config
+                </JsonExporter>
+              </MenubarItem>
+              <MenubarItem>
+                <JsonExporter
+                  values={watch("slides")}
+                  filename={"carousel-content.json"}
+                >
+                  Export Content
+                </JsonExporter>
+              </MenubarItem>
+              <MenubarSeparator />
+              <MenubarItem onClick={() => reset()}>
+                {/* TODO: This should have a confirmation alert dialog */}
+                Reset
+              </MenubarItem>
+              <MenubarSeparator />
+              <MenubarItem>Print</MenubarItem>
+            </MenubarContent>
+          </MenubarMenu>
+        </Menubar>
 
-        <JsonImporter fields="config" />
-        <JsonImporter fields="slides" />
-
-        <Button variant="outline" size="sm" onClick={handlePrint}>
+        <Button variant="outline" onClick={handlePrint}>
           <div className="flex flex-row gap-1 items-center">
             <span>Download</span>
             {isPrinting && <Loader2Icon className="w-4 h-4 animate-spin" />}
           </div>
         </Button>
+        {/* TODO extract config importer into components to be able to use them fro content too */}
+
+        <JsonImporter fields="config" />
+        <JsonImporter fields="slides" />
       </div>
+      <Pager />
     </div>
   );
 }
