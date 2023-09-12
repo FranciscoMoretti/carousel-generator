@@ -52,11 +52,7 @@ export function SettingsForm({}: {}) {
             <FormItem>
               <FormLabel>Avatar</FormLabel>
               <FormControl>
-                <Textarea
-                  placeholder="A link to your avatar"
-                  className="resize-none"
-                  {...field}
-                />
+                <Input placeholder="A link to your avatar" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
