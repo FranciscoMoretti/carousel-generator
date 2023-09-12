@@ -36,22 +36,18 @@ export function EditorMenubar({
           <MenubarMenu>
             <MenubarTrigger>File</MenubarTrigger>
             <MenubarContent>
-              <MenubarItem>
-                <JsonExporter
-                  values={watch("config")}
-                  filename={"carousel-config.json"}
-                >
-                  Export Config
-                </JsonExporter>
-              </MenubarItem>
-              <MenubarItem>
-                <JsonExporter
-                  values={watch("slides")}
-                  filename={"carousel-content.json"}
-                >
-                  Export Content
-                </JsonExporter>
-              </MenubarItem>
+              <JsonExporter
+                values={watch("config")}
+                filename={"carousel-config.json"}
+              >
+                <MenubarItem>Export Config</MenubarItem>
+              </JsonExporter>
+              <JsonExporter
+                values={watch("slides")}
+                filename={"carousel-content.json"}
+              >
+                <MenubarItem>Export Content</MenubarItem>
+              </JsonExporter>
               <MenubarSeparator />
               <MenubarItem onClick={() => reset()}>
                 {/* TODO: This should have a confirmation alert dialog */}
