@@ -129,10 +129,6 @@ export function EditorMenubar({
             {isPrinting && <Loader2Icon className="w-4 h-4 animate-spin" />}
           </div>
         </Button>
-        {/* TODO extract config importer into components to be able to use them fro content too */}
-
-        <JsonImporter fields="config" />
-        <JsonImporter fields="slides" />
       </div>
       <Pager />
     </div>
