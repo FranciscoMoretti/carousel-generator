@@ -55,6 +55,9 @@ const ultra = Ultra({
 });
 
 export const metadata: Metadata = {
+  ...(process.env.NEXT_PUBLIC_APP_URL && {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL),
+  }),
   title: "Carousel Generator",
   description: "An open source carousel maker for LinkedIn",
 };
