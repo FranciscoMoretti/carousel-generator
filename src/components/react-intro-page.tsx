@@ -36,7 +36,7 @@ export function IntroPage({
       <div className={`flex flex-col justify-center grow gap-1`}>
         <h2
           className={cn(
-            `text-5xl mb-3 leading-none tracking-tight font-bold`,
+            `text-5xl mb-3 font-bold text-balance`,
             fontIdToClassName(config.fonts.font1)
           )}
           style={{
