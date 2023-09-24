@@ -108,7 +108,7 @@ function EditorCanvas({}: EditorCanvasProps) {
         filename: watch("filename"),
         image: { type: "jpeg", quality: 0.98 },
         html2canvas: {
-          scale: 2,
+          scale: 4, // TODO: Consider making sharpness configurable
           width: SIZE.width,
           height: SIZE.height * numPages,
           logging: true,
