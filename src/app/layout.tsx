@@ -5,7 +5,9 @@ import {
   PT_Serif,
   Roboto,
   Roboto_Condensed,
+  Syne,
   Ultra,
+  Archivo_Black,
 } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
 import { DM_Sans, DM_Serif_Display } from "next/font/google";
@@ -40,11 +42,18 @@ const roboto = Roboto({
   weight: ["400", "700"],
 });
 
-const roboto_condensed = Roboto_Condensed({
+const inter = Inter({
   subsets: ["latin"],
   display: "swap",
-  variable: "--roboto-condensed",
+  variable: "--inter",
   weight: ["400", "700"],
+});
+
+const archivoBlack = Archivo_Black({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--archivo-black",
+  weight: ["400"],
 });
 
 const ultra = Ultra({
@@ -52,6 +61,20 @@ const ultra = Ultra({
   display: "swap",
   variable: "--ultra",
   weight: ["400"],
+});
+
+const roboto_condensed = Roboto_Condensed({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--roboto-condensed",
+  weight: ["400", "700"],
+});
+
+const syne = Syne({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--syne",
+  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
@@ -70,7 +93,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${dm_sans.variable} ${dm_serif_display.variable} ${pt_serif.variable} ${roboto.variable} ${roboto_condensed.variable} ${ultra.variable} flex flex-col`}
+        className={`${dm_sans.variable} ${dm_serif_display.variable} ${pt_serif.variable} ${roboto.variable} ${roboto_condensed.variable} ${ultra.variable} ${inter.variable} ${syne.variable} ${archivoBlack.variable} flex flex-col`}
       >
         <MainNav items={[]} className="h-12 border-b px-6" />
         <div className="flex-1">{children}</div>

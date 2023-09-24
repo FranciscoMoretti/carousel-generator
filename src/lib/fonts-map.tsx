@@ -32,6 +32,18 @@ export const fontsMap: FontMap = {
     className: "font-ultra",
     name: "Ultra",
   },
+  Inter: {
+    className: "font-inter",
+    name: "Inter",
+  },
+  Syne: {
+    className: "font-syne",
+    name: "Syne",
+  },
+  ArchivoBlack: {
+    className: "font-archivo-black",
+    name: "Archivo Black",
+  },
 };
 
 export function fontIdToClassName(fontId: string) {
