@@ -7,6 +7,6 @@ export function useFieldArrayValues(fieldArrayName: string) {
   // @ts-ignore should be only the available fields.
   // TODO: construct argument type
   const currentSlidesValues = watch(fieldArrayName);
-  const numPages = currentSlidesValues.length;
+  const numPages: number = currentSlidesValues.length;
   return { numPages };
 }

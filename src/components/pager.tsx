@@ -17,10 +17,6 @@ export default function Pager({}: Props) {
 
   return (
     <div className="flex flex-col md:flex-row gap-2 items-center ">
-      <p className="px-2">{`Slide ${Math.min(
-        currentPage + 1,
-        numPages
-      )} of ${numPages}`}</p>
       <div className="flex flex-row gap-1 items-center">
         <Button
           onClick={() => setCurrentPage(0)}
@@ -38,6 +34,10 @@ export default function Pager({}: Props) {
         >
           <ChevronLeft className="w-4 h-4" />
         </Button>
+        <p className="px-2">{`${Math.min(
+          currentPage + 1,
+          numPages
+        )} / ${numPages}`}</p>
         <Button
           onClick={onNextClick}
           variant="outline"

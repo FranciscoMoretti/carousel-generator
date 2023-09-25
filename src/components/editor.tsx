@@ -23,7 +23,7 @@ export default function Editor({}: {}) {
           handlePrint={handlePrint}
           isPrinting={isPrinting}
         />
-        <div className="w-full flex flex-col items-center justify-between py-1 bg-accent lg:rounded-full">
+        <div className="flex flex-col items-center justify-between py-1 bg-accent lg:rounded-full md:mx-4">
           <Pager />
         </div>
         <div className="flex-1 grid grid-cols-1 items-start md:grid md:grid-cols-[260px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[300px_minmax(0,1fr)] lg:gap-10">
