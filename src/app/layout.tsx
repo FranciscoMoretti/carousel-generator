@@ -92,9 +92,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${dm_sans.variable} ${dm_serif_display.variable} ${pt_serif.variable} ${roboto.variable} ${roboto_condensed.variable} ${ultra.variable} ${inter.variable} ${syne.variable} ${archivoBlack.variable} flex flex-col`}
+        className={`${dm_sans.variable} ${dm_serif_display.variable} ${pt_serif.variable} ${roboto.variable} ${roboto_condensed.variable} ${ultra.variable} ${inter.variable} ${syne.variable} ${archivoBlack.variable} flex flex-col min-h-screen items-stretch justify-between`}
       >
-        <div className="flex-1">{children}</div>
+        <div className="flex-1 ">{children}</div>
         <SiteFooter />
         <Toaster />
       </body>
