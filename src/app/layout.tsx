@@ -11,7 +11,6 @@ import {
 } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
 import { DM_Sans, DM_Serif_Display } from "next/font/google";
-import { MainNav } from "@/components/main-nav";
 import { SiteFooter } from "@/components/site-footer";
 
 const dm_sans = DM_Sans({
@@ -95,7 +94,6 @@ export default function RootLayout({
       <body
         className={`${dm_sans.variable} ${dm_serif_display.variable} ${pt_serif.variable} ${roboto.variable} ${roboto_condensed.variable} ${ultra.variable} ${inter.variable} ${syne.variable} ${archivoBlack.variable} flex flex-col`}
       >
-        <MainNav items={[]} className="h-12 border-b px-6" />
         <div className="flex-1">{children}</div>
         <SiteFooter />
         <Toaster />

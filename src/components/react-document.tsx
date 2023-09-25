@@ -13,18 +13,19 @@ import { NewPage } from "./react-new-page";
 import { SlidesFieldArrayReturn } from "@/lib/document-form-types";
 import { getDefaultSlideOfType } from "@/lib/default-slides";
 import { useFieldArrayValues } from "@/lib/hooks/use-field-array-values";
+import { useRefContext } from "@/lib/providers/reference-context";
 
 export function ReactDocument({
   document,
-  docReference,
   slidesFieldArray,
   scale,
 }: {
   document: z.infer<typeof DocumentSchema>;
-  docReference: React.MutableRefObject<null>;
   slidesFieldArray: SlidesFieldArrayReturn;
   scale: number;
 }) {
+  const docReference = useRefContext();
+
   const { currentPage, setCurrentPage } = usePagerContext();
   const { numPages } = useFieldArrayValues("slides");
 

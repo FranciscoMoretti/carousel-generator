@@ -11,11 +11,9 @@ import useWindowDimensions from "@/lib/hooks/use-window-dimensions";
 import { SIZE } from "@/lib/pdf-resources";
 import { LoadingSpinner } from "./loading-spinner";
 
-interface SlidesEditorProps {
-  docReference: React.MutableRefObject<null>;
-}
+interface SlidesEditorProps {}
 
-export function SlidesEditor({ docReference }: SlidesEditorProps) {
+export function SlidesEditor({}: SlidesEditorProps) {
   const { control, watch }: DocumentFormReturn = useFormContext();
   const document = watch();
   const { width: windowWidth } = useWindowDimensions();
@@ -52,7 +50,6 @@ export function SlidesEditor({ docReference }: SlidesEditorProps) {
         >
           <ReactDocument
             document={document}
-            docReference={docReference}
             slidesFieldArray={slidesFieldArray}
             scale={SCALE}
           />
