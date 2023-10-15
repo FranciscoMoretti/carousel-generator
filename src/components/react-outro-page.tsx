@@ -23,7 +23,7 @@ export function OutroPage({
 }) {
   return (
     <div
-      className={cn("p-8 flex flex-col", className)}
+      className={cn("p-10 flex flex-col", className)}
       onClick={handleClick}
       style={{
         backgroundColor: config.theme.background,

@@ -23,7 +23,7 @@ export function ContentPage({
 }) {
   return (
     <div
-      className={cn("p-8 flex flex-col", className)}
+      className={cn("p-10 flex flex-col", className)}
       onClick={handleClick}
       style={{
         backgroundColor: config.theme.background,
@@ -33,7 +33,7 @@ export function ContentPage({
         minHeight: `${size.height}px`,
       }}
     >
-      <div className="flex flex-col justify-center items-start row grow gap-2">
+      <div className="flex flex-col justify-center items-start grow gap-4">
         <h2
           className={cn(
             `text-3xl tracking-tight font-bold text-balance`,
@@ -47,7 +47,7 @@ export function ContentPage({
         </h2>
 
         <p
-          className={cn(`text-base`, fontIdToClassName(config.fonts.font2))}
+          className={cn(`text-xl`, fontIdToClassName(config.fonts.font2))}
           style={{
             color: config.theme.secondary,
           }}

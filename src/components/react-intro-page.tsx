@@ -5,6 +5,7 @@ import { Footer } from "./react-footer";
 import { cn } from "@/lib/utils";
 import { fontIdToClassName, fontsMap } from "@/lib/fonts-map";
 import { IntroSlideSchema } from "@/lib/validation/slide-schema";
+import Image from "next/image";
 
 export function IntroPage({
   index,
@@ -23,7 +24,7 @@ export function IntroPage({
 }) {
   return (
     <div
-      className={cn("p-8 flex flex-col", className)}
+      className={cn("p-10 flex flex-col", className)}
       onClick={handleClick}
       style={{
         backgroundColor: config.theme.background,
@@ -64,6 +65,14 @@ export function IntroPage({
         >
           {slide.description}
         </p>
+        <div className="flex flex-col items-center">
+          <Image
+            alt="bg image"
+            src={"/laptop_no_bg.png"}
+            width={200}
+            height={200}
+          />
+        </div>
       </div>
       <Footer number={index + 1} config={config} />
     </div>
