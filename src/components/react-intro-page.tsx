@@ -34,10 +34,10 @@ export function IntroPage({
         minHeight: `${size.height}px`,
       }}
     >
-      <div className={`flex flex-col justify-center grow gap-1`}>
+      <div className={`flex flex-col justify-center grow gap-1 items-center`}>
         <h2
           className={cn(
-            `text-5xl mb-3 font-bold text-balance`,
+            `text-4xl mb-3 text-balance font-black text-center`,
             fontIdToClassName(config.fonts.font1)
           )}
           style={{

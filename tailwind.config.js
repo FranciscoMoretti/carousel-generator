@@ -73,6 +73,7 @@ module.exports = {
       fontFamily: {
         "dm-sans": ["var(--dm-sans)"],
         "dm-serif-display": ["var(--dm-serif-display)"],
+        montserrat: ["var(--montserrat)"],
         "pt-serif": ["var(--pt-serif)"],
         roboto: ["var(--roboto)"],
         "roboto-condensed": ["var(--roboto-condensed)"],

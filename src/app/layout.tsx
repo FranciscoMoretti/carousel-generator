@@ -8,6 +8,7 @@ import {
   Syne,
   Ultra,
   Archivo_Black,
+  Montserrat,
 } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
 import { DM_Sans, DM_Serif_Display } from "next/font/google";
@@ -27,6 +28,13 @@ const dm_serif_display = DM_Serif_Display({
   weight: ["400"],
 });
 
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--montserrat",
+  weight: ["500", "700", "900"],
+});
+
 const pt_serif = PT_Serif({
   subsets: ["latin"],
   display: "swap",
@@ -38,14 +46,14 @@ const roboto = Roboto({
   subsets: ["latin"],
   display: "swap",
   variable: "--roboto",
-  weight: ["400", "700"],
+  weight: ["500", "700"],
 });
 
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--inter",
-  weight: ["400", "700"],
+  weight: ["500", "700"],
 });
 
 const archivoBlack = Archivo_Black({
@@ -73,7 +81,7 @@ const syne = Syne({
   subsets: ["latin"],
   display: "swap",
   variable: "--syne",
-  weight: ["400", "700"],
+  weight: ["500", "700"],
 });
 
 export const metadata: Metadata = {
@@ -92,7 +100,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${dm_sans.variable} ${dm_serif_display.variable} ${pt_serif.variable} ${roboto.variable} ${roboto_condensed.variable} ${ultra.variable} ${inter.variable} ${syne.variable} ${archivoBlack.variable} flex flex-col min-h-screen items-stretch justify-between`}
+        className={`${dm_sans.variable} ${dm_serif_display.variable} ${pt_serif.variable} ${roboto.variable} ${roboto_condensed.variable} ${ultra.variable} ${inter.variable} ${syne.variable} ${archivoBlack.variable}  ${montserrat.variable} flex flex-col min-h-screen items-stretch justify-between`}
       >
         <div className="flex-1 ">{children}</div>
         <SiteFooter />

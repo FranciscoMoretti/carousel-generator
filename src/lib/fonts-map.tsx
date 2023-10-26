@@ -16,6 +16,10 @@ export const fontsMap: FontMap = {
     className: "font-dm-serif-display",
     name: "DM Serif Display",
   },
+  Montserrat: {
+    className: "font-montserrat",
+    name: "Montserrat",
+  },
   PT_Serif: {
     className: "font-pt-serif",
     name: "PT Serif",

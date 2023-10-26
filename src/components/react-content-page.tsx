@@ -47,7 +47,10 @@ export function ContentPage({
         </h2>
 
         <p
-          className={cn(`text-xl`, fontIdToClassName(config.fonts.font2))}
+          className={cn(
+            `text-lg font-medium`,
+            fontIdToClassName(config.fonts.font2)
+          )}
           style={{
             color: config.theme.secondary,
           }}
