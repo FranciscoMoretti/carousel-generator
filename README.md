@@ -38,7 +38,12 @@ Carousel Generator comes packed with a variety of features to help you create st
 
 To get started with Carousel Generator, follow these simple installation steps:
 
-1. Install the required dependencies using `pnpm`:
+1. Create your environment file
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Install the required dependencies using `pnpm`:
 
    ```bash
    pnpm i
@@ -50,7 +55,7 @@ To get started with Carousel Generator, follow these simple installation steps:
    npm install
    ```
 
-2. Start the development server:
+3. Start the development server:
 
    ```bash
    pnpm dev
