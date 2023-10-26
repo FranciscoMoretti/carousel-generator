@@ -56,7 +56,7 @@ export function useComponentPrinter() {
         filename: watch("filename"),
         image: { type: "jpeg", quality: 1 },
         html2canvas: {
-          scale: 6, // TODO: Consider making sharpness configurable
+          scale: 1.5, // TODO: Consider making sharpness configurable
           width: SIZE.width,
           height: SIZE.height * numPages,
           logging: true,
