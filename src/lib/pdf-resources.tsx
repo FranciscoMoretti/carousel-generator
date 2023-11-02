@@ -1,4 +1,4 @@
 export const SIZE = {
-  width: 448,
-  height: 560,
+  width: 400,
+  height: 500,
 };
