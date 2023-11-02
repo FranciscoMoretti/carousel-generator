@@ -51,12 +51,13 @@ export function useComponentPrinter() {
         console.error("Couldn't find element to convert to PDF");
         return;
       }
+      const SCALE_TO_LINKEDIN_INTRINSIC_SIZE = 1.8;
       const options = {
         margin: 0,
         filename: watch("filename"),
-        image: { type: "jpeg", quality: 1 },
+        image: { type: "webp", quality: 0.98 },
         html2canvas: {
-          scale: 1.5, // TODO: Consider making sharpness configurable
+          scale: SCALE_TO_LINKEDIN_INTRINSIC_SIZE, // TODO: Consider making sharpness configurable
           width: SIZE.width,
           height: SIZE.height * numPages,
           logging: true,
