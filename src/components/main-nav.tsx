@@ -23,8 +23,6 @@ interface MainNavProps {
 }
 
 export function MainNav({ handlePrint, isPrinting, className }: MainNavProps) {
-  const segment = useSelectedLayoutSegment();
-
   return (
     <div
       className={cn(

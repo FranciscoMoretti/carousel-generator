@@ -13,8 +13,8 @@ export async function GET(request: NextRequest) {
     const siteUrl = process.env.NEXT_PUBLIC_APP_URL || "";
 
     // Make a GET request to the external URL
-    const response = await fetch(imageUrl);
-    const contentType = response.headers.get("Content-Type");
+    const { contentType, body } = await fetchExternalImageUrl(imageUrl);
+
     if (
       !(typeof contentType === "string") ||
       !contentType.startsWith("image")
@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
     headers.set("Access-Control-Allow-Origin", siteUrl);
     headers.set("Content-Type", contentType);
     // Return the response as-is
-    return new NextResponse(response.body, {
+    return new NextResponse(body, {
       status: 200,
       statusText: "OK",
       headers,
@@ -39,4 +39,14 @@ export async function GET(request: NextRequest) {
       headers: { "Content-Type": "text/plain" },
     });
   }
+}
+
+async function fetchExternalImageUrl(imageUrl: string) {
+  // TODO: Convert to server action
+  const response = await fetch(imageUrl);
+  const contentType = response.headers.get("Content-Type");
+  if (typeof contentType === "string" && contentType.startsWith("image")) {
+    response.body;
+  }
+  return { contentType, body: response.body };
 }

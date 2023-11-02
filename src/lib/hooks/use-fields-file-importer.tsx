@@ -4,7 +4,6 @@ import { useFormContext } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { ConfigSchema } from "@/lib/validation/document-schema";
 import { MultiSlideSchema } from "@/lib/validation/slide-schema";
-import FileInputForm from "@/components/file-input-form";
 
 export function useFieldsFileImporter(fields: "config" | "slides") {
   const { setValue }: DocumentFormReturn = useFormContext(); // retrieve those props
