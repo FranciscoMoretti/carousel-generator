@@ -99,7 +99,10 @@ function proxyImgSources(html: HTMLElement) {
   ) as HTMLImageElement[];
   const url = process.env.NEXT_PUBLIC_APP_URL;
 
-  images.forEach((image) => {
+  const externalImages = images.filter((image) => !image.src.startsWith("/"));
+
+  // TODO: Make a single request with the list of images
+  externalImages.forEach((image) => {
     const apiRequestURL = new URL(`${url}/api/proxy`);
     apiRequestURL.searchParams.set("url", image.src);
     // TODO: Consider using the cache of fetch
