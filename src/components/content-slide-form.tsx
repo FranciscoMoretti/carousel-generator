@@ -53,6 +53,23 @@ export function ContentSlideForm({
           </FormItem>
         )}
       />
+      <FormField
+        control={form.control}
+        name={`slides.${currentSlide}.image`}
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Image</FormLabel>
+            <FormControl>
+              <Input
+                placeholder="Url to an image"
+                className="resize-none"
+                {...field}
+              />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
     </div>
   );
 }

@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { Footer } from "./react-footer";
 import { fontIdToClassName } from "@/lib/fonts-map";
 import { ContentSlideSchema } from "@/lib/validation/slide-schema";
+import Image from "next/image";
 
 export function ContentPage({
   index,
@@ -57,6 +58,19 @@ export function ContentPage({
         >
           {slide.description}
         </p>
+        {slide.image ? (
+          <div className="flex flex-col items-center w-full h-40">
+            <img
+              alt="slide image"
+              src={slide.image}
+              // TODO: Extract cover/contain into a setting for images
+              className={cn(
+                "rounded-md shadow-md overflow-hidden",
+                true ? "object-cover w-full h-full" : "object-contain"
+              )}
+            />
+          </div>
+        ) : null}
       </div>
       <Footer number={index + 1} config={config} />
       {/* TODO: better number calculation */}

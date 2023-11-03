@@ -14,6 +14,7 @@ export const ContentSlideSchema = z.object({
       message: "Title must not be longer than 30 characters.",
     }),
   description: z.string(),
+  image: z.string().url(),
 });
 
 export const IntroSlideSchema = z.object({
