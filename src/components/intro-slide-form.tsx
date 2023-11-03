@@ -73,6 +73,23 @@ export function IntroSlideForm({
           </FormItem>
         )}
       />
+      <FormField
+        control={form.control}
+        name={`slides.${currentSlide}.backgroundImage`}
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Background Image</FormLabel>
+            <FormControl>
+              <Input
+                placeholder="Url to an image"
+                className="resize-none"
+                {...field}
+              />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
     </div>
   );
 }

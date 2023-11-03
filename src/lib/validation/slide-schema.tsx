@@ -35,6 +35,7 @@ export const IntroSlideSchema = z.object({
       message: "Subtitle must not be longer than 30 characters.",
     }),
   description: z.string(),
+  backgroundImage: z.string().url(),
 });
 
 export const OutroSlideSchema = z.object({

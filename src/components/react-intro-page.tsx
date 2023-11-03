@@ -24,9 +24,11 @@ export function IntroPage({
 }) {
   return (
     <div
-      className={cn("p-10 flex flex-col", className)}
       onClick={handleClick}
       style={{
+        backgroundImage: slide.backgroundImage
+          ? `url(${slide.backgroundImage})`
+          : undefined, // Conditionally add the background image
         backgroundColor: config.theme.background,
         width: `${size.width}px`,
         height: `${size.height}px`,
@@ -34,50 +36,44 @@ export function IntroPage({
         minHeight: `${size.height}px`,
       }}
     >
-      <div className={`flex flex-col justify-center grow gap-1 items-center`}>
-        <h2
-          className={cn(
-            `text-4xl mb-3 text-balance font-black text-center`,
-            fontIdToClassName(config.fonts.font1)
-          )}
-          style={{
-            color: config.theme.primary,
-          }}
-        >
-          {slide.title}
-        </h2>
-        <h3
-          className={cn(
-            `text-xl font-bold`,
-            fontIdToClassName(config.fonts.font1)
-          )}
-          style={{
-            color: config.theme.secondary,
-          }}
-        >
-          {slide.subtitle}
-        </h3>
-        <p
-          className={cn(
-            `text-base text-center`,
-            fontIdToClassName(config.fonts.font2)
-          )}
-          style={{
-            color: config.theme.secondary,
-          }}
-        >
-          {slide.description}
-        </p>
-        <div className="flex flex-col items-center">
-          <Image
-            alt="bg image"
-            src={"/laptop_no_bg.png"}
-            width={200}
-            height={200}
-          />
+      <div className={cn("p-10 flex flex-col h-full w-full", className)}>
+        <div className={`flex flex-col justify-center grow gap-1 items-center`}>
+          <h2
+            className={cn(
+              `text-4xl mb-3 text-balance font-black text-center`,
+              fontIdToClassName(config.fonts.font1)
+            )}
+            style={{
+              color: config.theme.primary,
+            }}
+          >
+            {slide.title}
+          </h2>
+          <h3
+            className={cn(
+              `text-xl font-bold`,
+              fontIdToClassName(config.fonts.font1)
+            )}
+            style={{
+              color: config.theme.secondary,
+            }}
+          >
+            {slide.subtitle}
+          </h3>
+          <p
+            className={cn(
+              `text-base text-center`,
+              fontIdToClassName(config.fonts.font2)
+            )}
+            style={{
+              color: config.theme.secondary,
+            }}
+          >
+            {slide.description}
+          </p>
         </div>
+        <Footer number={index + 1} config={config} />
       </div>
-      <Footer number={index + 1} config={config} />
     </div>
   );
 }
