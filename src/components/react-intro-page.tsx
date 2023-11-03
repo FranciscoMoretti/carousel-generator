@@ -58,7 +58,10 @@ export function IntroPage({
           {slide.subtitle}
         </h3>
         <p
-          className={cn(`text-base`, fontIdToClassName(config.fonts.font2))}
+          className={cn(
+            `text-base text-center`,
+            fontIdToClassName(config.fonts.font2)
+          )}
           style={{
             color: config.theme.secondary,
           }}
