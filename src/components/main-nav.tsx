@@ -7,6 +7,7 @@ import { Icons } from "@/components/icons";
 import { Button, buttonVariants } from "./ui/button";
 import { EditorMenubar } from "./editor-menubar";
 import { Download, Loader2Icon } from "lucide-react";
+import Pager from "./pager";
 
 export type NavItem = {
   title: string;
@@ -38,6 +39,9 @@ export function MainNav({ handlePrint, isPrinting, className }: MainNavProps) {
           </span>
         </Link>
         <EditorMenubar />
+      </div>
+      <div className="hidden sm:block">
+        <Pager />
       </div>
       <div className="flex gap-2">
         <Button variant="ghost" size={"icon"} onClick={handlePrint}>

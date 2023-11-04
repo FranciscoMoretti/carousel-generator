@@ -40,7 +40,7 @@ export function SlidesEditor({}: SlidesEditorProps) {
 
   return (
     <div className="flex flex-col w-full items-center justify-start">
-      <div className=" flex flex-col p-4 w-full items-center justify-start gap-3 rounded font-mono text-sm border shadow">
+      <div className=" flex flex-col p-4 w-full items-center justify-start gap-3 font-mono text-sm ">
         <SlideMenubar slidesFieldArray={slidesFieldArray} />
         <div
           className="overflow-clip w-full relative" //flex items-center justify-center

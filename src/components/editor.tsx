@@ -23,9 +23,6 @@ export default function Editor({}: {}) {
           handlePrint={handlePrint}
           isPrinting={isPrinting}
         />
-        <div className="flex flex-col items-center justify-between py-1 bg-accent lg:rounded-full md:mx-4">
-          <Pager />
-        </div>
         <div className="flex-1 grid grid-cols-1 items-start md:grid md:grid-cols-[260px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[300px_minmax(0,1fr)] lg:gap-10">
           <aside className="top-14 z-30 hidden h-full w-full shrink-0 md:sticky md:block border-r">
             <ScrollArea className="py-6  px-6 lg:py-8">

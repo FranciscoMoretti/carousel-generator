@@ -34,7 +34,7 @@ export default function Pager({}: Props) {
         >
           <ChevronLeft className="w-4 h-4" />
         </Button>
-        <p className="px-2">{`${Math.min(
+        <p className="px-2 ">{`Slide ${Math.min(
           currentPage + 1,
           numPages
         )} / ${numPages}`}</p>
