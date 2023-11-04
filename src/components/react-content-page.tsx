@@ -66,7 +66,7 @@ export function ContentPage({
               // TODO: Extract cover/contain into a setting for images
               className={cn(
                 "rounded-md shadow-md overflow-hidden",
-                true ? "object-cover w-full h-full" : "object-contain"
+                true ? "object-cover w-full" : "object-contain"
               )}
             />
           </div>
