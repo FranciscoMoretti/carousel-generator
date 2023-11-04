@@ -72,7 +72,7 @@ export function SidebarFormsPanel() {
       defaultValue={ALL_FORMS.brand.value}
       className="flex-1 min-h-[600px] h-full p-0"
     >
-      <div className="flex flex-row gap-2 h-full ">
+      <div className="flex flex-row h-full ">
         <ScrollArea className=" border-r h-full bg-muted">
           <VerticalTabsList className="grid grid-cols-1 gap-2 w-20 rounded-none">
             <TabTriggerButton tabInfo={ALL_FORMS.brand}></TabTriggerButton>
@@ -81,28 +81,28 @@ export function SidebarFormsPanel() {
             <TabTriggerButton tabInfo={ALL_FORMS.pageNumber}></TabTriggerButton>
           </VerticalTabsList>
         </ScrollArea>
-        <div className="">
+        <div className="p-2 flex flex-col items-center">
           <VerticalTabsContent
             value={ALL_FORMS.brand.value}
-            className="mt-0 border-0 p-0"
+            className="mt-0 border-0 p-0 m-4"
           >
             <SettingsForm />
           </VerticalTabsContent>
           <VerticalTabsContent
             value={ALL_FORMS.theme.value}
-            className="mt-0 border-0 p-0"
+            className="mt-0 border-0 p-0 m-4"
           >
             <ThemeForm />
           </VerticalTabsContent>
           <VerticalTabsContent
             value={ALL_FORMS.fonts.value}
-            className="mt-0 border-0 p-0"
+            className="mt-0 border-0 p-0 m-4"
           >
             <FontsForm />
           </VerticalTabsContent>
           <VerticalTabsContent
             value={ALL_FORMS.pageNumber.value}
-            className="mt-0 border-0 p-0"
+            className="mt-0 border-0 p-0 m-4"
           >
             <PageNumberForm />
           </VerticalTabsContent>
