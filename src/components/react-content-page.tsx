@@ -65,7 +65,8 @@ export function ContentPage({
               src={slide.image}
               // TODO: Extract cover/contain into a setting for images
               className={cn(
-                "rounded-md shadow-md overflow-hidden",
+                // shadow-md or any box shadow not supported by html2canvas
+                "rounded-md overflow-hidden",
                 true ? "object-cover w-full" : "object-contain"
               )}
             />
