@@ -18,11 +18,19 @@ import { Separator } from "@/components/ui/separator";
 import { FontsForm } from "@/components/fonts-form";
 import { PageNumberForm } from "./page-number-form";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
-import { Briefcase, FileDigit, LucideIcon, Palette, Type } from "lucide-react";
-
-export function SettingsPanel({ className }: { className?: string }) {
-  return <SidebarFormsPanel />;
-}
+import {
+  Briefcase,
+  FileDigit,
+  LucideIcon,
+  Palette,
+  Plus,
+  Type,
+} from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+import { Drawer } from "vaul";
+import { DrawerContent, DrawerTrigger } from "@/components/drawer";
+import { ReactNode } from "react";
+import { buttonVariants } from "./ui/button";
 
 type TabInfo = {
   name: string;
@@ -53,7 +61,31 @@ const ALL_FORMS: Record<string, TabInfo> = {
   },
 };
 
-function TabTriggerButton({ tabInfo }: { tabInfo: TabInfo }) {
+export function SettingsPanel({ className }: { className?: string }) {
+  return (
+    <>
+      <div className="hidden sm:block h-full">
+        <SidebarFormsPanel />
+      </div>
+      <div className="block sm:hidden">
+        <Drawer.Root>
+          <DrawerTrigger>
+            <CircularFloatingButton>
+              <Plus className="w-4 h-4" />
+            </CircularFloatingButton>
+          </DrawerTrigger>
+          <DrawerContent>
+            <div>
+              <DrawerFormsPanel className="mt-8" />
+            </div>
+          </DrawerContent>
+        </Drawer.Root>
+      </div>
+    </>
+  );
+}
+
+function VerticalTabTriggerButton({ tabInfo }: { tabInfo: TabInfo }) {
   return (
     <VerticalTabsTrigger
       value={tabInfo.value}
@@ -66,6 +98,19 @@ function TabTriggerButton({ tabInfo }: { tabInfo: TabInfo }) {
   );
 }
 
+function HorizontalTabTriggerButton({ tabInfo }: { tabInfo: TabInfo }) {
+  return (
+    <TabsTrigger
+      value={tabInfo.value}
+      className="h-16 flex flex-col gap-2 items-center py-2 justify-center"
+    >
+      <tabInfo.icon className="h-4 w-4" />
+      <span className="sr-only ">{tabInfo.name}</span>
+      <p className="text-xs">{tabInfo.name}</p>
+    </TabsTrigger>
+  );
+}
+
 export function SidebarFormsPanel() {
   return (
     <VerticalTabs
@@ -73,12 +118,12 @@ export function SidebarFormsPanel() {
       className="flex-1 min-h-[600px] h-full p-0"
     >
       <div className="flex flex-row h-full ">
-        <ScrollArea className=" border-r h-full bg-muted">
+        <ScrollArea className="border-r h-full bg-muted">
           <VerticalTabsList className="grid grid-cols-1 gap-2 w-20 rounded-none">
-            <TabTriggerButton tabInfo={ALL_FORMS.brand}></TabTriggerButton>
-            <TabTriggerButton tabInfo={ALL_FORMS.theme}></TabTriggerButton>
-            <TabTriggerButton tabInfo={ALL_FORMS.fonts}></TabTriggerButton>
-            <TabTriggerButton tabInfo={ALL_FORMS.pageNumber}></TabTriggerButton>
+            <VerticalTabTriggerButton tabInfo={ALL_FORMS.brand} />
+            <VerticalTabTriggerButton tabInfo={ALL_FORMS.theme} />
+            <VerticalTabTriggerButton tabInfo={ALL_FORMS.fonts} />
+            <VerticalTabTriggerButton tabInfo={ALL_FORMS.pageNumber} />
           </VerticalTabsList>
         </ScrollArea>
         <div className="p-2 flex flex-col items-center">
@@ -111,3 +156,71 @@ export function SidebarFormsPanel() {
     </VerticalTabs>
   );
 }
+
+export function DrawerFormsPanel({ className }: { className: string }) {
+  return (
+    <Tabs
+      defaultValue={ALL_FORMS.brand.value}
+      className={cn("flex-1 w-full", className)}
+    >
+      <div className="flex flex-col h-full ">
+        <ScrollArea className=" border-b h-full bg-muted">
+          <TabsList className="grid grid-cols-4 gap-2 h-20 rounded-none">
+            <HorizontalTabTriggerButton tabInfo={ALL_FORMS.brand} />
+            <HorizontalTabTriggerButton tabInfo={ALL_FORMS.theme} />
+            <HorizontalTabTriggerButton tabInfo={ALL_FORMS.fonts} />
+            <HorizontalTabTriggerButton tabInfo={ALL_FORMS.pageNumber} />
+          </TabsList>
+        </ScrollArea>
+        <div className="p-2 flex flex-col items-center">
+          <TabsContent
+            value={ALL_FORMS.brand.value}
+            className="mt-0 border-0 p-0 m-4"
+          >
+            <SettingsForm />
+          </TabsContent>
+          <TabsContent
+            value={ALL_FORMS.theme.value}
+            className="mt-0 border-0 p-0 m-4"
+          >
+            <ThemeForm />
+          </TabsContent>
+          <TabsContent
+            value={ALL_FORMS.fonts.value}
+            className="mt-0 border-0 p-0 m-4"
+          >
+            <FontsForm />
+          </TabsContent>
+          <TabsContent
+            value={ALL_FORMS.pageNumber.value}
+            className="mt-0 border-0 p-0 m-4"
+          >
+            <PageNumberForm />
+          </TabsContent>
+        </div>
+      </div>
+    </Tabs>
+  );
+}
+
+const CircularFloatingButton = ({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) => {
+  return (
+    <div
+      className={cn(
+        buttonVariants({
+          variant: "default",
+          size: "icon",
+        }),
+        "fixed bottom-4 right-4 rounded-full w-12 h-12 "
+      )}
+    >
+      {children}
+    </div>
+  );
+};
