@@ -12,6 +12,7 @@ export const INTRO: z.infer<typeof IntroSlideSchema> = {
   subtitle: "Your awesome subtitle",
   description:
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, dolorum.",
+  backgroundImage: "",
 };
 
 export const CONTENT: z.infer<typeof ContentSlideSchema> = {
@@ -19,6 +20,7 @@ export const CONTENT: z.infer<typeof ContentSlideSchema> = {
   title: "A cool title for this slide",
   description:
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, recusandae.",
+  image: "",
 };
 export const OUTRO: z.infer<typeof OutroSlideSchema> = {
   type: SlideType.enum.Outro,
