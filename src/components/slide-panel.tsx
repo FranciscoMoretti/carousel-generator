@@ -1,6 +1,5 @@
 import { usePagerContext } from "@/lib/providers/pager-context";
 import { SlidesForm } from "./slides-form";
-import { Tabs } from "./ui/tabs";
 import { SlidesFieldArrayReturn } from "@/lib/document-form-types";
 import { SIZE } from "@/lib/pdf-resources";
 
