@@ -183,7 +183,7 @@ export function DrawerFormsPanel({ className }: { className: string }) {
             <HorizontalTabTriggerButton tabInfo={ALL_FORMS.pageNumber} />
           </TabsList>
         </ScrollArea>
-        <div className="p-2 w-[300] m-auto">
+        <div className="p-2 w-[320px] m-auto">
           {/* // TODO Should be in a ScrollArea but it does not scroll */}
           <TabsContent
             value={ALL_FORMS.brand.value}
