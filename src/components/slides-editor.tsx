@@ -27,7 +27,7 @@ export function SlidesEditor({}: SlidesEditorProps) {
   // TODO: Replace with better loading indicator (sized skeleton from shadcn/ui)
   if (isLoadingWidth) {
     return (
-      <div className="w-full flex items-center justify-center min-h-screen">
+      <div className="w-full flex items-center justify-center min-h-screen bg-muted/50">
         <LoadingSpinner />
       </div>
     );
@@ -39,7 +39,7 @@ export function SlidesEditor({}: SlidesEditorProps) {
   const SCALE = Math.min(1, windowWidth / screenToSlideMinRatio / SIZE.width);
 
   return (
-    <div className="flex flex-col w-full items-center justify-start">
+    <div className="flex flex-col w-full items-center justify-start bg-muted/50">
       <div className=" flex flex-col p-4 w-full items-center justify-start gap-3 font-mono text-sm ">
         <SlideMenubar slidesFieldArray={slidesFieldArray} />
         <div

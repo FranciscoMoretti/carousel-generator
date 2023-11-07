@@ -12,7 +12,7 @@ export function SlidePanel({
 }) {
   return (
     <div
-      className="flex flex-col gap-6"
+      className="flex flex-col gap-6 bg-background"
       style={{
         width: `${scale * SIZE.width}px`,
       }}

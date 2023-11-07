@@ -22,11 +22,9 @@ export default function Editor({}: {}) {
           handlePrint={handlePrint}
           isPrinting={isPrinting}
         />
-        <div className="flex-1 grid grid-cols-1 items-start md:grid md:grid-cols-[320px_minmax(0,1fr)] md:gap-6 ">
+        <div className="flex-1 grid grid-cols-1 items-start md:grid md:grid-cols-[320px_minmax(0,1fr)] ">
           <SettingsPanel />
-          <div className="h-full flex-col flex gap-4">
-            <SlidesEditor />
-          </div>
+          <SlidesEditor />
         </div>
       </div>
     </RefProvider>
