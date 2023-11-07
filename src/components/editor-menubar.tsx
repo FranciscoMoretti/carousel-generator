@@ -5,6 +5,7 @@ import { Loader2Icon } from "lucide-react";
 import React, { useState } from "react";
 import { JsonExporter } from "./json-exporter";
 import { JsonImporter } from "./json-importer";
+import { FilenameForm } from "./filename-form";
 import {
   Menubar,
   MenubarContent,
@@ -35,12 +36,16 @@ export function EditorMenubar({}: {}) {
     useFieldsFileImporter("slides");
 
   return (
-    // TODO: Add Here FilenameForm, download and help
+    // TODO: Add Here download and help
     <div className="flex items-center flex-row gap-2">
       <Menubar>
         <MenubarMenu>
           <MenubarTrigger>File</MenubarTrigger>
           <MenubarContent>
+            {/* <MenubarItem > */}
+            <FilenameForm className={"text-left my-1"} />
+            {/* </MenubarItem> */}
+            <MenubarSeparator />
             <JsonExporter
               values={watch("config")}
               filename={"carousel-settings.json"}
