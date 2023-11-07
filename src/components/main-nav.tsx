@@ -8,6 +8,7 @@ import { Button, buttonVariants } from "./ui/button";
 import { EditorMenubar } from "./editor-menubar";
 import { Download, Loader2Icon } from "lucide-react";
 import Pager from "./pager";
+import { FilenameForm } from "./filename-form";
 
 export type NavItem = {
   title: string;
@@ -43,7 +44,10 @@ export function MainNav({ handlePrint, isPrinting, className }: MainNavProps) {
       <div className="hidden md:block">
         <Pager />
       </div>
-      <div className="flex gap-2">
+      <div className="flex gap-2 items-center">
+        <div className="hidden md:block">
+          <FilenameForm />
+        </div>
         <Button variant="ghost" size={"icon"} onClick={handlePrint}>
           <div className="flex flex-row gap-1 items-center">
             {isPrinting ? (

@@ -44,7 +44,7 @@ export function DocumentProvider({ children }: { children: React.ReactNode }) {
           showNumbers: true,
         },
       },
-      filename: "New carousel",
+      filename: "My Carousel File",
     },
   });
   usePersistFormWithKey(documentForm, "documentFormKey");

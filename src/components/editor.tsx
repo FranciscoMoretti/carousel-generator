@@ -7,7 +7,6 @@ import { SlidesEditor } from "@/components/slides-editor";
 import React from "react";
 import { useComponentPrinter } from "@/lib/hooks/use-component-printer";
 
-import { EditorMenubar } from "@/components/editor-menubar";
 import { RefProvider } from "@/lib/providers/reference-context";
 import { MainNav } from "./main-nav";
 import Pager from "./pager";

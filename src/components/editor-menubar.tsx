@@ -34,7 +34,6 @@ export function EditorMenubar({}: {}) {
   const { handleFileSubmission: handleContentFileSubmission } =
     useFieldsFileImporter("slides");
 
-  // TODO: Show filename form in menubar
   return (
     <div className="flex items-center flex-row gap-2">
       <Menubar>
