@@ -64,10 +64,10 @@ const ALL_FORMS: Record<string, TabInfo> = {
 export function SettingsPanel({ className }: { className?: string }) {
   return (
     <>
-      <div className="hidden sm:block h-full">
+      <div className="hidden md:block h-full">
         <SidebarFormsPanel />
       </div>
-      <div className="block sm:hidden">
+      <div className="block md:hidden">
         <Drawer.Root>
           <DrawerTrigger>
             <CircularFloatingButton>
