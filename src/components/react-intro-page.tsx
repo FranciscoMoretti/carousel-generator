@@ -41,7 +41,7 @@ export function IntroPage({
           {/* // TODO Extract title into a Title component and correlate with a title form */}
           <h2
             className={cn(
-              `text-5xl mb-3 text-balance font-black text-center`,
+              `text-4xl mb-3 text-balance font-black text-center`,
               fontIdToClassName(config.fonts.font1)
             )}
             style={{
