@@ -154,7 +154,7 @@ export function SidebarFormsPanel() {
           </VerticalTabsContent>
           <VerticalTabsContent
             value={ALL_FORMS.pageNumber.value}
-            className="mt-0 border-0 p-0"
+            className="mt-0 border-0 p-0 m-4"
           >
             <h4 className="text-xl font-semibold">
               {ALL_FORMS.pageNumber.name}
