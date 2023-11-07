@@ -31,6 +31,7 @@ import { Drawer } from "vaul";
 import { DrawerContent, DrawerTrigger } from "@/components/drawer";
 import { ReactNode } from "react";
 import { buttonVariants } from "./ui/button";
+import { ScrollBar } from "./ui/scroll-area";
 
 type TabInfo = {
   name: string;
@@ -64,20 +65,20 @@ const ALL_FORMS: Record<string, TabInfo> = {
 export function SettingsPanel({ className }: { className?: string }) {
   return (
     <>
-      <div className="hidden md:block h-full">
-        <SidebarFormsPanel />
-      </div>
+      <aside className="top-14 z-30 hidden h-full w-full shrink-0 md:sticky md:block border-r">
+        <div className="hidden md:block h-full">
+          <SidebarFormsPanel />
+        </div>
+      </aside>
       <div className="block md:hidden">
-        <Drawer.Root>
+        <Drawer.Root modal={true}>
           <DrawerTrigger>
             <CircularFloatingButton>
               <Plus className="w-4 h-4" />
             </CircularFloatingButton>
           </DrawerTrigger>
-          <DrawerContent>
-            <div>
-              <DrawerFormsPanel className="mt-8" />
-            </div>
+          <DrawerContent className="h-[60%] ">
+            <DrawerFormsPanel className="mt-8" />
           </DrawerContent>
         </Drawer.Root>
       </div>
@@ -131,24 +132,34 @@ export function SidebarFormsPanel() {
             value={ALL_FORMS.brand.value}
             className="mt-0 border-0 p-0 m-4"
           >
+            <h4 className="text-xl font-semibold">{ALL_FORMS.brand.name}</h4>
+            <Separator className="mt-2 mb-4"></Separator>
             <SettingsForm />
           </VerticalTabsContent>
           <VerticalTabsContent
             value={ALL_FORMS.theme.value}
             className="mt-0 border-0 p-0 m-4"
           >
+            <h4 className="text-xl font-semibold">{ALL_FORMS.theme.name}</h4>
+            <Separator className="mt-2 mb-4"></Separator>
             <ThemeForm />
           </VerticalTabsContent>
           <VerticalTabsContent
             value={ALL_FORMS.fonts.value}
             className="mt-0 border-0 p-0 m-4"
           >
+            <h4 className="text-xl font-semibold">{ALL_FORMS.fonts.name}</h4>
+            <Separator className="mt-2 mb-4"></Separator>
             <FontsForm />
           </VerticalTabsContent>
           <VerticalTabsContent
             value={ALL_FORMS.pageNumber.value}
-            className="mt-0 border-0 p-0 m-4"
+            className="mt-0 border-0 p-0"
           >
+            <h4 className="text-xl font-semibold">
+              {ALL_FORMS.pageNumber.name}
+            </h4>
+            <Separator className="mt-2 mb-4"></Separator>
             <PageNumberForm />
           </VerticalTabsContent>
         </div>
@@ -172,29 +183,40 @@ export function DrawerFormsPanel({ className }: { className: string }) {
             <HorizontalTabTriggerButton tabInfo={ALL_FORMS.pageNumber} />
           </TabsList>
         </ScrollArea>
-        <div className="p-2 flex flex-col items-center">
+        <div className="p-2 w-[300] m-auto">
+          {/* // TODO Should be in a ScrollArea but it does not scroll */}
           <TabsContent
             value={ALL_FORMS.brand.value}
-            className="mt-0 border-0 p-0 m-4"
+            className="mt-0 border-0 p-0 m-4 "
           >
+            <h4 className="text-xl font-semibold">{ALL_FORMS.brand.name}</h4>
+            <Separator className="mt-2 mb-4"></Separator>
             <SettingsForm />
           </TabsContent>
           <TabsContent
             value={ALL_FORMS.theme.value}
-            className="mt-0 border-0 p-0 m-4"
+            className="mt-0 border-0 p-0 m-4 "
           >
+            <h4 className="text-xl font-semibold">{ALL_FORMS.theme.name}</h4>
+            <Separator className="mt-2 mb-4"></Separator>
             <ThemeForm />
           </TabsContent>
           <TabsContent
             value={ALL_FORMS.fonts.value}
             className="mt-0 border-0 p-0 m-4"
           >
+            <h4 className="text-xl font-semibold">{ALL_FORMS.fonts.name}</h4>
+            <Separator className="mt-2 mb-4"></Separator>
             <FontsForm />
           </TabsContent>
           <TabsContent
             value={ALL_FORMS.pageNumber.value}
             className="mt-0 border-0 p-0 m-4"
           >
+            <h4 className="text-xl font-semibold">
+              {ALL_FORMS.pageNumber.name}
+            </h4>
+            <Separator className="mt-2 mb-4"></Separator>
             <PageNumberForm />
           </TabsContent>
         </div>
