@@ -66,9 +66,7 @@ export function SettingsPanel({ className }: { className?: string }) {
   return (
     <>
       <aside className="top-14 z-30 hidden h-full w-full shrink-0 md:sticky md:block border-r">
-        <div className="hidden md:block h-full">
-          <SidebarFormsPanel />
-        </div>
+        <SidebarFormsPanel />
       </aside>
       <div className="block md:hidden">
         <Drawer.Root modal={true}>
@@ -118,7 +116,7 @@ export function SidebarFormsPanel() {
       defaultValue={ALL_FORMS.brand.value}
       className="flex-1 min-h-[600px] h-full p-0"
     >
-      <div className="flex flex-row h-full ">
+      <div className="flex flex-row h-full w-full">
         <ScrollArea className="border-r h-full bg-muted">
           <VerticalTabsList className="grid grid-cols-1 gap-2 w-20 rounded-none">
             <VerticalTabTriggerButton tabInfo={ALL_FORMS.brand} />
@@ -127,7 +125,7 @@ export function SidebarFormsPanel() {
             <VerticalTabTriggerButton tabInfo={ALL_FORMS.pageNumber} />
           </VerticalTabsList>
         </ScrollArea>
-        <div className="p-2 flex flex-col items-center">
+        <div className="p-2 flex flex-col items-stretch w-full ">
           <VerticalTabsContent
             value={ALL_FORMS.brand.value}
             className="mt-0 border-0 p-0 m-4"

@@ -38,9 +38,10 @@ export function IntroPage({
     >
       <div className={cn("p-10 flex flex-col h-full w-full", className)}>
         <div className={`flex flex-col justify-center grow gap-1 items-center`}>
+          {/* // TODO Extract title into a Title component and correlate with a title form */}
           <h2
             className={cn(
-              `text-4xl mb-3 text-balance font-black text-center`,
+              `text-5xl mb-3 text-balance font-black text-center`,
               fontIdToClassName(config.fonts.font1)
             )}
             style={{
