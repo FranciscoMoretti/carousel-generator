@@ -41,7 +41,7 @@ export function MainNav({ handlePrint, isPrinting, className }: MainNavProps) {
         </Link>
         <EditorMenubar />
       </div>
-      <div className="hidden md:block">
+      <div className="hidden lg:block">
         <Pager />
       </div>
       <div className="flex gap-2 items-center">
