@@ -40,7 +40,7 @@ export function MainNav({ handlePrint, isPrinting, className }: MainNavProps) {
         </Link>
         <EditorMenubar />
       </div>
-      <div className="hidden sm:block">
+      <div className="hidden md:block">
         <Pager />
       </div>
       <div className="flex gap-2">
