@@ -8,7 +8,7 @@ import {
 import { ReactDocument } from "./react-document";
 import React from "react";
 import useWindowDimensions from "@/lib/hooks/use-window-dimensions";
-import { SIZE } from "@/lib/pdf-resources";
+import { SIZE } from "@/lib/page-size";
 import { LoadingSpinner } from "./loading-spinner";
 
 interface SlidesEditorProps {}

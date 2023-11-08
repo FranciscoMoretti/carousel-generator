@@ -1,7 +1,7 @@
 import { usePagerContext } from "@/lib/providers/pager-context";
 import { SlidesForm } from "./slides-form";
 import { SlidesFieldArrayReturn } from "@/lib/document-form-types";
-import { SIZE } from "@/lib/pdf-resources";
+import { SIZE } from "@/lib/page-size";
 
 export function SlidePanel({
   slidesFieldArray,
