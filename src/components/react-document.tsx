@@ -4,7 +4,7 @@ import React from "react";
 import { DocumentSchema } from "@/lib/validation/document-schema";
 import { SlideType } from "@/lib/validation/slide-schema";
 import { ContentPage } from "./react-content-page";
-import { SIZE } from "@/lib/pdf-resources";
+import { SIZE } from "@/lib/page-size";
 import { usePagerContext } from "@/lib/providers/pager-context";
 import { IntroPage } from "./react-intro-page";
 import { OutroPage } from "./react-outro-page";
