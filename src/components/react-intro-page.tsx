@@ -21,15 +21,7 @@ export function IntroPage({
   className?: string;
   handleClick?: React.MouseEventHandler<HTMLDivElement> | undefined;
 }) {
-  console.log({
-    url: slide.backgroundImage,
-  });
-
-  const backgroundImageSrc = slide.backgroundImage || undefined;
-  console.log({
-    url: slide.backgroundImage,
-    result: backgroundImageSrc,
-  });
+  const backgroundImageSrc = slide.backgroundImage.src || undefined;
 
   return (
     <div

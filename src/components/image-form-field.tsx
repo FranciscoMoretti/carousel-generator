@@ -17,45 +17,54 @@ type ImageFormType = "backgroundImage" | "image";
 export function ImageFormField({
   currentSlide,
   form,
-  type,
+  formType,
 }: {
   currentSlide: number;
   form: DocumentFormReturn;
-  type: ImageFormType;
+  formType: ImageFormType;
 }) {
   return (
     <FormField
       control={form.control}
-      name={`slides.${currentSlide}.${type}`}
+      name={`slides.${currentSlide}.${formType}`}
       render={({ field }) => (
         <FormItem>
           <FormLabel>
-            {type == "backgroundImage" ? "Image Background" : "Image"}
+            {formType == "backgroundImage" ? "Image Background" : "Image"}
           </FormLabel>
-          <Tabs defaultValue="url" className="w-full">
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="url">URL</TabsTrigger>
-              <TabsTrigger value="upload">Upload</TabsTrigger>
-            </TabsList>
-            <TabsContent value="url">
-              <FormControl>
+          <FormControl>
+            <Tabs
+              onValueChange={(tabValue) =>
+                field.onChange({ type: tabValue, src: "" })
+              }
+              defaultValue={field?.value?.type || "URL"}
+              className="w-full"
+            >
+              <TabsList className="grid w-full grid-cols-2">
+                <TabsTrigger value="URL">URL</TabsTrigger>
+                <TabsTrigger value="UPLOAD">Upload</TabsTrigger>
+              </TabsList>
+              <TabsContent value="URL">
                 <Input
                   placeholder="Url to an image"
                   className="resize-none"
                   {...field}
-                  // TODO: COnsider a more robust way of finding if it's an URL
-                  value={field.value?.startsWith("http") ? field.value : ""}
+                  onChange={(e) => {
+                    console.log(e.target.value);
+                    field.onChange({
+                      type: "URL",
+                      src: e.target.value,
+                    });
+                  }}
+                  value={field.value?.type == "URL" ? field.value.src : ""}
                 />
-              </FormControl>
-              <FormMessage />
-            </TabsContent>
-            <TabsContent value="upload">
-              <FormControl>
+                <FormMessage />
+              </TabsContent>
+              <TabsContent value="UPLOAD">
                 <Input
                   accept=".jpg, .jpeg, .png, .svg, .webp"
                   type="file"
                   onChange={async (e) => {
-                    console.log(e);
                     const file = e.target?.files ? e.target?.files[0] : null;
 
                     if (file) {
@@ -76,16 +85,19 @@ export function ImageFormField({
                       const dataUrl = await convertFileToDataUrl(
                         compressedFile
                       );
-                      field.onChange(dataUrl ? dataUrl : null);
+                      field.onChange({
+                        type: "UPLOAD",
+                        src: dataUrl ? dataUrl : "",
+                      });
                     } else {
                       console.error("No valid image file selected.");
                     }
                   }}
                 />
-              </FormControl>
-              <FormMessage />
-            </TabsContent>
-          </Tabs>{" "}
+                <FormMessage />
+              </TabsContent>
+            </Tabs>
+          </FormControl>
         </FormItem>
       )}
     />

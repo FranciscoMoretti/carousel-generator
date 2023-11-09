@@ -54,7 +54,11 @@ export function ContentSlideForm({
           </FormItem>
         )}
       />
-      <ImageFormField currentSlide={currentSlide} form={form} type="image" />
+      <ImageFormField
+        currentSlide={currentSlide}
+        form={form}
+        formType="image"
+      />
     </div>
   );
 }

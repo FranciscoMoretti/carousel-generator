@@ -80,7 +80,7 @@ export function IntroSlideForm({
       <ImageFormField
         currentSlide={currentSlide}
         form={form}
-        type="backgroundImage"
+        formType="backgroundImage"
       />
     </div>
   );

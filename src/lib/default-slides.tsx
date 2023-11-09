@@ -12,7 +12,10 @@ export const INTRO: z.infer<typeof IntroSlideSchema> = {
   subtitle: "Your awesome subtitle",
   description:
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, dolorum.",
-  backgroundImage: "",
+  backgroundImage: {
+    src: "",
+    type: "URL",
+  },
 };
 
 export const CONTENT: z.infer<typeof ContentSlideSchema> = {

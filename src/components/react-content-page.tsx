@@ -62,7 +62,7 @@ export function ContentPage({
           <div className="flex flex-col items-center w-full h-40">
             <img
               alt="slide image"
-              src={slide.image}
+              src={slide.image.src}
               // TODO: Extract cover/contain into a setting for images
               className={cn(
                 // shadow-md or any box shadow not supported by html2canvas
