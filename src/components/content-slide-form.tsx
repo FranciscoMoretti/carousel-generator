@@ -9,6 +9,7 @@ import {
 import { Input } from "@/components/ui/input";
 
 import { DocumentFormReturn } from "@/lib/document-form-types";
+import { ImageFormField } from "./image-form-field";
 
 export function ContentSlideForm({
   currentSlide,
@@ -53,23 +54,7 @@ export function ContentSlideForm({
           </FormItem>
         )}
       />
-      <FormField
-        control={form.control}
-        name={`slides.${currentSlide}.image`}
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Image</FormLabel>
-            <FormControl>
-              <Input
-                placeholder="Url to an image"
-                className="resize-none"
-                {...field}
-              />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+      <ImageFormField currentSlide={currentSlide} form={form} type="image" />
     </div>
   );
 }

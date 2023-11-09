@@ -77,7 +77,11 @@ export function IntroSlideForm({
           </FormItem>
         )}
       />
-      <ImageFormField currentSlide={currentSlide} form={form}></ImageFormField>
+      <ImageFormField
+        currentSlide={currentSlide}
+        form={form}
+        type="backgroundImage"
+      />
     </div>
   );
 }
