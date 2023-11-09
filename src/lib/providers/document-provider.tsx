@@ -8,6 +8,7 @@ import { DocumentSchema } from "@/lib/validation/document-schema";
 import { PagerProvider } from "@/lib/providers/pager-context";
 import { usePager } from "@/lib/hooks/use-pager";
 import { getDefaultSlideOfType } from "@/lib/default-slides";
+import { DEFAULT_IMAGE } from "../validation/image-schema";
 
 const defaultSlideValues: z.infer<typeof MultiSlideSchema> = [
   getDefaultSlideOfType(SlideType.enum.Intro),
@@ -25,10 +26,7 @@ export function DocumentProvider({ children }: { children: React.ReactNode }) {
       slides: defaultSlideValues,
       config: {
         brand: {
-          avatar: {
-            type: "URL",
-            src: "https://github.com/FranciscoMoretti.png",
-          },
+          avatar: DEFAULT_IMAGE,
 
           name: "My name",
           handle: "@name",

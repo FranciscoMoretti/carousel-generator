@@ -11,8 +11,7 @@ import { DocumentFormReturn } from "@/lib/document-form-types";
 import imageCompression from "browser-image-compression";
 import { MAX_IMAGE_SIZE_MB, MAX_IMAGE_WIDTH } from "./intro-slide-form";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
-import { z } from "zod";
-import { FieldPath, FieldValues } from "react-hook-form";
+import { ImageInputType } from "@/lib/validation/image-schema";
 
 type ImageFormType = "backgroundImage" | "image";
 
@@ -42,29 +41,33 @@ export function ImageFormField({
               onValueChange={(tabValue) =>
                 field.onChange({ type: tabValue, src: "" })
               }
-              defaultValue={field?.value?.type || "URL"}
+              defaultValue={field?.value?.type || ImageInputType.Url}
               className="w-full"
             >
               <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="URL">URL</TabsTrigger>
-                <TabsTrigger value="UPLOAD">Upload</TabsTrigger>
+                <TabsTrigger value={ImageInputType.Url}>URL</TabsTrigger>
+                <TabsTrigger value={ImageInputType.Upload}>Upload</TabsTrigger>
               </TabsList>
-              <TabsContent value="URL">
+              <TabsContent value={ImageInputType.Url}>
                 <Input
                   placeholder="Url to an image"
                   className="resize-none"
                   {...field}
                   onChange={(e) => {
                     field.onChange({
-                      type: "URL",
+                      type: ImageInputType.Url,
                       src: e.target.value,
                     });
                   }}
-                  value={field.value?.type == "URL" ? field.value.src : ""}
+                  value={
+                    field.value?.type == ImageInputType.Url
+                      ? field.value.src
+                      : ""
+                  }
                 />
                 <FormMessage />
               </TabsContent>
-              <TabsContent value="UPLOAD">
+              <TabsContent value={ImageInputType.Upload}>
                 <Input
                   accept=".jpg, .jpeg, .png, .svg, .webp"
                   type="file"
@@ -90,7 +93,7 @@ export function ImageFormField({
                         compressedFile
                       );
                       field.onChange({
-                        type: "UPLOAD",
+                        type: ImageInputType.Upload,
                         src: dataUrl ? dataUrl : "",
                       });
                     } else {

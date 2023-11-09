@@ -7,11 +7,19 @@ const imageDataUrlSchema = z
   });
 // note the 'as const'
 
-export const IMAGE_INPUT_TYPES = ["URL", "UPLOAD", "GENERATED"] as const;
-// works great
+export enum ImageInputType {
+  Url = "URL",
+  Upload = "UPLOAD",
+  Generated = "GENERATED",
+}
+const ImageInputTypeSchema = z.nativeEnum(ImageInputType);
 
-export const zImageInputTypes = z.enum(IMAGE_INPUT_TYPES);
 export const imageSchema = z.object({
   src: z.union([z.optional(z.string().url()), z.optional(imageDataUrlSchema)]),
-  type: zImageInputTypes,
+  type: ImageInputTypeSchema,
 });
+
+export const DEFAULT_IMAGE: z.infer<typeof imageSchema> = {
+  src: "",
+  type: ImageInputType.Url,
+};

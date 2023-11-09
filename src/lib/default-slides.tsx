@@ -5,6 +5,7 @@ import {
   OutroSlideSchema,
   SlideType,
 } from "./validation/slide-schema";
+import { DEFAULT_IMAGE } from "./validation/image-schema";
 
 export const INTRO: z.infer<typeof IntroSlideSchema> = {
   type: SlideType.enum.Intro,
@@ -12,10 +13,7 @@ export const INTRO: z.infer<typeof IntroSlideSchema> = {
   subtitle: "Your awesome subtitle",
   description:
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, dolorum.",
-  backgroundImage: {
-    src: "",
-    type: "URL",
-  },
+  backgroundImage: DEFAULT_IMAGE,
 };
 
 export const CONTENT: z.infer<typeof ContentSlideSchema> = {
@@ -23,7 +21,7 @@ export const CONTENT: z.infer<typeof ContentSlideSchema> = {
   title: "A cool title for this slide",
   description:
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, recusandae.",
-  image: { type: "URL", src: "" },
+  image: DEFAULT_IMAGE,
 };
 export const OUTRO: z.infer<typeof OutroSlideSchema> = {
   type: SlideType.enum.Outro,
