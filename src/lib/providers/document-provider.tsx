@@ -25,7 +25,11 @@ export function DocumentProvider({ children }: { children: React.ReactNode }) {
       slides: defaultSlideValues,
       config: {
         brand: {
-          avatar: "https://github.com/FranciscoMoretti.png",
+          avatar: {
+            type: "URL",
+            src: "https://github.com/FranciscoMoretti.png",
+          },
+
           name: "My name",
           handle: "@name",
         },

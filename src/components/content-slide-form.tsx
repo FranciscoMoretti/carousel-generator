@@ -55,7 +55,7 @@ export function ContentSlideForm({
         )}
       />
       <ImageFormField
-        currentSlide={currentSlide}
+        fieldName={`slides.${currentSlide}.image`}
         form={form}
         formType="image"
       />

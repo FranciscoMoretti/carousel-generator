@@ -10,8 +10,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-import { Textarea } from "@/components/ui/textarea";
 import { DocumentFormReturn } from "@/lib/document-form-types";
+import { ImageFormField } from "./image-form-field";
 
 export function SettingsForm({}: {}) {
   const form: DocumentFormReturn = useFormContext(); // retrieve those props
@@ -45,18 +45,10 @@ export function SettingsForm({}: {}) {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="config.brand.avatar"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Avatar</FormLabel>
-              <FormControl>
-                <Input placeholder="A link to your avatar" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+        <ImageFormField
+          form={form}
+          formType="image"
+          fieldName="config.brand.avatar"
         />
       </form>
     </Form>

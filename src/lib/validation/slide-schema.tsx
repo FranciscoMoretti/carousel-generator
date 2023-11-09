@@ -1,24 +1,8 @@
 import * as z from "zod";
+import { imageSchema } from "./image-schema";
 
 export const SlideType = z.enum(["Intro", "Content", "Outro"]);
 export type SlideType = z.infer<typeof SlideType>;
-
-const imageDataUrlSchema = z
-  .string()
-  .refine((dataUrl) => /^data:image\/[a-z]+;base64,/.test(dataUrl), {
-    message: "Invalid data URL format. It should start with 'data:image/'.",
-  });
-
-// note the 'as const'
-export const IMAGE_INPUT_TYPES = ["URL", "UPLOAD", "GENERATED"] as const;
-
-// works great
-export const zImageInputTypes = z.enum(IMAGE_INPUT_TYPES);
-
-const imageSchema = z.object({
-  src: z.union([z.optional(z.string().url()), z.optional(imageDataUrlSchema)]),
-  type: zImageInputTypes,
-});
 
 export const ContentSlideSchema = z.object({
   type: z.literal(SlideType.enum.Content),

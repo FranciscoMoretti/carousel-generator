@@ -11,22 +11,27 @@ import { DocumentFormReturn } from "@/lib/document-form-types";
 import imageCompression from "browser-image-compression";
 import { MAX_IMAGE_SIZE_MB, MAX_IMAGE_WIDTH } from "./intro-slide-form";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+import { z } from "zod";
+import { FieldPath, FieldValues } from "react-hook-form";
 
 type ImageFormType = "backgroundImage" | "image";
 
 export function ImageFormField({
-  currentSlide,
+  fieldName,
   form,
   formType,
 }: {
-  currentSlide: number;
+  fieldName:
+    | `slides.${number}.image`
+    | `slides.${number}.backgroundImage`
+    | "config.brand.avatar";
   form: DocumentFormReturn;
   formType: ImageFormType;
 }) {
   return (
     <FormField
       control={form.control}
-      name={`slides.${currentSlide}.${formType}`}
+      name={fieldName}
       render={({ field }) => (
         <FormItem>
           <FormLabel>
@@ -50,7 +55,6 @@ export function ImageFormField({
                   className="resize-none"
                   {...field}
                   onChange={(e) => {
-                    console.log(e.target.value);
                     field.onChange({
                       type: "URL",
                       src: e.target.value,

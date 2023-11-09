@@ -78,7 +78,7 @@ export function IntroSlideForm({
         )}
       />
       <ImageFormField
-        currentSlide={currentSlide}
+        fieldName={`slides.${currentSlide}.backgroundImage`}
         form={form}
         formType="backgroundImage"
       />

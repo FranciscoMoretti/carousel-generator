@@ -23,7 +23,7 @@ export const CONTENT: z.infer<typeof ContentSlideSchema> = {
   title: "A cool title for this slide",
   description:
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, recusandae.",
-  image: "",
+  image: { type: "URL", src: "" },
 };
 export const OUTRO: z.infer<typeof OutroSlideSchema> = {
   type: SlideType.enum.Outro,
