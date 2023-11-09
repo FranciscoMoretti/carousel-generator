@@ -18,6 +18,12 @@ export const ContentSlideSchema = z.object({
   image: z.optional(z.string().url()),
 });
 
+const imageDataUrlSchema = z
+  .string()
+  .refine((dataUrl) => /^data:image\/[a-z]+;base64,/.test(dataUrl), {
+    message: "Invalid data URL format. It should start with 'data:image/'.",
+  });
+
 export const IntroSlideSchema = z.object({
   type: z.literal(SlideType.enum.Intro),
   title: z
@@ -37,7 +43,10 @@ export const IntroSlideSchema = z.object({
       message: "Subtitle must not be longer than 30 characters.",
     }),
   description: z.string(),
-  backgroundImage: z.optional(z.string().url()),
+  backgroundImage: z.union([
+    z.optional(z.string().url()),
+    z.optional(imageDataUrlSchema),
+  ]),
 });
 
 export const OutroSlideSchema = z.object({

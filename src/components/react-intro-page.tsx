@@ -5,7 +5,6 @@ import { Footer } from "./react-footer";
 import { cn } from "@/lib/utils";
 import { fontIdToClassName, fontsMap } from "@/lib/fonts-map";
 import { IntroSlideSchema } from "@/lib/validation/slide-schema";
-import Image from "next/image";
 
 export function IntroPage({
   index,
@@ -22,12 +21,22 @@ export function IntroPage({
   className?: string;
   handleClick?: React.MouseEventHandler<HTMLDivElement> | undefined;
 }) {
+  console.log({
+    url: slide.backgroundImage,
+  });
+
+  const backgroundImageSrc = slide.backgroundImage || undefined;
+  console.log({
+    url: slide.backgroundImage,
+    result: backgroundImageSrc,
+  });
+
   return (
     <div
       onClick={handleClick}
       style={{
-        backgroundImage: slide.backgroundImage
-          ? `url(${slide.backgroundImage})`
+        backgroundImage: backgroundImageSrc
+          ? `url(${backgroundImageSrc})`
           : undefined, // Conditionally add the background image
         backgroundColor: config.theme.background,
         width: `${size.width}px`,
@@ -41,7 +50,7 @@ export function IntroPage({
           {/* // TODO Extract title into a Title component and correlate with a title form */}
           <h2
             className={cn(
-              `text-4xl mb-3 text-balance font-black text-center`,
+              `text-7xl mb-3 text-balance font-black text-center`,
               fontIdToClassName(config.fonts.font1)
             )}
             style={{

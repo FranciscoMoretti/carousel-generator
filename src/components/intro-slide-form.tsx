@@ -11,6 +11,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { DocumentSchema } from "@/lib/validation/document-schema";
 import { DocumentFormReturn } from "@/lib/document-form-types";
+import { ImageFormField } from "./image-form-field";
+
+export const MAX_IMAGE_SIZE_MB = 0.5; // Set your maximum image size limit in megabytes
+export const MAX_IMAGE_WIDTH = 800; // Set your maximum image width
 
 export function IntroSlideForm({
   currentSlide,
@@ -73,23 +77,7 @@ export function IntroSlideForm({
           </FormItem>
         )}
       />
-      <FormField
-        control={form.control}
-        name={`slides.${currentSlide}.backgroundImage`}
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Background Image</FormLabel>
-            <FormControl>
-              <Input
-                placeholder="Url to an image"
-                className="resize-none"
-                {...field}
-              />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+      <ImageFormField currentSlide={currentSlide} form={form}></ImageFormField>
     </div>
   );
 }
