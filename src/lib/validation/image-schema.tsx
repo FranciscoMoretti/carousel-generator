@@ -19,7 +19,7 @@ export const imageSchema = z.object({
   type: ImageInputTypeSchema,
 });
 
-export const DEFAULT_IMAGE: z.infer<typeof imageSchema> = {
+export const DEFAULT_IMAGE_INPUT: z.infer<typeof imageSchema> = {
   src: "",
   type: ImageInputType.Url,
 };

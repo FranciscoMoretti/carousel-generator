@@ -4,7 +4,7 @@ import Link from "next/link";
 // import { SidebarNavItem } from "types/nav";
 
 import { cn } from "@/lib/utils";
-import { SettingsForm } from "@/components/brand-form";
+import { BrandForm } from "@/components/brand-form";
 import { SlidesForm } from "@/components/slides-form";
 import { ThemeForm } from "@/components/theme-form";
 import {
@@ -132,7 +132,7 @@ export function SidebarFormsPanel() {
           >
             <h4 className="text-xl font-semibold">{ALL_FORMS.brand.name}</h4>
             <Separator className="mt-2 mb-4"></Separator>
-            <SettingsForm />
+            <BrandForm />
           </VerticalTabsContent>
           <VerticalTabsContent
             value={ALL_FORMS.theme.value}
@@ -189,7 +189,7 @@ export function DrawerFormsPanel({ className }: { className: string }) {
           >
             <h4 className="text-xl font-semibold">{ALL_FORMS.brand.name}</h4>
             <Separator className="mt-2 mb-4"></Separator>
-            <SettingsForm />
+            <BrandForm />
           </TabsContent>
           <TabsContent
             value={ALL_FORMS.theme.value}

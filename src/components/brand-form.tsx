@@ -1,3 +1,4 @@
+"use client";
 import { useFormContext } from "react-hook-form";
 
 import {
@@ -13,7 +14,7 @@ import { Input } from "@/components/ui/input";
 import { DocumentFormReturn } from "@/lib/document-form-types";
 import { ImageFormField } from "./image-form-field";
 
-export function SettingsForm({}: {}) {
+export function BrandForm({}: {}) {
   const form: DocumentFormReturn = useFormContext(); // retrieve those props
 
   return (
