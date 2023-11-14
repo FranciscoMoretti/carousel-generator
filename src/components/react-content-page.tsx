@@ -58,7 +58,7 @@ export function ContentPage({
         >
           {slide.description}
         </p>
-        {slide.image ? (
+        {slide.image.src ? (
           <div className="flex flex-col items-center w-full h-40">
             <img
               alt="slide image"
