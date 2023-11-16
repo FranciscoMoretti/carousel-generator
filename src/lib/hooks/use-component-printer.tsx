@@ -164,7 +164,7 @@ export function useComponentPrinter() {
 
       // TODO Create buttons to download as png / svg / etc from 'html-to-image'
       const canvas = await toCanvas(html, options.htmlToImage).catch((err) => {
-        console.log(err);
+        console.error(err);
       });
       if (!canvas) {
         console.error("Failed to create canvas");
@@ -194,7 +194,6 @@ function proxyImgSources(html: HTMLElement) {
   const externalImages = images.filter(
     (image) => !image.src.startsWith("/") && !image.src.startsWith("data:")
   );
-  console.log(externalImages);
 
   // TODO: Make a single request with the list of images
   externalImages.forEach((image) => {

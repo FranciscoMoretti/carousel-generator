@@ -6,6 +6,49 @@ import { cn } from "@/lib/utils";
 import { fontIdToClassName, fontsMap } from "@/lib/fonts-map";
 import { IntroSlideSchema } from "@/lib/validation/slide-schema";
 
+function BackgroundLayer({
+  background,
+  className = "",
+}: {
+  background: string;
+  className?: string;
+}) {
+  return (
+    <div
+      style={{
+        backgroundColor: background,
+      }}
+      className={cn(
+        "w-full h-full absolute top-0 left-0 right-0 bottom-0",
+        className
+      )}
+    ></div>
+  );
+}
+
+function BackgroundImageLayer({
+  backgroundImageSrc,
+  className = "",
+}: {
+  backgroundImageSrc: string;
+  className?: string;
+}) {
+  return (
+    <div
+      className={cn(
+        "w-full h-full absolute top-0 left-0 right-0 bottom-0 opacity-50",
+        className
+      )}
+    >
+      <img
+        className="w-full h-full object-cover "
+        src={backgroundImageSrc}
+        alt="Background"
+      />
+    </div>
+  );
+}
+
 export function IntroPage({
   index,
   config,
@@ -27,17 +70,21 @@ export function IntroPage({
     <div
       onClick={handleClick}
       style={{
-        backgroundImage: backgroundImageSrc
-          ? `url(${backgroundImageSrc})`
-          : undefined, // Conditionally add the background image
-        backgroundColor: config.theme.background,
         width: `${size.width}px`,
         height: `${size.height}px`,
         minWidth: `${size.width}px`,
         minHeight: `${size.height}px`,
       }}
+      className="overflow-clip relative"
     >
-      <div className={cn("p-10 flex flex-col h-full w-full", className)}>
+      <BackgroundLayer background={config.theme.background} className="-z-20" />
+      {backgroundImageSrc ? (
+        <BackgroundImageLayer
+          backgroundImageSrc={backgroundImageSrc}
+          className="opacity-20 -z-10"
+        />
+      ) : null}
+      <div className={cn("p-10 flex flex-col h-full w-full z-20", className)}>
         <div className={`flex flex-col justify-center grow gap-1 items-center`}>
           {/* // TODO Extract title into a Title component and correlate with a title form */}
           <h2
