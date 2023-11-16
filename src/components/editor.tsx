@@ -9,7 +9,6 @@ import { useComponentPrinter } from "@/lib/hooks/use-component-printer";
 
 import { RefProvider } from "@/lib/providers/reference-context";
 import { MainNav } from "./main-nav";
-import Pager from "./pager";
 
 export default function Editor({}: {}) {
   const { componentRef, handlePrint, isPrinting } = useComponentPrinter();

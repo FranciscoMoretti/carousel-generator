@@ -4,6 +4,103 @@ import { SIZE } from "@/lib/page-size";
 import { useFieldArrayValues } from "@/lib/hooks/use-field-array-values";
 import { useFormContext } from "react-hook-form";
 import { DocumentFormReturn } from "@/lib/document-form-types";
+import { toCanvas } from "html-to-image";
+import { Options as HtmlToImageOptions } from "html-to-image/lib/types";
+import { jsPDF, jsPDFOptions } from "jspdf";
+
+// TODO: Create a reusable component and package with this code
+
+type HtmlToPdfOptions = {
+  margin: [number, number, number, number];
+  filename: string;
+  image: { type: string; quality: number };
+  htmlToImage: HtmlToImageOptions;
+  jsPDF: jsPDFOptions;
+};
+
+// Convert units to px using the conversion value 'k' from jsPDF.
+export const toPx = function toPx(val: number, k: number) {
+  return Math.floor(((val * k) / 72) * 96);
+};
+
+function getPdfPageSize(opt: HtmlToPdfOptions) {
+  // Retrieve page-size based on jsPDF settings, if not explicitly provided.
+  // @ts-ignore function not explicitly exported
+  const pageSize = jsPDF.getPageSize(opt.jsPDF);
+
+  // Add 'inner' field if not present.
+  if (!pageSize.hasOwnProperty("inner")) {
+    pageSize.inner = {
+      width: pageSize.width - opt.margin[1] - opt.margin[3],
+      height: pageSize.height - opt.margin[0] - opt.margin[2],
+    };
+    pageSize.inner.px = {
+      width: toPx(pageSize.inner.width, pageSize.k),
+      height: toPx(pageSize.inner.height, pageSize.k),
+    };
+    pageSize.inner.ratio = pageSize.inner.height / pageSize.inner.width;
+  }
+
+  // Attach pageSize to this.
+  return pageSize;
+}
+
+function canvasToPdf(canvas: HTMLCanvasElement, opt: HtmlToPdfOptions) {
+  const pdfPageSize = getPdfPageSize(opt);
+
+  // Calculate the number of pages.
+  var pxFullHeight = canvas.height;
+  var pxPageHeight = Math.floor(canvas.width * pdfPageSize.inner.ratio);
+  var nPages = Math.ceil(pxFullHeight / pxPageHeight);
+
+  // Define pageHeight separately so it can be trimmed on the final page.
+  var pageHeight = pdfPageSize.inner.height;
+
+  // Create a one-page canvas to split up the full image.
+  var pageCanvas = document.createElement("canvas");
+  var pageCtx = pageCanvas.getContext("2d");
+  if (!pageCtx) {
+    throw Error("Canvas context of created element not found");
+  }
+  pageCanvas.width = canvas.width;
+  pageCanvas.height = pxPageHeight;
+
+  // Initialize the PDF.
+  const pdf = new jsPDF(opt.jsPDF);
+
+  for (var page = 0; page < nPages; page++) {
+    // Trim the final page to reduce file size.
+    if (page === nPages - 1 && pxFullHeight % pxPageHeight !== 0) {
+      pageCanvas.height = pxFullHeight % pxPageHeight;
+      pageHeight =
+        (pageCanvas.height * pdfPageSize.inner.width) / pageCanvas.width;
+    }
+
+    // Display the page.
+    var w = pageCanvas.width;
+    var h = pageCanvas.height;
+
+    pageCtx.fillStyle = "white";
+    pageCtx.fillRect(0, 0, w, h);
+    pageCtx.drawImage(canvas, 0, page * pxPageHeight, w, h, 0, 0, w, h);
+
+    // Add the page to the PDF.
+    if (page) pdf.addPage();
+    var imgData = pageCanvas.toDataURL(
+      "image/" + opt.image.type,
+      opt.image.quality
+    );
+    pdf.addImage(
+      imgData,
+      opt.image.type,
+      opt.margin[1],
+      opt.margin[0],
+      pdfPageSize.inner.width,
+      pageHeight
+    );
+  }
+  return pdf;
+}
 
 export function useComponentPrinter() {
   const { numPages } = useFieldArrayValues("slides");
@@ -15,8 +112,7 @@ export function useComponentPrinter() {
 
   // Packages and references
   // react-to-print: https://github.com/gregnb/react-to-print
-  // html2pdf.js: https://ekoopmans.github.io/html2pdf.js/
-  // html2canvas: https://html2canvas.hertzen.com/configuration
+  // html-to-image: https://github.com/bubkoo/html-to-image
   // jsPDF: https://rawgit.com/MrRio/jsPDF/master/docs/jsPDF.html
 
   const reactToPrintContent = React.useCallback(() => {
@@ -40,48 +136,44 @@ export function useComponentPrinter() {
     onAfterPrint: () => setIsPrinting(false),
     pageStyle: `@page { size: ${SIZE.width}px ${SIZE.height}px;  margin: 0; } @media print { body { -webkit-print-color-adjust: exact; }}`,
     print: async (printIframe) => {
-      const document = printIframe.contentDocument;
-      if (!document) {
+      const contentDocument = printIframe.contentDocument;
+      if (!contentDocument) {
         console.error("iFrame does not have a document content");
         return;
       }
 
-      const html = document.getElementById("element-to-download-as-pdf");
+      const html = contentDocument.getElementById("element-to-download-as-pdf");
       if (!html) {
         console.error("Couldn't find element to convert to PDF");
         return;
       }
       const SCALE_TO_LINKEDIN_INTRINSIC_SIZE = 1.8;
-      const options = {
-        margin: 0,
+      const options: HtmlToPdfOptions = {
+        margin: [0, 0, 0, 0],
         filename: watch("filename"),
         image: { type: "webp", quality: 0.98 },
-        html2canvas: {
-          scale: SCALE_TO_LINKEDIN_INTRINSIC_SIZE, // TODO: Consider making sharpness configurable
-          width: SIZE.width,
+        htmlToImage: {
           height: SIZE.height * numPages,
-          logging: true,
-          imageTimeout: 0,
-          useCORS: true,
+          width: SIZE.width,
+          canvasHeight:
+            SIZE.height * numPages * SCALE_TO_LINKEDIN_INTRINSIC_SIZE,
+          canvasWidth: SIZE.width * SCALE_TO_LINKEDIN_INTRINSIC_SIZE,
         },
         jsPDF: { unit: "px", format: [SIZE.width, SIZE.height] },
       };
 
-      // @ts-ignore
-      await import("html2pdf.js")
-        .then((html2pdf) => {
-          html2pdf
-            .default()
-            .set(options)
-            .from(html)
-            .save()
-            .catch((error: string) =>
-              console.error("Failed to PDF processing: ", error)
-            );
-        })
-        .catch((error) =>
-          console.error("Failed to import PDF conversion library: ", error)
-        );
+      // TODO Create buttons to download as png / svg / etc from 'html-to-image'
+      const canvas = await toCanvas(html, options.htmlToImage).catch((err) => {
+        console.log(err);
+      });
+      if (!canvas) {
+        console.error("Failed to create canvas");
+        return;
+      }
+      // DEBUG:
+      // document.body.appendChild(canvas);
+      const pdf = canvasToPdf(canvas, options);
+      pdf.save(options.filename);
     },
   });
 
@@ -99,7 +191,10 @@ function proxyImgSources(html: HTMLElement) {
   ) as HTMLImageElement[];
   const url = process.env.NEXT_PUBLIC_APP_URL;
 
-  const externalImages = images.filter((image) => !image.src.startsWith("/"));
+  const externalImages = images.filter(
+    (image) => !image.src.startsWith("/") && !image.src.startsWith("data:")
+  );
+  console.log(externalImages);
 
   // TODO: Make a single request with the list of images
   externalImages.forEach((image) => {
