@@ -1,8 +1,8 @@
 import React from "react";
 import * as z from "zod";
 import { ConfigSchema, DocumentSchema } from "@/lib/validation/document-schema";
-import { Signature } from "./react-signature";
-import { PageNumber } from "./react-page-number";
+import { Signature } from "@/components/elements/signature";
+import { PageNumber } from "@/components/elements/page-number";
 
 export function Footer({
   config,

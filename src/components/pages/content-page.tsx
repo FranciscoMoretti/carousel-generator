@@ -2,10 +2,9 @@ import React from "react";
 import * as z from "zod";
 import { ConfigSchema, DocumentSchema } from "@/lib/validation/document-schema";
 import { cn } from "@/lib/utils";
-import { Footer } from "./react-footer";
+import { Footer } from "../elements/footer";
 import { fontIdToClassName } from "@/lib/fonts-map";
 import { ContentSlideSchema } from "@/lib/validation/slide-schema";
-import Image from "next/image";
 
 export function ContentPage({
   index,

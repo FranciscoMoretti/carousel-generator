@@ -5,7 +5,7 @@ import {
   DocumentFormReturn,
   SlidesFieldArrayReturn,
 } from "@/lib/document-form-types";
-import { ReactDocument } from "./react-document";
+import { ReactDocument } from "./pages/document";
 import React from "react";
 import useWindowDimensions from "@/lib/hooks/use-window-dimensions";
 import { SIZE } from "@/lib/page-size";

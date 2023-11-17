@@ -1,7 +1,7 @@
 import React from "react";
 import * as z from "zod";
 import { ConfigSchema, DocumentSchema } from "@/lib/validation/document-schema";
-import { Footer } from "./react-footer";
+import { Footer } from "../elements/footer";
 import { cn } from "@/lib/utils";
 import { fontIdToClassName, fontsMap } from "@/lib/fonts-map";
 import { IntroSlideSchema } from "@/lib/validation/slide-schema";

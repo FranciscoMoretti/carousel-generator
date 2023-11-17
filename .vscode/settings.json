@@ -2,6 +2,7 @@
   // Use workspace typescript version
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.preferences.importModuleSpecifier": "non-relative",
 
   // Prettier
   "editor.formatOnSave": true,
@@ -12,7 +13,6 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-
   // Pretty TS Errors - Run in different process until perf issues are solved by extension maintainers
   "extensions.experimental.affinity": {
     "yoavbls.pretty-ts-errors": 1

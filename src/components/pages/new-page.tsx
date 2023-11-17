@@ -3,7 +3,7 @@ import { SlideType } from "@/lib/validation/slide-schema";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Plus } from "lucide-react";
-import { NewSlideDialogContent } from "./new-page-dialog-content";
+import { NewSlideDialogContent } from "@/components/new-page-dialog-content";
 
 export function NewPage({
   size,
