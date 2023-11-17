@@ -5,10 +5,10 @@ import { cn } from "@/lib/utils";
 import { Footer } from "../elements/footer";
 import { fontIdToClassName } from "@/lib/fonts-map";
 import { ContentSlideSchema } from "@/lib/validation/slide-schema";
-import { BackgroundLayer } from "@/components/pages/background-layer";
+import { BackgroundLayer } from "@/components/elements/background-layer";
 import { PageLayout } from "./page-layout";
-import { Title } from "./title";
-import { Description } from "@/components/pages/description";
+import { Title } from "../elements/title";
+import { Description } from "@/components/elements/description";
 
 export function ContentPage({
   index,

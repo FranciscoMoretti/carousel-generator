@@ -5,11 +5,11 @@ import { Footer } from "@/components/elements/footer";
 import { cn } from "@/lib/utils";
 import { fontIdToClassName } from "@/lib/fonts-map";
 import { OutroSlideSchema } from "@/lib/validation/slide-schema";
-import { BackgroundLayer } from "@/components/pages/background-layer";
 import { PageLayout } from "@/components/pages/page-layout";
-import { Subtitle } from "@/components/pages/subtitle";
-import { Title } from "@/components/pages/title";
-import { Description } from "@/components/pages/description";
+import { BackgroundLayer } from "@/components/elements/background-layer";
+import { Subtitle } from "@/components/elements/subtitle";
+import { Title } from "@/components/elements/title";
+import { Description } from "@/components/elements/description";
 
 export function OutroPage({
   index,

@@ -5,12 +5,12 @@ import { Footer } from "../elements/footer";
 import { cn } from "@/lib/utils";
 import { fontIdToClassName, fontsMap } from "@/lib/fonts-map";
 import { IntroSlideSchema } from "@/lib/validation/slide-schema";
-import { BackgroundLayer } from "./background-layer";
-import { BackgroundImageLayer } from "./background-image-layer";
+import { BackgroundLayer } from "@/components/elements/background-layer";
+import { BackgroundImageLayer } from "@/components/elements/background-image-layer";
 import { PageLayout } from "@/components/pages/page-layout";
-import { Subtitle } from "@/components/pages/subtitle";
-import { Title } from "@/components/pages/title";
-import { Description } from "@/components/pages/description";
+import { Subtitle } from "@/components/elements/subtitle";
+import { Title } from "@/components/elements/title";
+import { Description } from "@/components/elements/description";
 
 export function IntroPage({
   index,
