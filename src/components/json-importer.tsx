@@ -4,7 +4,7 @@ import { useFormContext } from "react-hook-form";
 import { Input } from "./ui/input";
 import { ConfigSchema } from "@/lib/validation/document-schema";
 import { MultiSlideSchema } from "@/lib/validation/slide-schema";
-import FileInputForm from "./file-input-form";
+import FileInputForm from "./forms/file-input-form";
 import {
   Dialog,
   DialogContent,

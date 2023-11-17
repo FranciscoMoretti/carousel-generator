@@ -8,9 +8,9 @@ import {
   SlidesFieldArrayReturn,
 } from "@/lib/document-form-types";
 import { SlideType } from "@/lib/validation/slide-schema";
-import { ContentSlideForm } from "./content-slide-form";
-import { OutroSlideForm } from "./outro-slide-form";
-import { IntroSlideForm } from "./intro-slide-form";
+import { ContentSlideForm } from "./forms/content-slide-form";
+import { OutroSlideForm } from "./forms/outro-slide-form";
+import { IntroSlideForm } from "./forms/intro-slide-form";
 import { usePagerContext } from "@/lib/providers/pager-context";
 
 export function SlidesForm({

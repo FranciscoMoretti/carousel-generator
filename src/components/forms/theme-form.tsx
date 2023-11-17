@@ -11,14 +11,14 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { pallettes } from "@/lib/pallettes";
 import {
   ColorsDisplay,
   ColorsRadioGroupItem,
-} from "./pallette-radio-group-item";
+} from "../pallette-radio-group-item";
 import { DocumentFormReturn } from "@/lib/document-form-types";
-import { Checkbox } from "./ui/checkbox";
+import { Checkbox } from "../ui/checkbox";
 
 function PalletteSelector({ form }: { form: DocumentFormReturn }) {
   const { control, setValue } = form;

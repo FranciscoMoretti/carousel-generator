@@ -4,9 +4,9 @@ import Link from "next/link";
 // import { SidebarNavItem } from "types/nav";
 
 import { cn } from "@/lib/utils";
-import { BrandForm } from "@/components/brand-form";
+import { BrandForm } from "@/components/forms/brand-form";
 import { SlidesForm } from "@/components/slides-form";
-import { ThemeForm } from "@/components/theme-form";
+import { ThemeForm } from "@/components/forms/theme-form";
 import {
   VerticalTabs,
   VerticalTabsContent,
@@ -15,8 +15,8 @@ import {
 } from "@/components/ui/vertical-tabs";
 import { usePagerContext } from "@/lib/providers/pager-context";
 import { Separator } from "@/components/ui/separator";
-import { FontsForm } from "@/components/fonts-form";
-import { PageNumberForm } from "./page-number-form";
+import { FontsForm } from "@/components/forms/fonts-form";
+import { PageNumberForm } from "./forms/page-number-form";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import {
   Briefcase,

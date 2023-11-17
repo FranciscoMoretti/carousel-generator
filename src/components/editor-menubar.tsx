@@ -5,7 +5,7 @@ import { Loader2Icon } from "lucide-react";
 import React, { useState } from "react";
 import { JsonExporter } from "./json-exporter";
 import { JsonImporter } from "./json-importer";
-import { FilenameForm } from "./filename-form";
+import { FilenameForm } from "./forms/filename-form";
 import {
   Menubar,
   MenubarContent,
@@ -22,7 +22,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import FileInputForm from "./file-input-form";
+import FileInputForm from "./forms/file-input-form";
 import { useFieldsFileImporter } from "@/lib/hooks/use-fields-file-importer";
 
 export function EditorMenubar({}: {}) {

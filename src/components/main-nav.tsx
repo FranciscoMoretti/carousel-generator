@@ -8,7 +8,7 @@ import { Button, buttonVariants } from "./ui/button";
 import { EditorMenubar } from "./editor-menubar";
 import { Download, Loader2Icon } from "lucide-react";
 import Pager from "./pager";
-import { FilenameForm } from "./filename-form";
+import { FilenameForm } from "./forms/filename-form";
 
 export type NavItem = {
   title: string;
