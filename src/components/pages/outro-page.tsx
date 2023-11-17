@@ -7,6 +7,8 @@ import { fontIdToClassName } from "@/lib/fonts-map";
 import { OutroSlideSchema } from "@/lib/validation/slide-schema";
 import { BackgroundLayer } from "@/components/pages/background-layer";
 import { PageLayout } from "@/components/pages/page-layout";
+import { Subtitle } from "@/components/pages/subtitle";
+import { Title } from "@/components/pages/title";
 
 export function OutroPage({
   index,
@@ -28,28 +30,8 @@ export function OutroPage({
       <BackgroundLayer background={config.theme.background} className="-z-20" />
       <div className={cn("p-10 flex flex-col h-full w-full", className)}>
         <div className={`flex flex-col justify-center grow gap-1`}>
-          <h2
-            className={cn(
-              `text-5xl mb-3 leading-none tracking-tight font-bold `,
-              fontIdToClassName(config.fonts.font1)
-            )}
-            style={{
-              color: config.theme.primary,
-            }}
-          >
-            {slide.title}
-          </h2>
-          <h3
-            className={cn(
-              `text-xl font-bold`,
-              fontIdToClassName(config.fonts.font1)
-            )}
-            style={{
-              color: config.theme.secondary,
-            }}
-          >
-            {slide.subtitle}
-          </h3>
+          <Title config={config} title={slide.title} className="text-5xl" />
+          <Subtitle config={config} subtitle={slide.subtitle} />
           <p
             className={cn(`text-base`, fontIdToClassName(config.fonts.font2))}
             style={{

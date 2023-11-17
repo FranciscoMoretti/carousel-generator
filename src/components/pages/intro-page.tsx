@@ -8,6 +8,8 @@ import { IntroSlideSchema } from "@/lib/validation/slide-schema";
 import { BackgroundLayer } from "./background-layer";
 import { BackgroundImageLayer } from "./background-image-layer";
 import { PageLayout } from "@/components/pages/page-layout";
+import { Subtitle } from "@/components/pages/subtitle";
+import { Title } from "@/components/pages/title";
 
 export function IntroPage({
   index,
@@ -35,29 +37,12 @@ export function IntroPage({
       ) : null}
       <div className={cn("p-10 flex flex-col h-full w-full", className)}>
         <div className={`flex flex-col justify-center grow gap-1 items-center`}>
-          {/* // TODO Extract title into a Title component and correlate with a title form */}
-          <h2
-            className={cn(
-              `text-7xl mb-3 text-balance font-black text-center`,
-              fontIdToClassName(config.fonts.font1)
-            )}
-            style={{
-              color: config.theme.primary,
-            }}
-          >
-            {slide.title}
-          </h2>
-          <h3
-            className={cn(
-              `text-xl font-bold`,
-              fontIdToClassName(config.fonts.font1)
-            )}
-            style={{
-              color: config.theme.secondary,
-            }}
-          >
-            {slide.subtitle}
-          </h3>
+          <Title
+            config={config}
+            title={slide.title}
+            className="text-7xl text-center"
+          />
+          <Subtitle config={config} subtitle={slide.subtitle} />
           <p
             className={cn(
               `text-base text-center`,

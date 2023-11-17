@@ -7,6 +7,7 @@ import { fontIdToClassName } from "@/lib/fonts-map";
 import { ContentSlideSchema } from "@/lib/validation/slide-schema";
 import { BackgroundLayer } from "@/components/pages/background-layer";
 import { PageLayout } from "./page-layout";
+import { Title } from "./title";
 
 export function ContentPage({
   index,
@@ -28,18 +29,7 @@ export function ContentPage({
       <BackgroundLayer background={config.theme.background} className="-z-20" />
       <div className={cn("p-10 flex flex-col h-full w-full", className)}>
         <div className="flex flex-col justify-center items-start grow gap-4">
-          <h2
-            className={cn(
-              `text-3xl tracking-tight font-bold text-balance`,
-              fontIdToClassName(config.fonts.font1)
-            )}
-            style={{
-              color: config.theme.primary,
-            }}
-          >
-            {slide.title}
-          </h2>
-
+          <Title config={config} title={slide.title} />
           <p
             className={cn(
               `text-lg font-medium`,
