@@ -16,7 +16,7 @@ export const ContentSlideSchema = z.object({
     }),
   description: z.string(),
   // TODO Fix optional usage of images
-  image: imageSchema,
+  image: z.optional(imageSchema),
 });
 
 export const IntroSlideSchema = z.object({
@@ -38,7 +38,7 @@ export const IntroSlideSchema = z.object({
       message: "Subtitle must not be longer than 30 characters.",
     }),
   description: z.string(),
-  backgroundImage: imageSchema,
+  backgroundImage: z.optional(imageSchema),
 });
 
 export const OutroSlideSchema = z.object({

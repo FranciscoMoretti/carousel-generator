@@ -63,8 +63,8 @@ export function ImageFormField({
                       });
                     }}
                     value={
-                      form.getValues(fieldName).type == ImageInputType.Url
-                        ? form.getValues(fieldName).src
+                      form.getValues(fieldName)?.type == ImageInputType.Url
+                        ? form.getValues(fieldName)?.src
                         : ""
                     }
                   />

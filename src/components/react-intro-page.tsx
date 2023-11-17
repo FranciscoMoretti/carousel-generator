@@ -64,8 +64,6 @@ export function IntroPage({
   className?: string;
   handleClick?: React.MouseEventHandler<HTMLDivElement> | undefined;
 }) {
-  const backgroundImageSrc = slide.backgroundImage.src || undefined;
-
   return (
     <div
       onClick={handleClick}
@@ -78,9 +76,9 @@ export function IntroPage({
       className="overflow-clip relative"
     >
       <BackgroundLayer background={config.theme.background} className="-z-20" />
-      {backgroundImageSrc ? (
+      {slide.backgroundImage?.src ? (
         <BackgroundImageLayer
-          backgroundImageSrc={backgroundImageSrc}
+          backgroundImageSrc={slide.backgroundImage?.src}
           className="opacity-20 -z-10"
         />
       ) : null}
