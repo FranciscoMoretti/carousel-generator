@@ -5,6 +5,8 @@ import { cn } from "@/lib/utils";
 import { Footer } from "../elements/footer";
 import { fontIdToClassName } from "@/lib/fonts-map";
 import { ContentSlideSchema } from "@/lib/validation/slide-schema";
+import { BackgroundLayer } from "@/components/pages/background-layer";
+import { PageLayout } from "./page-layout";
 
 export function ContentPage({
   index,
@@ -22,58 +24,51 @@ export function ContentPage({
   handleClick?: React.MouseEventHandler<HTMLDivElement> | undefined;
 }) {
   return (
-    <div
-      className={cn("p-10 flex flex-col", className)}
-      onClick={handleClick}
-      style={{
-        backgroundColor: config.theme.background,
-        width: `${size.width}px`,
-        height: `${size.height}px`,
-        minWidth: `${size.width}px`,
-        minHeight: `${size.height}px`,
-      }}
-    >
-      <div className="flex flex-col justify-center items-start grow gap-4">
-        <h2
-          className={cn(
-            `text-3xl tracking-tight font-bold text-balance`,
-            fontIdToClassName(config.fonts.font1)
-          )}
-          style={{
-            color: config.theme.primary,
-          }}
-        >
-          {slide.title}
-        </h2>
+    <PageLayout handleClick={handleClick} size={size}>
+      <BackgroundLayer background={config.theme.background} className="-z-20" />
+      <div className={cn("p-10 flex flex-col h-full w-full", className)}>
+        <div className="flex flex-col justify-center items-start grow gap-4">
+          <h2
+            className={cn(
+              `text-3xl tracking-tight font-bold text-balance`,
+              fontIdToClassName(config.fonts.font1)
+            )}
+            style={{
+              color: config.theme.primary,
+            }}
+          >
+            {slide.title}
+          </h2>
 
-        <p
-          className={cn(
-            `text-lg font-medium`,
-            fontIdToClassName(config.fonts.font2)
-          )}
-          style={{
-            color: config.theme.secondary,
-          }}
-        >
-          {slide.description}
-        </p>
-        {slide.image?.src ? (
-          <div className="flex flex-col items-center w-full h-40">
-            <img
-              alt="slide image"
-              src={slide.image.src}
-              // TODO: Extract cover/contain into a setting for images
-              className={cn(
-                // shadow-md or any box shadow not supported by html2canvas
-                "rounded-md overflow-hidden",
-                true ? "object-cover w-full" : "object-contain"
-              )}
-            />
-          </div>
-        ) : null}
+          <p
+            className={cn(
+              `text-lg font-medium`,
+              fontIdToClassName(config.fonts.font2)
+            )}
+            style={{
+              color: config.theme.secondary,
+            }}
+          >
+            {slide.description}
+          </p>
+          {slide.image?.src ? (
+            <div className="flex flex-col items-center w-full h-40">
+              <img
+                alt="slide image"
+                src={slide.image.src}
+                // TODO: Extract cover/contain into a setting for images
+                className={cn(
+                  // shadow-md or any box shadow not supported by html2canvas
+                  "rounded-md overflow-hidden",
+                  true ? "object-cover w-full" : "object-contain"
+                )}
+              />
+            </div>
+          ) : null}
+        </div>
+        <Footer number={index + 1} config={config} />
+        {/* TODO: better number calculation */}
       </div>
-      <Footer number={index + 1} config={config} />
-      {/* TODO: better number calculation */}
-    </div>
+    </PageLayout>
   );
 }

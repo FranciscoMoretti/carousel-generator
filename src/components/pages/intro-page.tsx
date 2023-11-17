@@ -5,49 +5,9 @@ import { Footer } from "../elements/footer";
 import { cn } from "@/lib/utils";
 import { fontIdToClassName, fontsMap } from "@/lib/fonts-map";
 import { IntroSlideSchema } from "@/lib/validation/slide-schema";
-
-function BackgroundLayer({
-  background,
-  className = "",
-}: {
-  background: string;
-  className?: string;
-}) {
-  return (
-    <div
-      style={{
-        backgroundColor: background,
-      }}
-      className={cn(
-        "w-full h-full absolute top-0 left-0 right-0 bottom-0",
-        className
-      )}
-    ></div>
-  );
-}
-
-function BackgroundImageLayer({
-  backgroundImageSrc,
-  className = "",
-}: {
-  backgroundImageSrc: string;
-  className?: string;
-}) {
-  return (
-    <div
-      className={cn(
-        "w-full h-full absolute top-0 left-0 right-0 bottom-0 opacity-50",
-        className
-      )}
-    >
-      <img
-        className="w-full h-full object-cover "
-        src={backgroundImageSrc}
-        alt="Background"
-      />
-    </div>
-  );
-}
+import { BackgroundLayer } from "./background-layer";
+import { BackgroundImageLayer } from "./background-image-layer";
+import { PageLayout } from "@/components/pages/page-layout";
 
 export function IntroPage({
   index,
@@ -65,16 +25,7 @@ export function IntroPage({
   handleClick?: React.MouseEventHandler<HTMLDivElement> | undefined;
 }) {
   return (
-    <div
-      onClick={handleClick}
-      style={{
-        width: `${size.width}px`,
-        height: `${size.height}px`,
-        minWidth: `${size.width}px`,
-        minHeight: `${size.height}px`,
-      }}
-      className="overflow-clip relative"
-    >
+    <PageLayout handleClick={handleClick} size={size}>
       <BackgroundLayer background={config.theme.background} className="-z-20" />
       {slide.backgroundImage?.src ? (
         <BackgroundImageLayer
@@ -82,7 +33,7 @@ export function IntroPage({
           className="opacity-20 -z-10"
         />
       ) : null}
-      <div className={cn("p-10 flex flex-col h-full w-full z-20", className)}>
+      <div className={cn("p-10 flex flex-col h-full w-full", className)}>
         <div className={`flex flex-col justify-center grow gap-1 items-center`}>
           {/* // TODO Extract title into a Title component and correlate with a title form */}
           <h2
@@ -121,6 +72,6 @@ export function IntroPage({
         </div>
         <Footer number={index + 1} config={config} />
       </div>
-    </div>
+    </PageLayout>
   );
 }
