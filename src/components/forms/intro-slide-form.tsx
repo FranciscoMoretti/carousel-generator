@@ -11,7 +11,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { DocumentSchema } from "@/lib/validation/document-schema";
 import { DocumentFormReturn } from "@/lib/document-form-types";
-import { ImageFormField } from "./image-form-field";
+import { ImageFormField } from "./fields/image-form-field";
+import { TitleFormField } from "@/components/forms/fields/title-form-field";
+import { SubtitleFormField } from "@/components/forms/fields/subtitle-form-field";
+import { DescriptionFormField } from "@/components/forms/fields/description-form-field";
 
 export const MAX_IMAGE_SIZE_MB = 0.5; // Set your maximum image size limit in megabytes
 export const MAX_IMAGE_WIDTH = 800; // Set your maximum image width
@@ -26,57 +29,9 @@ export function IntroSlideForm({
   // TODO: Validate fields with zod on change (e.g. Max character)
   return (
     <div className="space-y-6 w-full">
-      <FormField
-        control={form.control}
-        name={`slides.${currentSlide}.title`}
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Title</FormLabel>
-            <FormControl>
-              <Input
-                placeholder="Your super cool title"
-                className=""
-                {...field}
-              />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-      <FormField
-        control={form.control}
-        name={`slides.${currentSlide}.subtitle`}
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Subtitle</FormLabel>
-            <FormControl>
-              <Input
-                placeholder="Subtitle for more clarity"
-                className=""
-                {...field}
-              />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-      <FormField
-        control={form.control}
-        name={`slides.${currentSlide}.description`}
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Description</FormLabel>
-            <FormControl>
-              <Textarea
-                placeholder="Tell us a little bit about yourself"
-                className="resize-none"
-                {...field}
-              />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+      <TitleFormField currentSlide={currentSlide} form={form} />
+      <SubtitleFormField currentSlide={currentSlide} form={form} />
+      <DescriptionFormField currentSlide={currentSlide} form={form} />
       <ImageFormField
         fieldName={`slides.${currentSlide}.backgroundImage`}
         form={form}
