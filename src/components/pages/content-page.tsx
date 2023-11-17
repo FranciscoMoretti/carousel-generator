@@ -8,6 +8,7 @@ import { ContentSlideSchema } from "@/lib/validation/slide-schema";
 import { BackgroundLayer } from "@/components/pages/background-layer";
 import { PageLayout } from "./page-layout";
 import { Title } from "./title";
+import { Description } from "@/components/pages/description";
 
 export function ContentPage({
   index,
@@ -30,17 +31,7 @@ export function ContentPage({
       <div className={cn("p-10 flex flex-col h-full w-full", className)}>
         <div className="flex flex-col justify-center items-start grow gap-4">
           <Title config={config} title={slide.title} />
-          <p
-            className={cn(
-              `text-lg font-medium`,
-              fontIdToClassName(config.fonts.font2)
-            )}
-            style={{
-              color: config.theme.secondary,
-            }}
-          >
-            {slide.description}
-          </p>
+          <Description config={config} description={slide.description} />
           {slide.image?.src ? (
             <div className="flex flex-col items-center w-full h-40">
               <img

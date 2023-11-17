@@ -9,6 +9,7 @@ import { BackgroundLayer } from "@/components/pages/background-layer";
 import { PageLayout } from "@/components/pages/page-layout";
 import { Subtitle } from "@/components/pages/subtitle";
 import { Title } from "@/components/pages/title";
+import { Description } from "@/components/pages/description";
 
 export function OutroPage({
   index,
@@ -32,14 +33,7 @@ export function OutroPage({
         <div className={`flex flex-col justify-center grow gap-1`}>
           <Title config={config} title={slide.title} className="text-5xl" />
           <Subtitle config={config} subtitle={slide.subtitle} />
-          <p
-            className={cn(`text-base`, fontIdToClassName(config.fonts.font2))}
-            style={{
-              color: config.theme.secondary,
-            }}
-          >
-            {slide.description}
-          </p>
+          <Description config={config} description={slide.description} />
         </div>
         <Footer number={index + 1} config={config} />
       </div>

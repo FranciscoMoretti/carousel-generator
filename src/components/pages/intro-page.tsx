@@ -10,6 +10,7 @@ import { BackgroundImageLayer } from "./background-image-layer";
 import { PageLayout } from "@/components/pages/page-layout";
 import { Subtitle } from "@/components/pages/subtitle";
 import { Title } from "@/components/pages/title";
+import { Description } from "@/components/pages/description";
 
 export function IntroPage({
   index,
@@ -43,17 +44,11 @@ export function IntroPage({
             className="text-7xl text-center"
           />
           <Subtitle config={config} subtitle={slide.subtitle} />
-          <p
-            className={cn(
-              `text-base text-center`,
-              fontIdToClassName(config.fonts.font2)
-            )}
-            style={{
-              color: config.theme.secondary,
-            }}
-          >
-            {slide.description}
-          </p>
+          <Description
+            config={config}
+            description={slide.description}
+            className="text-center"
+          />
         </div>
         <Footer number={index + 1} config={config} />
       </div>
