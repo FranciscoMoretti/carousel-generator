@@ -29,7 +29,7 @@ export function ContentPage({
     <PageLayout handleClick={handleClick} size={size}>
       <BackgroundLayer background={config.theme.background} className="-z-20" />
       <div className={cn("p-10 flex flex-col h-full w-full", className)}>
-        <div className="flex flex-col justify-center items-start grow gap-4">
+        <div className="flex flex-col justify-center  items-stretch grow gap-4">
           <Title config={config} title={slide.title} />
           <Description config={config} description={slide.description} />
           {slide.image?.src ? (

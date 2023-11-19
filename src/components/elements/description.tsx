@@ -3,7 +3,9 @@ import * as z from "zod";
 import { ConfigSchema } from "@/lib/validation/document-schema";
 import { cn } from "@/lib/utils";
 import { fontIdToClassName } from "@/lib/fonts-map";
-import { DescriptionSchema, TitleSchema } from "@/lib/validation/slide-schema";
+import { DescriptionSchema } from "@/lib/validation/text-schema";
+import { TitleSchema } from "@/lib/validation/text-schema";
+import { textStyleToClasses } from "@/lib/text-style-to-classes";
 
 export function Description({
   config,
@@ -18,6 +20,10 @@ export function Description({
     <p
       className={cn(
         `text-lg font-medium`,
+        textStyleToClasses({
+          style: description.style,
+          sizes: ["text-xl", "text-lg", "text-base"],
+        }),
         fontIdToClassName(config.fonts.font2),
         className
       )}
@@ -25,7 +31,7 @@ export function Description({
         color: config.theme.secondary,
       }}
     >
-      {description}
+      {description.text}
     </p>
   );
 }

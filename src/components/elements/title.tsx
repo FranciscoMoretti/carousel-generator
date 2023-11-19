@@ -3,7 +3,8 @@ import * as z from "zod";
 import { ConfigSchema } from "@/lib/validation/document-schema";
 import { cn } from "@/lib/utils";
 import { fontIdToClassName } from "@/lib/fonts-map";
-import { TitleSchema } from "@/lib/validation/slide-schema";
+import { TitleSchema } from "@/lib/validation/text-schema";
+import { textStyleToClasses } from "@/lib/text-style-to-classes";
 
 export function Title({
   config,
@@ -17,7 +18,11 @@ export function Title({
   return (
     <h2
       className={cn(
-        `text-3xl font-black text-balance`,
+        `font-black text-balance`,
+        textStyleToClasses({
+          style: title.style,
+          sizes: ["text-7xl", "text-5xl", "text-3xl"],
+        }),
         fontIdToClassName(config.fonts.font1),
         className
       )}
@@ -25,7 +30,7 @@ export function Title({
         color: config.theme.primary,
       }}
     >
-      {title}
+      {title.text}
     </h2>
   );
 }

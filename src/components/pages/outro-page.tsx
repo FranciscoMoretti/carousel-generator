@@ -1,9 +1,8 @@
 import React from "react";
 import * as z from "zod";
-import { ConfigSchema, DocumentSchema } from "@/lib/validation/document-schema";
+import { ConfigSchema } from "@/lib/validation/document-schema";
 import { Footer } from "@/components/elements/footer";
 import { cn } from "@/lib/utils";
-import { fontIdToClassName } from "@/lib/fonts-map";
 import { OutroSlideSchema } from "@/lib/validation/slide-schema";
 import { PageLayout } from "@/components/pages/page-layout";
 import { BackgroundLayer } from "@/components/elements/background-layer";
@@ -30,7 +29,9 @@ export function OutroPage({
     <PageLayout handleClick={handleClick} size={size}>
       <BackgroundLayer background={config.theme.background} className="-z-20" />
       <div className={cn("p-10 flex flex-col h-full w-full", className)}>
-        <div className={`flex flex-col justify-center grow gap-1`}>
+        <div
+          className={`flex flex-col justify-center items-stretch grow gap-1`}
+        >
           <Title config={config} title={slide.title} className="text-5xl" />
           <Subtitle config={config} subtitle={slide.subtitle} />
           <Description config={config} description={slide.description} />

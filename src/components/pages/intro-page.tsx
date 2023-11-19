@@ -37,18 +37,12 @@ export function IntroPage({
         />
       ) : null}
       <div className={cn("p-10 flex flex-col h-full w-full", className)}>
-        <div className={`flex flex-col justify-center grow gap-1 items-center`}>
-          <Title
-            config={config}
-            title={slide.title}
-            className="text-7xl text-center"
-          />
+        <div
+          className={`flex flex-col justify-center grow gap-1 items-stretch`}
+        >
+          <Title config={config} title={slide.title} />
           <Subtitle config={config} subtitle={slide.subtitle} />
-          <Description
-            config={config}
-            description={slide.description}
-            className="text-center"
-          />
+          <Description config={config} description={slide.description} />
         </div>
         <Footer number={index + 1} config={config} />
       </div>

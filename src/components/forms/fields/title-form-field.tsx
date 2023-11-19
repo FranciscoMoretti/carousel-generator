@@ -1,12 +1,7 @@
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { DocumentFormReturn } from "@/lib/document-form-types";
+import { TextStyleFormFields } from "./text-style-form-field";
+import { TextInputFormField } from "@/components/forms/fields/text-input-form-field";
+import { Label } from "@/components/ui/label";
 
 export function TitleFormField({
   currentSlide,
@@ -16,22 +11,20 @@ export function TitleFormField({
   form: DocumentFormReturn;
 }) {
   return (
-    <FormField
-      control={form.control}
-      name={`slides.${currentSlide}.title`}
-      render={({ field }) => (
-        <FormItem>
-          <FormLabel>Title</FormLabel>
-          <FormControl>
-            <Input
-              placeholder="Your super cool title"
-              className=""
-              {...field}
-            />
-          </FormControl>
-          <FormMessage />
-        </FormItem>
-      )}
-    />
+    <div className="flex flex-col gap-2">
+      <Label>Title</Label>
+      <TextStyleFormFields
+        form={form}
+        fieldName={`slides.${currentSlide}.title.style`}
+        className="flex flex-row"
+      >
+        <TextInputFormField
+          fieldName={`slides.${currentSlide}.title.text`}
+          label=""
+          placeholder="Your super cool title"
+          form={form}
+        />
+      </TextStyleFormFields>
+    </div>
   );
 }
