@@ -11,8 +11,8 @@ export function TitleFormField({
   form: DocumentFormReturn;
 }) {
   return (
-    <div className="flex flex-col gap-2">
-      <Label>Title</Label>
+    <div className="flex flex-col gap-3">
+      <Label className="text-base">Title</Label>
       <TextStyleFormFields
         form={form}
         fieldName={`slides.${currentSlide}.title.style`}

@@ -11,8 +11,8 @@ export function SubtitleFormField({
   form: DocumentFormReturn;
 }) {
   return (
-    <div className="flex flex-col gap-2">
-      <Label>Subtitle</Label>
+    <div className="flex flex-col gap-3">
+      <Label className="text-base">Subtitle</Label>
       <TextStyleFormFields
         form={form}
         fieldName={`slides.${currentSlide}.subtitle.style`}

@@ -3,16 +3,7 @@ import { Button } from "@/components/ui/button";
 import { usePagerContext } from "@/lib/providers/pager-context";
 import { DocumentSchema } from "@/lib/validation/document-schema";
 import { useFormContext } from "react-hook-form";
-import {
-  ArrowLeftFromLine,
-  ArrowRightFromLine,
-  ArrowLeftRight,
-  ArrowRightLeft,
-  CornerUpRight,
-  CornerUpLeft,
-  X,
-  Copy,
-} from "lucide-react";
+import { CornerUpRight, CornerUpLeft, Copy, Trash } from "lucide-react";
 import {
   DocumentFormReturn,
   SlidesFieldArrayReturn,
@@ -71,7 +62,7 @@ export default function SlideMenubar({
         variant="outline"
         size="icon"
       >
-        <X className="w-4 h-4" />
+        <Trash className="w-4 h-4" />
       </Button>
       <Button
         onClick={() => {

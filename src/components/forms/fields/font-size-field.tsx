@@ -43,7 +43,7 @@ export function FontSizeField({
                   <FontSizeRadioGroupItem
                     value={FontSizeType.enum.Small}
                     className={cn(
-                      "h-6 w-6 flex flex-col items-center justify-center data-[state=unchecked]:border-transparent",
+                      "h-5 w-5 flex flex-col items-center justify-center data-[state=unchecked]:border-transparent border",
                       itemClassName
                     )}
                   >
@@ -57,7 +57,7 @@ export function FontSizeField({
                   <FontSizeRadioGroupItem
                     value={FontSizeType.enum.Medium}
                     className={cn(
-                      "h-6 w-6 flex flex-col items-center justify-center data-[state=unchecked]:border-transparent",
+                      "h-5 w-5 flex flex-col items-center justify-center data-[state=unchecked]:border-transparent border",
                       itemClassName
                     )}
                   >
@@ -71,7 +71,7 @@ export function FontSizeField({
                   <FontSizeRadioGroupItem
                     value={FontSizeType.enum.Large}
                     className={cn(
-                      "h-6 w-6 flex flex-col items-center justify-center data-[state=unchecked]:border-transparent",
+                      "h-5 w-5 flex flex-col items-center justify-center data-[state=unchecked]:border-transparent border",
                       itemClassName
                     )}
                   >

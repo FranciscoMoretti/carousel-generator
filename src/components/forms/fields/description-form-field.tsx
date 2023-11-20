@@ -18,8 +18,8 @@ export function DescriptionFormField({
   form: DocumentFormReturn;
 }) {
   return (
-    <div className="flex flex-col gap-2">
-      <Label>Description</Label>
+    <div className="flex flex-col gap-3">
+      <Label className="text-base ">Description</Label>
       <TextStyleFormFields
         form={form}
         fieldName={`slides.${currentSlide}.description.style`}

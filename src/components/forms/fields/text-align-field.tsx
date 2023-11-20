@@ -44,7 +44,7 @@ export function TextAlignField({
                   <FontSizeRadioGroupItem
                     value={TextALignType.enum.Left}
                     className={cn(
-                      "h-6 w-6 flex flex-col items-center justify-center data-[state=unchecked]:border-transparent",
+                      "h-5 w-5 flex flex-col items-center justify-center data-[state=unchecked]:border-transparent border",
                       itemClassName
                     )}
                   >
@@ -58,7 +58,7 @@ export function TextAlignField({
                   <FontSizeRadioGroupItem
                     value={TextALignType.enum.Center}
                     className={cn(
-                      "h-6 w-6 flex flex-col items-center justify-center data-[state=unchecked]:border-transparent",
+                      "h-5 w-5 flex flex-col items-center justify-center data-[state=unchecked]:border-transparent border",
                       itemClassName
                     )}
                   >
@@ -72,7 +72,7 @@ export function TextAlignField({
                   <FontSizeRadioGroupItem
                     value={TextALignType.enum.Right}
                     className={cn(
-                      "h-6 w-6 flex flex-col items-center justify-center data-[state=unchecked]:border-transparent",
+                      "h-5 w-5 flex flex-col items-center justify-center data-[state=unchecked]:border-transparent border",
                       itemClassName
                     )}
                   >
