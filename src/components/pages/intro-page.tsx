@@ -30,9 +30,9 @@ export function IntroPage({
   return (
     <PageLayout handleClick={handleClick} size={size}>
       <BackgroundLayer background={config.theme.background} className="-z-20" />
-      {slide.backgroundImage?.src ? (
+      {slide.backgroundImage?.source.src ? (
         <BackgroundImageLayer
-          backgroundImageSrc={slide.backgroundImage?.src}
+          backgroundImageSrc={slide.backgroundImage?.source.src}
           className="opacity-20 -z-10"
         />
       ) : null}

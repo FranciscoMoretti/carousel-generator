@@ -1,6 +1,5 @@
 import { EnumRadioGroupField } from "@/components/forms/fields/enum-radio-group-field";
 import { DocumentFormReturn } from "@/lib/document-form-types";
-import { TextAlignField } from "@/components/forms/fields/text-align-field";
 import { cn } from "@/lib/utils";
 import React from "react";
 import { AlignCenter, AlignLeft, AlignRight, Type } from "lucide-react";

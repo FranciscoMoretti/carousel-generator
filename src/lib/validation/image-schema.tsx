@@ -21,17 +21,17 @@ export enum ImageInputType {
 }
 const ImageInputTypeSchema = z.nativeEnum(ImageInputType);
 
-export const ImageContentSchema = z.object({
+export const ImageSourceSchema = z.object({
   src: z.union([z.string().url(), ImageDataUrlSchema]),
   type: ImageInputTypeSchema,
 });
 export const ImageSchema = z.object({
-  content: ImageContentSchema,
+  source: ImageSourceSchema,
   style: ImageStyleSchema,
 });
 
 export const DEFAULT_IMAGE_INPUT: z.infer<typeof ImageSchema> = {
-  content: {
+  source: {
     src: "",
     type: ImageInputType.Url,
   },

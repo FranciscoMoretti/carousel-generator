@@ -18,14 +18,21 @@ export function EnumRadioGroupField<T extends string | number | symbol>({
   itemClassName = "",
   groupClassName = "",
 }: {
-  fieldName: // FontSize
+  fieldName: // Enums in form
+  // TEXT
+  // FontSize
   | `slides.${number}.title.style.fontSize`
     | `slides.${number}.subtitle.style.fontSize`
     | `slides.${number}.description.style.fontSize`
     // Align
     | `slides.${number}.title.style.align`
     | `slides.${number}.subtitle.style.align`
-    | `slides.${number}.description.style.align`;
+    | `slides.${number}.description.style.align`
+    // IMAGE
+    // Object fit
+    | `slides.${number}.image.style.objectFit`
+    | `slides.${number}.backgroundImage.style.objectFit`
+    | "config.brand.avatar.style.objectFit";
   form: DocumentFormReturn;
   enumValueElements: Record<T, React.ReactNode>;
   itemClassName?: string;

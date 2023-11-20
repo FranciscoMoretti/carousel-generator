@@ -9,32 +9,7 @@ import { BackgroundLayer } from "@/components/elements/background-layer";
 import { PageLayout } from "./page-layout";
 import { Title } from "../elements/title";
 import { Description } from "@/components/elements/description";
-import { ObjectFitType, ImageSchema } from "@/lib/validation/image-schema";
-
-function InsertedImage({ image }: { image: z.infer<typeof ImageSchema> }) {
-  if (!image.content.src) {
-    return null;
-  }
-
-  return (
-    <div className="flex flex-col items-center w-full h-40">
-      {/* // TODO: Extract to component */}
-      <img
-        alt="slide image"
-        src={image.content.src} // TODO: Extract cover/contain into a setting for images
-        className={cn(
-          // shadow-md or any box shadow not supported by html2canvas
-          "rounded-md overflow-hidden",
-          image.style.objectFit == ObjectFitType.enum.Cover
-            ? "object-cover w-full"
-            : image.style.objectFit == ObjectFitType.enum.Contain
-            ? "object-contain"
-            : ""
-        )}
-      />
-    </div>
-  );
-}
+import { ContentImage } from "../elements/content-image";
 
 export function ContentPage({
   index,
@@ -58,7 +33,7 @@ export function ContentPage({
         <div className="flex flex-col justify-center  items-stretch grow gap-4">
           <Title config={config} title={slide.title} />
           <Description config={config} description={slide.description} />
-          {slide.image && <InsertedImage image={slide.image}></InsertedImage>}
+          {slide.image && <ContentImage image={slide.image}></ContentImage>}
         </div>
         <Footer number={index + 1} config={config} />
         {/* TODO: better number calculation */}
