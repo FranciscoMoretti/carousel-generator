@@ -21,9 +21,9 @@ export function ImageFormField({
   formType,
 }: {
   fieldName:
-    | `slides.${number}.image`
-    | `slides.${number}.backgroundImage`
-    | "config.brand.avatar";
+    | `slides.${number}.image.content`
+    | `slides.${number}.backgroundImage.content`
+    | "config.brand.avatar.content";
   form: DocumentFormReturn;
   formType: ImageFormType;
 }) {

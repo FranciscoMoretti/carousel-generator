@@ -33,7 +33,7 @@ export function IntroSlideForm({
       <SubtitleFormField currentSlide={currentSlide} form={form} />
       <DescriptionFormField currentSlide={currentSlide} form={form} />
       <ImageFormField
-        fieldName={`slides.${currentSlide}.backgroundImage`}
+        fieldName={`slides.${currentSlide}.backgroundImage.content`}
         form={form}
         formType="backgroundImage"
       />

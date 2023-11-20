@@ -49,7 +49,7 @@ export function BrandForm({}: {}) {
         <ImageFormField
           form={form}
           formType="image"
-          fieldName="config.brand.avatar"
+          fieldName="config.brand.avatar.content"
         />
       </form>
     </Form>
