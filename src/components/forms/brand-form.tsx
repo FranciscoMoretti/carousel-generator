@@ -12,7 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 
 import { DocumentFormReturn } from "@/lib/document-form-types";
-import { ImageContentFormField } from "./fields/image-form-field";
+import { ImageContentFormField } from "./fields/image-content-form-field";
 
 export function BrandForm({}: {}) {
   const form: DocumentFormReturn = useFormContext(); // retrieve those props
