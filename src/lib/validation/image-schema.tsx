@@ -25,12 +25,12 @@ export const ImageContentSchema = z.object({
   src: z.union([z.string().url(), ImageDataUrlSchema]),
   type: ImageInputTypeSchema,
 });
-export const imageSchema = z.object({
+export const ImageSchema = z.object({
   content: ImageContentSchema,
   style: ImageStyleSchema,
 });
 
-export const DEFAULT_IMAGE_INPUT: z.infer<typeof imageSchema> = {
+export const DEFAULT_IMAGE_INPUT: z.infer<typeof ImageSchema> = {
   content: {
     src: "",
     type: ImageInputType.Url,

@@ -15,7 +15,7 @@ import { ImageInputType } from "@/lib/validation/image-schema";
 
 type ImageFormType = "backgroundImage" | "image";
 
-export function ImageFormField({
+export function ImageContentFormField({
   fieldName,
   form,
   formType,

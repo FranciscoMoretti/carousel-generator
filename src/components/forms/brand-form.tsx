@@ -12,7 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 
 import { DocumentFormReturn } from "@/lib/document-form-types";
-import { ImageFormField } from "./fields/image-form-field";
+import { ImageContentFormField } from "./fields/image-form-field";
 
 export function BrandForm({}: {}) {
   const form: DocumentFormReturn = useFormContext(); // retrieve those props
@@ -46,7 +46,7 @@ export function BrandForm({}: {}) {
             </FormItem>
           )}
         />
-        <ImageFormField
+        <ImageContentFormField
           form={form}
           formType="image"
           fieldName="config.brand.avatar.content"

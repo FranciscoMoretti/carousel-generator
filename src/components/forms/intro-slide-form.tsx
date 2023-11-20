@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { DocumentSchema } from "@/lib/validation/document-schema";
 import { DocumentFormReturn } from "@/lib/document-form-types";
-import { ImageFormField } from "./fields/image-form-field";
+import { ImageContentFormField } from "./fields/image-form-field";
 import { TitleFormField } from "@/components/forms/fields/title-form-field";
 import { SubtitleFormField } from "@/components/forms/fields/subtitle-form-field";
 import { DescriptionFormField } from "@/components/forms/fields/description-form-field";
@@ -32,7 +32,7 @@ export function IntroSlideForm({
       <TitleFormField currentSlide={currentSlide} form={form} />
       <SubtitleFormField currentSlide={currentSlide} form={form} />
       <DescriptionFormField currentSlide={currentSlide} form={form} />
-      <ImageFormField
+      <ImageContentFormField
         fieldName={`slides.${currentSlide}.backgroundImage.content`}
         form={form}
         formType="backgroundImage"

@@ -9,7 +9,7 @@ import {
 import { Input } from "@/components/ui/input";
 
 import { DocumentFormReturn } from "@/lib/document-form-types";
-import { ImageFormField } from "./fields/image-form-field";
+import { ImageContentFormField } from "./fields/image-form-field";
 import { TitleFormField } from "./fields/title-form-field";
 import { DescriptionFormField } from "@/components/forms/fields/description-form-field";
 
@@ -24,7 +24,7 @@ export function ContentSlideForm({
     <div className="space-y-6 w-full">
       <TitleFormField currentSlide={currentSlide} form={form}></TitleFormField>
       <DescriptionFormField currentSlide={currentSlide} form={form} />
-      <ImageFormField
+      <ImageContentFormField
         fieldName={`slides.${currentSlide}.image.content`}
         form={form}
         formType="image"

@@ -9,9 +9,9 @@ import { BackgroundLayer } from "@/components/elements/background-layer";
 import { PageLayout } from "./page-layout";
 import { Title } from "../elements/title";
 import { Description } from "@/components/elements/description";
-import { ObjectFitType, imageSchema } from "@/lib/validation/image-schema";
+import { ObjectFitType, ImageSchema } from "@/lib/validation/image-schema";
 
-function InsertedImage({ image }: { image: z.infer<typeof imageSchema> }) {
+function InsertedImage({ image }: { image: z.infer<typeof ImageSchema> }) {
   if (!image.content.src) {
     return null;
   }
