@@ -4,7 +4,7 @@ export const FontSizeType = z.enum(["Small", "Medium", "Large"]);
 export type FontSizeType = z.infer<typeof FontSizeType>;
 
 export const TextALignType = z.enum(["Left", "Center", "Right"]);
-export type TextALignType = z.infer<typeof FontSizeType>;
+export type TextALignType = z.infer<typeof TextALignType>;
 
 export const TextStyleSchema = z.object({
   fontSize: FontSizeType,
