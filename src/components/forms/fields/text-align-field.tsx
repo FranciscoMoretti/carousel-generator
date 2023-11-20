@@ -9,7 +9,7 @@ import {
 import { DocumentFormReturn } from "@/lib/document-form-types";
 import { FontSizeType, TextALignType } from "@/lib/validation/text-schema";
 import { RadioGroup } from "@radix-ui/react-radio-group";
-import { FontSizeRadioGroupItem } from "@/components/font-size-radio-group-item";
+import { CustomIndicatorRadioGroupItem } from "@/components/custom-indicator-radio-group-item";
 import { cn } from "@/lib/utils";
 
 // TODO: JOin with FontSizeField and parametrize
@@ -41,7 +41,7 @@ export function TextAlignField({
             >
               <FormItem className="flex items-center space-x-3 space-y-0">
                 <FormControl>
-                  <FontSizeRadioGroupItem
+                  <CustomIndicatorRadioGroupItem
                     value={TextALignType.enum.Left}
                     className={cn(
                       "h-5 w-5 flex flex-col items-center justify-center data-[state=unchecked]:border-transparent border",
@@ -49,13 +49,13 @@ export function TextAlignField({
                     )}
                   >
                     <AlignLeft className="h-4 w-4" />
-                  </FontSizeRadioGroupItem>
+                  </CustomIndicatorRadioGroupItem>
                 </FormControl>
                 {/* <FormLabel className="font-normal">Huemint 1</FormLabel> */}
               </FormItem>
               <FormItem className="flex items-center space-x-3 space-y-0 ">
                 <FormControl>
-                  <FontSizeRadioGroupItem
+                  <CustomIndicatorRadioGroupItem
                     value={TextALignType.enum.Center}
                     className={cn(
                       "h-5 w-5 flex flex-col items-center justify-center data-[state=unchecked]:border-transparent border",
@@ -63,13 +63,13 @@ export function TextAlignField({
                     )}
                   >
                     <AlignCenter className="h-4 w-4" />
-                  </FontSizeRadioGroupItem>
+                  </CustomIndicatorRadioGroupItem>
                 </FormControl>
                 {/* <FormLabel className="font-normal">Huemint 1</FormLabel> */}
               </FormItem>
               <FormItem className="flex items-center space-x-3 space-y-0">
                 <FormControl>
-                  <FontSizeRadioGroupItem
+                  <CustomIndicatorRadioGroupItem
                     value={TextALignType.enum.Right}
                     className={cn(
                       "h-5 w-5 flex flex-col items-center justify-center data-[state=unchecked]:border-transparent border",
@@ -77,7 +77,7 @@ export function TextAlignField({
                     )}
                   >
                     <AlignRight className="h-4 w-4" />
-                  </FontSizeRadioGroupItem>
+                  </CustomIndicatorRadioGroupItem>
                 </FormControl>
                 {/* <FormLabel className="font-normal">Huemint 1</FormLabel> */}
               </FormItem>

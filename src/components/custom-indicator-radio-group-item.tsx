@@ -5,7 +5,7 @@ import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 
 import { cn } from "@/lib/utils";
 
-export const FontSizeRadioGroupItem = React.forwardRef<
+export const CustomIndicatorRadioGroupItem = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>
 >(({ className, children, ...props }, ref) => {
@@ -13,7 +13,7 @@ export const FontSizeRadioGroupItem = React.forwardRef<
     <RadioGroupPrimitive.Item
       ref={ref}
       className={cn(
-        "border-2 text-primary disabled:cursor-not-allowed disabled:opacity-50 data-[state=unchecked]:border-muted data-[state=checked]:border-foreground rounded",
+        "border-2 p-0.5 text-primary disabled:cursor-not-allowed disabled:opacity-50 data-[state=unchecked]:border-muted data-[state=checked]:border-foreground rounded",
         className
       )}
       {...props}
@@ -26,4 +26,5 @@ export const FontSizeRadioGroupItem = React.forwardRef<
     </RadioGroupPrimitive.Item>
   );
 });
-FontSizeRadioGroupItem.displayName = RadioGroupPrimitive.Item.displayName;
+CustomIndicatorRadioGroupItem.displayName =
+  RadioGroupPrimitive.Item.displayName;

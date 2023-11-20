@@ -13,10 +13,8 @@ import { Input } from "@/components/ui/input";
 
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { pallettes } from "@/lib/pallettes";
-import {
-  ColorsDisplay,
-  ColorsRadioGroupItem,
-} from "../pallette-radio-group-item";
+import { CustomIndicatorRadioGroupItem } from "../custom-indicator-radio-group-item";
+import { ColorThemeDisplay } from "../color-theme-display";
 import { DocumentFormReturn } from "@/lib/document-form-types";
 import { Checkbox } from "../ui/checkbox";
 
@@ -47,9 +45,9 @@ function PalletteSelector({ form }: { form: DocumentFormReturn }) {
                   key={palletteName}
                 >
                   <FormControl>
-                    <ColorsRadioGroupItem value={palletteName}>
-                      <ColorsDisplay colors={colors} />
-                    </ColorsRadioGroupItem>
+                    <CustomIndicatorRadioGroupItem value={palletteName}>
+                      <ColorThemeDisplay colors={colors} />
+                    </CustomIndicatorRadioGroupItem>
                   </FormControl>
                   {/* <FormLabel className="font-normal">Huemint 1</FormLabel> */}
                 </FormItem>

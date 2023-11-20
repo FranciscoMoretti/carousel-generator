@@ -9,7 +9,7 @@ import {
 import { DocumentFormReturn } from "@/lib/document-form-types";
 import { FontSizeType } from "@/lib/validation/text-schema";
 import { RadioGroup } from "@radix-ui/react-radio-group";
-import { FontSizeRadioGroupItem } from "@/components/font-size-radio-group-item";
+import { CustomIndicatorRadioGroupItem } from "@/components/custom-indicator-radio-group-item";
 import { cn } from "@/lib/utils";
 
 export function FontSizeField({
@@ -40,7 +40,7 @@ export function FontSizeField({
             >
               <FormItem className="flex items-center">
                 <FormControl>
-                  <FontSizeRadioGroupItem
+                  <CustomIndicatorRadioGroupItem
                     value={FontSizeType.enum.Small}
                     className={cn(
                       "h-5 w-5 flex flex-col items-center justify-center data-[state=unchecked]:border-transparent border",
@@ -48,13 +48,13 @@ export function FontSizeField({
                     )}
                   >
                     <Type className="h-2 w-2" />
-                  </FontSizeRadioGroupItem>
+                  </CustomIndicatorRadioGroupItem>
                 </FormControl>
                 {/* <FormLabel className="font-normal">Huemint 1</FormLabel> */}
               </FormItem>
               <FormItem className="flex items-center ">
                 <FormControl>
-                  <FontSizeRadioGroupItem
+                  <CustomIndicatorRadioGroupItem
                     value={FontSizeType.enum.Medium}
                     className={cn(
                       "h-5 w-5 flex flex-col items-center justify-center data-[state=unchecked]:border-transparent border",
@@ -62,13 +62,13 @@ export function FontSizeField({
                     )}
                   >
                     <Type className="h-3 w-3" />
-                  </FontSizeRadioGroupItem>
+                  </CustomIndicatorRadioGroupItem>
                 </FormControl>
                 {/* <FormLabel className="font-normal">Huemint 1</FormLabel> */}
               </FormItem>
               <FormItem className="flex items-center ">
                 <FormControl>
-                  <FontSizeRadioGroupItem
+                  <CustomIndicatorRadioGroupItem
                     value={FontSizeType.enum.Large}
                     className={cn(
                       "h-5 w-5 flex flex-col items-center justify-center data-[state=unchecked]:border-transparent border",
@@ -76,7 +76,7 @@ export function FontSizeField({
                     )}
                   >
                     <Type className="h-4 w-4" />
-                  </FontSizeRadioGroupItem>
+                  </CustomIndicatorRadioGroupItem>
                 </FormControl>
                 {/* <FormLabel className="font-normal">Huemint 1</FormLabel> */}
               </FormItem>
