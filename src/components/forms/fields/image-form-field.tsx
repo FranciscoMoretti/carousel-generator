@@ -1,8 +1,8 @@
 import { DocumentFormReturn } from "@/lib/document-form-types";
 import {
-  ImageContentFormField,
+  ImageSourceFormField,
   ImageFormType,
-} from "@/components/forms/fields/image-content-form-field";
+} from "@/components/forms/fields/image-source-form-field";
 import { ObjectFitType } from "@/lib/validation/image-schema";
 import { Maximize, Maximize2, Minimize2 } from "lucide-react";
 import { EnumRadioGroupField } from "@/components/forms/fields/enum-radio-group-field";
@@ -27,7 +27,7 @@ export function ImageFormField({
 }) {
   return (
     <>
-      <ImageContentFormField
+      <ImageSourceFormField
         fieldName={`${fieldName}.source`}
         form={form}
         formType={formType}
