@@ -31,10 +31,7 @@ export function IntroPage({
     <PageLayout handleClick={handleClick} size={size}>
       <BackgroundLayer background={config.theme.background} className="-z-20" />
       {slide.backgroundImage?.source.src ? (
-        <BackgroundImageLayer
-          backgroundImageSrc={slide.backgroundImage?.source.src}
-          className="opacity-20 -z-10"
-        />
+        <BackgroundImageLayer image={slide.backgroundImage} className="-z-10" />
       ) : null}
       <div className={cn("p-10 flex flex-col h-full w-full", className)}>
         <div

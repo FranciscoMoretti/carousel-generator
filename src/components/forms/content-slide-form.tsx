@@ -12,7 +12,7 @@ import { DocumentFormReturn } from "@/lib/document-form-types";
 import { ImageContentFormField } from "./fields/image-content-form-field";
 import { TitleFormField } from "./fields/title-form-field";
 import { DescriptionFormField } from "@/components/forms/fields/description-form-field";
-import { ImageFormField } from "@/components/forms/fields/image-form-field";
+import { ContentImageFormField } from "@/components/forms/fields/content-image-form-field";
 
 export function ContentSlideForm({
   currentSlide,
@@ -25,7 +25,7 @@ export function ContentSlideForm({
     <div className="space-y-6 w-full">
       <TitleFormField currentSlide={currentSlide} form={form}></TitleFormField>
       <DescriptionFormField currentSlide={currentSlide} form={form} />
-      <ImageFormField
+      <ContentImageFormField
         fieldName={`slides.${currentSlide}.image`}
         form={form}
         formType="image"

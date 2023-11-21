@@ -1,5 +1,5 @@
 import * as z from "zod";
-import { ImageSchema } from "./image-schema";
+import { ContentImageSchema, ImageSchema } from "./image-schema";
 import { TitleSchema, SubtitleSchema, DescriptionSchema } from "./text-schema";
 
 export const SlideType = z.enum(["Intro", "Content", "Outro"]);
@@ -10,7 +10,7 @@ export const ContentSlideSchema = z.object({
   title: TitleSchema,
   description: DescriptionSchema,
   // TODO Fix optional usage of images
-  image: z.optional(ImageSchema),
+  image: z.optional(ContentImageSchema),
 });
 
 export const IntroSlideSchema = z.object({

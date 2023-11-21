@@ -33,7 +33,7 @@ export function ContentPage({
         <div className="flex flex-col justify-center  items-stretch grow gap-4">
           <Title config={config} title={slide.title} />
           <Description config={config} description={slide.description} />
-          {slide.image && <ContentImage image={slide.image}></ContentImage>}
+          {slide.image && <ContentImage image={slide.image} className="h-40" />}
         </div>
         <Footer number={index + 1} config={config} />
         {/* TODO: better number calculation */}
