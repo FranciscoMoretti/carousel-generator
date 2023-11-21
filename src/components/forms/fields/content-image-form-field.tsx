@@ -6,6 +6,7 @@ import {
 import { ObjectFitType } from "@/lib/validation/image-schema";
 import { Maximize, Maximize2, Minimize2 } from "lucide-react";
 import { EnumRadioGroupField } from "@/components/forms/fields/enum-radio-group-field";
+import { OpacityFormField } from "@/components/forms/fields/opacity-form-field";
 
 const objectFitMap: Record<ObjectFitType, React.ReactElement> = {
   [ObjectFitType.enum.Contain]: <Minimize2 className="h-4 w-4" />,
@@ -30,6 +31,11 @@ export function ContentImageFormField({
         fieldName={`${fieldName}.source`}
         form={form}
         formType={formType}
+      />
+      <OpacityFormField
+        fieldName={`${fieldName}.style.opacity`}
+        form={form}
+        label={"Opacity"}
       />
       <EnumRadioGroupField
         fieldName={`${fieldName}.style.objectFit`}
