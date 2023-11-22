@@ -32,7 +32,7 @@ export function OutroPage({
         <div
           className={`flex flex-col justify-center items-stretch grow gap-1`}
         >
-          <Title config={config} title={slide.title} className="text-5xl" />
+          <Title config={config} title={slide.title} />
           <Subtitle config={config} subtitle={slide.subtitle} />
           <Description config={config} description={slide.description} />
         </div>
