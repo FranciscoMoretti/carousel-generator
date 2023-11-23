@@ -5,7 +5,6 @@ import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 import { BrandForm } from "@/components/forms/brand-form";
-import { SlidesForm } from "@/components/slides-form";
 import { ThemeForm } from "@/components/forms/theme-form";
 import {
   VerticalTabs,
