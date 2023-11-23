@@ -39,6 +39,7 @@ export default function SlideMenubar({
       <Button
         onClick={() => {
           insert(currentPage, currentSlidesValues[currentPage]);
+          setCurrentPage(currentPage + 1);
         }}
         disabled={currentPage == 0 && numPages == 0}
         variant="outline"
