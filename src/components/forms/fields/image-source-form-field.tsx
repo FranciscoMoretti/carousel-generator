@@ -28,49 +28,51 @@ export function ImageSourceFormField({
   formType: ImageFormType;
 }) {
   return (
-    <FormField
-      control={form.control}
-      name={fieldName}
-      render={({ field }) => {
-        return (
-          <FormItem>
-            <FormLabel>
-              {formType == "backgroundImage" ? "Image Background" : "Image"}
-            </FormLabel>
-            <FormControl>
-              <Tabs
-                onValueChange={(tabValue) =>
-                  field.onChange({ type: tabValue, src: "" })
-                }
-                defaultValue={field?.value?.type || ImageInputType.Url}
-                className="w-full"
-              >
-                <TabsList className="grid w-full grid-cols-2">
-                  <TabsTrigger value={ImageInputType.Url}>URL</TabsTrigger>
-                  <TabsTrigger value={ImageInputType.Upload}>
-                    Upload
-                  </TabsTrigger>
-                </TabsList>
-                <TabsContent value={ImageInputType.Url}>
+    <Tabs
+      onValueChange={(tabValue) =>
+        form.setValue(fieldName, { type: tabValue as ImageInputType, src: "" })
+      }
+      defaultValue={form.getValues(`${fieldName}.type`)}
+      className="w-full"
+    >
+      <TabsList className="grid w-full grid-cols-2">
+        <TabsTrigger value={ImageInputType.Url}>URL</TabsTrigger>
+        <TabsTrigger value={ImageInputType.Upload}>Upload</TabsTrigger>
+      </TabsList>
+      <TabsContent value={ImageInputType.Url}>
+        <FormField
+          control={form.control}
+          name={`${fieldName}.src`}
+          render={({ field }) => {
+            return (
+              <FormItem>
+                <FormLabel>
+                  {formType == "backgroundImage" ? "Image Background" : "Image"}
+                </FormLabel>
+                <FormControl>
                   <Input
                     placeholder="Url to an image"
                     className="resize-none"
                     {...field}
-                    onChange={(e) => {
-                      field.onChange({
-                        type: ImageInputType.Url,
-                        src: e.target.value,
-                      });
-                    }}
-                    value={
-                      form.getValues(fieldName)?.type == ImageInputType.Url
-                        ? form.getValues(fieldName)?.src
-                        : ""
-                    }
                   />
-                  <FormMessage />
-                </TabsContent>
-                <TabsContent value={ImageInputType.Upload}>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            );
+          }}
+        />
+      </TabsContent>
+      <TabsContent value={ImageInputType.Upload}>
+        <FormField
+          control={form.control}
+          name={`${fieldName}.src`}
+          render={({ field }) => {
+            return (
+              <FormItem>
+                <FormLabel>
+                  {formType == "backgroundImage" ? "Image Background" : "Image"}
+                </FormLabel>
+                <FormControl>
                   <Input
                     accept=".jpg, .jpeg, .png, .svg, .webp"
                     type="file"
@@ -95,22 +97,19 @@ export function ImageSourceFormField({
                         const dataUrl = await convertFileToDataUrl(
                           compressedFile
                         );
-                        field.onChange({
-                          type: ImageInputType.Upload,
-                          src: dataUrl ? dataUrl : "",
-                        });
+                        field.onChange(dataUrl ? dataUrl : "");
                       } else {
                         console.error("No valid image file selected.");
                       }
                     }}
                   />
-                  <FormMessage />
-                </TabsContent>
-              </Tabs>
-            </FormControl>
-          </FormItem>
-        );
-      }}
-    />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            );
+          }}
+        />
+      </TabsContent>
+    </Tabs>
   );
 }
