@@ -13,19 +13,15 @@ import { MAX_IMAGE_SIZE_MB, MAX_IMAGE_WIDTH } from "../intro-slide-form";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../ui/tabs";
 import { ImageInputType } from "@/lib/validation/image-schema";
 
-export type ImageFormType = "backgroundImage" | "image";
-
 export function ImageSourceFormField({
   fieldName,
   form,
-  formType,
 }: {
   fieldName:
     | `slides.${number}.image.source`
     | `slides.${number}.backgroundImage.source`
     | "config.brand.avatar.source";
   form: DocumentFormReturn;
-  formType: ImageFormType;
 }) {
   return (
     <Tabs
@@ -46,9 +42,7 @@ export function ImageSourceFormField({
           render={({ field }) => {
             return (
               <FormItem>
-                <FormLabel>
-                  {formType == "backgroundImage" ? "Image Background" : "Image"}
-                </FormLabel>
+                <FormLabel>{""}</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="Url to an image"
@@ -69,9 +63,7 @@ export function ImageSourceFormField({
           render={({ field }) => {
             return (
               <FormItem>
-                <FormLabel>
-                  {formType == "backgroundImage" ? "Image Background" : "Image"}
-                </FormLabel>
+                <FormLabel>{""}</FormLabel>
                 <FormControl>
                   <Input
                     accept=".jpg, .jpeg, .png, .svg, .webp"

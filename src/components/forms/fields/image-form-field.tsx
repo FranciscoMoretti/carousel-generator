@@ -1,8 +1,5 @@
 import { DocumentFormReturn } from "@/lib/document-form-types";
-import {
-  ImageSourceFormField,
-  ImageFormType,
-} from "@/components/forms/fields/image-source-form-field";
+import { ImageSourceFormField } from "@/components/forms/fields/image-source-form-field";
 import { ObjectFitType } from "@/lib/validation/image-schema";
 import { Maximize, Maximize2, Minimize2 } from "lucide-react";
 import { EnumRadioGroupField } from "@/components/forms/fields/enum-radio-group-field";
@@ -16,22 +13,19 @@ const objectFitMap: Record<ObjectFitType, React.ReactElement> = {
 export function ImageFormField({
   fieldName,
   form,
-  formType,
+  label,
 }: {
   fieldName:
     | `slides.${number}.image`
     | `slides.${number}.backgroundImage`
     | "config.brand.avatar";
   form: DocumentFormReturn;
-  formType: ImageFormType;
+  label: string;
 }) {
   return (
     <>
-      <ImageSourceFormField
-        fieldName={`${fieldName}.source`}
-        form={form}
-        formType={formType}
-      />
+      <h3 className="text-base">{label}</h3>
+      <ImageSourceFormField fieldName={`${fieldName}.source`} form={form} />
       <OpacityFormField
         fieldName={`${fieldName}.style.opacity`}
         form={form}

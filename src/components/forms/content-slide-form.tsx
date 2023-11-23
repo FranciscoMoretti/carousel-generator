@@ -9,7 +9,6 @@ import {
 import { Input } from "@/components/ui/input";
 
 import { DocumentFormReturn } from "@/lib/document-form-types";
-import { ImageSourceFormField } from "./fields/image-source-form-field";
 import { TitleFormField } from "./fields/title-form-field";
 import { DescriptionFormField } from "@/components/forms/fields/description-form-field";
 import { ContentImageFormField } from "@/components/forms/fields/content-image-form-field";

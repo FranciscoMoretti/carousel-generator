@@ -35,7 +35,7 @@ export function IntroSlideForm({
       <ImageFormField
         fieldName={`slides.${currentSlide}.backgroundImage`}
         form={form}
-        formType={"backgroundImage"}
+        label={"Background Image"}
       />
     </div>
   );

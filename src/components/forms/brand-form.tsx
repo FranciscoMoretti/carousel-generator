@@ -12,7 +12,6 @@ import {
 import { Input } from "@/components/ui/input";
 
 import { DocumentFormReturn } from "@/lib/document-form-types";
-import { ImageSourceFormField } from "./fields/image-source-form-field";
 import { ImageFormField } from "@/components/forms/fields/image-form-field";
 
 export function BrandForm({}: {}) {
@@ -49,7 +48,7 @@ export function BrandForm({}: {}) {
         />
         <ImageFormField
           form={form}
-          formType="image"
+          label="Avatar Image"
           fieldName="config.brand.avatar"
         />
       </form>

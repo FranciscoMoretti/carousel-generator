@@ -24,11 +24,7 @@ export function ContentImageFormField({
 }) {
   return (
     <>
-      <ImageSourceFormField
-        fieldName={`${fieldName}.source`}
-        form={form}
-        formType={formType}
-      />
+      <ImageSourceFormField fieldName={`${fieldName}.source`} form={form} />
       <OpacityFormField
         fieldName={`${fieldName}.style.opacity`}
         form={form}
