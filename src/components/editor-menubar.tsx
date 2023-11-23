@@ -24,9 +24,12 @@ import {
 } from "@/components/ui/dialog";
 import FileInputForm from "./forms/file-input-form";
 import { useFieldsFileImporter } from "@/lib/hooks/use-fields-file-importer";
+import { usePagerContext } from "@/lib/providers/pager-context";
 
 export function EditorMenubar({}: {}) {
   const { reset, watch }: DocumentFormReturn = useFormContext(); // retrieve those props
+  const { setCurrentPage } = usePagerContext();
+
   const [isConfigDialogOpen, setIsConfigDialogOpen] = useState(false);
   const { handleFileSubmission: handleConfigFileSubmission } =
     useFieldsFileImporter("config");
@@ -110,7 +113,12 @@ export function EditorMenubar({}: {}) {
 
             <MenubarSeparator />
 
-            <MenubarItem onClick={() => reset()}>
+            <MenubarItem
+              onClick={() => {
+                reset();
+                setCurrentPage(0);
+              }}
+            >
               {/* TODO: This should have a confirmation alert dialog */}
               Reset to defaults
             </MenubarItem>
