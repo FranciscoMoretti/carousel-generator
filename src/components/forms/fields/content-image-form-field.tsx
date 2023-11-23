@@ -18,10 +18,7 @@ export function ContentImageFormField({
   form,
   formType,
 }: {
-  fieldName:
-    | `slides.${number}.image`
-    | `slides.${number}.backgroundImage`
-    | "config.brand.avatar";
+  fieldName: `slides.${number}.image`;
   form: DocumentFormReturn;
   formType: ImageFormType;
 }) {

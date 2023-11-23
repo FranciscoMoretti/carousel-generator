@@ -10,6 +10,7 @@ import { DocumentFormReturn } from "@/lib/document-form-types";
 import { RadioGroup } from "@radix-ui/react-radio-group";
 import { CustomIndicatorRadioGroupItem } from "@/components/custom-indicator-radio-group-item";
 import { cn } from "@/lib/utils";
+import React from "react";
 
 export function EnumRadioGroupField<T extends string | number | symbol>({
   fieldName,
@@ -29,10 +30,9 @@ export function EnumRadioGroupField<T extends string | number | symbol>({
     | `slides.${number}.subtitle.style.align`
     | `slides.${number}.description.style.align`
     // IMAGE
+    // CONTENT IMAGE
     // Object fit
-    | `slides.${number}.image.style.objectFit`
-    | `slides.${number}.backgroundImage.style.objectFit`
-    | "config.brand.avatar.style.objectFit";
+    | `slides.${number}.image.style.objectFit`;
   form: DocumentFormReturn;
   enumValueElements: Record<T, React.ReactNode>;
   itemClassName?: string;
@@ -50,7 +50,9 @@ export function EnumRadioGroupField<T extends string | number | symbol>({
               defaultValue={field.value}
               className={cn("flex flex-row gap-0.5", groupClassName)}
             >
-              {Object.entries(enumValueElements).map(([value, icon]) => (
+              {Object.entries<React.ReactNode>(
+                enumValueElements
+              ).map<React.ReactNode>(([value, icon]) => (
                 <FormItem className="flex items-center" key={value}>
                   <FormControl>
                     <CustomIndicatorRadioGroupItem
