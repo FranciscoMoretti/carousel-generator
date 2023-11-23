@@ -5,36 +5,16 @@ import {
   OutroSlideSchema,
   SlideType,
 } from "./validation/slide-schema";
-import { DescriptionSchema, TitleSchema } from "./validation/text-schema";
+import {
+  DEFAULT_DESCRIPTION,
+  DEFAULT_SUBTITLE,
+  DEFAULT_TITLE,
+} from "./validation/text-schema";
+
 import {
   DEFAULT_BACKGROUND_IMAGE_INPUT,
   DEFAULT_CONTENT_IMAGE_INPUT,
-  DEFAULT_IMAGE_INPUT,
 } from "./validation/image-schema";
-
-const DEFAULT_TITLE: z.infer<typeof TitleSchema> = {
-  text: "YOUR TITLE",
-  style: {
-    fontSize: "Medium",
-    align: "Left",
-  },
-};
-
-const DEFAULT_SUBTITLE: z.infer<typeof TitleSchema> = {
-  text: "Your awesome subtitle",
-  style: {
-    fontSize: "Medium",
-    align: "Left",
-  },
-};
-
-const DEFAULT_DESCRIPTION: z.infer<typeof DescriptionSchema> = {
-  text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, dolorum. awesome subtitle",
-  style: {
-    fontSize: "Medium",
-    align: "Left",
-  },
-};
 
 export const INTRO: z.infer<typeof IntroSlideSchema> = {
   type: SlideType.enum.Intro,

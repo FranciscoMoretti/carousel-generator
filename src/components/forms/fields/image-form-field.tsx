@@ -36,6 +36,7 @@ export function ImageFormField({
         fieldName={`${fieldName}.style.opacity`}
         form={form}
         label={"Opacity"}
+        disabled={form.getValues(`${fieldName}.source.src`) == ""}
       />
     </>
   );

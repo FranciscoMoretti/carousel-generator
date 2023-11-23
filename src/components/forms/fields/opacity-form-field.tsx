@@ -13,6 +13,7 @@ export function OpacityFormField({
   fieldName,
   form,
   label,
+  disabled = false,
   className = "",
 }: {
   fieldName:
@@ -21,6 +22,7 @@ export function OpacityFormField({
     | "config.brand.avatar.style.opacity";
   form: DocumentFormReturn;
   label: string;
+  disabled?: boolean;
   className?: string;
 }) {
   return (
@@ -34,6 +36,7 @@ export function OpacityFormField({
             <FormLabel>{label}</FormLabel>
             <FormControl>
               <Slider
+                disabled={disabled}
                 min={0}
                 max={100}
                 step={1}

@@ -4,6 +4,8 @@ import { useFormContext } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { ConfigSchema } from "@/lib/validation/document-schema";
 import { MultiSlideSchema } from "@/lib/validation/slide-schema";
+import merge from "deepmerge";
+import { getDefaultSlideOfType } from "@/lib/default-slides";
 
 export function useFieldsFileImporter(fields: "config" | "slides") {
   const { setValue }: DocumentFormReturn = useFormContext(); // retrieve those props
@@ -32,7 +34,9 @@ export function useFieldsFileImporter(fields: "config" | "slides") {
         }
       } else if (fields == "slides") {
         const parsedValues = MultiSlideSchema.parse(result);
+
         if (parsedValues) {
+          console.log({ parsedValues });
           setValue(fields, parsedValues);
         }
       } else {
