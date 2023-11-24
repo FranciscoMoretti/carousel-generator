@@ -42,6 +42,7 @@ export function ReactDocument({
         }px - ${SIZE.width * 0.5 * scale}px)`,
         transform: `scale(${scale})`,
         transformOrigin: "top",
+        height: `${SIZE.height * scale}px`,
       }}
     >
       <div className="flex flex-row gap-2">

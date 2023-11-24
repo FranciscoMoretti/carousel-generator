@@ -10,6 +10,12 @@ import React from "react";
 import useWindowDimensions from "@/lib/hooks/use-window-dimensions";
 import { SIZE } from "@/lib/page-size";
 import { LoadingSpinner } from "./loading-spinner";
+import { ScrollBar } from "@/components/ui/scroll-area";
+import { ScrollArea } from "@radix-ui/react-scroll-area";
+import { usePagerContext } from "@/lib/providers/pager-context";
+import { useFieldArrayValues } from "@/lib/hooks/use-field-array-values";
+import { Button } from "@/components/ui/button";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface SlidesEditorProps {}
 
@@ -18,7 +24,9 @@ export function SlidesEditor({}: SlidesEditorProps) {
   const document = watch();
   const { width: windowWidth } = useWindowDimensions();
   const isLoadingWidth = !windowWidth;
-
+  const { currentPage, onPreviousClick, onNextClick, setCurrentPage } =
+    usePagerContext();
+  const { numPages } = useFieldArrayValues("slides");
   const slidesFieldArray: SlidesFieldArrayReturn = useFieldArray({
     control, // control props comes from useForm (optional: if you are using FormContext)
     name: "slides", // unique name for your Field Array
@@ -42,20 +50,38 @@ export function SlidesEditor({}: SlidesEditorProps) {
     <div className="flex flex-col w-full items-center justify-start bg-muted/20">
       <div className=" flex flex-col p-4 w-full items-center justify-start gap-3 font-mono text-sm ">
         <SlideMenubar slidesFieldArray={slidesFieldArray} />
-        <div
-          className="overflow-clip w-full relative" //flex items-center justify-center
-          style={{
-            height: `${SIZE.height * SCALE}px`,
-          }}
-        >
+        <div className="relative w-full p-4 overflow-clip">
           <ReactDocument
             document={document}
             slidesFieldArray={slidesFieldArray}
             scale={SCALE}
-          />
+          />{" "}
+          <div className="absolute left-0 top-1/2 transform -translate-y-1/2 px-4 py-2 ">
+            <Button
+              onClick={onPreviousClick}
+              variant="outline"
+              size="icon"
+              className="border-2 border-primary"
+              disabled={currentPage == 0}
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </Button>
+          </div>
+          <div className="absolute right-0 top-1/2 transform -translate-y-1/2 px-4 py-2 ">
+            <Button
+              onClick={onNextClick}
+              variant="outline"
+              size="icon"
+              className="border-2 border-primary"
+              disabled={currentPage == numPages - 1 || numPages == 0}
+            >
+              <ChevronRight className="w-6 h-6" />
+            </Button>
+          </div>
         </div>
-        <SlidePanel slidesFieldArray={slidesFieldArray} scale={SCALE} />
       </div>
+
+      <SlidePanel slidesFieldArray={slidesFieldArray} scale={SCALE} />
     </div>
   );
 }
