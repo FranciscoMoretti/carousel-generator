@@ -1,8 +1,5 @@
 import { DocumentFormReturn } from "@/lib/document-form-types";
-import {
-  ImageSourceFormField,
-  ImageFormType,
-} from "@/components/forms/fields/image-source-form-field";
+import { ImageSourceFormField } from "@/components/forms/fields/image-source-form-field";
 import { ObjectFitType } from "@/lib/validation/image-schema";
 import { Maximize, Maximize2, Minimize2 } from "lucide-react";
 import { EnumRadioGroupField } from "@/components/forms/fields/enum-radio-group-field";
@@ -16,11 +13,9 @@ const objectFitMap: Record<ObjectFitType, React.ReactElement> = {
 export function ContentImageFormField({
   fieldName,
   form,
-  formType,
 }: {
   fieldName: `slides.${number}.image`;
   form: DocumentFormReturn;
-  formType: ImageFormType;
 }) {
   return (
     <>

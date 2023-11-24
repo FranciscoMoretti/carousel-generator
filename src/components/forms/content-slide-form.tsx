@@ -27,7 +27,6 @@ export function ContentSlideForm({
       <ContentImageFormField
         fieldName={`slides.${currentSlide}.image`}
         form={form}
-        formType="image"
       />
     </div>
   );
