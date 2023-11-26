@@ -18,7 +18,7 @@ export function Title({
   return (
     <h2
       className={cn(
-        `font-black text-balance`,
+        `font-black text-balance border-box border border-transparent hover:border-muted`,
         textStyleToClasses({
           style: title.style,
           sizes: ["text-7xl", "text-5xl", "text-3xl"],

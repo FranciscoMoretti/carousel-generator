@@ -11,12 +11,18 @@ import { PageLayout } from "@/components/pages/page-layout";
 import { Subtitle } from "@/components/elements/subtitle";
 import { Title } from "@/components/elements/title";
 import { Description } from "@/components/elements/description";
+import { TextAreaFormField } from "@/components/forms/fields/text-input-form-field";
+import { Title2 } from "@/components/elements/title2";
+import { Subtitle2 } from "@/components/elements/subtitle2";
+import { Description2 } from "@/components/elements/description2";
+import { SlideFieldPath, TextFieldPath } from "@/lib/document-form-types";
 
 export function IntroPage({
   index,
   config,
   slide,
   size,
+  fieldName,
   className,
   handleClick = undefined,
 }: {
@@ -24,6 +30,7 @@ export function IntroPage({
   config: z.infer<typeof ConfigSchema>;
   slide: z.infer<typeof IntroSlideSchema>;
   size: { width: number; height: number };
+  fieldName: SlideFieldPath;
   className?: string;
   handleClick?: React.MouseEventHandler<HTMLDivElement> | undefined;
 }) {
@@ -35,11 +42,13 @@ export function IntroPage({
       ) : null}
       <div className={cn("p-10 flex flex-col h-full w-full", className)}>
         <div
-          className={`flex flex-col justify-center grow gap-1 items-stretch`}
+          className={`flex flex-col justify-center grow gap-2 items-stretch`}
         >
-          <Title config={config} title={slide.title} />
-          <Subtitle config={config} subtitle={slide.subtitle} />
-          <Description config={config} description={slide.description} />
+          <Title2 fieldName={(fieldName + ".title") as TextFieldPath} />
+          <Subtitle2 fieldName={(fieldName + ".subtitle") as TextFieldPath} />
+          <Description2
+            fieldName={(fieldName + ".description") as TextFieldPath}
+          />
         </div>
         <Footer number={index + 1} config={config} />
       </div>

@@ -10,7 +10,10 @@ import { IntroPage } from "@/components/pages/intro-page";
 import { OutroPage } from "@/components/pages/outro-page";
 import { cn } from "@/lib/utils";
 import { NewPage } from "@/components/pages/new-page";
-import { SlidesFieldArrayReturn } from "@/lib/document-form-types";
+import {
+  SlideFieldPath,
+  SlidesFieldArrayReturn,
+} from "@/lib/document-form-types";
 import { getDefaultSlideOfType } from "@/lib/default-slides";
 import { useFieldArrayValues } from "@/lib/hooks/use-field-array-values";
 import { useRefContext } from "@/lib/providers/reference-context";
@@ -32,6 +35,8 @@ export function ReactDocument({
   const PAGE_GAP_PX = 8;
   const { append } = slidesFieldArray;
   const newPageAsSideButton = numPages > 0;
+
+  const fielName = "slides";
 
   return (
     <div
@@ -60,6 +65,7 @@ export function ReactDocument({
                 key={index}
                 index={index}
                 size={SIZE}
+                fieldName={(fielName + "." + index) as SlideFieldPath}
                 className={cn(
                   "",
                   currentPage != index &&
@@ -74,6 +80,7 @@ export function ReactDocument({
                 key={index}
                 index={index}
                 size={SIZE}
+                fieldName={(fielName + "." + index) as SlideFieldPath}
                 className={cn(
                   currentPage != index &&
                     "hover:brightness-90 hover:cursor-pointer"
@@ -87,6 +94,7 @@ export function ReactDocument({
                 key={index}
                 index={index}
                 size={SIZE}
+                fieldName={(fielName + "." + index) as SlideFieldPath}
                 className={cn(
                   currentPage != index &&
                     "hover:brightness-90 hover:cursor-pointer"
