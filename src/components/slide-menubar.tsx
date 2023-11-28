@@ -38,8 +38,16 @@ export default function SlideMenubar({
       </Button>
       <Button
         onClick={() => {
-          insert(currentPage, currentSlidesValues[currentPage]);
-          setCurrentPage(currentPage + 1);
+          console.log({
+            currentPage,
+            pageValue: currentSlidesValues[currentPage],
+          });
+          const insertPosition = currentPage;
+          const values = JSON.parse(
+            JSON.stringify(currentSlidesValues[insertPosition])
+          );
+          insert(insertPosition, values);
+          setCurrentPage(insertPosition + 1);
         }}
         disabled={currentPage == 0 && numPages == 0}
         variant="outline"
