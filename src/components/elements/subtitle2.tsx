@@ -6,27 +6,25 @@ import { fontIdToClassName } from "@/lib/fonts-map";
 import { TitleSchema } from "@/lib/validation/text-schema";
 import { textStyleToClasses } from "@/lib/text-style-to-classes";
 import { useFormContext } from "react-hook-form";
-import { DocumentFormReturn } from "@/lib/document-form-types";
+import {
+  DocumentFormReturn,
+  TextFieldPath,
+  TextFieldTextPath,
+} from "@/lib/document-form-types";
 import { TextAreaFormField } from "@/components/forms/fields/text-area-form-field";
 
 export function Subtitle2({
   fieldName,
   className = "",
 }: {
-  fieldName:
-    | `slides.${number}.title`
-    | `slides.${number}.subtitle`
-    | `slides.${number}.description`;
+  fieldName: TextFieldPath;
   className?: string;
 }) {
   const form = useFormContext();
   const { getValues } = form;
   const config = getValues("config");
   const style = getValues(`${fieldName}.style`);
-  const textFieldName = (fieldName + ".text") as
-    | `slides.${number}.title.text`
-    | `slides.${number}.subtitle.text`
-    | `slides.${number}.description.text`;
+  const textFieldName = (fieldName + ".text") as TextFieldTextPath;
 
   return (
     <TextAreaFormField

@@ -8,6 +8,7 @@ import { textStyleToClasses } from "@/lib/text-style-to-classes";
 import { useFormContext } from "react-hook-form";
 import {
   DocumentFormReturn,
+  TextFieldPath,
   TextFieldTextPath,
 } from "@/lib/document-form-types";
 import { TextAreaFormField } from "@/components/forms/fields/text-area-form-field";
@@ -16,7 +17,7 @@ export function Title2({
   fieldName,
   className = "",
 }: {
-  fieldName: TextFields;
+  fieldName: TextFieldPath;
   className?: string;
 }) {
   const form = useFormContext();
