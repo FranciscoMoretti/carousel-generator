@@ -10,9 +10,12 @@ import {
   DocumentFormReturn,
   TextFieldTextPath,
 } from "@/lib/document-form-types";
+import { getSlideNumber } from "@/lib/field-path";
+import { usePagerContext } from "@/lib/providers/pager-context";
 import { useSelectionContext } from "@/lib/providers/selection-context";
 
 import { CSSProperties } from "react";
+import { set } from "zod";
 
 export function TextAreaFormField({
   form,
@@ -30,6 +33,8 @@ export function TextAreaFormField({
   style?: CSSProperties;
 }) {
   const { setCurrentSelection } = useSelectionContext();
+  const { setCurrentPage } = usePagerContext();
+  const pageNumber = getSlideNumber(fieldName);
   return (
     <FormField
       control={form.control}
@@ -45,7 +50,7 @@ export function TextAreaFormField({
               {...field}
               onFocus={(event) => {
                 setCurrentSelection(fieldName);
-                event.stopPropagation();
+                setCurrentPage(pageNumber);
               }}
               // TODO: Create currentHover
               // Link with onMouseEnter and onMouseLeave
