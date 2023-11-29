@@ -47,7 +47,7 @@ export function EnumRadioGroupField<T extends string | number | symbol>({
           <FormControl>
             <RadioGroup
               onValueChange={field.onChange}
-              defaultValue={field.value}
+              defaultValue={form.getValues(fieldName)}
               className={cn("flex flex-row gap-0.5", groupClassName)}
             >
               {Object.entries<React.ReactNode>(

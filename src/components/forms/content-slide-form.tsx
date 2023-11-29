@@ -22,8 +22,6 @@ export function ContentSlideForm({
 }) {
   return (
     <div className="space-y-6 w-full">
-      <TitleFormField currentSlide={currentSlide} form={form}></TitleFormField>
-      <DescriptionFormField currentSlide={currentSlide} form={form} />
       <ContentImageFormField
         fieldName={`slides.${currentSlide}.image`}
         form={form}

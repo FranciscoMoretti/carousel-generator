@@ -10,6 +10,7 @@ import {
   DocumentFormReturn,
   TextFieldTextPath,
 } from "@/lib/document-form-types";
+import { useSelectionContext } from "@/lib/providers/selection-context";
 
 import { CSSProperties } from "react";
 
@@ -28,6 +29,7 @@ export function TextAreaFormField({
   className?: string;
   style?: CSSProperties;
 }) {
+  const { setCurrentSelection } = useSelectionContext();
   return (
     <FormField
       control={form.control}
@@ -41,6 +43,12 @@ export function TextAreaFormField({
               className={className}
               style={style}
               {...field}
+              onFocus={(event) => {
+                setCurrentSelection(fieldName);
+                event.stopPropagation();
+              }}
+              // TODO: Create currentHover
+              // Link with onMouseEnter and onMouseLeave
             />
           </FormControl>
           <FormMessage />

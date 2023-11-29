@@ -15,11 +15,5 @@ export function OutroSlideForm({
   currentSlide: number;
   form: DocumentFormReturn;
 }) {
-  return (
-    <div className="space-y-6 w-full">
-      <TitleFormField currentSlide={currentSlide} form={form} />
-      <SubtitleFormField currentSlide={currentSlide} form={form} />
-      <DescriptionFormField currentSlide={currentSlide} form={form} />
-    </div>
-  );
+  return <div className="space-y-6 w-full"></div>;
 }

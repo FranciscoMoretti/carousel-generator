@@ -16,11 +16,14 @@ import { usePagerContext } from "@/lib/providers/pager-context";
 import { useFieldArrayValues } from "@/lib/hooks/use-field-array-values";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { StyleMenu } from "@/components/style-menu";
+import { useSelectionContext } from "@/lib/providers/selection-context";
 
 interface SlidesEditorProps {}
 
 export function SlidesEditor({}: SlidesEditorProps) {
-  const { control, watch }: DocumentFormReturn = useFormContext();
+  const form: DocumentFormReturn = useFormContext();
+  const { control, watch } = form;
   const document = watch();
   const { width: windowWidth } = useWindowDimensions();
   const isLoadingWidth = !windowWidth;
@@ -31,6 +34,7 @@ export function SlidesEditor({}: SlidesEditorProps) {
     control, // control props comes from useForm (optional: if you are using FormContext)
     name: "slides", // unique name for your Field Array
   });
+  const { setCurrentSelection } = useSelectionContext();
 
   // TODO: Replace with better loading indicator (sized skeleton from shadcn/ui)
   if (isLoadingWidth) {
@@ -48,14 +52,28 @@ export function SlidesEditor({}: SlidesEditorProps) {
 
   return (
     <div className="flex flex-col w-full items-center justify-start bg-muted/20">
-      <div className=" flex flex-col p-4 w-full items-center justify-start gap-3 font-mono text-sm ">
+      <div
+        className=" flex flex-col p-4 w-full items-center justify-start gap-3 font-mono text-sm"
+        // TODO: When background gets clicked element gets unselected
+        onClick={(event) => {
+          // Only clear selection if this element started the event
+          if (event.target == event.currentTarget) {
+            setCurrentSelection(null);
+            event.stopPropagation();
+          }
+        }}
+      >
+        <div className="self-end">
+          <StyleMenu form={form} />
+        </div>
         <SlideMenubar slidesFieldArray={slidesFieldArray} />
+
         <div className="relative w-full p-4 overflow-clip">
           <ReactDocument
             document={document}
             slidesFieldArray={slidesFieldArray}
             scale={SCALE}
-          />{" "}
+          />
           <div className="absolute left-0 top-1/2 transform -translate-y-1/2 px-4 py-2 ">
             <Button
               onClick={onPreviousClick}

@@ -29,9 +29,6 @@ export function IntroSlideForm({
   // TODO: Validate fields with zod on change (e.g. Max character)
   return (
     <div className="space-y-6 w-full">
-      <TitleFormField currentSlide={currentSlide} form={form} />
-      <SubtitleFormField currentSlide={currentSlide} form={form} />
-      <DescriptionFormField currentSlide={currentSlide} form={form} />
       <ImageFormField
         fieldName={`slides.${currentSlide}.backgroundImage`}
         form={form}

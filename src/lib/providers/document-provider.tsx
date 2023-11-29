@@ -9,6 +9,8 @@ import { PagerProvider } from "@/lib/providers/pager-context";
 import { usePager } from "@/lib/hooks/use-pager";
 import { getDefaultSlideOfType } from "@/lib/default-slides";
 import { DEFAULT_IMAGE_INPUT } from "../validation/image-schema";
+import { SelectionProvider } from "@/lib/providers/selection-context";
+import { useSelection } from "@/lib/hooks/use-selection";
 
 const defaultSlideValues: z.infer<typeof MultiSlideSchema> = [
   getDefaultSlideOfType(SlideType.enum.Intro),
@@ -51,11 +53,14 @@ export function DocumentProvider({ children }: { children: React.ReactNode }) {
   });
   usePersistFormWithKey(documentForm, "documentFormKey");
   const pager = usePager(0);
+  const selection = useSelection();
   return (
     <FormProvider {...documentForm}>
-      <PagerProvider value={pager}>
-        <div className="flex-1">{children}</div>
-      </PagerProvider>
+      <SelectionProvider value={selection}>
+        <PagerProvider value={pager}>
+          <div className="flex-1">{children}</div>
+        </PagerProvider>
+      </SelectionProvider>
     </FormProvider>
   );
 }
