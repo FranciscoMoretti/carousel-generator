@@ -49,7 +49,7 @@ export function TextAreaFormField({
               style={style}
               {...field}
               onFocus={(event) => {
-                setCurrentSelection(fieldName);
+                setCurrentSelection(fieldName, event);
                 setCurrentPage(pageNumber);
               }}
               // TODO: Create currentHover

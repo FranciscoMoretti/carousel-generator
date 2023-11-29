@@ -15,6 +15,7 @@ import { getStyleSibling } from "../lib/field-path";
 export function StyleMenu({ form }: { form: DocumentFormReturn }) {
   const { currentSelection } = useSelectionContext();
 
+  console.log(currentSelection);
   return (
     <Popover open={true}>
       <PopoverTrigger asChild>

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 
 interface SelectionContextValue {
   currentSelection: string | null;
-  setCurrentSelection: (selection: string | null) => void;
+  setCurrentSelection: (selection: string | null, event: any) => void;
 }
 
 const SelectionContext = React.createContext<SelectionContextValue | undefined>(

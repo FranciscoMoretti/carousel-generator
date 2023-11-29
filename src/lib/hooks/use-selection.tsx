@@ -3,8 +3,15 @@ import { useState } from "react";
 export function useSelection() {
   const [currentSelection, setCurrentSelection] = useState<string | null>(null);
 
+  function _setCurrentSelection(currentSelection: string, event: any) {
+    // Only clear selection if this element started the event
+    if (event.target == event.currentTarget) {
+      setCurrentSelection(currentSelection);
+    }
+  }
+
   return {
     currentSelection,
-    setCurrentSelection,
+    setCurrentSelection: _setCurrentSelection,
   };
 }

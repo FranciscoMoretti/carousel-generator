@@ -5,7 +5,7 @@ import { getSlideNumber } from "@/lib/field-path";
 import { useSelection } from "@/lib/hooks/use-selection";
 import { useSelectionContext } from "@/lib/providers/selection-context";
 
-export function PageLayout({
+export function PageFrame({
   children,
   fieldName,
   className,
@@ -20,12 +20,9 @@ export function PageLayout({
 
   return (
     <div
-      className={cn(
-        "flex flex-col justify-center grow gap-2 items-stretch",
-        className
-      )}
+      className={cn("p-10 flex flex-col h-full w-full", className)}
       onClick={(event) => {
-        console.log("clicking layout");
+        console.log("clicking frame");
         setCurrentPage(pageNumber);
         setCurrentSelection(fieldName, event);
         event.stopPropagation();

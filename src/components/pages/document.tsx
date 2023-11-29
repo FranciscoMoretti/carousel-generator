@@ -71,7 +71,6 @@ export function ReactDocument({
                   currentPage != index &&
                     "hover:brightness-90 hover:cursor-pointer "
                 )}
-                handleClick={() => setCurrentPage(index)}
               />
             ) : slide.type == SlideType.enum.Intro ? (
               <IntroPage
@@ -85,7 +84,6 @@ export function ReactDocument({
                   currentPage != index &&
                     "hover:brightness-90 hover:cursor-pointer"
                 )}
-                handleClick={() => setCurrentPage(index)}
               />
             ) : slide.type == SlideType.enum.Outro ? (
               <OutroPage
@@ -99,7 +97,6 @@ export function ReactDocument({
                   currentPage != index &&
                     "hover:brightness-90 hover:cursor-pointer"
                 )}
-                handleClick={() => setCurrentPage(index)}
               />
             ) : null
           )}

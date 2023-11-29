@@ -57,10 +57,7 @@ export function SlidesEditor({}: SlidesEditorProps) {
         // TODO: When background gets clicked element gets unselected
         onClick={(event) => {
           // Only clear selection if this element started the event
-          if (event.target == event.currentTarget) {
-            setCurrentSelection(null);
-            event.stopPropagation();
-          }
+          setCurrentSelection(null, event);
         }}
       >
         <div className="self-end">
