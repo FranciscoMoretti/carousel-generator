@@ -20,12 +20,5 @@ export function ContentSlideForm({
   currentSlide: number;
   form: DocumentFormReturn;
 }) {
-  return (
-    <div className="space-y-6 w-full">
-      <ContentImageFormField
-        fieldName={`slides.${currentSlide}.image`}
-        form={form}
-      />
-    </div>
-  );
+  return <div className="space-y-6 w-full"></div>;
 }
