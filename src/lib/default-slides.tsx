@@ -29,12 +29,14 @@ export const CONTENT: z.infer<typeof ContentSlideSchema> = {
   title: DEFAULT_TITLE,
   description: DEFAULT_DESCRIPTION,
   image: DEFAULT_CONTENT_IMAGE_INPUT,
+  backgroundImage: DEFAULT_BACKGROUND_IMAGE_INPUT,
 };
 export const OUTRO: z.infer<typeof OutroSlideSchema> = {
   type: SlideType.enum.Outro,
   title: DEFAULT_TITLE,
   subtitle: DEFAULT_SUBTITLE,
   description: DEFAULT_DESCRIPTION,
+  backgroundImage: DEFAULT_BACKGROUND_IMAGE_INPUT,
 };
 
 export function getDefaultSlideOfType(slideType: SlideType) {

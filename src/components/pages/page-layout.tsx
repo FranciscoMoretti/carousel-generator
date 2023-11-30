@@ -25,10 +25,8 @@ export function PageLayout({
         className
       )}
       onClick={(event) => {
-        console.log("clicking layout");
         setCurrentPage(pageNumber);
         setCurrentSelection(fieldName, event);
-        event.stopPropagation();
       }}
     >
       {children}

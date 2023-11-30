@@ -52,6 +52,9 @@ export function TextAreaFormField({
                 setCurrentSelection(fieldName, event);
                 setCurrentPage(pageNumber);
               }}
+              onClick={(event) => {
+                event.stopPropagation();
+              }}
               // TODO: Create currentHover
               // Link with onMouseEnter and onMouseLeave
             />

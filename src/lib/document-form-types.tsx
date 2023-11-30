@@ -1,11 +1,15 @@
 import {
   FieldPath,
+  FieldPathByValue,
   UseFieldArrayReturn,
   UseFormReturn,
   UseFormWatch,
 } from "react-hook-form";
 import * as z from "zod";
 import { DocumentSchema } from "@/lib/validation/document-schema";
+import { ConfigSchema } from "@/lib/validation/document-schema";
+import { TextStyleSchema } from "@/lib/validation/text-schema";
+import { getPathsByValue } from "@/lib/zod-paths-by-value";
 
 export type DocumentFormReturn = UseFormReturn<
   z.infer<typeof DocumentSchema>,
@@ -30,7 +34,7 @@ export type TextFieldTextPath =
   | `slides.${number}.subtitle.text`
   | `slides.${number}.description.text`;
 
-export type TextFieldStylePath =
-  | `slides.${number}.title.style`
-  | `slides.${number}.subtitle.style`
-  | `slides.${number}.description.style`;
+export type TextFieldStylePath = FieldPathByValue<
+  z.infer<typeof DocumentSchema>,
+  z.infer<typeof TextStyleSchema>
+>;

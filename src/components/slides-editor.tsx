@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { StyleMenu } from "@/components/style-menu";
 import { useSelectionContext } from "@/lib/providers/selection-context";
+import { StyleMenuPopover } from "@/components/style-menu-popover";
 
 interface SlidesEditorProps {}
 
@@ -61,7 +62,7 @@ export function SlidesEditor({}: SlidesEditorProps) {
         }}
       >
         <div className="self-end">
-          <StyleMenu form={form} />
+          <StyleMenuPopover form={form} />
         </div>
         <SlideMenubar slidesFieldArray={slidesFieldArray} />
 

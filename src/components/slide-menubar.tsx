@@ -47,6 +47,7 @@ export default function SlideMenubar({
             JSON.stringify(currentSlidesValues[insertPosition])
           );
           insert(insertPosition, values);
+          // TODO A clone sets focus to an input and that resets current page back to `inserposition`
           setCurrentPage(insertPosition + 1);
         }}
         disabled={currentPage == 0 && numPages == 0}

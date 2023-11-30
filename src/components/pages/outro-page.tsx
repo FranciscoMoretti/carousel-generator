@@ -15,6 +15,7 @@ import { Subtitle2 } from "@/components/elements/subtitle2";
 import { Description2 } from "@/components/elements/description2";
 import { PageFrame } from "@/components/pages/page-frame";
 import { PageLayout } from "@/components/pages/page-layout";
+import { BackgroundImageLayer } from "@/components/elements/background-image-layer";
 
 export function OutroPage({
   index,
@@ -33,11 +34,16 @@ export function OutroPage({
   className?: string;
   handleClick?: React.MouseEventHandler<HTMLDivElement> | undefined;
 }) {
+  const backgroundImageField = fieldName + ".backgroundImage.source";
+
   return (
-    <PageBase size={size}>
+    <PageBase size={size} fieldName={backgroundImageField}>
       <BackgroundLayer background={config.theme.background} className="-z-20" />
-      <PageFrame fieldName={fieldName} className={className}>
-        <PageLayout fieldName={fieldName} className={className}>
+      {slide.backgroundImage?.source.src ? (
+        <BackgroundImageLayer image={slide.backgroundImage} className="-z-10" />
+      ) : null}
+      <PageFrame fieldName={backgroundImageField} className={className}>
+        <PageLayout fieldName={backgroundImageField} className={className}>
           <Title2 fieldName={(fieldName + ".title") as TextFieldPath} />
           <Subtitle2 fieldName={(fieldName + ".subtitle") as TextFieldPath} />
           <Description2

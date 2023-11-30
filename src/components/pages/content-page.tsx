@@ -15,6 +15,7 @@ import { Title2 } from "@/components/elements/title2";
 import { Description2 } from "@/components/elements/description2";
 import { PageFrame } from "@/components/pages/page-frame";
 import { PageLayout } from "@/components/pages/page-layout";
+import { BackgroundImageLayer } from "@/components/elements/background-image-layer";
 
 export function ContentPage({
   index,
@@ -23,7 +24,6 @@ export function ContentPage({
   size,
   fieldName,
   className,
-  handleClick = undefined,
 }: {
   index: number;
   config: z.infer<typeof ConfigSchema>;
@@ -31,13 +31,17 @@ export function ContentPage({
   size: { width: number; height: number };
   fieldName: SlideFieldPath;
   className?: string;
-  handleClick?: React.MouseEventHandler<HTMLDivElement> | undefined;
 }) {
+  // TODO: Change source field for parent field
+  const backgroundImageField = fieldName + ".backgroundImage.source";
   return (
-    <PageBase size={size}>
+    <PageBase size={size} fieldName={backgroundImageField}>
       <BackgroundLayer background={config.theme.background} className="-z-20" />
-      <PageFrame fieldName={fieldName} className={className}>
-        <PageLayout fieldName={fieldName} className={className}>
+      {slide.backgroundImage?.source.src ? (
+        <BackgroundImageLayer image={slide.backgroundImage} className="-z-10" />
+      ) : null}
+      <PageFrame fieldName={backgroundImageField} className={className}>
+        <PageLayout fieldName={backgroundImageField} className={className}>
           <Title2 fieldName={(fieldName + ".title") as TextFieldPath} />
           <Description2
             fieldName={(fieldName + ".description") as TextFieldPath}

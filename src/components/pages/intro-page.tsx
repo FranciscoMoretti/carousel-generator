@@ -35,14 +35,16 @@ export function IntroPage({
   className?: string;
   handleClick?: React.MouseEventHandler<HTMLDivElement> | undefined;
 }) {
+  const backgroundImageField = fieldName + ".backgroundImage.source";
+
   return (
-    <PageBase size={size}>
+    <PageBase size={size} fieldName={backgroundImageField}>
       <BackgroundLayer background={config.theme.background} className="-z-20" />
       {slide.backgroundImage?.source.src ? (
         <BackgroundImageLayer image={slide.backgroundImage} className="-z-10" />
       ) : null}
-      <PageFrame fieldName={fieldName} className={className}>
-        <PageLayout fieldName={fieldName} className={className}>
+      <PageFrame fieldName={backgroundImageField} className={className}>
+        <PageLayout fieldName={backgroundImageField} className={className}>
           <Title2 fieldName={(fieldName + ".title") as TextFieldPath} />
           <Subtitle2 fieldName={(fieldName + ".subtitle") as TextFieldPath} />
           <Description2

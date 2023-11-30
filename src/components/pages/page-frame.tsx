@@ -22,10 +22,8 @@ export function PageFrame({
     <div
       className={cn("p-10 flex flex-col h-full w-full", className)}
       onClick={(event) => {
-        console.log("clicking frame");
         setCurrentPage(pageNumber);
         setCurrentSelection(fieldName, event);
-        event.stopPropagation();
       }}
     >
       {children}
