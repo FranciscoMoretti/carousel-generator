@@ -25,7 +25,6 @@ export function IntroPage({
   size,
   fieldName,
   className,
-  handleClick = undefined,
 }: {
   index: number;
   config: z.infer<typeof ConfigSchema>;
@@ -33,7 +32,6 @@ export function IntroPage({
   size: { width: number; height: number };
   fieldName: SlideFieldPath;
   className?: string;
-  handleClick?: React.MouseEventHandler<HTMLDivElement> | undefined;
 }) {
   const backgroundImageField = fieldName + ".backgroundImage.source";
 

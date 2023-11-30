@@ -24,7 +24,6 @@ export function OutroPage({
   size,
   fieldName,
   className,
-  handleClick = undefined,
 }: {
   index: number;
   config: z.infer<typeof ConfigSchema>;
@@ -32,7 +31,6 @@ export function OutroPage({
   size: { width: number; height: number };
   fieldName: SlideFieldPath;
   className?: string;
-  handleClick?: React.MouseEventHandler<HTMLDivElement> | undefined;
 }) {
   const backgroundImageField = fieldName + ".backgroundImage.source";
 
