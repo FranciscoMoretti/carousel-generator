@@ -27,6 +27,8 @@ export function ContentImage({
     image.source.src ||
     "http://www.listercarterhomes.com/wp-content/uploads/2013/11/dummy-image-square.jpg";
 
+  // TODO: Convert to Toggle to make it accessible. Control with selection
+
   return (
     <div
       className={cn(
