@@ -70,7 +70,10 @@ export function StyleMenu({ form }: { form: DocumentFormReturn }) {
           />
         ) : null}
         {srcPath?.endsWith(".source") ? (
-          <ImageSourceFormField fieldName={`${srcPath}`} form={form} />
+          <div className="w-full flex flex-col gap-1">
+            <h4 className="text-base font-semibold">Image</h4>
+            <ImageSourceFormField fieldName={`${srcPath}`} form={form} />
+          </div>
         ) : null}
         {/* {currentSelection ? (
         <TextStyleFormFields
