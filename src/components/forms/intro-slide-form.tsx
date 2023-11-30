@@ -27,13 +27,5 @@ export function IntroSlideForm({
   form: DocumentFormReturn;
 }) {
   // TODO: Validate fields with zod on change (e.g. Max character)
-  return (
-    <div className="space-y-6 w-full">
-      <ImageFormField
-        fieldName={`slides.${currentSlide}.backgroundImage`}
-        form={form}
-        label={"Background Image"}
-      />
-    </div>
-  );
+  return <div className="space-y-6 w-full"></div>;
 }

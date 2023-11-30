@@ -4,10 +4,18 @@ import { EnumRadioGroupField } from "@/components/forms/fields/enum-radio-group-
 import { DocumentFormReturn } from "@/lib/document-form-types";
 import { cn } from "@/lib/utils";
 import React from "react";
-import { AlignCenter, AlignLeft, AlignRight, Type } from "lucide-react";
+import {
+  AlignCenter,
+  AlignLeft,
+  AlignRight,
+  Maximize2,
+  Minimize2,
+  Type,
+} from "lucide-react";
 import { FontSizeType, TextALignType } from "@/lib/validation/text-schema";
 import { OpacityFormField } from "@/components/forms/fields/opacity-form-field";
 import { ImageSourceFormField } from "@/components/forms/fields/image-source-form-field";
+import { ObjectFitType } from "@/lib/validation/image-schema";
 
 const fontSizeMap: Record<FontSizeType, React.ReactElement> = {
   [FontSizeType.enum.Small]: <Type className="h-2 w-2" />,
@@ -19,6 +27,11 @@ const textAlignMap: Record<TextALignType, React.ReactElement> = {
   [TextALignType.enum.Left]: <AlignLeft className="h-4 w-4" />,
   [TextALignType.enum.Center]: <AlignCenter className="h-4 w-4" />,
   [TextALignType.enum.Right]: <AlignRight className="h-4 w-4" />,
+};
+
+const objectFitMap: Record<ObjectFitType, React.ReactElement> = {
+  [ObjectFitType.enum.Contain]: <Minimize2 className="h-4 w-4" />,
+  [ObjectFitType.enum.Cover]: <Maximize2 className="h-4 w-4" />,
 };
 
 export function StyleMenu({ form }: { form: DocumentFormReturn }) {
@@ -34,6 +47,7 @@ export function StyleMenu({ form }: { form: DocumentFormReturn }) {
         // Don't propagate click to background
         (event) => event.stopPropagation()
       }
+      key={srcPath}
     >
       <div className="space-y-2">
         <h4 className="font-medium leading-none">Style</h4>
@@ -60,6 +74,15 @@ export function StyleMenu({ form }: { form: DocumentFormReturn }) {
             itemClassName="h-10 w-10"
           />
         ) : null}
+        {values.objectFit != undefined ? (
+          <EnumRadioGroupField
+            form={form}
+            fieldName={`${stylePath}.objectFit`}
+            enumValueElements={objectFitMap}
+            groupClassName="grid grid-cols-3 items-center gap-1"
+            itemClassName="h-10 w-10"
+          />
+        ) : null}
         {values.opacity != undefined ? (
           <OpacityFormField
             fieldName={`${stylePath}.opacity`}
@@ -75,14 +98,6 @@ export function StyleMenu({ form }: { form: DocumentFormReturn }) {
             <ImageSourceFormField fieldName={`${srcPath}`} form={form} />
           </div>
         ) : null}
-        {/* {currentSelection ? (
-        <TextStyleFormFields
-          key={currentSelection} // Necessary to update the component based on field change
-          form={form}
-          fieldName={stylePath}
-          className="flex flex-row"
-        ></TextStyleFormFields>
-      ) : null} */}
       </div>
     </div>
   );

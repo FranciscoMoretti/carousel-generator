@@ -24,6 +24,7 @@ export const IntroSlideSchema = z.object({
   title: TitleSchema.default({}),
   subtitle: SubtitleSchema.default({}),
   description: DescriptionSchema.default({}),
+  image: ContentImageSchema.default(DEFAULT_CONTENT_IMAGE_INPUT),
   backgroundImage: ImageSchema.default(DEFAULT_BACKGROUND_IMAGE_INPUT),
 });
 
@@ -32,6 +33,7 @@ export const OutroSlideSchema = z.object({
   title: TitleSchema.default({}),
   subtitle: SubtitleSchema.default({}),
   description: DescriptionSchema.default({}),
+  image: ContentImageSchema.default(DEFAULT_CONTENT_IMAGE_INPUT),
   backgroundImage: ImageSchema.default(DEFAULT_BACKGROUND_IMAGE_INPUT),
 });
 

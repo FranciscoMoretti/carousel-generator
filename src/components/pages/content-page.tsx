@@ -46,7 +46,11 @@ export function ContentPage({
           <Description2
             fieldName={(fieldName + ".description") as TextFieldPath}
           />
-          {slide.image && <ContentImage image={slide.image} className="h-40" />}
+          <ContentImage
+            fieldName={fieldName + ".image.source"}
+            image={slide.image}
+            className="h-40"
+          />
         </PageLayout>
         <Footer number={index + 1} config={config} />
       </PageFrame>
