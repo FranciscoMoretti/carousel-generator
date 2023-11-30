@@ -23,7 +23,7 @@ export function Description2({
     <TextAreaFormField
       fieldName={textFieldName}
       form={form}
-      placeholder={"Your title here"}
+      placeholder={"Your description here"}
       className={cn(
         `font-medium`,
         textStyleToClasses({

@@ -30,7 +30,7 @@ export function Subtitle2({
     <TextAreaFormField
       fieldName={textFieldName}
       form={form}
-      placeholder={"Your title here"}
+      placeholder={"Your subtitle here"}
       className={cn(
         `font-bold`,
         textStyleToClasses({
