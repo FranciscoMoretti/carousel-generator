@@ -97,7 +97,7 @@ export function SlidesEditor({}: SlidesEditorProps) {
         </div>
       </div>
 
-      <SlidePanel slidesFieldArray={slidesFieldArray} scale={SCALE} />
+      {/* <SlidePanel slidesFieldArray={slidesFieldArray} scale={SCALE} /> */}
     </div>
   );
 }
