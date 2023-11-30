@@ -58,7 +58,7 @@ export function DocumentProvider({ children }: { children: React.ReactNode }) {
     <FormProvider {...documentForm}>
       <SelectionProvider value={selection}>
         <PagerProvider value={pager}>
-          <div className="flex-1">{children}</div>
+          <div className="flex-1 flex flex-col">{children}</div>
         </PagerProvider>
       </SelectionProvider>
     </FormProvider>

@@ -15,9 +15,9 @@ export default function Editor({}: {}) {
 
   return (
     <RefProvider myRef={componentRef}>
-      <div className="flex flex-col">
+      <div className="flex-1 flex flex-col">
         <MainNav
-          className="h-12 border-b px-6"
+          className="h-12 border-b px-6 "
           handlePrint={handlePrint}
           isPrinting={isPrinting}
         />
