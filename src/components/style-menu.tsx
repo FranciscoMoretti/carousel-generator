@@ -38,8 +38,6 @@ export function StyleMenu({ form }: { form: DocumentFormReturn }) {
   const { currentSelection: srcPath } = useSelectionContext();
   const stylePath = srcPath ? getStyleSibling(srcPath) : "";
   const values = stylePath ? form.getValues(stylePath) : {};
-  console.log(stylePath);
-  console.log(values);
   return (
     <div
       className="grid gap-4"

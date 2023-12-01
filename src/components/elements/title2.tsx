@@ -25,7 +25,6 @@ export function Title2({
   const config = getValues("config");
   const style = getValues(`${fieldName}.style`);
   const textFieldName = (fieldName + ".text") as TextFieldTextPath;
-
   return (
     <TextAreaFormField
       fieldName={textFieldName}

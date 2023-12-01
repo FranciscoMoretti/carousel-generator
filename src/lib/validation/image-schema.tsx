@@ -1,3 +1,4 @@
+import { ElementType } from "@/lib/validation/element-type";
 import * as z from "zod";
 
 const ImageDataUrlSchema = z
@@ -16,7 +17,7 @@ export const ImageStyleSchema = z.object({
 });
 
 export const ContentImageStyleSchema = ImageStyleSchema.extend({
-  objectFit: ObjectFitType.default(ObjectFitType.enum.Contain),
+  objectFit: ObjectFitType.default(ObjectFitType.enum.Cover),
 });
 
 export enum ImageInputType {
@@ -42,6 +43,7 @@ export const ImageSchema = z.object({
 });
 
 export const ContentImageSchema = z.object({
+  type: z.literal(ElementType.enum.Image).default(ElementType.enum.Image),
   source: ImageSourceSchema.default(DEFAULT_IMAGE_SOURCE),
   style: ContentImageStyleSchema.default({}),
 });

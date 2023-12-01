@@ -1,5 +1,6 @@
 import * as z from "zod";
 import {
+  CommonSlideSchema,
   ContentSlideSchema,
   IntroSlideSchema,
   OutroSlideSchema,
@@ -15,6 +16,21 @@ import {
   DEFAULT_BACKGROUND_IMAGE_INPUT,
   DEFAULT_CONTENT_IMAGE_INPUT,
 } from "./validation/image-schema";
+
+export const COMMON_PAGE: z.infer<typeof CommonSlideSchema> = {
+  elements: [
+    DEFAULT_TITLE,
+    DEFAULT_SUBTITLE,
+    DEFAULT_DESCRIPTION,
+    DEFAULT_CONTENT_IMAGE_INPUT,
+  ],
+  backgroundImage: DEFAULT_BACKGROUND_IMAGE_INPUT,
+};
+
+export const COMMON_PAGE_2: z.infer<typeof CommonSlideSchema> = {
+  elements: [DEFAULT_CONTENT_IMAGE_INPUT, DEFAULT_TITLE],
+  backgroundImage: DEFAULT_BACKGROUND_IMAGE_INPUT,
+};
 
 export const INTRO: z.infer<typeof IntroSlideSchema> = {
   type: SlideType.enum.Intro,
@@ -49,6 +65,8 @@ export function getDefaultSlideOfType(slideType: SlideType) {
   } else if (slideType == SlideType.enum.Outro) {
     return { ...OUTRO };
   } else {
+    return { ...COMMON_PAGE };
+    // TODO This method should be reused for elements
     throw Error(`Unknown slide type [${slideType}]`);
   }
 }

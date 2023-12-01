@@ -7,9 +7,10 @@ import {
 } from "react-hook-form";
 import * as z from "zod";
 import { DocumentSchema } from "@/lib/validation/document-schema";
-import { ConfigSchema } from "@/lib/validation/document-schema";
+import { CommonSlideSchema } from "@/lib/validation/slide-schema";
 import { TextStyleSchema } from "@/lib/validation/text-schema";
 import { getPathsByValue } from "@/lib/zod-paths-by-value";
+import { CommonPage } from "@/components/pages/common-page";
 
 export type DocumentFormReturn = UseFormReturn<
   z.infer<typeof DocumentSchema>,
@@ -20,6 +21,11 @@ export type DocumentFormReturn = UseFormReturn<
 export type SlidesFieldArrayReturn = UseFieldArrayReturn<
   z.infer<typeof DocumentSchema>,
   "slides"
+>;
+
+export type ElementsFieldArrayReturn = UseFieldArrayReturn<
+  z.infer<typeof CommonSlideSchema>,
+  `elements` // TODO: This shouldn't be 0, it should be generic
 >;
 
 export type SlideFieldPath = `slides.${number}`;

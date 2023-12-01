@@ -10,16 +10,19 @@ import {
 import { useSelectionContext } from "@/lib/providers/selection-context";
 import { getSlideNumber } from "@/lib/field-path";
 import { usePagerContext } from "@/lib/providers/pager-context";
+import { useFormContext } from "react-hook-form";
 
 export function ContentImage({
-  image,
   fieldName,
   className,
 }: {
-  image: z.infer<typeof ContentImageSchema>;
   fieldName: string;
   className?: string;
 }) {
+  const form = useFormContext();
+  const { getValues } = form;
+  const image = getValues(`${fieldName}`);
+
   const { setCurrentPage } = usePagerContext();
   const { currentSelection, setCurrentSelection } = useSelectionContext();
   const pageNumber = getSlideNumber(fieldName);
@@ -33,7 +36,7 @@ export function ContentImage({
     <div
       className={cn(
         "flex flex-col h-full w-full outline-transparent rounded-md ring-offset-background",
-        currentSelection == fieldName &&
+        currentSelection == fieldName + ".source" &&
           "outline-input ring-2 ring-offset-2 ring-ring",
         className
       )}
@@ -56,7 +59,7 @@ export function ContentImage({
         }}
         onClick={(event) => {
           setCurrentPage(pageNumber);
-          setCurrentSelection(fieldName, event);
+          setCurrentSelection(fieldName + ".source", event);
         }}
       />
     </div>

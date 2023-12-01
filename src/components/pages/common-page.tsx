@@ -4,7 +4,10 @@ import { ConfigSchema, DocumentSchema } from "@/lib/validation/document-schema";
 import { Footer } from "../elements/footer";
 import { cn } from "@/lib/utils";
 import { fontIdToClassName, fontsMap } from "@/lib/fonts-map";
-import { IntroSlideSchema } from "@/lib/validation/slide-schema";
+import {
+  CommonSlideSchema,
+  IntroSlideSchema,
+} from "@/lib/validation/slide-schema";
 import { BackgroundLayer } from "@/components/elements/background-layer";
 import { BackgroundImageLayer } from "@/components/elements/background-image-layer";
 import { PageBase } from "@/components/pages/page-base";
@@ -18,8 +21,10 @@ import { SlideFieldPath, TextFieldPath } from "@/lib/document-form-types";
 import { PageFrame } from "@/components/pages/page-frame";
 import { PageLayout } from "@/components/pages/page-layout";
 import { AddElement } from "@/components/pages/add-element";
+import { ElementType } from "@/lib/validation/element-type";
+import { ContentImage } from "@/components/elements/content-image";
 
-export function IntroPage({
+export function CommonPage({
   index,
   config,
   slide,
@@ -29,7 +34,7 @@ export function IntroPage({
 }: {
   index: number;
   config: z.infer<typeof ConfigSchema>;
-  slide: z.infer<typeof IntroSlideSchema>;
+  slide: z.infer<typeof CommonSlideSchema>;
   size: { width: number; height: number };
   fieldName: SlideFieldPath;
   className?: string;
@@ -44,12 +49,27 @@ export function IntroPage({
       ) : null}
       <PageFrame fieldName={backgroundImageField} className={className}>
         <PageLayout fieldName={backgroundImageField} className={className}>
-          <Title2 fieldName={(fieldName + ".title") as TextFieldPath} />
-          <Subtitle2 fieldName={(fieldName + ".subtitle") as TextFieldPath} />
-          <Description2
-            fieldName={(fieldName + ".description") as TextFieldPath}
-          />
-          <AddElement fieldName={fieldName} />
+          {slide.elements.map((element, index) => {
+            return element.type == ElementType.enum.Title ? (
+              <Title2
+                fieldName={(fieldName + ".elements." + index) as TextFieldPath}
+              />
+            ) : element.type == ElementType.enum.Subtitle ? (
+              <Subtitle2
+                fieldName={(fieldName + ".elements." + index) as TextFieldPath}
+              />
+            ) : element.type == ElementType.enum.Description ? (
+              <Description2
+                fieldName={(fieldName + ".elements." + index) as TextFieldPath}
+              />
+            ) : element.type == ElementType.enum.Image ? (
+              <ContentImage
+                fieldName={(fieldName + ".elements." + index) as TextFieldPath}
+                className="h-40"
+              />
+            ) : null;
+          })}
+          <AddElement fieldName={fieldName + ".elements"} />
         </PageLayout>
         <Footer number={index + 1} config={config} />
       </PageFrame>

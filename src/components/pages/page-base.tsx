@@ -17,9 +17,11 @@ export function PageBase({
   className?: string;
 }) {
   const { currentSelection } = useSelectionContext();
+  const pageNumber = getSlideNumber(fieldName);
 
   return (
     <div
+      id={"page-base-" + pageNumber}
       className={cn(
         "overflow-clip relative outline-2 outline-transparent ring-offset-background",
         currentSelection == fieldName &&

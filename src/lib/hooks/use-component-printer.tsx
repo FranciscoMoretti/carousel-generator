@@ -123,6 +123,8 @@ export function useComponentPrinter() {
       // Change from horizontal to vertical for printing and remove gap
       clone.className = "flex flex-col";
       proxyImgSources(clone);
+      removeSelectionStyle(clone);
+      removeAddElementButtons(clone);
       return clone;
     }
 
@@ -202,4 +204,32 @@ function proxyImgSources(html: HTMLElement) {
     // TODO: Consider using the cache of fetch
     image.src = apiRequestURL.toString();
   });
+}
+
+function removeAddElementButtons(html: HTMLElement) {
+  const elements = Array.from(
+    html.querySelectorAll("[id^=add-element-]")
+  ) as HTMLDivElement[];
+
+  elements.forEach((element) => {
+    element.remove();
+  });
+}
+
+function removeSelectionStyle(html: HTMLElement) {
+  const elements = Array.from(
+    html.querySelectorAll("[id^=page-base]")
+  ) as HTMLDivElement[];
+
+  const classNames = "outline-input ring-2 ring-offset-2 ring-ring";
+  elements.forEach((element) => {
+    element.className = removeClassnames(element, classNames);
+  });
+}
+
+function removeClassnames(element: HTMLDivElement, classNames: string): string {
+  return element.className
+    .split(" ")
+    .filter((el) => !classNames.split(" ").includes(el))
+    .join(" ");
 }

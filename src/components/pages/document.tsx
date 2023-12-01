@@ -17,6 +17,7 @@ import {
 import { getDefaultSlideOfType } from "@/lib/default-slides";
 import { useFieldArrayValues } from "@/lib/hooks/use-field-array-values";
 import { useRefContext } from "@/lib/providers/reference-context";
+import { CommonPage } from "@/components/pages/common-page";
 
 export function ReactDocument({
   document,
@@ -98,7 +99,20 @@ export function ReactDocument({
                     "hover:brightness-90 hover:cursor-pointer"
                 )}
               />
-            ) : null
+            ) : (
+              <CommonPage
+                config={document.config}
+                slide={slide}
+                key={index}
+                index={index}
+                size={SIZE}
+                fieldName={(fielName + "." + index) as SlideFieldPath}
+                className={cn(
+                  currentPage != index &&
+                    "hover:brightness-90 hover:cursor-pointer"
+                )}
+              />
+            )
           )}
         </div>
         <NewPage
