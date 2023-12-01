@@ -15,12 +15,12 @@ import { useSelection } from "@/lib/hooks/use-selection";
 const defaultSlideValues: z.infer<typeof MultiSlideSchema> = [
   getDefaultSlideOfType(undefined),
   { ...COMMON_PAGE_2 },
-  getDefaultSlideOfType(SlideType.enum.Intro),
-  getDefaultSlideOfType(SlideType.enum.Content),
-  getDefaultSlideOfType(SlideType.enum.Content),
-  getDefaultSlideOfType(SlideType.enum.Content),
-  getDefaultSlideOfType(SlideType.enum.Content),
-  getDefaultSlideOfType(SlideType.enum.Outro),
+  // getDefaultSlideOfType(SlideType.enum.Intro),
+  // getDefaultSlideOfType(SlideType.enum.Content),
+  // getDefaultSlideOfType(SlideType.enum.Content),
+  // getDefaultSlideOfType(SlideType.enum.Content),
+  // getDefaultSlideOfType(SlideType.enum.Content),
+  // getDefaultSlideOfType(SlideType.enum.Outro),
 ];
 
 export function DocumentProvider({ children }: { children: React.ReactNode }) {

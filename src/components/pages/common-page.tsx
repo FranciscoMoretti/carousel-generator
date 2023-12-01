@@ -23,6 +23,7 @@ import { PageLayout } from "@/components/pages/page-layout";
 import { AddElement } from "@/components/pages/add-element";
 import { ElementType } from "@/lib/validation/element-type";
 import { ContentImage } from "@/components/elements/content-image";
+import ElementMenubar from "@/components/element-menubar";
 
 export function CommonPage({
   index,
@@ -51,22 +52,38 @@ export function CommonPage({
         <PageLayout fieldName={backgroundImageField} className={className}>
           {slide.elements.map((element, index) => {
             return element.type == ElementType.enum.Title ? (
-              <Title2
-                fieldName={(fieldName + ".elements." + index) as TextFieldPath}
-              />
+              <ElementMenubar fieldName={fieldName + ".elements." + index}>
+                <Title2
+                  fieldName={
+                    (fieldName + ".elements." + index) as TextFieldPath
+                  }
+                />
+              </ElementMenubar>
             ) : element.type == ElementType.enum.Subtitle ? (
-              <Subtitle2
-                fieldName={(fieldName + ".elements." + index) as TextFieldPath}
-              />
+              <ElementMenubar fieldName={fieldName + ".elements." + index}>
+                <Subtitle2
+                  fieldName={
+                    (fieldName + ".elements." + index) as TextFieldPath
+                  }
+                />
+              </ElementMenubar>
             ) : element.type == ElementType.enum.Description ? (
-              <Description2
-                fieldName={(fieldName + ".elements." + index) as TextFieldPath}
-              />
+              <ElementMenubar fieldName={fieldName + ".elements." + index}>
+                <Description2
+                  fieldName={
+                    (fieldName + ".elements." + index) as TextFieldPath
+                  }
+                />
+              </ElementMenubar>
             ) : element.type == ElementType.enum.Image ? (
-              <ContentImage
-                fieldName={(fieldName + ".elements." + index) as TextFieldPath}
-                className="h-40"
-              />
+              <ElementMenubar fieldName={fieldName + ".elements." + index}>
+                <ContentImage
+                  fieldName={
+                    (fieldName + ".elements." + index) as TextFieldPath
+                  }
+                  className="h-40"
+                />
+              </ElementMenubar>
             ) : null;
           })}
           <AddElement fieldName={fieldName + ".elements"} />
