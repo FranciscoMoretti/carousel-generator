@@ -24,7 +24,6 @@ import { AddElement } from "@/components/pages/add-element";
 import { ElementType } from "@/lib/validation/element-type";
 import { ContentImage } from "@/components/elements/content-image";
 import ElementMenubarWrapper from "@/components/element-menubar-wrapper";
-import { useElementSize } from "usehooks-ts";
 
 export function CommonPage({
   index,
@@ -64,8 +63,6 @@ export function CommonPage({
   const remainingHeight = elementsHeight
     ? size.height - FRAME_PADDING * 2 - footerDimensions.height - elementsHeight
     : 0;
-
-  console.log({ fieldName, elementsHeight, remainingHeight, footerDimensions });
 
   return (
     <PageBase size={size} fieldName={backgroundImageField}>
