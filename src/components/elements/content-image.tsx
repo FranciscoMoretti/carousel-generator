@@ -34,6 +34,7 @@ export function ContentImage({
 
   return (
     <div
+      id={"content-image-" + fieldName}
       className={cn(
         "flex flex-col h-full w-full outline-transparent rounded-md ring-offset-background",
         currentSelection == fieldName &&

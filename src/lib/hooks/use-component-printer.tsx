@@ -123,7 +123,8 @@ export function useComponentPrinter() {
       // Change from horizontal to vertical for printing and remove gap
       clone.className = "flex flex-col";
       proxyImgSources(clone);
-      removeSelectionStyle(clone);
+      removeSelectionStyleById(clone, "page-base-");
+      removeSelectionStyleById(clone, "content-image-");
       removeAllById(clone, "add-element-");
       removeAllById(clone, "element-menubar-");
       removeAllById(clone, "slide-menubar-");
@@ -219,9 +220,9 @@ function removeAllById(html: HTMLElement, id: string) {
   });
 }
 
-function removeSelectionStyle(html: HTMLElement) {
+function removeSelectionStyleById(html: HTMLElement, id: string) {
   const elements = Array.from(
-    html.querySelectorAll("[id^=page-base]")
+    html.querySelectorAll(`[id^=${id}]`)
   ) as HTMLDivElement[];
 
   const classNames = "outline-input ring-2 ring-offset-2 ring-ring";
