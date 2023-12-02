@@ -124,7 +124,10 @@ export function useComponentPrinter() {
       clone.className = "flex flex-col";
       proxyImgSources(clone);
       removeSelectionStyle(clone);
-      removeAddElementButtons(clone);
+      removeAllById(clone, "add-element-");
+      removeAllById(clone, "element-menubar-");
+      removeAllById(clone, "slide-menubar-");
+
       return clone;
     }
 
@@ -206,9 +209,9 @@ function proxyImgSources(html: HTMLElement) {
   });
 }
 
-function removeAddElementButtons(html: HTMLElement) {
+function removeAllById(html: HTMLElement, id: string) {
   const elements = Array.from(
-    html.querySelectorAll("[id^=add-element-]")
+    html.querySelectorAll(`[id^=${id}]`)
   ) as HTMLDivElement[];
 
   elements.forEach((element) => {

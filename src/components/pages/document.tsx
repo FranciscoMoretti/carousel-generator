@@ -18,6 +18,7 @@ import { getDefaultSlideOfType } from "@/lib/default-slides";
 import { useFieldArrayValues } from "@/lib/hooks/use-field-array-values";
 import { useRefContext } from "@/lib/providers/reference-context";
 import { CommonPage } from "@/components/pages/common-page";
+import SlideMenubarWrapper from "@/components/slide-menubar-wrapper";
 
 export function ReactDocument({
   document,
@@ -100,18 +101,23 @@ export function ReactDocument({
                 )}
               />
             ) : (
-              <CommonPage
-                config={document.config}
-                slide={slide}
-                key={index}
-                index={index}
-                size={SIZE}
+              <SlideMenubarWrapper
+                slidesFieldArray={slidesFieldArray}
                 fieldName={(fielName + "." + index) as SlideFieldPath}
-                className={cn(
-                  currentPage != index &&
-                    "hover:brightness-90 hover:cursor-pointer"
-                )}
-              />
+                key={fielName + "." + index}
+              >
+                <CommonPage
+                  config={document.config}
+                  slide={slide}
+                  index={index}
+                  size={SIZE}
+                  fieldName={(fielName + "." + index) as SlideFieldPath}
+                  className={cn(
+                    currentPage != index &&
+                      "hover:brightness-90 hover:cursor-pointer"
+                  )}
+                />
+              </SlideMenubarWrapper>
             )
           )}
         </div>
