@@ -24,6 +24,7 @@ import { AddElement } from "@/components/pages/add-element";
 import { ElementType } from "@/lib/validation/element-type";
 import { ContentImage } from "@/components/elements/content-image";
 import ElementMenubarWrapper from "@/components/element-menubar-wrapper";
+import { useElementSize } from "usehooks-ts";
 
 export function CommonPage({
   index,
