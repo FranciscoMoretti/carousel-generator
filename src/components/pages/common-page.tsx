@@ -23,7 +23,7 @@ import { PageLayout } from "@/components/pages/page-layout";
 import { AddElement } from "@/components/pages/add-element";
 import { ElementType } from "@/lib/validation/element-type";
 import { ContentImage } from "@/components/elements/content-image";
-import ElementMenubar from "@/components/element-menubar";
+import ElementMenubarWrapper from "@/components/element-menubar-wrapper";
 
 export function CommonPage({
   index,
@@ -40,7 +40,7 @@ export function CommonPage({
   fieldName: SlideFieldPath;
   className?: string;
 }) {
-  const backgroundImageField = fieldName + ".backgroundImage.source";
+  const backgroundImageField = fieldName + ".backgroundImage";
 
   return (
     <PageBase size={size} fieldName={backgroundImageField}>
@@ -52,38 +52,46 @@ export function CommonPage({
         <PageLayout fieldName={backgroundImageField} className={className}>
           {slide.elements.map((element, index) => {
             return element.type == ElementType.enum.Title ? (
-              <ElementMenubar fieldName={fieldName + ".elements." + index}>
+              <ElementMenubarWrapper
+                fieldName={fieldName + ".elements." + index}
+              >
                 <Title2
                   fieldName={
                     (fieldName + ".elements." + index) as TextFieldPath
                   }
                 />
-              </ElementMenubar>
+              </ElementMenubarWrapper>
             ) : element.type == ElementType.enum.Subtitle ? (
-              <ElementMenubar fieldName={fieldName + ".elements." + index}>
+              <ElementMenubarWrapper
+                fieldName={fieldName + ".elements." + index}
+              >
                 <Subtitle2
                   fieldName={
                     (fieldName + ".elements." + index) as TextFieldPath
                   }
                 />
-              </ElementMenubar>
+              </ElementMenubarWrapper>
             ) : element.type == ElementType.enum.Description ? (
-              <ElementMenubar fieldName={fieldName + ".elements." + index}>
+              <ElementMenubarWrapper
+                fieldName={fieldName + ".elements." + index}
+              >
                 <Description2
                   fieldName={
                     (fieldName + ".elements." + index) as TextFieldPath
                   }
                 />
-              </ElementMenubar>
-            ) : element.type == ElementType.enum.Image ? (
-              <ElementMenubar fieldName={fieldName + ".elements." + index}>
+              </ElementMenubarWrapper>
+            ) : element.type == ElementType.enum.ContentImage ? (
+              <ElementMenubarWrapper
+                fieldName={fieldName + ".elements." + index}
+              >
                 <ContentImage
                   fieldName={
                     (fieldName + ".elements." + index) as TextFieldPath
                   }
                   className="h-40"
                 />
-              </ElementMenubar>
+              </ElementMenubarWrapper>
             ) : null;
           })}
           <AddElement fieldName={fieldName + ".elements"} />

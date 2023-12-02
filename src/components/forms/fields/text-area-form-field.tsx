@@ -10,7 +10,7 @@ import {
   DocumentFormReturn,
   TextFieldTextPath,
 } from "@/lib/document-form-types";
-import { getSlideNumber } from "@/lib/field-path";
+import { getParent, getSlideNumber } from "@/lib/field-path";
 import { usePagerContext } from "@/lib/providers/pager-context";
 import { useSelectionContext } from "@/lib/providers/selection-context";
 
@@ -49,7 +49,7 @@ export function TextAreaFormField({
               style={style}
               {...field}
               onFocus={(event) => {
-                setCurrentSelection(fieldName, event);
+                setCurrentSelection(getParent(fieldName), event);
                 setCurrentPage(pageNumber);
               }}
               onClick={(event) => {

@@ -38,12 +38,15 @@ export const ImageSourceSchema = z.object({
 });
 
 export const ImageSchema = z.object({
+  type: z.literal(ElementType.enum.Image).default(ElementType.enum.Image),
   source: ImageSourceSchema.default(DEFAULT_IMAGE_SOURCE),
   style: ImageStyleSchema.default({}),
 });
 
 export const ContentImageSchema = z.object({
-  type: z.literal(ElementType.enum.Image).default(ElementType.enum.Image),
+  type: z
+    .literal(ElementType.enum.ContentImage)
+    .default(ElementType.enum.ContentImage),
   source: ImageSourceSchema.default(DEFAULT_IMAGE_SOURCE),
   style: ContentImageStyleSchema.default({}),
 });

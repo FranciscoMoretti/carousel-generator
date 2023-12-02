@@ -16,6 +16,7 @@ import { FontSizeType, TextALignType } from "@/lib/validation/text-schema";
 import { OpacityFormField } from "@/components/forms/fields/opacity-form-field";
 import { ImageSourceFormField } from "@/components/forms/fields/image-source-form-field";
 import { ObjectFitType } from "@/lib/validation/image-schema";
+import { ElementType } from "@/lib/validation/element-type";
 
 const fontSizeMap: Record<FontSizeType, React.ReactElement> = {
   [FontSizeType.enum.Small]: <Type className="h-2 w-2" />,
@@ -35,9 +36,11 @@ const objectFitMap: Record<ObjectFitType, React.ReactElement> = {
 };
 
 export function StyleMenu({ form }: { form: DocumentFormReturn }) {
-  const { currentSelection: srcPath } = useSelectionContext();
-  const stylePath = srcPath ? getStyleSibling(srcPath) : "";
-  const values = stylePath ? form.getValues(stylePath) : {};
+  const { currentSelection: elementPath } = useSelectionContext();
+  const stylePath = elementPath ? elementPath + ".style" : "";
+  const values = stylePath ? form.getValues(elementPath) : {};
+  const style = values.style;
+  const type = values.type;
   return (
     <div
       className="grid gap-4"
@@ -45,7 +48,7 @@ export function StyleMenu({ form }: { form: DocumentFormReturn }) {
         // Don't propagate click to background
         (event) => event.stopPropagation()
       }
-      key={srcPath}
+      key={elementPath}
     >
       <div className="space-y-2">
         <h4 className="font-medium leading-none">Style</h4>
@@ -54,7 +57,7 @@ export function StyleMenu({ form }: { form: DocumentFormReturn }) {
         </p>
       </div>
       <div className="flex flex-col gap-2 items-center">
-        {values.fontSize != undefined ? (
+        {style && style.fontSize != undefined ? (
           <EnumRadioGroupField
             form={form}
             fieldName={`${stylePath}.fontSize`}
@@ -63,7 +66,7 @@ export function StyleMenu({ form }: { form: DocumentFormReturn }) {
             itemClassName="h-10 w-10"
           />
         ) : null}
-        {values.align != undefined ? (
+        {style && style.align != undefined ? (
           <EnumRadioGroupField
             form={form}
             fieldName={`${stylePath}.align`}
@@ -72,7 +75,7 @@ export function StyleMenu({ form }: { form: DocumentFormReturn }) {
             itemClassName="h-10 w-10"
           />
         ) : null}
-        {values.objectFit != undefined ? (
+        {style && style.objectFit != undefined ? (
           <EnumRadioGroupField
             form={form}
             fieldName={`${stylePath}.objectFit`}
@@ -81,19 +84,23 @@ export function StyleMenu({ form }: { form: DocumentFormReturn }) {
             itemClassName="h-10 w-10"
           />
         ) : null}
-        {values.opacity != undefined ? (
+        {style && style.opacity != undefined ? (
           <OpacityFormField
             fieldName={`${stylePath}.opacity`}
             form={form}
             label={"Opacity"}
             className="w-full"
-            disabled={form.getValues(`${srcPath}.src`) == ""}
+            disabled={form.getValues(`${elementPath}.source.src`) == ""}
           />
         ) : null}
-        {srcPath?.endsWith(".source") ? (
+        {type == ElementType.enum.Image ||
+        type == ElementType.enum.ContentImage ? (
           <div className="w-full flex flex-col gap-1">
             <h4 className="text-base font-semibold">Image</h4>
-            <ImageSourceFormField fieldName={`${srcPath}`} form={form} />
+            <ImageSourceFormField
+              fieldName={`${elementPath}.source`}
+              form={form}
+            />
           </div>
         ) : null}
       </div>

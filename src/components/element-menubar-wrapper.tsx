@@ -19,8 +19,9 @@ import { useFieldArrayValues } from "@/lib/hooks/use-field-array-values";
 import { cn } from "@/lib/utils";
 import { useFieldArray } from "react-hook-form";
 import { getParent, getElementNumber } from "@/lib/field-path";
+import { useSelectionContext } from "@/lib/providers/selection-context";
 
-export default function ElementMenubar({
+export default function ElementMenubarWrapper({
   // slidesFieldArray,
   fieldName, //TODO Maybe change with number or expose onclciks
   children,
@@ -33,21 +34,26 @@ export default function ElementMenubar({
   className?: string;
 }) {
   const { numPages: numElements } = useFieldArrayValues(getParent(fieldName));
+  const { currentSelection } = useSelectionContext();
   const { watch }: DocumentFormReturn = useFormContext(); // retrieve those props
   const { control } = useFormContext();
   const { swap, remove, insert } = useFieldArray({
-    control, // control props comes from useForm (optional: if you are using FormContext)
-    name: getParent(fieldName), // unique name for your Field Array
+    control,
+    name: getParent(fieldName),
   });
   const currentElementNumber = getElementNumber(fieldName);
   const currentElementValue = watch(fieldName);
 
   // const { remove, swap, insert } = slidesFieldArray;
-
+  console.log({ currentSelection, fieldName });
   return (
     <div className="relative">
       <div
-        className={cn("flex flex-row gap-1 absolute -top-7 right-0", className)}
+        className={cn(
+          "flex flex-row gap-1 absolute -top-7 right-0",
+          currentSelection != fieldName && "hidden",
+          className
+        )}
       >
         <Button
           onClick={() => {

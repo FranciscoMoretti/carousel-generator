@@ -36,7 +36,7 @@ export function ContentImage({
     <div
       className={cn(
         "flex flex-col h-full w-full outline-transparent rounded-md ring-offset-background",
-        currentSelection == fieldName + ".source" &&
+        currentSelection == fieldName &&
           "outline-input ring-2 ring-offset-2 ring-ring",
         className
       )}
@@ -59,7 +59,7 @@ export function ContentImage({
         }}
         onClick={(event) => {
           setCurrentPage(pageNumber);
-          setCurrentSelection(fieldName + ".source", event);
+          setCurrentSelection(fieldName, event);
         }}
       />
     </div>
