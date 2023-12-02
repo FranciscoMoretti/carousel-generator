@@ -50,7 +50,7 @@ export default function ElementMenubarWrapper({
     <div className="relative">
       <div
         className={cn(
-          "flex flex-row gap-1 absolute -top-7 right-0",
+          "flex flex-row gap-0 absolute -top-7 right-0 bg-background rounded-t-md rounded-br-md rounded-bl-none px-1",
           currentSelection != fieldName && "hidden",
           className
         )}
@@ -60,7 +60,7 @@ export default function ElementMenubarWrapper({
             swap(currentElementNumber, currentElementNumber - 1);
             // setCurrentPage(currentElementNumber - 1);
           }}
-          variant="outline"
+          variant="ghost"
           size="icon"
           className="w-6 h-6"
           disabled={
@@ -82,7 +82,7 @@ export default function ElementMenubarWrapper({
             // setCurrentPage(insertPosition + 1);
           }}
           disabled={currentElementNumber == 0 && numElements == 0}
-          variant="outline"
+          variant="ghost"
           size="icon"
           className="w-6 h-6"
         >
@@ -101,7 +101,7 @@ export default function ElementMenubarWrapper({
             // }
           }}
           disabled={currentElementNumber == 0 && numElements == 0}
-          variant="outline"
+          variant="ghost"
           size="icon"
           className="w-6 h-6"
         >
@@ -112,7 +112,7 @@ export default function ElementMenubarWrapper({
             swap(currentElementNumber, currentElementNumber + 1);
             // setCurrentPage(currentElementNumber + 1);
           }}
-          variant="outline"
+          variant="ghost"
           size="icon"
           className="w-6 h-6"
           disabled={currentElementNumber >= numElements - 1}
