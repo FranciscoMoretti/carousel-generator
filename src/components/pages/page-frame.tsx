@@ -20,7 +20,7 @@ export function PageFrame({
 
   return (
     <div
-      className={cn("p-10 flex flex-col h-full w-full", className)}
+      className={cn("flex flex-col h-full w-full", className)}
       onClick={(event) => {
         setCurrentPage(pageNumber);
         setCurrentSelection(fieldName, event);

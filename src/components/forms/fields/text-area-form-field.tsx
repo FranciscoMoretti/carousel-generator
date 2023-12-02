@@ -13,7 +13,6 @@ import {
 import { getParent, getSlideNumber } from "@/lib/field-path";
 import { usePagerContext } from "@/lib/providers/pager-context";
 import { useSelectionContext } from "@/lib/providers/selection-context";
-
 import { CSSProperties } from "react";
 import { set } from "zod";
 
@@ -35,6 +34,7 @@ export function TextAreaFormField({
   const { setCurrentSelection } = useSelectionContext();
   const { setCurrentPage } = usePagerContext();
   const pageNumber = getSlideNumber(fieldName);
+
   return (
     <FormField
       control={form.control}

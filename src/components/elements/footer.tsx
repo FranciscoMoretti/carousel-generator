@@ -5,17 +5,21 @@ import { Signature } from "@/components/elements/signature";
 import { PageNumber } from "@/components/elements/page-number";
 import { cn } from "@/lib/utils";
 
-export function Footer({
-  config,
-  number,
-  className,
-}: {
-  config: z.infer<typeof ConfigSchema>;
-  number: number;
-  className?: string;
-}) {
+const Footer = React.forwardRef(function Footer(
+  {
+    config,
+    number,
+    className,
+  }: {
+    config: z.infer<typeof ConfigSchema>;
+    number: number;
+    className?: string;
+  },
+  ref
+) {
   return (
     <div
+      ref={ref}
       className={cn("flex flex-row justify-between items-center", className)}
     >
       <Signature config={config} />
@@ -24,4 +28,6 @@ export function Footer({
       )}
     </div>
   );
-}
+});
+
+export default Footer;

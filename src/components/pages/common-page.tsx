@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import * as z from "zod";
 import { ConfigSchema, DocumentSchema } from "@/lib/validation/document-schema";
-import { Footer } from "../elements/footer";
+import Footer from "../elements/footer";
 import { cn } from "@/lib/utils";
 import { fontIdToClassName, fontsMap } from "@/lib/fonts-map";
 import {
@@ -24,6 +24,7 @@ import { AddElement } from "@/components/pages/add-element";
 import { ElementType } from "@/lib/validation/element-type";
 import { ContentImage } from "@/components/elements/content-image";
 import ElementMenubarWrapper from "@/components/element-menubar-wrapper";
+import { useElementSize } from "usehooks-ts";
 
 export function CommonPage({
   index,
@@ -40,7 +41,31 @@ export function CommonPage({
   fieldName: SlideFieldPath;
   className?: string;
 }) {
+  const LAYOUT_GAP = 8;
+  const FRAME_PADDING = 40;
   const backgroundImageField = fieldName + ".backgroundImage";
+  const [elementsHeight, setElementsHeight] = useState<number | null>(null);
+  const [footerRef, footerDimensions] = useElementSize();
+  const inputRefs = React.useRef([]);
+
+  React.useEffect(
+    () => {
+      const elementsHeights = inputRefs.current
+        .filter((ref) => ref)
+        .map((ref) => ref.offsetHeight);
+      // Gap between existent elements + 1 for the element to be introduced by add button
+      const gapHeights = elementsHeights.length * LAYOUT_GAP;
+      setElementsHeight(
+        elementsHeights.reduce((acc, el) => acc + el, 0) + gapHeights
+      );
+    }
+    // TODO ADD dependencies
+  );
+  const remainingHeight = elementsHeight
+    ? size.height - FRAME_PADDING * 2 - footerDimensions.height - elementsHeight
+    : 0;
+
+  console.log({ fieldName, elementsHeight, remainingHeight, footerDimensions });
 
   return (
     <PageBase size={size} fieldName={backgroundImageField}>
@@ -48,12 +73,16 @@ export function CommonPage({
       {slide.backgroundImage?.source.src ? (
         <BackgroundImageLayer image={slide.backgroundImage} className="-z-10" />
       ) : null}
-      <PageFrame fieldName={backgroundImageField} className={className}>
-        <PageLayout fieldName={backgroundImageField} className={className}>
+      <PageFrame
+        fieldName={backgroundImageField}
+        className={cn("p-10", className)}
+      >
+        <PageLayout fieldName={backgroundImageField} className={"gap-2"}>
           {slide.elements.map((element, index) => {
             return element.type == ElementType.enum.Title ? (
               <ElementMenubarWrapper
                 fieldName={fieldName + ".elements." + index}
+                ref={(el) => (inputRefs.current[index] = el)}
               >
                 <Title2
                   fieldName={
@@ -64,6 +93,7 @@ export function CommonPage({
             ) : element.type == ElementType.enum.Subtitle ? (
               <ElementMenubarWrapper
                 fieldName={fieldName + ".elements." + index}
+                ref={(el) => (inputRefs.current[index] = el)}
               >
                 <Subtitle2
                   fieldName={
@@ -74,6 +104,7 @@ export function CommonPage({
             ) : element.type == ElementType.enum.Description ? (
               <ElementMenubarWrapper
                 fieldName={fieldName + ".elements." + index}
+                ref={(el) => (inputRefs.current[index] = el)}
               >
                 <Description2
                   fieldName={
@@ -84,6 +115,7 @@ export function CommonPage({
             ) : element.type == ElementType.enum.ContentImage ? (
               <ElementMenubarWrapper
                 fieldName={fieldName + ".elements." + index}
+                ref={(el) => (inputRefs.current[index] = el)}
               >
                 <ContentImage
                   fieldName={
@@ -94,9 +126,12 @@ export function CommonPage({
               </ElementMenubarWrapper>
             ) : null;
           })}
-          <AddElement fieldName={fieldName + ".elements"} />
+          {/* // TODO Replace 50 by the element size of element to introduce or minimum of all elements */}
+          {remainingHeight && remainingHeight >= 50 ? (
+            <AddElement fieldName={fieldName + ".elements"} />
+          ) : null}
         </PageLayout>
-        <Footer number={index + 1} config={config} />
+        <Footer number={index + 1} config={config} ref={footerRef} />
       </PageFrame>
     </PageBase>
   );

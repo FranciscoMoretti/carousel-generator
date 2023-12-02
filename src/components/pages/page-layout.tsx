@@ -21,7 +21,7 @@ export function PageLayout({
   return (
     <div
       className={cn(
-        "flex flex-col justify-center grow gap-2 items-stretch",
+        "flex flex-col justify-center grow items-stretch",
         className
       )}
       onClick={(event) => {

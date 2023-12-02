@@ -20,6 +20,7 @@ import { cn } from "@/lib/utils";
 import { useFieldArray } from "react-hook-form";
 import { getParent, getElementNumber } from "@/lib/field-path";
 import { useSelectionContext } from "@/lib/providers/selection-context";
+import React from "react";
 
 function ElementMenubar({
   fieldName, //TODO Maybe change with number or expose onclciks
@@ -110,32 +111,24 @@ function ElementMenubar({
   );
 }
 
-export default function ElementMenubarWrapper({
-  // slidesFieldArray,
-  fieldName, //TODO Maybe change with number or expose onclciks
-  children,
-  className = "",
-}: //
-{
-  // slidesFieldArray: SlidesFieldArrayReturn;
-  fieldName: string;
-  children: React.ReactNode;
-  className?: string;
-}) {
-  const { numPages: numElements } = useFieldArrayValues(getParent(fieldName));
+const ElementMenubarWrapper = React.forwardRef(function ElementMenubarWrapper(
+  {
+    // slidesFieldArray,
+    fieldName, //TODO Maybe change with number or expose onclciks
+    children,
+    className = "",
+  }: //
+  {
+    // slidesFieldArray: SlidesFieldArrayReturn;
+    fieldName: string;
+    children: React.ReactNode;
+    className?: string;
+  },
+  ref
+) {
   const { currentSelection } = useSelectionContext();
-  const { watch }: DocumentFormReturn = useFormContext(); // retrieve those props
-  const { control } = useFormContext();
-  const { swap, remove, insert } = useFieldArray({
-    control,
-    name: getParent(fieldName),
-  });
-  const currentElementNumber = getElementNumber(fieldName);
-  const currentElementValue = watch(fieldName);
-
-  // const { remove, swap, insert } = slidesFieldArray;
   return (
-    <div className="relative">
+    <div className="relative" ref={ref}>
       <div
         id={`element-menubar-${fieldName}`}
         className={cn(
@@ -152,4 +145,6 @@ export default function ElementMenubarWrapper({
       {children}
     </div>
   );
-}
+});
+
+export default ElementMenubarWrapper;
