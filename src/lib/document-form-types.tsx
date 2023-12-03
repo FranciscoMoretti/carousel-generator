@@ -42,7 +42,8 @@ export type TextFieldPath =
   | `slides.${number}.description`;
 
 export type TextTextFieldPath = `slides.${number}.elements.${number}.text`;
-export type TextStyleFieldPath = `slides.${number}.elements.${number}.style`;
+export type StyleFieldPath = `slides.${number}.elements.${number}.style`;
+
 export type TextStyleFontSizeFieldPath =
   `slides.${number}.elements.${number}.style.fontSize`;
 export type TextStyleAlignFieldPath =
@@ -64,6 +65,10 @@ export type ImageSourceFieldPath =
   | `slides.${number}.elements.${number}.source`
   | `slides.${number}.backgroundImage.source`
   | "config.brand.avatar.source";
+export type ImageSourceSrcFieldPath =
+  | `slides.${number}.elements.${number}.source.src`
+  | `slides.${number}.backgroundImage.source.src`
+  | "config.brand.avatar.source.src";
 
 export type ImageStyleOpacityFieldPath =
   | `slides.${number}.elements.${number}.style.opacity`

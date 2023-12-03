@@ -6,7 +6,7 @@ import {
   DocumentFormReturn,
   TextFieldPath,
   TextFieldStyle,
-  TextStyleFieldPath,
+  StyleFieldPath,
   TextTextFieldPath,
 } from "@/lib/document-form-types";
 import { TextAreaFormField } from "@/components/forms/fields/text-area-form-field";
@@ -22,7 +22,7 @@ export function Subtitle2({
   const { getValues } = form;
   const config = getValues("config");
   const style = getValues(
-    `${fieldName}.style` as TextStyleFieldPath
+    `${fieldName}.style` as StyleFieldPath
   ) as TextFieldStyle;
   const textFieldName = (fieldName + ".text") as TextTextFieldPath;
 

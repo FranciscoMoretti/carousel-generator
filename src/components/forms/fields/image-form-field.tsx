@@ -8,11 +8,6 @@ import { ObjectFitType } from "@/lib/validation/image-schema";
 import { Maximize2, Minimize2 } from "lucide-react";
 import { OpacityFormField } from "@/components/forms/fields/opacity-form-field";
 
-const objectFitMap: Record<ObjectFitType, React.ReactElement> = {
-  [ObjectFitType.enum.Contain]: <Minimize2 className="h-4 w-4" />,
-  [ObjectFitType.enum.Cover]: <Maximize2 className="h-4 w-4" />,
-};
-
 export function ImageFormField({
   fieldName,
   form,

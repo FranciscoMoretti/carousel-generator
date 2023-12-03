@@ -12,6 +12,7 @@ export const ElementSchema = z.discriminatedUnion("type", [
   SubtitleSchema,
   DescriptionSchema,
   ContentImageSchema,
+  ImageSchema,
 ]);
 
 // TODO: Convert into: elements prop with an array of discriminated union of types

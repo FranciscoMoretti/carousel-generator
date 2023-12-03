@@ -1,8 +1,5 @@
 import { EnumRadioGroupField } from "@/components/forms/fields/enum-radio-group-field";
-import {
-  DocumentFormReturn,
-  TextStyleFieldPath,
-} from "@/lib/document-form-types";
+import { DocumentFormReturn, StyleFieldPath } from "@/lib/document-form-types";
 import { cn } from "@/lib/utils";
 import React from "react";
 import { AlignCenter, AlignLeft, AlignRight, Type } from "lucide-react";
@@ -25,7 +22,7 @@ export function TextStyleFormFields({
   form,
   className = "",
 }: {
-  fieldName: TextStyleFieldPath;
+  fieldName: StyleFieldPath;
   form: DocumentFormReturn;
   className?: string;
 }) {
