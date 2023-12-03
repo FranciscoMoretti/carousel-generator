@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
   DocumentFormReturn,
-  ElementArrayPath,
+  ElementArrayFieldPath,
 } from "@/lib/document-form-types";
 import { DEFAULT_CONTENT_IMAGE_INPUT } from "@/lib/validation/image-schema";
 import { SlideType } from "@/lib/validation/slide-schema";
@@ -29,7 +29,7 @@ export function NewElementDialogContent({
   fieldName,
 }: {
   form: DocumentFormReturn;
-  fieldName: ElementArrayPath;
+  fieldName: ElementArrayFieldPath;
 }) {
   const { control } = form;
   const { append, fields } = useFieldArray({

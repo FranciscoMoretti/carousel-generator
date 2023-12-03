@@ -7,7 +7,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { convertFileToDataUrl } from "@/lib/convert-file";
-import { DocumentFormReturn, ImageSourcePath } from "@/lib/document-form-types";
+import {
+  DocumentFormReturn,
+  ImageSourceFieldPath,
+} from "@/lib/document-form-types";
 import imageCompression from "browser-image-compression";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../ui/tabs";
 import { ImageInputType } from "@/lib/validation/image-schema";
@@ -19,7 +22,7 @@ export function ImageSourceFormField({
   fieldName,
   form,
 }: {
-  fieldName: ImageSourcePath;
+  fieldName: ImageSourceFieldPath;
   form: DocumentFormReturn;
 }) {
   return (

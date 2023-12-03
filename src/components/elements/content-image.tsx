@@ -11,13 +11,16 @@ import { useSelectionContext } from "@/lib/providers/selection-context";
 import { getSlideNumber } from "@/lib/field-path";
 import { usePagerContext } from "@/lib/providers/pager-context";
 import { useFormContext } from "react-hook-form";
-import { DocumentFormReturn, ElementPath } from "@/lib/document-form-types";
+import {
+  DocumentFormReturn,
+  ElementFieldPath,
+} from "@/lib/document-form-types";
 
 export function ContentImage({
   fieldName,
   className,
 }: {
-  fieldName: ElementPath;
+  fieldName: ElementFieldPath;
   className?: string;
 }) {
   const form: DocumentFormReturn = useFormContext();

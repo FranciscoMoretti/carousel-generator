@@ -45,23 +45,23 @@ export type TextFieldTextPath = `slides.${number}.elements.${number}.text`;
 export type TextFieldStylePath = `slides.${number}.elements.${number}.style`;
 export type TextFieldStyle = z.infer<typeof TextStyleSchema>;
 
-export type ElementPath = FieldPathByValue<
+export type ElementFieldPath = FieldPathByValue<
   z.infer<typeof DocumentSchema>,
   z.infer<typeof ElementSchema>
 >;
-export type ElementArrayPath = `slides.${number}.elements`;
+export type ElementArrayFieldPath = `slides.${number}.elements`;
 
-export type DescriptionPath = FieldPathByValue<
+export type DescriptionFieldPath = FieldPathByValue<
   z.infer<typeof DocumentSchema>,
   z.infer<typeof DescriptionSchema>
 >;
 
-export type ImagePath =
+export type ImageFieldPath =
   | `slides.${number}.elements.${number}`
   | `slides.${number}.backgroundImage`
   | "config.brand.avatar";
 
-export type ImageSourcePath =
+export type ImageSourceFieldPath =
   | `slides.${number}.elements.${number}.source`
   | `slides.${number}.backgroundImage.source`
   | "config.brand.avatar.source";

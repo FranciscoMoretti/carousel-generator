@@ -11,9 +11,9 @@ import { Title2 } from "@/components/elements/title2";
 import { Subtitle2 } from "@/components/elements/subtitle2";
 import { Description2 } from "@/components/elements/description2";
 import {
-  DescriptionPath,
-  ElementArrayPath,
-  ElementPath,
+  DescriptionFieldPath,
+  ElementArrayFieldPath,
+  ElementFieldPath,
   SlideFieldPath,
   TextFieldPath,
 } from "@/lib/document-form-types";
@@ -80,7 +80,7 @@ export function CommonPage({
           {slide.elements.map((element, index) => {
             const currentField = (fieldName +
               ".elements." +
-              index) as ElementPath;
+              index) as ElementFieldPath;
             return element.type == ElementType.enum.Title ? (
               <ElementMenubarWrapper
                 key={currentField}
@@ -103,7 +103,9 @@ export function CommonPage({
                 fieldName={currentField}
                 ref={(el) => (inputRefs.current[index] = el)}
               >
-                <Description2 fieldName={currentField as DescriptionPath} />
+                <Description2
+                  fieldName={currentField as DescriptionFieldPath}
+                />
               </ElementMenubarWrapper>
             ) : element.type == ElementType.enum.ContentImage ? (
               <ElementMenubarWrapper
@@ -121,7 +123,7 @@ export function CommonPage({
           {/* // TODO Replace 50 by the element size of element to introduce or minimum of all elements */}
           {remainingHeight && remainingHeight >= 50 ? (
             <AddElement
-              fieldName={(fieldName + ".elements") as ElementArrayPath}
+              fieldName={(fieldName + ".elements") as ElementArrayFieldPath}
             />
           ) : null}
         </PageLayout>

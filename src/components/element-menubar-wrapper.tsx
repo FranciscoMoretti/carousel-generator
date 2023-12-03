@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import {
   DocumentFormReturn,
-  ElementPath,
+  ElementFieldPath,
   SlidesFieldArrayReturn,
 } from "@/lib/document-form-types";
 import { useFieldArrayValues } from "@/lib/hooks/use-field-array-values";
@@ -28,7 +28,7 @@ function ElementMenubar({
   className = "",
 }: //
 {
-  fieldName: ElementPath;
+  fieldName: ElementFieldPath;
   className?: string;
 }) {
   const { numPages: numElements } = useFieldArrayValues(getParent(fieldName));
@@ -116,7 +116,7 @@ const ElementMenubarWrapper = React.forwardRef<
   HTMLDivElement,
   {
     // slidesFieldArray: SlidesFieldArrayReturn;
-    fieldName: ElementPath;
+    fieldName: ElementFieldPath;
     children: React.ReactNode;
     className?: string;
   }

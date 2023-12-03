@@ -6,7 +6,7 @@ import { useFormContext } from "react-hook-form";
 import { NewElementDialogContent } from "@/components/new-element-dialog-content";
 import {
   DocumentFormReturn,
-  ElementArrayPath,
+  ElementArrayFieldPath,
 } from "@/lib/document-form-types";
 
 export function AddElement({
@@ -14,7 +14,7 @@ export function AddElement({
   fieldName,
 }: {
   className?: string;
-  fieldName: ElementArrayPath;
+  fieldName: ElementArrayFieldPath;
 }) {
   const pageNumber = getSlideNumber(fieldName);
   const form: DocumentFormReturn = useFormContext();
