@@ -8,11 +8,12 @@ export function useSelection() {
     event:
       | FocusEvent<HTMLTextAreaElement, Element>
       | React.MouseEvent<HTMLDivElement, MouseEvent>
+      | null
   ) {
     // Only clear selection if this element started the event
     // if (event.target == event.currentTarget) {
     setCurrentSelection(currentSelection);
-    event.stopPropagation();
+    if (event) event.stopPropagation();
     // }
   }
 

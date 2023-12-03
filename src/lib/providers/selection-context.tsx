@@ -1,8 +1,14 @@
-import React, { useContext } from "react";
+import React, { FocusEvent, useContext } from "react";
 
 interface SelectionContextValue {
   currentSelection: string | null;
-  setCurrentSelection: (selection: string | null, event: any) => void;
+  setCurrentSelection: (
+    selection: string | null,
+    event:
+      | FocusEvent<HTMLTextAreaElement, Element>
+      | React.MouseEvent<HTMLDivElement, MouseEvent>
+      | null
+  ) => void;
 }
 
 const SelectionContext = React.createContext<SelectionContextValue | undefined>(

@@ -28,9 +28,12 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { Drawer } from "vaul";
 import { DrawerContent, DrawerTrigger } from "@/components/drawer";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { buttonVariants } from "./ui/button";
 import { ScrollBar } from "./ui/scroll-area";
+import { useSelectionContext } from "@/lib/providers/selection-context";
+import { useFieldsFileImporter } from "@/lib/hooks/use-fields-file-importer";
+import { set } from "zod";
 
 type TabInfo = {
   name: string;
@@ -84,10 +87,13 @@ export function SidebarPanel({ className }: { className?: string }) {
 }
 
 function VerticalTabTriggerButton({ tabInfo }: { tabInfo: TabInfo }) {
+  const { setCurrentSelection } = useSelectionContext();
+  //  TODO Convert this comp into a forwardref like its child
   return (
     <VerticalTabsTrigger
       value={tabInfo.value}
       className="h-16 flex flex-col gap-2 items-center py-2 justify-center"
+      onFocus={() => setCurrentSelection("", null)}
     >
       <tabInfo.icon className="h-4 w-4" />
       <span className="sr-only ">{tabInfo.name}</span>
@@ -97,10 +103,13 @@ function VerticalTabTriggerButton({ tabInfo }: { tabInfo: TabInfo }) {
 }
 
 function HorizontalTabTriggerButton({ tabInfo }: { tabInfo: TabInfo }) {
+  const { setCurrentSelection } = useSelectionContext();
+  //  TODO Convert this comp into a forwardref like its child
   return (
     <TabsTrigger
       value={tabInfo.value}
       className="h-16 flex flex-col gap-2 items-center py-2 justify-center"
+      onFocus={() => setCurrentSelection("", null)}
     >
       <tabInfo.icon className="h-4 w-4" />
       <span className="sr-only ">{tabInfo.name}</span>
@@ -110,10 +119,16 @@ function HorizontalTabTriggerButton({ tabInfo }: { tabInfo: TabInfo }) {
 }
 
 export function SidebarTabsPanel() {
+  const { currentSelection } = useSelectionContext();
+  const [tab, setTab] = useState(ALL_FORMS.brand.value);
+
   return (
     <VerticalTabs
-      defaultValue={ALL_FORMS.brand.value}
-      className="flex-1 min-h-[600px] h-full p-0"
+      value={currentSelection ? "" : tab}
+      onValueChange={(val) => {
+        setTab(val);
+      }}
+      className="flex-1 h-full p-0"
     >
       <div className="flex flex-row h-full w-full">
         <ScrollArea className="border-r h-full bg-muted">
