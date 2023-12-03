@@ -79,7 +79,7 @@ export function SidebarPanel({ className }: { className?: string }) {
       <div className="block md:hidden">
         <Drawer.Root modal={true}>
           <DrawerTrigger>
-            <CircularFloatingButton className="bottom-4 left-4">
+            <CircularFloatingButton className="bottom-28 left-4">
               <Plus className="w-4 h-4" />
             </CircularFloatingButton>
           </DrawerTrigger>
@@ -92,7 +92,7 @@ export function SidebarPanel({ className }: { className?: string }) {
         <Drawer.Root modal={true}>
           <DrawerTrigger>
             {currentSelection ? (
-              <CircularFloatingButton className="bottom-4 right-4">
+              <CircularFloatingButton className="bottom-28 right-4">
                 <Brush className="w-4 h-4" />
               </CircularFloatingButton>
             ) : null}
