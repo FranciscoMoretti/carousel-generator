@@ -41,8 +41,8 @@ export type TextFieldPath =
   | `slides.${number}.subtitle`
   | `slides.${number}.description`;
 
-export type TextFieldTextPath = `slides.${number}.elements.${number}.text`;
-export type TextFieldStylePath = `slides.${number}.elements.${number}.style`;
+export type TextTextFieldPath = `slides.${number}.elements.${number}.text`;
+export type TextStyleFieldPath = `slides.${number}.elements.${number}.style`;
 export type TextFieldStyle = z.infer<typeof TextStyleSchema>;
 
 export type ElementFieldPath = FieldPathByValue<

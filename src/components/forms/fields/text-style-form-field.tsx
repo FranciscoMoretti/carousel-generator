@@ -1,7 +1,7 @@
 import { EnumRadioGroupField } from "@/components/forms/fields/enum-radio-group-field";
 import {
   DocumentFormReturn,
-  TextFieldStylePath,
+  TextStyleFieldPath,
 } from "@/lib/document-form-types";
 import { cn } from "@/lib/utils";
 import React from "react";
@@ -25,7 +25,7 @@ export function TextStyleFormFields({
   form,
   className = "",
 }: {
-  fieldName: TextFieldStylePath;
+  fieldName: TextStyleFieldPath;
   form: DocumentFormReturn;
   className?: string;
 }) {

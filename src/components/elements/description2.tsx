@@ -9,8 +9,8 @@ import {
   DocumentFormReturn,
   TextFieldPath,
   TextFieldStyle,
-  TextFieldStylePath,
-  TextFieldTextPath,
+  TextStyleFieldPath,
+  TextTextFieldPath,
 } from "@/lib/document-form-types";
 
 export function Description2({
@@ -24,9 +24,9 @@ export function Description2({
   const { getValues } = form;
   const config = getValues("config");
   const style = getValues(
-    `${fieldName}.style` as TextFieldStylePath
+    `${fieldName}.style` as TextStyleFieldPath
   ) as TextFieldStyle;
-  const textFieldName = (fieldName + ".text") as TextFieldTextPath;
+  const textFieldName = (fieldName + ".text") as TextTextFieldPath;
 
   return (
     <TextAreaFormField

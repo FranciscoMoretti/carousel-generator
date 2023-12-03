@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/form";
 import {
   DocumentFormReturn,
-  TextFieldTextPath,
+  TextTextFieldPath,
 } from "@/lib/document-form-types";
 import { getParent, getSlideNumber } from "@/lib/field-path";
 import { usePagerContext } from "@/lib/providers/pager-context";
@@ -25,7 +25,7 @@ export function TextAreaFormField({
   style = {},
 }: {
   form: DocumentFormReturn;
-  fieldName: TextFieldTextPath;
+  fieldName: TextTextFieldPath;
   label: string;
   placeholder: string;
   className?: string;
