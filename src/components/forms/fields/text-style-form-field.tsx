@@ -1,5 +1,5 @@
 import { EnumRadioGroupField } from "@/components/forms/fields/enum-radio-group-field";
-import { DocumentFormReturn } from "@/lib/document-form-types";
+import { DocumentFormReturn, StyleFieldPath } from "@/lib/document-form-types";
 import { cn } from "@/lib/utils";
 import React from "react";
 import { AlignCenter, AlignLeft, AlignRight, Type } from "lucide-react";
@@ -20,36 +20,28 @@ const textAlignMap: Record<TextALignType, React.ReactElement> = {
 export function TextStyleFormFields({
   fieldName,
   form,
-  children,
   className = "",
 }: {
-  fieldName:
-    | `slides.${number}.title.style`
-    | `slides.${number}.subtitle.style`
-    | `slides.${number}.description.style`;
+  fieldName: StyleFieldPath;
   form: DocumentFormReturn;
-  children: React.ReactNode;
   className?: string;
 }) {
   return (
-    <div className={cn("flex flex-col")}>
-      <div className="flex flex-row justify-between items-center rounded border">
-        <EnumRadioGroupField
-          form={form}
-          fieldName={`${fieldName}.fontSize`}
-          enumValueElements={fontSizeMap}
-          groupClassName="gap-0"
-          itemClassName=""
-        />
-        <EnumRadioGroupField
-          form={form}
-          fieldName={`${fieldName}.align`}
-          enumValueElements={textAlignMap}
-          groupClassName="gap-0"
-          itemClassName=""
-        />
-      </div>
-      {children}
+    <div className="flex flex-col gap-2 items-center">
+      <EnumRadioGroupField
+        form={form}
+        fieldName={`${fieldName}.fontSize`}
+        enumValueElements={fontSizeMap}
+        groupClassName="grid grid-cols-3 items-center gap-1"
+        itemClassName="h-10 w-10"
+      />
+      <EnumRadioGroupField
+        form={form}
+        fieldName={`${fieldName}.align`}
+        enumValueElements={textAlignMap}
+        groupClassName="grid grid-cols-3 items-center gap-1"
+        itemClassName="h-10 w-10"
+      />
     </div>
   );
 }

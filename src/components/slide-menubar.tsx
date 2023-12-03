@@ -3,17 +3,27 @@ import { Button } from "@/components/ui/button";
 import { usePagerContext } from "@/lib/providers/pager-context";
 import { DocumentSchema } from "@/lib/validation/document-schema";
 import { useFormContext } from "react-hook-form";
-import { CornerUpRight, CornerUpLeft, Copy, Trash } from "lucide-react";
+import {
+  CornerUpRight,
+  CornerUpLeft,
+  Copy,
+  Trash,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import {
   DocumentFormReturn,
   SlidesFieldArrayReturn,
 } from "@/lib/document-form-types";
 import { useFieldArrayValues } from "@/lib/hooks/use-field-array-values";
+import { cn } from "@/lib/utils";
 
 export default function SlideMenubar({
   slidesFieldArray,
+  className = "",
 }: {
   slidesFieldArray: SlidesFieldArrayReturn;
+  className?: string;
 }) {
   const { currentPage, setCurrentPage } = usePagerContext();
   const { numPages } = useFieldArrayValues("slides");
@@ -24,25 +34,41 @@ export default function SlideMenubar({
   const { remove, swap, insert } = slidesFieldArray;
 
   return (
-    <div className="flex flex-row gap-1">
+    <div
+      className={cn(
+        "flex flex-row gap-0 bg-background rounded-t-md rounded-br-md rounded-bl-none px-1 border",
+        className
+      )}
+    >
       <Button
         onClick={() => {
           swap(currentPage, currentPage - 1);
           setCurrentPage(currentPage - 1);
         }}
-        variant="outline"
+        variant="ghost"
         size="icon"
+        className="w-8 h-8"
         disabled={currentPage <= 0 || currentPage > numPages - 1}
       >
-        <CornerUpLeft className="w-4 h-4" />
+        <ChevronLeft className="w-4 h-4" />
       </Button>
       <Button
         onClick={() => {
-          insert(currentPage, currentSlidesValues[currentPage]);
-          setCurrentPage(currentPage + 1);
+          console.log({
+            currentPage,
+            pageValue: currentSlidesValues[currentPage],
+          });
+          const insertPosition = currentPage;
+          const values = JSON.parse(
+            JSON.stringify(currentSlidesValues[insertPosition])
+          );
+          insert(insertPosition, values);
+          // TODO A clone sets focus to an input and that resets current page back to `inserposition`
+          setCurrentPage(insertPosition + 1);
         }}
         disabled={currentPage == 0 && numPages == 0}
-        variant="outline"
+        variant="ghost"
+        className="w-8 h-8"
         size="icon"
       >
         <Copy className="w-4 h-4" />
@@ -60,7 +86,8 @@ export default function SlideMenubar({
           }
         }}
         disabled={currentPage == 0 && numPages == 0}
-        variant="outline"
+        variant="ghost"
+        className="w-8 h-8"
         size="icon"
       >
         <Trash className="w-4 h-4" />
@@ -70,11 +97,12 @@ export default function SlideMenubar({
           swap(currentPage, currentPage + 1);
           setCurrentPage(currentPage + 1);
         }}
-        variant="outline"
+        variant="ghost"
+        className="w-8 h-8"
         size="icon"
         disabled={currentPage >= numPages - 1}
       >
-        <CornerUpRight className="w-4 h-4" />
+        <ChevronRight className="w-4 h-4" />
       </Button>
     </div>
   );

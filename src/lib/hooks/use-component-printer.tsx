@@ -123,6 +123,12 @@ export function useComponentPrinter() {
       // Change from horizontal to vertical for printing and remove gap
       clone.className = "flex flex-col";
       proxyImgSources(clone);
+      removeSelectionStyleById(clone, "page-base-");
+      removeSelectionStyleById(clone, "content-image-");
+      removeAllById(clone, "add-element-");
+      removeAllById(clone, "element-menubar-");
+      removeAllById(clone, "slide-menubar-");
+
       return clone;
     }
 
@@ -202,4 +208,32 @@ function proxyImgSources(html: HTMLElement) {
     // TODO: Consider using the cache of fetch
     image.src = apiRequestURL.toString();
   });
+}
+
+function removeAllById(html: HTMLElement, id: string) {
+  const elements = Array.from(
+    html.querySelectorAll(`[id^=${id}]`)
+  ) as HTMLDivElement[];
+
+  elements.forEach((element) => {
+    element.remove();
+  });
+}
+
+function removeSelectionStyleById(html: HTMLElement, id: string) {
+  const elements = Array.from(
+    html.querySelectorAll(`[id^=${id}]`)
+  ) as HTMLDivElement[];
+
+  const classNames = "outline-input ring-2 ring-offset-2 ring-ring";
+  elements.forEach((element) => {
+    element.className = removeClassnames(element, classNames);
+  });
+}
+
+function removeClassnames(element: HTMLDivElement, classNames: string): string {
+  return element.className
+    .split(" ")
+    .filter((el) => !classNames.split(" ").includes(el))
+    .join(" ");
 }

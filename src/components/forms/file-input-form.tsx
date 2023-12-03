@@ -12,6 +12,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { UnstyledInput } from "@/components/ui/unstyled-input";
 
 export function FileInputForm({
   label,
@@ -73,7 +74,7 @@ export function FileInputForm({
             <FormItem>
               <FormLabel>{label}</FormLabel>
               <FormControl>
-                <Input
+                <UnstyledInput
                   type="file"
                   accept={INPUT_FILE_TYPE}
                   multiple={false}

@@ -19,6 +19,7 @@ import { PageNumberForm } from "./forms/page-number-form";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import {
   Briefcase,
+  Brush,
   FileDigit,
   LucideIcon,
   Palette,
@@ -28,9 +29,15 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { Drawer } from "vaul";
 import { DrawerContent, DrawerTrigger } from "@/components/drawer";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { buttonVariants } from "./ui/button";
 import { ScrollBar } from "./ui/scroll-area";
+import { useSelectionContext } from "@/lib/providers/selection-context";
+import { useFieldsFileImporter } from "@/lib/hooks/use-fields-file-importer";
+import { set } from "zod";
+import { StyleMenu } from "@/components/style-menu";
+import { useFormContext } from "react-hook-form";
+import { DocumentFormReturn } from "@/lib/document-form-types";
 
 type TabInfo = {
   name: string;
@@ -61,16 +68,19 @@ const ALL_FORMS: Record<string, TabInfo> = {
   },
 };
 
-export function SettingsPanel({ className }: { className?: string }) {
+export function SidebarPanel({ className }: { className?: string }) {
+  const form: DocumentFormReturn = useFormContext();
+  const { currentSelection } = useSelectionContext();
+
   return (
-    <>
+    <div className={cn("h-full flex flex-1", className)}>
       <aside className="top-14 z-30 hidden h-full w-full shrink-0 md:sticky md:block border-r">
-        <SidebarFormsPanel />
+        <SidebarTabsPanel />
       </aside>
-      <div className="block md:hidden">
+      <div className="block md:hidden h-0">
         <Drawer.Root modal={true}>
           <DrawerTrigger>
-            <CircularFloatingButton>
+            <CircularFloatingButton className="bottom-28 left-4">
               <Plus className="w-4 h-4" />
             </CircularFloatingButton>
           </DrawerTrigger>
@@ -79,15 +89,32 @@ export function SettingsPanel({ className }: { className?: string }) {
           </DrawerContent>
         </Drawer.Root>
       </div>
-    </>
+      <div className="block md:hidden h-0">
+        <Drawer.Root modal={true}>
+          <DrawerTrigger>
+            {currentSelection ? (
+              <CircularFloatingButton className="bottom-28 right-4">
+                <Brush className="w-4 h-4" />
+              </CircularFloatingButton>
+            ) : null}
+          </DrawerTrigger>
+          <DrawerContent className="h-[40%] ">
+            <StyleMenu form={form} className={"m-4"} />
+          </DrawerContent>
+        </Drawer.Root>
+      </div>
+    </div>
   );
 }
 
 function VerticalTabTriggerButton({ tabInfo }: { tabInfo: TabInfo }) {
+  const { setCurrentSelection } = useSelectionContext();
+  //  TODO Convert this comp into a forwardref like its child
   return (
     <VerticalTabsTrigger
       value={tabInfo.value}
       className="h-16 flex flex-col gap-2 items-center py-2 justify-center"
+      onFocus={() => setCurrentSelection("", null)}
     >
       <tabInfo.icon className="h-4 w-4" />
       <span className="sr-only ">{tabInfo.name}</span>
@@ -97,10 +124,13 @@ function VerticalTabTriggerButton({ tabInfo }: { tabInfo: TabInfo }) {
 }
 
 function HorizontalTabTriggerButton({ tabInfo }: { tabInfo: TabInfo }) {
+  const { setCurrentSelection } = useSelectionContext();
+  //  TODO Convert this comp into a forwardref like its child
   return (
     <TabsTrigger
       value={tabInfo.value}
       className="h-16 flex flex-col gap-2 items-center py-2 justify-center"
+      onFocus={() => setCurrentSelection("", null)}
     >
       <tabInfo.icon className="h-4 w-4" />
       <span className="sr-only ">{tabInfo.name}</span>
@@ -109,11 +139,21 @@ function HorizontalTabTriggerButton({ tabInfo }: { tabInfo: TabInfo }) {
   );
 }
 
-export function SidebarFormsPanel() {
+export function SidebarTabsPanel() {
+  const { currentSelection } = useSelectionContext();
+  const [tab, setTab] = useState(ALL_FORMS.brand.value);
+  const form: DocumentFormReturn = useFormContext();
+
   return (
     <VerticalTabs
-      defaultValue={ALL_FORMS.brand.value}
-      className="flex-1 min-h-[600px] h-full p-0"
+      value={currentSelection ? "" : tab}
+      onValueChange={(val) => {
+        if (val) {
+          // Don't lost previous state when showing current selection
+          setTab(val);
+        }
+      }}
+      className="flex-1 h-full p-0"
     >
       <div className="flex flex-row h-full w-full">
         <ScrollArea className="border-r h-full bg-muted">
@@ -125,6 +165,11 @@ export function SidebarFormsPanel() {
           </VerticalTabsList>
         </ScrollArea>
         <div className="p-2 flex flex-col items-stretch w-full ">
+          {/* //TODO: Share this area with stylemenu */}
+          {currentSelection ? (
+            <StyleMenu form={form} className={"m-4"} />
+          ) : // TODO: Create consistent styles between tabs and StyleMenu
+          null}
           <VerticalTabsContent
             value={ALL_FORMS.brand.value}
             className="mt-0 border-0 p-0 m-4"
@@ -166,9 +211,19 @@ export function SidebarFormsPanel() {
 }
 
 export function DrawerFormsPanel({ className }: { className: string }) {
+  const { currentSelection } = useSelectionContext();
+  const [tab, setTab] = useState(ALL_FORMS.brand.value);
+  // TODO: Lift state to not loose it when drawer gets closed ?
+
   return (
     <Tabs
-      defaultValue={ALL_FORMS.brand.value}
+      value={currentSelection ? "" : tab}
+      onValueChange={(val) => {
+        if (val) {
+          // Don't lost previous state when showing current selection
+          setTab(val);
+        }
+      }}
       className={cn("flex-1 w-full", className)}
     >
       <div className="flex flex-col h-full ">
@@ -236,7 +291,8 @@ const CircularFloatingButton = ({
           variant: "default",
           size: "icon",
         }),
-        "fixed bottom-4 right-4 rounded-full w-12 h-12 "
+        "fixed bottom-4 right-4 rounded-full w-12 h-12 ",
+        className
       )}
     >
       {children}

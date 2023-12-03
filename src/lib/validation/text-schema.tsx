@@ -1,3 +1,4 @@
+import { ElementType } from "@/lib/validation/element-type";
 import * as z from "zod";
 
 export const FontSizeType = z.enum(["Small", "Medium", "Large"]);
@@ -12,6 +13,7 @@ export const TextStyleSchema = z.object({
 });
 
 export const TitleSchema = z.object({
+  type: z.literal(ElementType.enum.Title).default(ElementType.enum.Title),
   text: z
     .string()
     .max(160, {
@@ -22,6 +24,7 @@ export const TitleSchema = z.object({
 });
 
 export const SubtitleSchema = z.object({
+  type: z.literal(ElementType.enum.Subtitle).default(ElementType.enum.Subtitle),
   text: z
     .string()
     // .min(10, {
@@ -35,6 +38,9 @@ export const SubtitleSchema = z.object({
 });
 
 export const DescriptionSchema = z.object({
+  type: z
+    .literal(ElementType.enum.Description)
+    .default(ElementType.enum.Description),
   text: z.string().default(""),
   style: TextStyleSchema.default({}),
 });

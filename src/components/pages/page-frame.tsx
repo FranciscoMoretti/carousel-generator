@@ -1,11 +1,11 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { usePagerContext } from "@/lib/providers/pager-context";
-import { getSlideNumber } from "@/lib/field-path";
+import { getParent, getSlideNumber } from "@/lib/field-path";
 import { useSelection } from "@/lib/hooks/use-selection";
 import { useSelectionContext } from "@/lib/providers/selection-context";
 
-export function PageLayout({
+export function PageFrame({
   children,
   fieldName,
   className,
@@ -20,10 +20,7 @@ export function PageLayout({
 
   return (
     <div
-      className={cn(
-        "flex flex-col justify-center grow items-stretch",
-        className
-      )}
+      className={cn("flex flex-col h-full w-full", className)}
       onClick={(event) => {
         setCurrentPage(pageNumber);
         setCurrentSelection(fieldName, event);

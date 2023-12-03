@@ -7,20 +7,22 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { convertFileToDataUrl } from "@/lib/convert-file";
-import { DocumentFormReturn } from "@/lib/document-form-types";
+import {
+  DocumentFormReturn,
+  ImageSourceFieldPath,
+} from "@/lib/document-form-types";
 import imageCompression from "browser-image-compression";
-import { MAX_IMAGE_SIZE_MB, MAX_IMAGE_WIDTH } from "../intro-slide-form";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../ui/tabs";
 import { ImageInputType } from "@/lib/validation/image-schema";
+
+export const MAX_IMAGE_SIZE_MB = 0.5; // Set your maximum image size limit in megabytes
+export const MAX_IMAGE_WIDTH = 800; // Set your maximum image width
 
 export function ImageSourceFormField({
   fieldName,
   form,
 }: {
-  fieldName:
-    | `slides.${number}.image.source`
-    | `slides.${number}.backgroundImage.source`
-    | "config.brand.avatar.source";
+  fieldName: ImageSourceFieldPath;
   form: DocumentFormReturn;
 }) {
   return (

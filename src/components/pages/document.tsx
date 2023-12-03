@@ -2,18 +2,21 @@
 import * as z from "zod";
 import React from "react";
 import { DocumentSchema } from "@/lib/validation/document-schema";
-import { SlideType } from "@/lib/validation/slide-schema";
-import { ContentPage } from "@/components/pages/content-page";
 import { SIZE } from "@/lib/page-size";
 import { usePagerContext } from "@/lib/providers/pager-context";
-import { IntroPage } from "@/components/pages/intro-page";
-import { OutroPage } from "@/components/pages/outro-page";
 import { cn } from "@/lib/utils";
 import { NewPage } from "@/components/pages/new-page";
-import { SlidesFieldArrayReturn } from "@/lib/document-form-types";
+import {
+  SlideFieldPath,
+  SlidesFieldArrayReturn,
+} from "@/lib/document-form-types";
+import { SlideType } from "@/lib/validation/slide-schema";
+
 import { getDefaultSlideOfType } from "@/lib/default-slides";
 import { useFieldArrayValues } from "@/lib/hooks/use-field-array-values";
 import { useRefContext } from "@/lib/providers/reference-context";
+import { CommonPage } from "@/components/pages/common-page";
+import SlideMenubarWrapper from "@/components/slide-menubar-wrapper";
 
 export function ReactDocument({
   document,
@@ -33,6 +36,8 @@ export function ReactDocument({
   const { append } = slidesFieldArray;
   const newPageAsSideButton = numPages > 0;
 
+  const fielName = "slides";
+
   return (
     <div
       className={`relative transition-all`}
@@ -51,50 +56,25 @@ export function ReactDocument({
           className="flex flex-row gap-2"
           id="element-to-download-as-pdf"
         >
-          {document.slides.map((slide, index) =>
-            // TODO: Write a wrapper Page class to remove duplication
-            slide.type == SlideType.enum.Content ? (
-              <ContentPage
+          {document.slides.map((slide, index) => (
+            <SlideMenubarWrapper
+              slidesFieldArray={slidesFieldArray}
+              fieldName={(fielName + "." + index) as SlideFieldPath}
+              key={fielName + "." + index}
+            >
+              <CommonPage
                 config={document.config}
                 slide={slide}
-                key={index}
                 index={index}
                 size={SIZE}
-                className={cn(
-                  "",
-                  currentPage != index &&
-                    "hover:brightness-90 hover:cursor-pointer "
-                )}
-                handleClick={() => setCurrentPage(index)}
-              />
-            ) : slide.type == SlideType.enum.Intro ? (
-              <IntroPage
-                config={document.config}
-                slide={slide}
-                key={index}
-                index={index}
-                size={SIZE}
+                fieldName={(fielName + "." + index) as SlideFieldPath}
                 className={cn(
                   currentPage != index &&
                     "hover:brightness-90 hover:cursor-pointer"
                 )}
-                handleClick={() => setCurrentPage(index)}
               />
-            ) : slide.type == SlideType.enum.Outro ? (
-              <OutroPage
-                config={document.config}
-                slide={slide}
-                key={index}
-                index={index}
-                size={SIZE}
-                className={cn(
-                  currentPage != index &&
-                    "hover:brightness-90 hover:cursor-pointer"
-                )}
-                handleClick={() => setCurrentPage(index)}
-              />
-            ) : null
-          )}
+            </SlideMenubarWrapper>
+          ))}
         </div>
         <NewPage
           size={SIZE}

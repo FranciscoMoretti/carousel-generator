@@ -7,24 +7,49 @@ import {
   ImageSchema,
   ContentImageSchema,
 } from "@/lib/validation/image-schema";
+import { useSelectionContext } from "@/lib/providers/selection-context";
+import { getSlideNumber } from "@/lib/field-path";
+import { usePagerContext } from "@/lib/providers/pager-context";
+import { useFormContext } from "react-hook-form";
+import {
+  DocumentFormReturn,
+  ElementFieldPath,
+} from "@/lib/document-form-types";
 
 export function ContentImage({
-  image,
+  fieldName,
   className,
 }: {
-  image: z.infer<typeof ContentImageSchema>;
+  fieldName: ElementFieldPath;
   className?: string;
 }) {
-  if (!image.source.src) {
-    return null;
-  }
+  const form: DocumentFormReturn = useFormContext();
+  const { getValues } = form;
+  const image = getValues(fieldName) as z.infer<typeof ContentImageSchema>;
+
+  const { setCurrentPage } = usePagerContext();
+  const { currentSelection, setCurrentSelection } = useSelectionContext();
+  const pageNumber = getSlideNumber(fieldName);
+  const source =
+    image.source.src ||
+    "http://www.listercarterhomes.com/wp-content/uploads/2013/11/dummy-image-square.jpg";
+
+  // TODO: Convert to Toggle to make it accessible. Control with selection
 
   return (
-    <div className={cn("flex flex-col h-full w-full", className)}>
+    <div
+      id={"content-image-" + fieldName}
+      className={cn(
+        "flex flex-col h-full w-full outline-transparent rounded-md ring-offset-background",
+        currentSelection == fieldName &&
+          "outline-input ring-2 ring-offset-2 ring-ring",
+        className
+      )}
+    >
       {/* // TODO: Extract to component */}
       <img
         alt="slide image"
-        src={image.source.src} // TODO: Extract cover/contain into a setting for images
+        src={source} // TODO: Extract cover/contain into a setting for images
         className={cn(
           // shadow-md or any box shadow not supported by html2canvas
           "rounded-md overflow-hidden",
@@ -36,6 +61,10 @@ export function ContentImage({
         )}
         style={{
           opacity: image.style.opacity / 100,
+        }}
+        onClick={(event) => {
+          setCurrentPage(pageNumber);
+          setCurrentSelection(fieldName, event);
         }}
       />
     </div>
