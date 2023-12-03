@@ -7,7 +7,7 @@ import { usePersistFormWithKey } from "@/lib/hooks/use-persist-form-with-key";
 import { DocumentSchema } from "@/lib/validation/document-schema";
 import { PagerProvider } from "@/lib/providers/pager-context";
 import { usePager } from "@/lib/hooks/use-pager";
-import { getDefaultSlideOfType, SlideType } from "@/lib/default-slides";
+import { getDefaultSlideOfType } from "@/lib/default-slides";
 import { DEFAULT_IMAGE_INPUT } from "../validation/image-schema";
 import { SelectionProvider } from "@/lib/providers/selection-context";
 import { useSelection } from "@/lib/hooks/use-selection";

@@ -7,6 +7,9 @@ import {
 } from "./image-schema";
 import { TitleSchema, SubtitleSchema, DescriptionSchema } from "./text-schema";
 
+export const SlideType = z.enum(["Intro", "Content", "Outro", "Common"]);
+export type SlideType = z.infer<typeof SlideType>;
+
 export const ElementSchema = z.discriminatedUnion("type", [
   TitleSchema,
   SubtitleSchema,

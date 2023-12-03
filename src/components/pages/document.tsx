@@ -2,7 +2,6 @@
 import * as z from "zod";
 import React from "react";
 import { DocumentSchema } from "@/lib/validation/document-schema";
-import { SlideType } from "@/lib/validation/slide-schema";
 import { SIZE } from "@/lib/page-size";
 import { usePagerContext } from "@/lib/providers/pager-context";
 import { cn } from "@/lib/utils";
@@ -11,6 +10,8 @@ import {
   SlideFieldPath,
   SlidesFieldArrayReturn,
 } from "@/lib/document-form-types";
+import { SlideType } from "@/lib/validation/slide-schema";
+
 import { getDefaultSlideOfType } from "@/lib/default-slides";
 import { useFieldArrayValues } from "@/lib/hooks/use-field-array-values";
 import { useRefContext } from "@/lib/providers/reference-context";

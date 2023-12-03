@@ -15,7 +15,6 @@ import {
   ElementArrayFieldPath,
 } from "@/lib/document-form-types";
 import { DEFAULT_CONTENT_IMAGE_INPUT } from "@/lib/validation/image-schema";
-import { SlideType } from "@/lib/validation/slide-schema";
 import {
   DescriptionSchema,
   SubtitleSchema,
