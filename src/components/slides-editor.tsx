@@ -52,15 +52,15 @@ export function SlidesEditor({}: SlidesEditorProps) {
   const SCALE = Math.min(1, windowWidth / screenToSlideMinRatio / SIZE.width);
 
   return (
-    <div className="flex flex-col w-full items-center justify-start bg-muted/20">
-      <div
-        className=" flex flex-col p-4 w-full items-center justify-start gap-3 font-mono text-sm"
-        // TODO: When background gets clicked element gets unselected
-        onClick={(event) => {
-          // Only clear selection if this element started the event
-          setCurrentSelection(null, event);
-        }}
-      >
+    <div
+      className="flex flex-col w-full items-center justify-start bg-muted/20 flex-1 h-full"
+      // TODO: When background gets clicked element gets unselected
+      onClick={(event) => {
+        // Only clear selection if this element started the event
+        setCurrentSelection(null, event);
+      }}
+    >
+      <div className=" flex flex-col p-4 w-full items-center justify-start gap-3 font-mono text-sm">
         <div className="relative w-full px-4 py-10 overflow-clip">
           {/* <StyleMenuPopover form={form} /> */}
           <ReactDocument
@@ -92,8 +92,6 @@ export function SlidesEditor({}: SlidesEditorProps) {
           </div>
         </div>
       </div>
-
-      {/* <SlidePanel slidesFieldArray={slidesFieldArray} scale={SCALE} /> */}
     </div>
   );
 }

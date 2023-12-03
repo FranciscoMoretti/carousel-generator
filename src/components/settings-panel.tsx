@@ -122,11 +122,15 @@ export function SidebarTabsPanel() {
   const { currentSelection } = useSelectionContext();
   const [tab, setTab] = useState(ALL_FORMS.brand.value);
 
+  console.log({ currentSelection, tab });
   return (
     <VerticalTabs
       value={currentSelection ? "" : tab}
       onValueChange={(val) => {
-        setTab(val);
+        if (val) {
+          // Don't lost previous state when showing current selection
+          setTab(val);
+        }
       }}
       className="flex-1 h-full p-0"
     >
