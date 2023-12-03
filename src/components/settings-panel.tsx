@@ -19,6 +19,7 @@ import { PageNumberForm } from "./forms/page-number-form";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import {
   Briefcase,
+  Brush,
   FileDigit,
   LucideIcon,
   Palette,
@@ -34,6 +35,8 @@ import { ScrollBar } from "./ui/scroll-area";
 import { useSelectionContext } from "@/lib/providers/selection-context";
 import { useFieldsFileImporter } from "@/lib/hooks/use-fields-file-importer";
 import { set } from "zod";
+import { StyleMenu } from "@/components/style-menu";
+import { useFormContext } from "react-hook-form";
 
 type TabInfo = {
   name: string;
@@ -65,6 +68,9 @@ const ALL_FORMS: Record<string, TabInfo> = {
 };
 
 export function SidebarPanel({ className }: { className?: string }) {
+  const form = useFormContext();
+  const { currentSelection } = useSelectionContext();
+
   return (
     <>
       <aside className="top-14 z-30 hidden h-full w-full shrink-0 md:sticky md:block border-r">
@@ -73,12 +79,26 @@ export function SidebarPanel({ className }: { className?: string }) {
       <div className="block md:hidden">
         <Drawer.Root modal={true}>
           <DrawerTrigger>
-            <CircularFloatingButton>
+            <CircularFloatingButton className="bottom-4 left-4">
               <Plus className="w-4 h-4" />
             </CircularFloatingButton>
           </DrawerTrigger>
           <DrawerContent className="h-[60%] ">
             <DrawerFormsPanel className="mt-8" />
+          </DrawerContent>
+        </Drawer.Root>
+      </div>
+      <div className="block md:hidden">
+        <Drawer.Root modal={true}>
+          <DrawerTrigger>
+            {currentSelection ? (
+              <CircularFloatingButton className="bottom-4 right-4">
+                <Brush className="w-4 h-4" />
+              </CircularFloatingButton>
+            ) : null}
+          </DrawerTrigger>
+          <DrawerContent className="h-[40%] ">
+            <StyleMenu form={form} className={"m-4"} />
           </DrawerContent>
         </Drawer.Root>
       </div>
@@ -121,6 +141,7 @@ function HorizontalTabTriggerButton({ tabInfo }: { tabInfo: TabInfo }) {
 export function SidebarTabsPanel() {
   const { currentSelection } = useSelectionContext();
   const [tab, setTab] = useState(ALL_FORMS.brand.value);
+  const form = useFormContext();
 
   return (
     <VerticalTabs
@@ -143,6 +164,11 @@ export function SidebarTabsPanel() {
           </VerticalTabsList>
         </ScrollArea>
         <div className="p-2 flex flex-col items-stretch w-full ">
+          {/* //TODO: Share this area with stylemenu */}
+          {currentSelection ? (
+            <StyleMenu form={form} className={"m-4"} />
+          ) : // TODO: Create consistent styles between tabs and StyleMenu
+          null}
           <VerticalTabsContent
             value={ALL_FORMS.brand.value}
             className="mt-0 border-0 p-0 m-4"
@@ -264,7 +290,8 @@ const CircularFloatingButton = ({
           variant: "default",
           size: "icon",
         }),
-        "fixed bottom-4 right-4 rounded-full w-12 h-12 "
+        "fixed bottom-4 right-4 rounded-full w-12 h-12 ",
+        className
       )}
     >
       {children}

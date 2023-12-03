@@ -35,7 +35,13 @@ const objectFitMap: Record<ObjectFitType, React.ReactElement> = {
   [ObjectFitType.enum.Cover]: <Maximize2 className="h-4 w-4" />,
 };
 
-export function StyleMenu({ form }: { form: DocumentFormReturn }) {
+export function StyleMenu({
+  form,
+  className = "",
+}: {
+  form: DocumentFormReturn;
+  className?: string;
+}) {
   const { currentSelection: elementPath } = useSelectionContext();
   const stylePath = elementPath ? elementPath + ".style" : "";
   const values = stylePath ? form.getValues(elementPath) : {};
@@ -43,7 +49,7 @@ export function StyleMenu({ form }: { form: DocumentFormReturn }) {
   const type = values.type;
   return (
     <div
-      className="grid gap-4"
+      className={cn("grid gap-4", className)}
       onClick={
         // Don't propagate click to background
         (event) => event.stopPropagation()
