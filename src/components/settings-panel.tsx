@@ -61,7 +61,7 @@ const ALL_FORMS: Record<string, TabInfo> = {
   },
 };
 
-export function SettingsPanel({ className }: { className?: string }) {
+export function SidebarPanel({ className }: { className?: string }) {
   return (
     <>
       <aside className="top-14 z-30 hidden h-full w-full shrink-0 md:sticky md:block border-r">

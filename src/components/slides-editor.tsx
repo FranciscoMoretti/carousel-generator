@@ -61,10 +61,6 @@ export function SlidesEditor({}: SlidesEditorProps) {
           setCurrentSelection(null, event);
         }}
       >
-        <div className="self-end">
-          <StyleMenuPopover form={form} />
-        </div>
-
         <div className="relative w-full px-4 py-10 overflow-clip">
           <ReactDocument
             document={document}

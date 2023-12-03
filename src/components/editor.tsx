@@ -2,16 +2,19 @@
 import { Metadata } from "next";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { SettingsPanel } from "@/components/settings-panel";
+import { SidebarPanel } from "@/components/settings-panel";
 import { SlidesEditor } from "@/components/slides-editor";
 import React from "react";
 import { useComponentPrinter } from "@/lib/hooks/use-component-printer";
 
 import { RefProvider } from "@/lib/providers/reference-context";
 import { MainNav } from "./main-nav";
+import { useFormContext } from "react-hook-form";
+import { StyleMenuPopover } from "@/components/style-menu-popover";
 
 export default function Editor({}: {}) {
   const { componentRef, handlePrint, isPrinting } = useComponentPrinter();
+  const form = useFormContext();
 
   return (
     <RefProvider myRef={componentRef}>
@@ -21,9 +24,10 @@ export default function Editor({}: {}) {
           handlePrint={handlePrint}
           isPrinting={isPrinting}
         />
-        <div className="flex-1 grid grid-cols-1 items-start md:grid md:grid-cols-[320px_minmax(0,1fr)] ">
-          <SettingsPanel />
+        <div className="flex-1 grid grid-cols-1 items-start md:grid md:grid-cols-[320px_minmax(0,1fr)_320px] ">
+          <SidebarPanel />
           <SlidesEditor />
+          <StyleMenuPopover form={form} />
         </div>
       </div>
     </RefProvider>
