@@ -55,11 +55,6 @@ export type ElementFieldPath = FieldPathByValue<
 >;
 export type ElementArrayFieldPath = `slides.${number}.elements`;
 
-export type DescriptionFieldPath = FieldPathByValue<
-  z.infer<typeof DocumentSchema>,
-  z.infer<typeof DescriptionSchema>
->;
-
 export type ImageFieldPath =
   | `slides.${number}.elements.${number}`
   | `slides.${number}.backgroundImage`

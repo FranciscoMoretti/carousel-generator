@@ -11,7 +11,6 @@ import { Title2 } from "@/components/elements/title2";
 import { Subtitle2 } from "@/components/elements/subtitle2";
 import { Description2 } from "@/components/elements/description2";
 import {
-  DescriptionFieldPath,
   ElementArrayFieldPath,
   ElementFieldPath,
   SlideFieldPath,
@@ -45,7 +44,7 @@ export function CommonPage({
   const backgroundImageField = fieldName + ".backgroundImage";
   const [elementsHeight, setElementsHeight] = useState<number | null>(null);
   const [footerRef, footerDimensions] = useElementSize();
-  const inputRefs = React.useRef([]);
+  const inputRefs = React.useRef<HTMLDivElement[]>([]);
   const offsetHeights = inputRefs.current.map((ref) => ref.offsetHeight);
 
   React.useEffect(
@@ -85,7 +84,9 @@ export function CommonPage({
               <ElementMenubarWrapper
                 key={currentField}
                 fieldName={currentField}
-                ref={(el) => (inputRefs.current[index] = el)}
+                ref={(el) => {
+                  el ? (inputRefs.current[index] = el) : null;
+                }}
               >
                 <Title2 fieldName={currentField as TextFieldPath} />
               </ElementMenubarWrapper>
@@ -93,7 +94,9 @@ export function CommonPage({
               <ElementMenubarWrapper
                 key={currentField}
                 fieldName={currentField}
-                ref={(el) => (inputRefs.current[index] = el)}
+                ref={(el) => {
+                  el ? (inputRefs.current[index] = el) : null;
+                }}
               >
                 <Subtitle2 fieldName={currentField as TextFieldPath} />
               </ElementMenubarWrapper>
@@ -101,20 +104,22 @@ export function CommonPage({
               <ElementMenubarWrapper
                 key={currentField}
                 fieldName={currentField}
-                ref={(el) => (inputRefs.current[index] = el)}
+                ref={(el) => {
+                  el ? (inputRefs.current[index] = el) : null;
+                }}
               >
-                <Description2
-                  fieldName={currentField as DescriptionFieldPath}
-                />
+                <Description2 fieldName={currentField as TextFieldPath} />
               </ElementMenubarWrapper>
             ) : element.type == ElementType.enum.ContentImage ? (
               <ElementMenubarWrapper
                 key={currentField}
                 fieldName={currentField}
-                ref={(el) => (inputRefs.current[index] = el)}
+                ref={(el) => {
+                  el ? (inputRefs.current[index] = el) : null;
+                }}
               >
                 <ContentImage
-                  fieldName={currentField as ContentImagePath}
+                  fieldName={currentField as ElementFieldPath}
                   className="h-40"
                 />
               </ElementMenubarWrapper>

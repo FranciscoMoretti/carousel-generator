@@ -5,7 +5,6 @@ import { textStyleToClasses } from "@/lib/text-style-to-classes";
 import { useFormContext } from "react-hook-form";
 import { TextAreaFormField } from "@/components/forms/fields/text-area-form-field";
 import {
-  DescriptionFieldPath,
   DocumentFormReturn,
   TextFieldPath,
   TextFieldStyle,
@@ -17,7 +16,7 @@ export function Description2({
   fieldName,
   className = "",
 }: {
-  fieldName: DescriptionFieldPath;
+  fieldName: TextFieldPath;
   className?: string;
 }) {
   const form: DocumentFormReturn = useFormContext();
