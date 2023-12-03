@@ -11,7 +11,6 @@ import { Title2 } from "@/components/elements/title2";
 import { Subtitle2 } from "@/components/elements/subtitle2";
 import { Description2 } from "@/components/elements/description2";
 import {
-  ContentImagePath,
   DescriptionPath,
   ElementArrayPath,
   ElementPath,
