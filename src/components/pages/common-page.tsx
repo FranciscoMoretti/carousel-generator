@@ -47,6 +47,7 @@ export function CommonPage({
   const [elementsHeight, setElementsHeight] = useState<number | null>(null);
   const [footerRef, footerDimensions] = useElementSize();
   const inputRefs = React.useRef([]);
+  const offsetHeights = inputRefs.current.map((ref) => ref.offsetHeight);
 
   React.useEffect(
     () => {
@@ -58,7 +59,8 @@ export function CommonPage({
       setElementsHeight(
         elementsHeights.reduce((acc, el) => acc + el, 0) + gapHeights
       );
-    }
+    },
+    [offsetHeights]
     // TODO ADD dependencies
   );
   const remainingHeight = elementsHeight
