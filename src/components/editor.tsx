@@ -10,7 +10,6 @@ import { useComponentPrinter } from "@/lib/hooks/use-component-printer";
 import { RefProvider } from "@/lib/providers/reference-context";
 import { MainNav } from "./main-nav";
 import { useFormContext } from "react-hook-form";
-import { StyleMenuPopover } from "@/components/style-menu-popover";
 
 export default function Editor({}: {}) {
   const { componentRef, handlePrint, isPrinting } = useComponentPrinter();
@@ -27,7 +26,6 @@ export default function Editor({}: {}) {
         <div className="flex-1 grid grid-cols-1 items-start md:grid md:grid-cols-[320px_minmax(0,1fr)_320px] ">
           <SidebarPanel />
           <SlidesEditor />
-          <StyleMenuPopover form={form} />
         </div>
       </div>
     </RefProvider>

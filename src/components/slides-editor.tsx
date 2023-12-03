@@ -10,15 +10,11 @@ import React from "react";
 import useWindowDimensions from "@/lib/hooks/use-window-dimensions";
 import { SIZE } from "@/lib/page-size";
 import { LoadingSpinner } from "./loading-spinner";
-import { ScrollBar } from "@/components/ui/scroll-area";
-import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { usePagerContext } from "@/lib/providers/pager-context";
 import { useFieldArrayValues } from "@/lib/hooks/use-field-array-values";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { StyleMenu } from "@/components/style-menu";
 import { useSelectionContext } from "@/lib/providers/selection-context";
-import { StyleMenuPopover } from "@/components/style-menu-popover";
 
 interface SlidesEditorProps {}
 
@@ -62,7 +58,6 @@ export function SlidesEditor({}: SlidesEditorProps) {
     >
       <div className=" flex flex-col p-4 w-full items-center justify-start gap-3 font-mono text-sm">
         <div className="relative w-full px-4 py-10 overflow-clip">
-          {/* <StyleMenuPopover form={form} /> */}
           <ReactDocument
             document={document}
             slidesFieldArray={slidesFieldArray}
