@@ -72,11 +72,11 @@ export function SidebarPanel({ className }: { className?: string }) {
   const { currentSelection } = useSelectionContext();
 
   return (
-    <>
+    <div className={cn("h-full flex flex-1", className)}>
       <aside className="top-14 z-30 hidden h-full w-full shrink-0 md:sticky md:block border-r">
         <SidebarTabsPanel />
       </aside>
-      <div className="block md:hidden">
+      <div className="block md:hidden h-0">
         <Drawer.Root modal={true}>
           <DrawerTrigger>
             <CircularFloatingButton className="bottom-28 left-4">
@@ -88,7 +88,7 @@ export function SidebarPanel({ className }: { className?: string }) {
           </DrawerContent>
         </Drawer.Root>
       </div>
-      <div className="block md:hidden">
+      <div className="block md:hidden h-0">
         <Drawer.Root modal={true}>
           <DrawerTrigger>
             {currentSelection ? (
@@ -102,7 +102,7 @@ export function SidebarPanel({ className }: { className?: string }) {
           </DrawerContent>
         </Drawer.Root>
       </div>
-    </>
+    </div>
   );
 }
 

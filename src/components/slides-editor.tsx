@@ -36,7 +36,7 @@ export function SlidesEditor({}: SlidesEditorProps) {
   // TODO: Replace with better loading indicator (sized skeleton from shadcn/ui)
   if (isLoadingWidth) {
     return (
-      <div className="w-full flex items-center justify-center min-h-screen bg-muted/20">
+      <div className="w-full flex items-center justify-center h-full bg-muted/20">
         <LoadingSpinner />
       </div>
     );
@@ -44,7 +44,7 @@ export function SlidesEditor({}: SlidesEditorProps) {
 
   // Screen with larger than md side have smaller slides because the sidebar is present
   const mdWindowWidthPx = 770;
-  const screenToSlideMinRatio = windowWidth > mdWindowWidthPx ? 2.5 : 2.0;
+  const screenToSlideMinRatio = windowWidth > mdWindowWidthPx ? 2.5 : 1.4;
   const SCALE = Math.min(1, windowWidth / screenToSlideMinRatio / SIZE.width);
 
   return (
