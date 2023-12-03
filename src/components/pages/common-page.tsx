@@ -1,19 +1,12 @@
 import React, { useState } from "react";
 import * as z from "zod";
-import { ConfigSchema, DocumentSchema } from "@/lib/validation/document-schema";
+import { ConfigSchema } from "@/lib/validation/document-schema";
 import Footer from "../elements/footer";
 import { cn } from "@/lib/utils";
-import { fontIdToClassName, fontsMap } from "@/lib/fonts-map";
-import {
-  CommonSlideSchema,
-  IntroSlideSchema,
-} from "@/lib/validation/slide-schema";
+import { CommonSlideSchema } from "@/lib/validation/slide-schema";
 import { BackgroundLayer } from "@/components/elements/background-layer";
 import { BackgroundImageLayer } from "@/components/elements/background-image-layer";
 import { PageBase } from "@/components/pages/page-base";
-import { Subtitle } from "@/components/elements/subtitle";
-import { Title } from "@/components/elements/title";
-import { Description } from "@/components/elements/description";
 import { Title2 } from "@/components/elements/title2";
 import { Subtitle2 } from "@/components/elements/subtitle2";
 import { Description2 } from "@/components/elements/description2";
