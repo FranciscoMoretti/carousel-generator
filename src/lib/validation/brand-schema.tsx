@@ -1,8 +1,8 @@
 import * as z from "zod";
-import { DEFAULT_CONTENT_IMAGE_INPUT, ImageSchema } from "./image-schema";
+import { DEFAULT_IMAGE_INPUT, ImageSchema } from "./image-schema";
 
 export const BrandSchema = z.object({
-  avatar: ImageSchema.default(DEFAULT_CONTENT_IMAGE_INPUT),
+  avatar: ImageSchema.default(DEFAULT_IMAGE_INPUT),
   name: z
     .string()
     .min(2, {
