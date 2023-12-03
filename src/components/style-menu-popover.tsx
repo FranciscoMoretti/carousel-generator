@@ -9,7 +9,7 @@ import { StyleMenu } from "@/components/style-menu";
 
 export function StyleMenuPopover({ form }: { form: DocumentFormReturn }) {
   return (
-    <Popover open={true}>
+    <Popover>
       <PopoverTrigger asChild>
         <Button variant="outline">Open popover</Button>
       </PopoverTrigger>

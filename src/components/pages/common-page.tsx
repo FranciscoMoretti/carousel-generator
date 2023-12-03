@@ -77,48 +77,39 @@ export function CommonPage({
       >
         <PageLayout fieldName={backgroundImageField} className={"gap-2"}>
           {slide.elements.map((element, index) => {
+            const currentField = fieldName + ".elements." + index;
             return element.type == ElementType.enum.Title ? (
               <ElementMenubarWrapper
-                fieldName={fieldName + ".elements." + index}
+                key={currentField}
+                fieldName={currentField}
                 ref={(el) => (inputRefs.current[index] = el)}
               >
-                <Title2
-                  fieldName={
-                    (fieldName + ".elements." + index) as TextFieldPath
-                  }
-                />
+                <Title2 fieldName={currentField as TextFieldPath} />
               </ElementMenubarWrapper>
             ) : element.type == ElementType.enum.Subtitle ? (
               <ElementMenubarWrapper
-                fieldName={fieldName + ".elements." + index}
+                key={currentField}
+                fieldName={currentField}
                 ref={(el) => (inputRefs.current[index] = el)}
               >
-                <Subtitle2
-                  fieldName={
-                    (fieldName + ".elements." + index) as TextFieldPath
-                  }
-                />
+                <Subtitle2 fieldName={currentField as TextFieldPath} />
               </ElementMenubarWrapper>
             ) : element.type == ElementType.enum.Description ? (
               <ElementMenubarWrapper
-                fieldName={fieldName + ".elements." + index}
+                key={currentField}
+                fieldName={currentField}
                 ref={(el) => (inputRefs.current[index] = el)}
               >
-                <Description2
-                  fieldName={
-                    (fieldName + ".elements." + index) as TextFieldPath
-                  }
-                />
+                <Description2 fieldName={currentField as TextFieldPath} />
               </ElementMenubarWrapper>
             ) : element.type == ElementType.enum.ContentImage ? (
               <ElementMenubarWrapper
-                fieldName={fieldName + ".elements." + index}
+                key={currentField}
+                fieldName={currentField}
                 ref={(el) => (inputRefs.current[index] = el)}
               >
                 <ContentImage
-                  fieldName={
-                    (fieldName + ".elements." + index) as TextFieldPath
-                  }
+                  fieldName={currentField as TextFieldPath}
                   className="h-40"
                 />
               </ElementMenubarWrapper>

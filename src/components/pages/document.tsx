@@ -6,8 +6,6 @@ import { SlideType } from "@/lib/validation/slide-schema";
 import { ContentPage } from "@/components/pages/content-page";
 import { SIZE } from "@/lib/page-size";
 import { usePagerContext } from "@/lib/providers/pager-context";
-import { IntroPage } from "@/components/pages/intro-page";
-import { OutroPage } from "@/components/pages/outro-page";
 import { cn } from "@/lib/utils";
 import { NewPage } from "@/components/pages/new-page";
 import {
@@ -58,27 +56,15 @@ export function ReactDocument({
           className="flex flex-row gap-2"
           id="element-to-download-as-pdf"
         >
-          {document.slides.map((slide, index) =>
-            // TODO: Write a wrapper Page class to remove duplication
-            slide.type == SlideType.enum.Content ? (
-              <ContentPage
+          {document.slides.map((slide, index) => (
+            <SlideMenubarWrapper
+              slidesFieldArray={slidesFieldArray}
+              fieldName={(fielName + "." + index) as SlideFieldPath}
+              key={fielName + "." + index}
+            >
+              <CommonPage
                 config={document.config}
                 slide={slide}
-                key={index}
-                index={index}
-                size={SIZE}
-                fieldName={(fielName + "." + index) as SlideFieldPath}
-                className={cn(
-                  "",
-                  currentPage != index &&
-                    "hover:brightness-90 hover:cursor-pointer "
-                )}
-              />
-            ) : slide.type == SlideType.enum.Intro ? (
-              <IntroPage
-                config={document.config}
-                slide={slide}
-                key={index}
                 index={index}
                 size={SIZE}
                 fieldName={(fielName + "." + index) as SlideFieldPath}
@@ -87,39 +73,8 @@ export function ReactDocument({
                     "hover:brightness-90 hover:cursor-pointer"
                 )}
               />
-            ) : slide.type == SlideType.enum.Outro ? (
-              <OutroPage
-                config={document.config}
-                slide={slide}
-                key={index}
-                index={index}
-                size={SIZE}
-                fieldName={(fielName + "." + index) as SlideFieldPath}
-                className={cn(
-                  currentPage != index &&
-                    "hover:brightness-90 hover:cursor-pointer"
-                )}
-              />
-            ) : (
-              <SlideMenubarWrapper
-                slidesFieldArray={slidesFieldArray}
-                fieldName={(fielName + "." + index) as SlideFieldPath}
-                key={fielName + "." + index}
-              >
-                <CommonPage
-                  config={document.config}
-                  slide={slide}
-                  index={index}
-                  size={SIZE}
-                  fieldName={(fielName + "." + index) as SlideFieldPath}
-                  className={cn(
-                    currentPage != index &&
-                      "hover:brightness-90 hover:cursor-pointer"
-                  )}
-                />
-              </SlideMenubarWrapper>
-            )
-          )}
+            </SlideMenubarWrapper>
+          ))}
         </div>
         <NewPage
           size={SIZE}

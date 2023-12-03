@@ -62,6 +62,7 @@ export function SlidesEditor({}: SlidesEditorProps) {
         }}
       >
         <div className="relative w-full px-4 py-10 overflow-clip">
+          {/* <StyleMenuPopover form={form} /> */}
           <ReactDocument
             document={document}
             slidesFieldArray={slidesFieldArray}
