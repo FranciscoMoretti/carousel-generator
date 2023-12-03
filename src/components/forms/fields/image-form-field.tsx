@@ -1,8 +1,7 @@
 import { DocumentFormReturn } from "@/lib/document-form-types";
 import { ImageSourceFormField } from "@/components/forms/fields/image-source-form-field";
 import { ObjectFitType } from "@/lib/validation/image-schema";
-import { Maximize, Maximize2, Minimize2 } from "lucide-react";
-import { EnumRadioGroupField } from "@/components/forms/fields/enum-radio-group-field";
+import { Maximize2, Minimize2 } from "lucide-react";
 import { OpacityFormField } from "@/components/forms/fields/opacity-form-field";
 
 const objectFitMap: Record<ObjectFitType, React.ReactElement> = {

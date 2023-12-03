@@ -55,3 +55,13 @@ export type DescriptionPath = FieldPathByValue<
   z.infer<typeof DocumentSchema>,
   z.infer<typeof DescriptionSchema>
 >;
+
+export type ImagePath =
+  | `slides.${number}.elements.${number}`
+  | `slides.${number}.backgroundImage`
+  | "config.brand.avatar";
+
+export type ImageSourcePath =
+  | `slides.${number}.elements.${number}.source`
+  | `slides.${number}.backgroundImage.source`
+  | "config.brand.avatar.source";
