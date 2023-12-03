@@ -11,9 +11,12 @@ import {
   CommonSlideSchema,
   ElementSchema,
 } from "@/lib/validation/slide-schema";
-import { TextStyleSchema } from "@/lib/validation/text-schema";
-import { getPathsByValue } from "@/lib/zod-paths-by-value";
+import {
+  DescriptionSchema,
+  TextStyleSchema,
+} from "@/lib/validation/text-schema";
 import { CommonPage } from "@/components/pages/common-page";
+import { ContentImageSchema } from "@/lib/validation/image-schema";
 
 export type DocumentFormReturn = UseFormReturn<
   z.infer<typeof DocumentSchema>,
@@ -38,17 +41,17 @@ export type TextFieldPath =
   | `slides.${number}.subtitle`
   | `slides.${number}.description`;
 
-export type TextFieldTextPath =
-  | `slides.${number}.title.text`
-  | `slides.${number}.subtitle.text`
-  | `slides.${number}.description.text`;
-
-export type TextFieldStylePath = FieldPathByValue<
-  z.infer<typeof DocumentSchema>,
-  z.infer<typeof TextStyleSchema>
->;
+export type TextFieldTextPath = `slides.${number}.elements.${number}.text`;
+export type TextFieldStylePath = `slides.${number}.elements.${number}.style`;
+export type TextFieldStyle = z.infer<typeof TextStyleSchema>;
 
 export type ElementPath = FieldPathByValue<
   z.infer<typeof DocumentSchema>,
   z.infer<typeof ElementSchema>
+>;
+export type ElementArrayPath = `slides.${number}.elements`;
+
+export type DescriptionPath = FieldPathByValue<
+  z.infer<typeof DocumentSchema>,
+  z.infer<typeof DescriptionSchema>
 >;

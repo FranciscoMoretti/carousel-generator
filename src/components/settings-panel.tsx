@@ -37,6 +37,7 @@ import { useFieldsFileImporter } from "@/lib/hooks/use-fields-file-importer";
 import { set } from "zod";
 import { StyleMenu } from "@/components/style-menu";
 import { useFormContext } from "react-hook-form";
+import { DocumentFormReturn } from "@/lib/document-form-types";
 
 type TabInfo = {
   name: string;
@@ -68,7 +69,7 @@ const ALL_FORMS: Record<string, TabInfo> = {
 };
 
 export function SidebarPanel({ className }: { className?: string }) {
-  const form = useFormContext();
+  const form: DocumentFormReturn = useFormContext();
   const { currentSelection } = useSelectionContext();
 
   return (
@@ -141,7 +142,7 @@ function HorizontalTabTriggerButton({ tabInfo }: { tabInfo: TabInfo }) {
 export function SidebarTabsPanel() {
   const { currentSelection } = useSelectionContext();
   const [tab, setTab] = useState(ALL_FORMS.brand.value);
-  const form = useFormContext();
+  const form: DocumentFormReturn = useFormContext();
 
   return (
     <VerticalTabs

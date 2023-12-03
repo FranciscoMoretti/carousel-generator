@@ -17,7 +17,14 @@ import { Description } from "@/components/elements/description";
 import { Title2 } from "@/components/elements/title2";
 import { Subtitle2 } from "@/components/elements/subtitle2";
 import { Description2 } from "@/components/elements/description2";
-import { SlideFieldPath, TextFieldPath } from "@/lib/document-form-types";
+import {
+  ContentImagePath,
+  DescriptionPath,
+  ElementArrayPath,
+  ElementPath,
+  SlideFieldPath,
+  TextFieldPath,
+} from "@/lib/document-form-types";
 import { PageFrame } from "@/components/pages/page-frame";
 import { PageLayout } from "@/components/pages/page-layout";
 import { AddElement } from "@/components/pages/add-element";
@@ -79,7 +86,9 @@ export function CommonPage({
       >
         <PageLayout fieldName={backgroundImageField} className={"gap-2"}>
           {slide.elements.map((element, index) => {
-            const currentField = fieldName + ".elements." + index;
+            const currentField = (fieldName +
+              ".elements." +
+              index) as ElementPath;
             return element.type == ElementType.enum.Title ? (
               <ElementMenubarWrapper
                 key={currentField}
@@ -102,7 +111,7 @@ export function CommonPage({
                 fieldName={currentField}
                 ref={(el) => (inputRefs.current[index] = el)}
               >
-                <Description2 fieldName={currentField as TextFieldPath} />
+                <Description2 fieldName={currentField as DescriptionPath} />
               </ElementMenubarWrapper>
             ) : element.type == ElementType.enum.ContentImage ? (
               <ElementMenubarWrapper
@@ -111,7 +120,7 @@ export function CommonPage({
                 ref={(el) => (inputRefs.current[index] = el)}
               >
                 <ContentImage
-                  fieldName={currentField as TextFieldPath}
+                  fieldName={currentField as ContentImagePath}
                   className="h-40"
                 />
               </ElementMenubarWrapper>
@@ -119,7 +128,9 @@ export function CommonPage({
           })}
           {/* // TODO Replace 50 by the element size of element to introduce or minimum of all elements */}
           {remainingHeight && remainingHeight >= 50 ? (
-            <AddElement fieldName={fieldName + ".elements"} />
+            <AddElement
+              fieldName={(fieldName + ".elements") as ElementArrayPath}
+            />
           ) : null}
         </PageLayout>
         <Footer number={index + 1} config={config} ref={footerRef} />

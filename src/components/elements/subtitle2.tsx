@@ -1,14 +1,12 @@
-import React from "react";
-import * as z from "zod";
-import { ConfigSchema } from "@/lib/validation/document-schema";
 import { cn } from "@/lib/utils";
 import { fontIdToClassName } from "@/lib/fonts-map";
-import { TitleSchema } from "@/lib/validation/text-schema";
 import { textStyleToClasses } from "@/lib/text-style-to-classes";
 import { useFormContext } from "react-hook-form";
 import {
   DocumentFormReturn,
   TextFieldPath,
+  TextFieldStyle,
+  TextFieldStylePath,
   TextFieldTextPath,
 } from "@/lib/document-form-types";
 import { TextAreaFormField } from "@/components/forms/fields/text-area-form-field";
@@ -20,16 +18,19 @@ export function Subtitle2({
   fieldName: TextFieldPath;
   className?: string;
 }) {
-  const form = useFormContext();
+  const form: DocumentFormReturn = useFormContext();
   const { getValues } = form;
   const config = getValues("config");
-  const style = getValues(`${fieldName}.style`);
+  const style = getValues(
+    `${fieldName}.style` as TextFieldStylePath
+  ) as TextFieldStyle;
   const textFieldName = (fieldName + ".text") as TextFieldTextPath;
 
   return (
     <TextAreaFormField
       fieldName={textFieldName}
       form={form}
+      label={""}
       placeholder={"Your subtitle here"}
       className={cn(
         `font-bold`,

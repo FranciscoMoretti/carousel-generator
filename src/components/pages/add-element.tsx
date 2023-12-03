@@ -1,22 +1,23 @@
-import { SlideType } from "@/lib/validation/slide-schema";
-
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Plus } from "lucide-react";
-import { NewSlideDialogContent } from "@/components/new-page-dialog-content";
 import { getSlideNumber } from "@/lib/field-path";
 import { useFormContext } from "react-hook-form";
 import { NewElementDialogContent } from "@/components/new-element-dialog-content";
+import {
+  DocumentFormReturn,
+  ElementArrayPath,
+} from "@/lib/document-form-types";
 
 export function AddElement({
   className,
   fieldName,
 }: {
   className?: string;
-  fieldName: string;
+  fieldName: ElementArrayPath;
 }) {
   const pageNumber = getSlideNumber(fieldName);
-  const form = useFormContext();
+  const form: DocumentFormReturn = useFormContext();
   return (
     <Dialog>
       <DialogTrigger asChild>

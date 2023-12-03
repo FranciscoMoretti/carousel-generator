@@ -22,7 +22,7 @@ export function EnumRadioGroupField<T extends string | number | symbol>({
   fieldName: // Enums in form
   // TEXT
   // FontSize
-  | `slides.${number}.title.style.fontSize`
+  | `slides.${number}.element..style.fontSize`
     | `slides.${number}.subtitle.style.fontSize`
     | `slides.${number}.description.style.fontSize`
     // Align

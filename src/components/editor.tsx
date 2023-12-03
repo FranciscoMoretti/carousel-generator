@@ -1,7 +1,4 @@
 "use client";
-import { Metadata } from "next";
-
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { SidebarPanel } from "@/components/settings-panel";
 import { SlidesEditor } from "@/components/slides-editor";
 import React from "react";
@@ -10,10 +7,11 @@ import { useComponentPrinter } from "@/lib/hooks/use-component-printer";
 import { RefProvider } from "@/lib/providers/reference-context";
 import { MainNav } from "./main-nav";
 import { useFormContext } from "react-hook-form";
+import { DocumentFormReturn } from "@/lib/document-form-types";
 
 export default function Editor({}: {}) {
   const { componentRef, handlePrint, isPrinting } = useComponentPrinter();
-  const form = useFormContext();
+  const form: DocumentFormReturn = useFormContext();
 
   return (
     <RefProvider myRef={componentRef}>

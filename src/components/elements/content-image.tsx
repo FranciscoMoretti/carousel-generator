@@ -11,17 +11,18 @@ import { useSelectionContext } from "@/lib/providers/selection-context";
 import { getSlideNumber } from "@/lib/field-path";
 import { usePagerContext } from "@/lib/providers/pager-context";
 import { useFormContext } from "react-hook-form";
+import { DocumentFormReturn, ElementPath } from "@/lib/document-form-types";
 
 export function ContentImage({
   fieldName,
   className,
 }: {
-  fieldName: string;
+  fieldName: ElementPath;
   className?: string;
 }) {
-  const form = useFormContext();
+  const form: DocumentFormReturn = useFormContext();
   const { getValues } = form;
-  const image = getValues(`${fieldName}`);
+  const image = getValues(fieldName) as z.infer<typeof ContentImageSchema>;
 
   const { setCurrentPage } = usePagerContext();
   const { currentSelection, setCurrentSelection } = useSelectionContext();

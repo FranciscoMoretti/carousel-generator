@@ -9,6 +9,8 @@ import { useFormContext } from "react-hook-form";
 import {
   DocumentFormReturn,
   TextFieldPath,
+  TextFieldStyle,
+  TextFieldStylePath,
   TextFieldTextPath,
 } from "@/lib/document-form-types";
 import { TextAreaFormField } from "@/components/forms/fields/text-area-form-field";
@@ -20,15 +22,18 @@ export function Title2({
   fieldName: TextFieldPath;
   className?: string;
 }) {
-  const form = useFormContext();
+  const form: DocumentFormReturn = useFormContext();
   const { getValues } = form;
   const config = getValues("config");
-  const style = getValues(`${fieldName}.style`);
+  const style = getValues(
+    `${fieldName}.style` as TextFieldStylePath
+  ) as TextFieldStyle;
   const textFieldName = (fieldName + ".text") as TextFieldTextPath;
   return (
     <TextAreaFormField
       fieldName={textFieldName}
       form={form}
+      label={""}
       placeholder={"Your title here"}
       className={cn(
         `font-black text-balance`,

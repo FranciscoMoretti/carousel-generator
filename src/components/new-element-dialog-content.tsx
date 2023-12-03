@@ -10,7 +10,10 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { DocumentFormReturn } from "@/lib/document-form-types";
+import {
+  DocumentFormReturn,
+  ElementArrayPath,
+} from "@/lib/document-form-types";
 import { DEFAULT_CONTENT_IMAGE_INPUT } from "@/lib/validation/image-schema";
 import { SlideType } from "@/lib/validation/slide-schema";
 import {
@@ -26,7 +29,7 @@ export function NewElementDialogContent({
   fieldName,
 }: {
   form: DocumentFormReturn;
-  fieldName: `slides.${number}.elements`;
+  fieldName: ElementArrayPath;
 }) {
   const { control } = form;
   const { append, fields } = useFieldArray({

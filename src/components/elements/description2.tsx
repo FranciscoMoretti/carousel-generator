@@ -4,25 +4,35 @@ import { fontIdToClassName } from "@/lib/fonts-map";
 import { textStyleToClasses } from "@/lib/text-style-to-classes";
 import { useFormContext } from "react-hook-form";
 import { TextAreaFormField } from "@/components/forms/fields/text-area-form-field";
-import { TextFieldPath, TextFieldTextPath } from "@/lib/document-form-types";
+import {
+  DescriptionPath,
+  DocumentFormReturn,
+  TextFieldPath,
+  TextFieldStyle,
+  TextFieldStylePath,
+  TextFieldTextPath,
+} from "@/lib/document-form-types";
 
 export function Description2({
   fieldName,
   className = "",
 }: {
-  fieldName: TextFieldPath;
+  fieldName: DescriptionPath;
   className?: string;
 }) {
-  const form = useFormContext();
+  const form: DocumentFormReturn = useFormContext();
   const { getValues } = form;
   const config = getValues("config");
-  const style = getValues(`${fieldName}.style`);
+  const style = getValues(
+    `${fieldName}.style` as TextFieldStylePath
+  ) as TextFieldStyle;
   const textFieldName = (fieldName + ".text") as TextFieldTextPath;
 
   return (
     <TextAreaFormField
       fieldName={textFieldName}
       form={form}
+      label={""}
       placeholder={"Your description here"}
       className={cn(
         `font-medium`,
