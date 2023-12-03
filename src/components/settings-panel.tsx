@@ -122,7 +122,6 @@ export function SidebarTabsPanel() {
   const { currentSelection } = useSelectionContext();
   const [tab, setTab] = useState(ALL_FORMS.brand.value);
 
-  console.log({ currentSelection, tab });
   return (
     <VerticalTabs
       value={currentSelection ? "" : tab}
@@ -185,9 +184,19 @@ export function SidebarTabsPanel() {
 }
 
 export function DrawerFormsPanel({ className }: { className: string }) {
+  const { currentSelection } = useSelectionContext();
+  const [tab, setTab] = useState(ALL_FORMS.brand.value);
+  // TODO: Lift state to not loose it when drawer gets closed ?
+
   return (
     <Tabs
-      defaultValue={ALL_FORMS.brand.value}
+      value={currentSelection ? "" : tab}
+      onValueChange={(val) => {
+        if (val) {
+          // Don't lost previous state when showing current selection
+          setTab(val);
+        }
+      }}
       className={cn("flex-1 w-full", className)}
     >
       <div className="flex flex-col h-full ">
