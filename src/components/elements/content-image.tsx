@@ -30,9 +30,7 @@ export function ContentImage({
   const { setCurrentPage } = usePagerContext();
   const { currentSelection, setCurrentSelection } = useSelectionContext();
   const pageNumber = getSlideNumber(fieldName);
-  const source =
-    image.source.src ||
-    "http://www.listercarterhomes.com/wp-content/uploads/2013/11/dummy-image-square.jpg";
+  const source = image.source.src || "https://placehold.co/400x200";
 
   // TODO: Convert to Toggle to make it accessible. Control with selection
 
