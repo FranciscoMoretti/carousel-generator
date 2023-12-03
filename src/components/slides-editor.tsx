@@ -1,12 +1,9 @@
-import { SlidePanel } from "./slide-panel";
-import SlideMenubar from "./slide-menubar";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import {
   DocumentFormReturn,
   SlidesFieldArrayReturn,
 } from "@/lib/document-form-types";
 import { ReactDocument } from "./pages/document";
-import React from "react";
 import useWindowDimensions from "@/lib/hooks/use-window-dimensions";
 import { SIZE } from "@/lib/page-size";
 import { LoadingSpinner } from "./loading-spinner";
