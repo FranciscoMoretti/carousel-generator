@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import {
   DocumentFormReturn,
+  ElementPath,
   SlidesFieldArrayReturn,
 } from "@/lib/document-form-types";
 import { useFieldArrayValues } from "@/lib/hooks/use-field-array-values";
@@ -23,11 +24,11 @@ import { useSelectionContext } from "@/lib/providers/selection-context";
 import React from "react";
 
 function ElementMenubar({
-  fieldName, //TODO Maybe change with number or expose onclciks
+  fieldName,
   className = "",
 }: //
 {
-  fieldName: string;
+  fieldName: ElementPath;
   className?: string;
 }) {
   const { numPages: numElements } = useFieldArrayValues(getParent(fieldName));
@@ -111,18 +112,20 @@ function ElementMenubar({
   );
 }
 
-const ElementMenubarWrapper = React.forwardRef(function ElementMenubarWrapper(
+const ElementMenubarWrapper = React.forwardRef<
+  HTMLDivElement,
+  {
+    // slidesFieldArray: SlidesFieldArrayReturn;
+    fieldName: ElementPath;
+    children: React.ReactNode;
+    className?: string;
+  }
+>(function ElementMenubarWrapper(
   {
     // slidesFieldArray,
     fieldName, //TODO Maybe change with number or expose onclciks
     children,
     className = "",
-  }: //
-  {
-    // slidesFieldArray: SlidesFieldArrayReturn;
-    fieldName: string;
-    children: React.ReactNode;
-    className?: string;
   },
   ref
 ) {

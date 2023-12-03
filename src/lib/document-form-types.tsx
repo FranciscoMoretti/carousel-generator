@@ -7,7 +7,10 @@ import {
 } from "react-hook-form";
 import * as z from "zod";
 import { DocumentSchema } from "@/lib/validation/document-schema";
-import { CommonSlideSchema } from "@/lib/validation/slide-schema";
+import {
+  CommonSlideSchema,
+  ElementSchema,
+} from "@/lib/validation/slide-schema";
 import { TextStyleSchema } from "@/lib/validation/text-schema";
 import { getPathsByValue } from "@/lib/zod-paths-by-value";
 import { CommonPage } from "@/components/pages/common-page";
@@ -43,4 +46,9 @@ export type TextFieldTextPath =
 export type TextFieldStylePath = FieldPathByValue<
   z.infer<typeof DocumentSchema>,
   z.infer<typeof TextStyleSchema>
+>;
+
+export type ElementPath = FieldPathByValue<
+  z.infer<typeof DocumentSchema>,
+  z.infer<typeof ElementSchema>
 >;

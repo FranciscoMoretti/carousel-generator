@@ -5,18 +5,14 @@ import { Signature } from "@/components/elements/signature";
 import { PageNumber } from "@/components/elements/page-number";
 import { cn } from "@/lib/utils";
 
-const Footer = React.forwardRef(function Footer(
+const Footer = React.forwardRef<
+  HTMLDivElement,
   {
-    config,
-    number,
-    className,
-  }: {
     config: z.infer<typeof ConfigSchema>;
     number: number;
     className?: string;
-  },
-  ref
-) {
+  }
+>(function Footer({ config, number, className }, ref) {
   return (
     <div
       ref={ref}
