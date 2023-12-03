@@ -1,26 +1,23 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import * as z from "zod";
-import { MultiSlideSchema, SlideType } from "@/lib/validation/slide-schema";
+import { MultiSlideSchema } from "@/lib/validation/slide-schema";
 import { usePersistFormWithKey } from "@/lib/hooks/use-persist-form-with-key";
 
 import { DocumentSchema } from "@/lib/validation/document-schema";
 import { PagerProvider } from "@/lib/providers/pager-context";
 import { usePager } from "@/lib/hooks/use-pager";
-import { getDefaultSlideOfType, COMMON_PAGE_2 } from "@/lib/default-slides";
+import { getDefaultSlideOfType, SlideType } from "@/lib/default-slides";
 import { DEFAULT_IMAGE_INPUT } from "../validation/image-schema";
 import { SelectionProvider } from "@/lib/providers/selection-context";
 import { useSelection } from "@/lib/hooks/use-selection";
 
 const defaultSlideValues: z.infer<typeof MultiSlideSchema> = [
-  getDefaultSlideOfType(undefined),
-  { ...COMMON_PAGE_2 },
-  // getDefaultSlideOfType(SlideType.enum.Intro),
-  // getDefaultSlideOfType(SlideType.enum.Content),
-  // getDefaultSlideOfType(SlideType.enum.Content),
-  // getDefaultSlideOfType(SlideType.enum.Content),
-  // getDefaultSlideOfType(SlideType.enum.Content),
-  // getDefaultSlideOfType(SlideType.enum.Outro),
+  getDefaultSlideOfType(SlideType.enum.Intro),
+  getDefaultSlideOfType(SlideType.enum.Common),
+  getDefaultSlideOfType(SlideType.enum.Content),
+  getDefaultSlideOfType(SlideType.enum.Content),
+  getDefaultSlideOfType(SlideType.enum.Outro),
 ];
 
 export function DocumentProvider({ children }: { children: React.ReactNode }) {

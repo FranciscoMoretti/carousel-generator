@@ -1,11 +1,5 @@
 import * as z from "zod";
-import {
-  CommonSlideSchema,
-  ContentSlideSchema,
-  IntroSlideSchema,
-  OutroSlideSchema,
-  SlideType,
-} from "./validation/slide-schema";
+import { CommonSlideSchema } from "./validation/slide-schema";
 import {
   DEFAULT_DESCRIPTION,
   DEFAULT_SUBTITLE,
@@ -26,6 +20,9 @@ export const COMMON_PAGE: z.infer<typeof CommonSlideSchema> = {
   ],
   backgroundImage: DEFAULT_BACKGROUND_IMAGE_INPUT,
 };
+
+export const SlideType = z.enum(["Intro", "Content", "Outro", "Common"]);
+export type SlideType = z.infer<typeof SlideType>;
 
 export const INTRO: z.infer<typeof CommonSlideSchema> = {
   elements: [DEFAULT_CONTENT_IMAGE_INPUT, DEFAULT_TITLE],
