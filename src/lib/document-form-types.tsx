@@ -43,6 +43,10 @@ export type TextFieldPath =
 
 export type TextTextFieldPath = `slides.${number}.elements.${number}.text`;
 export type TextStyleFieldPath = `slides.${number}.elements.${number}.style`;
+export type TextStyleFontSizeFieldPath =
+  `slides.${number}.elements.${number}.style.fontSize`;
+export type TextStyleAlignFieldPath =
+  `slides.${number}.elements.${number}.style.align`;
 export type TextFieldStyle = z.infer<typeof TextStyleSchema>;
 
 export type ElementFieldPath = FieldPathByValue<
@@ -65,3 +69,6 @@ export type ImageSourceFieldPath =
   | `slides.${number}.elements.${number}.source`
   | `slides.${number}.backgroundImage.source`
   | "config.brand.avatar.source";
+
+export type ImageStyleObjectFitFieldPath =
+  | `slides.${number}.elements.${number}.style.objectFit`;

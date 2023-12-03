@@ -6,7 +6,12 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { DocumentFormReturn } from "@/lib/document-form-types";
+import {
+  DocumentFormReturn,
+  ImageStyleObjectFitFieldPath,
+  TextStyleAlignFieldPath,
+  TextStyleFontSizeFieldPath,
+} from "@/lib/document-form-types";
 import { RadioGroup } from "@radix-ui/react-radio-group";
 import { CustomIndicatorRadioGroupItem } from "@/components/custom-indicator-radio-group-item";
 import { cn } from "@/lib/utils";
@@ -19,20 +24,10 @@ export function EnumRadioGroupField<T extends string | number | symbol>({
   itemClassName = "",
   groupClassName = "",
 }: {
-  fieldName: // Enums in form
-  // TEXT
-  // FontSize
-  | `slides.${number}.element..style.fontSize`
-    | `slides.${number}.subtitle.style.fontSize`
-    | `slides.${number}.description.style.fontSize`
-    // Align
-    | `slides.${number}.title.style.align`
-    | `slides.${number}.subtitle.style.align`
-    | `slides.${number}.description.style.align`
-    // IMAGE
-    // CONTENT IMAGE
-    // Object fit
-    | `slides.${number}.image.style.objectFit`;
+  fieldName:
+    | TextStyleFontSizeFieldPath
+    | TextStyleAlignFieldPath
+    | ImageStyleObjectFitFieldPath;
   form: DocumentFormReturn;
   enumValueElements: Record<T, React.ReactNode>;
   itemClassName?: string;
