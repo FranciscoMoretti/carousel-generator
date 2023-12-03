@@ -1,4 +1,8 @@
-import { DocumentFormReturn } from "@/lib/document-form-types";
+import {
+  DocumentFormReturn,
+  ImageFieldPath,
+  ImageStyleOpacityFieldPath,
+} from "@/lib/document-form-types";
 import { ImageSourceFormField } from "@/components/forms/fields/image-source-form-field";
 import { ObjectFitType } from "@/lib/validation/image-schema";
 import { Maximize2, Minimize2 } from "lucide-react";
@@ -14,10 +18,7 @@ export function ImageFormField({
   form,
   label,
 }: {
-  fieldName:
-    | `slides.${number}.image`
-    | `slides.${number}.backgroundImage`
-    | "config.brand.avatar";
+  fieldName: ImageFieldPath;
   form: DocumentFormReturn;
   label: string;
 }) {
@@ -26,7 +27,7 @@ export function ImageFormField({
       <h3 className="text-base">{label}</h3>
       <ImageSourceFormField fieldName={`${fieldName}.source`} form={form} />
       <OpacityFormField
-        fieldName={`${fieldName}.style.opacity`}
+        fieldName={`${fieldName}.style.opacity` as ImageStyleOpacityFieldPath}
         form={form}
         label={"Opacity"}
         disabled={form.getValues(`${fieldName}.source.src`) == ""}

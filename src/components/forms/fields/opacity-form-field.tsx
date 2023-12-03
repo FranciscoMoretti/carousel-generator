@@ -7,7 +7,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
-import { DocumentFormReturn } from "@/lib/document-form-types";
+import {
+  DocumentFormReturn,
+  ImageStyleOpacityFieldPath,
+} from "@/lib/document-form-types";
 
 export function OpacityFormField({
   fieldName,
@@ -16,10 +19,7 @@ export function OpacityFormField({
   disabled = false,
   className = "",
 }: {
-  fieldName:
-    | `slides.${number}.image.style.opacity`
-    | `slides.${number}.backgroundImage.style.opacity`
-    | "config.brand.avatar.style.opacity";
+  fieldName: ImageStyleOpacityFieldPath;
   form: DocumentFormReturn;
   label: string;
   disabled?: boolean;

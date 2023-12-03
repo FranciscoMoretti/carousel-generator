@@ -65,5 +65,10 @@ export type ImageSourceFieldPath =
   | `slides.${number}.backgroundImage.source`
   | "config.brand.avatar.source";
 
+export type ImageStyleOpacityFieldPath =
+  | `slides.${number}.elements.${number}.style.opacity`
+  | `slides.${number}.backgroundImage.style.opacity`
+  | "config.brand.avatar.style.opacity";
+
 export type ImageStyleObjectFitFieldPath =
   | `slides.${number}.elements.${number}.style.objectFit`;
