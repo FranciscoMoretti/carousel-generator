@@ -65,7 +65,7 @@ export function SidebarPanel({ className }: { className?: string }) {
   return (
     <>
       <aside className="top-14 z-30 hidden h-full w-full shrink-0 md:sticky md:block border-r">
-        <SidebarFormsPanel />
+        <SidebarTabsPanel />
       </aside>
       <div className="block md:hidden">
         <Drawer.Root modal={true}>
@@ -109,7 +109,7 @@ function HorizontalTabTriggerButton({ tabInfo }: { tabInfo: TabInfo }) {
   );
 }
 
-export function SidebarFormsPanel() {
+export function SidebarTabsPanel() {
   return (
     <VerticalTabs
       defaultValue={ALL_FORMS.brand.value}
