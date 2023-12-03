@@ -1,9 +1,9 @@
 import React, { FocusEvent, useContext } from "react";
 
 interface SelectionContextValue {
-  currentSelection: string | null;
+  currentSelection: string;
   setCurrentSelection: (
-    selection: string | null,
+    selection: string,
     event:
       | FocusEvent<HTMLTextAreaElement, Element>
       | React.MouseEvent<HTMLDivElement, MouseEvent>

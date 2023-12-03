@@ -3,6 +3,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import * as z from "zod";
 import { MultiSlideSchema } from "@/lib/validation/slide-schema";
 import { usePersistFormWithKey } from "@/lib/hooks/use-persist-form-with-key";
+import { SlideType } from "@/lib/validation/slide-schema";
 
 import { DocumentSchema } from "@/lib/validation/document-schema";
 import { PagerProvider } from "@/lib/providers/pager-context";
@@ -51,8 +52,8 @@ export function DocumentProvider({ children }: { children: React.ReactNode }) {
     },
   });
   usePersistFormWithKey(documentForm, "documentFormKey");
-  const pager = usePager(0);
   const selection = useSelection();
+  const pager = usePager(0);
   return (
     <FormProvider {...documentForm}>
       <SelectionProvider value={selection}>

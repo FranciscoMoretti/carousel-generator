@@ -1,7 +1,7 @@
 import { FocusEvent, useState } from "react";
 
 export function useSelection() {
-  const [currentSelection, setCurrentSelection] = useState<string | null>(null);
+  const [currentSelection, setCurrentSelection] = useState<string>("");
 
   function _setCurrentSelection(
     currentSelection: string,
