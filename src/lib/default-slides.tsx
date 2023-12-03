@@ -27,33 +27,18 @@ export const COMMON_PAGE: z.infer<typeof CommonSlideSchema> = {
   backgroundImage: DEFAULT_BACKGROUND_IMAGE_INPUT,
 };
 
-export const COMMON_PAGE_2: z.infer<typeof CommonSlideSchema> = {
+export const INTRO: z.infer<typeof CommonSlideSchema> = {
   elements: [DEFAULT_CONTENT_IMAGE_INPUT, DEFAULT_TITLE],
   backgroundImage: DEFAULT_BACKGROUND_IMAGE_INPUT,
 };
 
-export const INTRO: z.infer<typeof IntroSlideSchema> = {
-  type: SlideType.enum.Intro,
-  title: DEFAULT_TITLE,
-  subtitle: DEFAULT_SUBTITLE,
-  description: DEFAULT_DESCRIPTION,
-  image: DEFAULT_CONTENT_IMAGE_INPUT,
+export const CONTENT: z.infer<typeof CommonSlideSchema> = {
+  elements: [DEFAULT_TITLE, DEFAULT_DESCRIPTION],
   backgroundImage: DEFAULT_BACKGROUND_IMAGE_INPUT,
 };
 
-export const CONTENT: z.infer<typeof ContentSlideSchema> = {
-  type: SlideType.enum.Content,
-  title: DEFAULT_TITLE,
-  description: DEFAULT_DESCRIPTION,
-  image: DEFAULT_CONTENT_IMAGE_INPUT,
-  backgroundImage: DEFAULT_BACKGROUND_IMAGE_INPUT,
-};
-export const OUTRO: z.infer<typeof OutroSlideSchema> = {
-  type: SlideType.enum.Outro,
-  title: DEFAULT_TITLE,
-  subtitle: DEFAULT_SUBTITLE,
-  description: DEFAULT_DESCRIPTION,
-  image: DEFAULT_CONTENT_IMAGE_INPUT,
+export const OUTRO: z.infer<typeof CommonSlideSchema> = {
+  elements: [DEFAULT_TITLE, DEFAULT_SUBTITLE, DEFAULT_DESCRIPTION],
   backgroundImage: DEFAULT_BACKGROUND_IMAGE_INPUT,
 };
 
