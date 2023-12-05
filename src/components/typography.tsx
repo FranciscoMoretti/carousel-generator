@@ -49,6 +49,25 @@ export function TypographyH3({
   return (
     <h3
       className={cn(
+        "scroll-m-20 text-2xl font-semibold tracking-tight",
+        className
+      )}
+    >
+      {children}
+    </h3>
+  );
+}
+
+export function TypographyH4({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <h3
+      className={cn(
         "scroll-m-20 text-xl font-semibold tracking-tight",
         className
       )}
@@ -168,5 +187,19 @@ export function TypographyMuted({
 }) {
   return (
     <p className={cn("text-sm text-muted-foreground", className)}>{children}</p>
+  );
+}
+
+export function TypographyFieldName({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <p className={cn("text-sm font-medium leading-none ", className)}>
+      {children}
+    </p>
   );
 }

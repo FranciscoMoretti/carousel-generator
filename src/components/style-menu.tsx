@@ -27,6 +27,13 @@ import { OpacityFormField } from "@/components/forms/fields/opacity-form-field";
 import { ImageSourceFormField } from "@/components/forms/fields/image-source-form-field";
 import { ObjectFitType } from "@/lib/validation/image-schema";
 import { ElementType } from "@/lib/validation/element-type";
+import {
+  TypographyFieldName,
+  TypographyH3,
+  TypographyH4,
+  TypographyLarge,
+} from "@/components/typography";
+import { Separator } from "@/components/ui/separator";
 
 const fontSizeMap: Record<FontSizeType, React.ReactElement> = {
   [FontSizeType.enum.Small]: <Type className="h-2 w-2" />,
@@ -70,61 +77,70 @@ export function StyleMenu({
       key={elementPath}
     >
       <div className="space-y-2">
-        <h4 className="font-medium leading-none">Style</h4>
+        <TypographyH3>Style</TypographyH3>
         <p className="text-sm text-muted-foreground">
           Set the selected element style.
         </p>
       </div>
-      <div className="flex flex-col gap-2 items-center">
-        {style && Object.hasOwn(style, "fontsize") ? (
+      <Separator orientation="horizontal"></Separator>
+      <div className="flex flex-col gap-6 items-start">
+        {style && Object.hasOwn(style, "fontSize") ? (
           <EnumRadioGroupField
+            name="Font Size"
             form={form}
             fieldName={`${stylePath}.fontSize` as TextStyleFontSizeFieldPath}
             enumValueElements={fontSizeMap}
-            groupClassName="grid grid-cols-3 items-center gap-1"
+            groupClassName="grid grid-cols-3 gap-1"
             itemClassName="h-10 w-10"
           />
         ) : null}
         {style && Object.hasOwn(style, "align") ? (
           <EnumRadioGroupField
+            name="Alignment"
             form={form}
             fieldName={`${stylePath}.align` as TextStyleAlignFieldPath}
             enumValueElements={textAlignMap}
-            groupClassName="grid grid-cols-3 items-center gap-1"
+            groupClassName="grid grid-cols-3 gap-1"
             itemClassName="h-10 w-10"
           />
         ) : null}
         {style && Object.hasOwn(style, "objectFit") ? (
           <EnumRadioGroupField
+            name={"Object Fit"}
             form={form}
             fieldName={`${stylePath}.objectFit` as ImageStyleObjectFitFieldPath}
             enumValueElements={objectFitMap}
-            groupClassName="grid grid-cols-3 items-center gap-1"
+            groupClassName="grid grid-cols-3  gap-1"
             itemClassName="h-10 w-10"
-          />
-        ) : null}
-        {style && Object.hasOwn(style, "opacity") ? (
-          <OpacityFormField
-            fieldName={`${stylePath}.opacity` as ImageStyleOpacityFieldPath}
-            form={form}
-            label={"Opacity"}
-            className="w-full"
-            disabled={
-              form.getValues(
-                `${elementPath}.source.src` as ImageSourceSrcFieldPath
-              ) == ""
-            }
           />
         ) : null}
         {type == ElementType.enum.Image ||
         type == ElementType.enum.ContentImage ? (
-          <div className="w-full flex flex-col gap-1">
-            <h4 className="text-base font-semibold">Image</h4>
-            <ImageSourceFormField
-              fieldName={`${elementPath}.source` as ImageSourceFieldPath}
+          <>
+            <div className="w-full flex flex-col gap-3">
+              <h4 className="text-base font-semibold">Image</h4>
+              <TypographyFieldName>Source</TypographyFieldName>
+              <ImageSourceFormField
+                fieldName={`${elementPath}.source` as ImageSourceFieldPath}
+                form={form}
+              />
+            </div>
+          </>
+        ) : null}
+        {style && Object.hasOwn(style, "opacity") ? (
+          <>
+            <OpacityFormField
+              fieldName={`${stylePath}.opacity` as ImageStyleOpacityFieldPath}
               form={form}
+              label={"Opacity"}
+              className="w-full"
+              disabled={
+                form.getValues(
+                  `${elementPath}.source.src` as ImageSourceSrcFieldPath
+                ) == ""
+              }
             />
-          </div>
+          </>
         ) : null}
       </div>
     </div>
