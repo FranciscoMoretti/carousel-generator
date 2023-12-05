@@ -20,7 +20,7 @@ export function TypographyH1({
   );
 }
 
-export function TypographyList({
+export function TypographyH2({
   children,
   className = "",
 }: {
