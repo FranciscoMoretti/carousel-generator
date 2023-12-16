@@ -36,7 +36,7 @@ export function ReactDocument({
   const { append } = slidesFieldArray;
   const newPageAsSideButton = numPages > 0;
 
-  const fielName = "slides";
+  const fieldName = "slides";
 
   return (
     <div
@@ -59,15 +59,15 @@ export function ReactDocument({
           {document.slides.map((slide, index) => (
             <SlideMenubarWrapper
               slidesFieldArray={slidesFieldArray}
-              fieldName={(fielName + "." + index) as SlideFieldPath}
-              key={fielName + "." + index}
+              fieldName={(fieldName + "." + index) as SlideFieldPath}
+              key={fieldName + "." + index}
             >
               <CommonPage
                 config={document.config}
                 slide={slide}
                 index={index}
                 size={SIZE}
-                fieldName={(fielName + "." + index) as SlideFieldPath}
+                fieldName={(fieldName + "." + index) as SlideFieldPath}
                 className={cn(
                   currentPage != index &&
                     "hover:brightness-90 hover:cursor-pointer"
