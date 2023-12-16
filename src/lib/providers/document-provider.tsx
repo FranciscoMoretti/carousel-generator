@@ -1,8 +1,12 @@
+"use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import * as z from "zod";
 import { MultiSlideSchema } from "@/lib/validation/slide-schema";
-import { usePersistFormWithKey } from "@/lib/hooks/use-persist-form-with-key";
+import {
+  useRetrieveFormValues,
+  usePersistFormValues,
+} from "@/lib/hooks/use-persist-form";
 import { SlideType } from "@/lib/validation/slide-schema";
 
 import { DocumentSchema } from "@/lib/validation/document-schema";
@@ -12,6 +16,9 @@ import { getDefaultSlideOfType } from "@/lib/default-slides";
 import { DEFAULT_IMAGE_INPUT } from "../validation/image-schema";
 import { SelectionProvider } from "@/lib/providers/selection-context";
 import { useSelection } from "@/lib/hooks/use-selection";
+import { DocumentFormReturn } from "@/lib/document-form-types";
+
+const FORM_DATA_KEY = "documentFormKey";
 
 const defaultSlideValues: z.infer<typeof MultiSlideSchema> = [
   getDefaultSlideOfType(SlideType.enum.Intro),
@@ -21,37 +28,45 @@ const defaultSlideValues: z.infer<typeof MultiSlideSchema> = [
   getDefaultSlideOfType(SlideType.enum.Outro),
 ];
 
-export function DocumentProvider({ children }: { children: React.ReactNode }) {
-  const documentForm = useForm<z.infer<typeof DocumentSchema>>({
-    resolver: zodResolver(DocumentSchema),
-    defaultValues: {
-      slides: defaultSlideValues,
-      config: {
-        brand: {
-          avatar: DEFAULT_IMAGE_INPUT,
+const defaultValues = {
+  slides: defaultSlideValues,
+  config: {
+    brand: {
+      avatar: DEFAULT_IMAGE_INPUT,
 
-          name: "My name",
-          handle: "@name",
-        },
-        theme: {
-          isCustom: false,
-          pallette: "pallette-1",
-          primary: "#b1e4cc",
-          secondary: "#9ac141",
-          background: "#202624",
-        },
-        fonts: {
-          font1: "DM_Serif_Display",
-          font2: "DM_Sans",
-        },
-        pageNumber: {
-          showNumbers: true,
-        },
-      },
-      filename: "My Carousel File",
+      name: "My name",
+      handle: "@name",
     },
+    theme: {
+      isCustom: false,
+      pallette: "pallette-1",
+      primary: "#b1e4cc",
+      secondary: "#9ac141",
+      background: "#202624",
+    },
+    fonts: {
+      font1: "DM_Serif_Display",
+      font2: "DM_Sans",
+    },
+    pageNumber: {
+      showNumbers: true,
+    },
+  },
+  filename: "My Carousel File",
+};
+export function DocumentProvider({ children }: { children: React.ReactNode }) {
+  const { getSavedData } = useRetrieveFormValues(FORM_DATA_KEY, defaultValues);
+  const documentForm: DocumentFormReturn = useForm<
+    z.infer<typeof DocumentSchema>
+  >({
+    resolver: zodResolver(DocumentSchema),
+    defaultValues: getSavedData(),
   });
-  usePersistFormWithKey(documentForm, "documentFormKey");
+  usePersistFormValues({
+    localStorageKey: FORM_DATA_KEY,
+    values: documentForm.getValues(),
+  });
+
   const selection = useSelection();
   const pager = usePager(0);
   return (

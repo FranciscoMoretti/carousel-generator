@@ -50,7 +50,6 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.48.2",
-    "react-hook-form-persist": "^3.0.0",
     "react-pdf": "^7.3.3",
     "react-pdf-tailwind": "^2.1.0",
     "react-textarea-autosize": "^8.5.3",
