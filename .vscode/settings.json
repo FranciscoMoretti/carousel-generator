@@ -4,6 +4,8 @@
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "typescript.preferences.importModuleSpecifier": "non-relative",
 
+  "typescript.preferences.preferTypeOnlyAutoImports": true,
+
   // Prettier
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -11,7 +13,7 @@
   // Eslint
   "eslint.codeActionsOnSave.mode": "all",
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": "explicit"
   },
   // Pretty TS Errors - Run in different process until perf issues are solved by extension maintainers
   "extensions.experimental.affinity": {
