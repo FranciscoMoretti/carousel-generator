@@ -1,21 +1,21 @@
 import { useCallback, useEffect } from "react";
 
-export function useRetrieveFormValues(
+export function useRetrieveFormValues<T>(
   localStorageKey: string,
-  defaultValues: any
+  defaultValues: T
 ) {
-  const getSavedData = useCallback(() => {
+  const getSavedData: () => T = useCallback(() => {
     const localStorage =
       typeof window !== "undefined" ? window.localStorage : undefined;
     let data = localStorage?.getItem(localStorageKey);
     if (data) {
       // Parse it to a javaScript object
       try {
-        data = JSON.parse(data);
+        const parsedData = JSON.parse(data) as T;
+        return parsedData;
       } catch (err) {
         console.log(err);
       }
-      return data;
     }
     return defaultValues;
   }, [defaultValues, localStorageKey]);
