@@ -25,6 +25,7 @@ import {
 import FileInputForm from "./forms/file-input-form";
 import { useFieldsFileImporter } from "@/lib/hooks/use-fields-file-importer";
 import { usePagerContext } from "@/lib/providers/pager-context";
+import { defaultValues } from "@/lib/default-document";
 
 export function EditorMenubar({}: {}) {
   const { reset, watch }: DocumentFormReturn = useFormContext(); // retrieve those props
@@ -115,7 +116,7 @@ export function EditorMenubar({}: {}) {
 
             <MenubarItem
               onClick={() => {
-                reset();
+                reset(defaultValues);
                 setCurrentPage(0);
               }}
             >
