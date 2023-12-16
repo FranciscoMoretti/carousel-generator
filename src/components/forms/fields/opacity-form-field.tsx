@@ -5,7 +5,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 import {
   DocumentFormReturn,
@@ -29,8 +28,7 @@ export function OpacityFormField({
     <FormField
       control={form.control}
       name={fieldName}
-      render={({ field }) => {
-        const { value, onChange } = field;
+      render={({ field: { value, onChange } }) => {
         return (
           <FormItem className={className}>
             <FormLabel>{label}</FormLabel>
