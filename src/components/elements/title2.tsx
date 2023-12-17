@@ -36,7 +36,8 @@ export function Title2({
       label={""}
       placeholder={"Your title here"}
       className={cn(
-        `font-black text-balance`,
+        // text-balance has some issues with text area
+        `font-black `,
         textStyleToClasses({
           style: style,
           sizes: ["text-7xl", "text-5xl", "text-3xl"],
