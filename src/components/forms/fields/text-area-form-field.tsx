@@ -55,6 +55,7 @@ export function TextAreaFormField({
               onClick={(event) => {
                 event.stopPropagation();
               }}
+              value={form.getValues(fieldName)}
               // TODO: Create currentHover
               // Link with onMouseEnter and onMouseLeave
             />
