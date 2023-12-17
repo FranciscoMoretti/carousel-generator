@@ -4,9 +4,12 @@ export function useRetrieveFormValues<T>(
   localStorageKey: string,
   defaultValues: T
 ) {
-  const getSavedData: () => T = useCallback(() => {
+  const getSavedData: () => T | undefined = useCallback(() => {
     const localStorage =
       typeof window !== "undefined" ? window.localStorage : undefined;
+    if (!localStorage) {
+      return undefined;
+    }
     let data = localStorage?.getItem(localStorageKey);
     if (data) {
       // Parse it to a javaScript object
