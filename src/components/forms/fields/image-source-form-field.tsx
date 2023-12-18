@@ -14,6 +14,7 @@ import {
 import imageCompression from "browser-image-compression";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../ui/tabs";
 import { ImageInputType } from "@/lib/validation/image-schema";
+import { useEffect, useState } from "react";
 
 export const MAX_IMAGE_SIZE_MB = 0.5; // Set your maximum image size limit in megabytes
 export const MAX_IMAGE_WIDTH = 800; // Set your maximum image width
@@ -25,12 +26,22 @@ export function ImageSourceFormField({
   fieldName: ImageSourceFieldPath;
   form: DocumentFormReturn;
 }) {
+  const [tabValue, setTabValue] = useState("");
+
+  const imageType = form.getValues(`${fieldName}.type`);
+  useEffect(() => {
+    // Use effect is needed to have consistent rendering of same defaults state on server and client. Then the client sets its tab selection
+    setTabValue(imageType);
+  }, [imageType]);
+
   return (
     <Tabs
-      onValueChange={(tabValue) =>
-        form.setValue(fieldName, { type: tabValue as ImageInputType, src: "" })
-      }
-      defaultValue={form.getValues(`${fieldName}.type`)}
+      onValueChange={(tabValue) => {
+        form.setValue(fieldName, { type: tabValue as ImageInputType, src: "" });
+        setTabValue(tabValue);
+      }}
+      value={tabValue}
+      defaultValue={tabValue}
       className="w-full"
     >
       <TabsList className="grid w-full grid-cols-2">

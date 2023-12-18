@@ -10,6 +10,7 @@ import {
   DocumentFormReturn,
   ImageStyleOpacityFieldPath,
 } from "@/lib/document-form-types";
+import { useEffect, useState } from "react";
 
 export function OpacityFormField({
   fieldName,
@@ -24,11 +25,18 @@ export function OpacityFormField({
   disabled?: boolean;
   className?: string;
 }) {
+  const [opacity, setOpacity] = useState(-1);
+
+  const opacityValue = form.getValues(fieldName);
+  useEffect(() => {
+    setOpacity(opacityValue);
+  }, [opacityValue]);
+
   return (
     <FormField
       control={form.control}
       name={fieldName}
-      render={({ field: { value, onChange } }) => {
+      render={({ field: { onChange } }) => {
         return (
           <FormItem className={className}>
             <FormLabel>{label}</FormLabel>
@@ -38,11 +46,12 @@ export function OpacityFormField({
                 min={0}
                 max={100}
                 step={1}
-                defaultValue={[value]}
+                defaultValue={[opacity]}
                 onValueChange={(vals) => {
                   onChange(vals[0]);
+                  setOpacity(vals[0]);
                 }}
-                value={[form.getValues(fieldName)]}
+                value={[opacity]}
               />
             </FormControl>
             <FormMessage />
