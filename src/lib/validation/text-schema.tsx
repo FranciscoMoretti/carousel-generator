@@ -30,11 +30,11 @@ export const TitleSchema = UnstyledTitleSchema.merge(
 );
 
 export const UnstyledSubtitleSchema = z.object({
-  type: z.literal(ElementType.enum.Title).default(ElementType.enum.Title),
+  type: z.literal(ElementType.enum.Subtitle).default(ElementType.enum.Subtitle),
   text: z
     .string()
     .max(160, {
-      message: "Title must not be longer than 160 characters.",
+      message: "Subtitle must not be longer than 160 characters.",
     })
     .default(""),
 });
