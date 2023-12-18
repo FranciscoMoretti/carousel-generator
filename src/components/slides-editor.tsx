@@ -12,6 +12,7 @@ import { useFieldArrayValues } from "@/lib/hooks/use-field-array-values";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useSelectionContext } from "@/lib/providers/selection-context";
+import { AIInputForm } from "@/components/ai-input-form";
 
 interface SlidesEditorProps {}
 
@@ -83,6 +84,7 @@ export function SlidesEditor({}: SlidesEditorProps) {
             </Button>
           </div>
         </div>
+        <AIInputForm />
       </div>
     </div>
   );

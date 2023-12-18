@@ -11,8 +11,14 @@ export const ConfigSchema = z.object({
   fonts: FontsSchema,
   pageNumber: PageNumberSchema,
 });
+
 export const DocumentSchema = z.object({
   slides: MultiSlideSchema,
   config: ConfigSchema,
+  filename: z.string(),
+});
+
+export const DocumentContentSchema = z.object({
+  slides: MultiSlideSchema,
   filename: z.string(),
 });
