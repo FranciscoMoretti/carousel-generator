@@ -58,7 +58,10 @@ export function AIInputForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="max-w-lg w-full m-auto"
+      >
         <FormField
           control={form.control}
           name="prompt"
@@ -66,7 +69,7 @@ export function AIInputForm() {
             <FormItem>
               <FormLabel></FormLabel>
               <FormControl>
-                <div className="flex flex-row gap-2 items-center max-w-lg w-full m-auto">
+                <div className="flex flex-row gap-2 items-center w-full">
                   <Input
                     placeholder="What's your carousel about"
                     {...field}
