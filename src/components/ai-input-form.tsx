@@ -58,33 +58,36 @@ export function AIInputForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
         <FormField
           control={form.control}
           name="prompt"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Carousel Topic</FormLabel>
+              <FormLabel></FormLabel>
               <FormControl>
-                <Input placeholder="What's your carousel about" {...field} />
+                <div className="flex flex-row gap-2 items-center max-w-lg w-full m-auto">
+                  <Input
+                    placeholder="What's your carousel about"
+                    {...field}
+                    className="flex-1"
+                  />
+                  <Button type="submit" className="flex-0">
+                    {isLoading ? (
+                      <LoadingSpinner />
+                    ) : (
+                      <span className="flex flex-row gap-1.5">
+                        {" "}
+                        <Sparkles className="w-4 h-4" /> Generate{" "}
+                      </span>
+                    )}
+                  </Button>
+                </div>
               </FormControl>
-              <FormDescription>
-                This is the topic for this carousel
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit">
-          {isLoading ? (
-            <LoadingSpinner />
-          ) : (
-            <span className="flex flex-row gap-1.5">
-              {" "}
-              <Sparkles className="w-4 h-4" /> Generate{" "}
-            </span>
-          )}
-        </Button>
       </form>
     </Form>
   );

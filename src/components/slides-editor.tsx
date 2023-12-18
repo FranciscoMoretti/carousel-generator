@@ -54,7 +54,7 @@ export function SlidesEditor({}: SlidesEditorProps) {
         setCurrentSelection("", event);
       }}
     >
-      <div className=" flex flex-col p-4 w-full items-center justify-start gap-3 font-mono text-sm">
+      <div className=" flex flex-col p-4 w-full items-center justify-start gap-8 font-mono text-sm">
         <div className="relative w-full px-4 py-10 overflow-clip">
           <ReactDocument
             document={document}
