@@ -42,7 +42,7 @@ export function OpacityFormField({
             <FormLabel>{label}</FormLabel>
             <FormControl>
               <Slider
-                disabled={disabled}
+                disabled={opacity == -1 || disabled}
                 min={0}
                 max={100}
                 step={1}
