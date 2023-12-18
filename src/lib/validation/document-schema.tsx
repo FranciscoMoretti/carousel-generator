@@ -18,7 +18,6 @@ export const DocumentSchema = z.object({
   filename: z.string(),
 });
 
-export const DocumentContentSchema = z.object({
-  slides: MultiSlideSchema,
-  filename: z.string(),
+export const DocumentContentSchema = DocumentSchema.omit({
+  config: true,
 });
