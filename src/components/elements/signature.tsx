@@ -23,6 +23,9 @@ export function Signature({
           src={config.brand.avatar.source.src}
           alt={config.brand.name}
           className={`w-12 h-12 rounded-full`}
+          style={{
+            opacity: config.brand.avatar.style.opacity / 100,
+          }}
         />
       )}
       <div className={`flex items-start flex-col`}>
