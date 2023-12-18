@@ -3,8 +3,11 @@ import { HumanMessage } from "langchain/schema";
 import { z } from "zod";
 import { zodToJsonSchema } from "zod-to-json-schema";
 import dotenv from "dotenv";
-import { MultiSlideSchema } from "@/lib/validation/slide-schema"; // TODO: Keep only the slides for some prompt
-import { DocumentContentSchema } from "@/lib/validation/document-schema";
+import {
+  MultiSlideSchema,
+  UnstyledMultiSlideSchema,
+} from "@/lib/validation/slide-schema"; // TODO: Keep only the slides for some prompt
+import { UnstyledDocumentSchema } from "@/lib/validation/document-schema";
 import { ElementSchema } from "@/lib/validation/slide-schema";
 import { ElementType } from "@/lib/validation/element-type";
 import {
@@ -26,7 +29,7 @@ dotenv.config();
 const carouselFunctionSchema = {
   name: "carouselCreator",
   description: "Creates a carousel with multiple slides about a topic.",
-  parameters: zodToJsonSchema(DocumentContentSchema, {
+  parameters: zodToJsonSchema(UnstyledDocumentSchema, {
     definitions: {
       TitleSchema,
       SubtitleSchema,
@@ -48,7 +51,7 @@ const model = new ChatOpenAI({
 
 export async function generateCarouselSlides(
   topicPrompt: string
-): Promise<z.infer<typeof MultiSlideSchema> | null> {
+): Promise<z.infer<typeof UnstyledMultiSlideSchema> | null> {
   const result = await model.invoke([
     new HumanMessage(`A carousel with about "${topicPrompt}"`),
   ]);
@@ -57,7 +60,7 @@ export async function generateCarouselSlides(
   );
 
   const documentContentParseResult =
-    DocumentContentSchema.safeParse(jsonParsed);
+    UnstyledDocumentSchema.safeParse(jsonParsed);
   if (documentContentParseResult.success) {
     return documentContentParseResult.data.slides;
   } else {

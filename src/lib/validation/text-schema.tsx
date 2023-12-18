@@ -12,7 +12,7 @@ export const TextStyleSchema = z.object({
   align: TextALignType.default(TextALignType.enum.Left),
 });
 
-export const TitleSchema = z.object({
+export const UnstyledTitleSchema = z.object({
   type: z.literal(ElementType.enum.Title).default(ElementType.enum.Title),
   text: z
     .string()
@@ -20,30 +20,43 @@ export const TitleSchema = z.object({
       message: "Title must not be longer than 160 characters.",
     })
     .default(""),
-  style: TextStyleSchema.default({}),
 });
 
-export const SubtitleSchema = z.object({
-  type: z.literal(ElementType.enum.Subtitle).default(ElementType.enum.Subtitle),
+// TODO use zod merge to add style
+export const TitleSchema = UnstyledTitleSchema.merge(
+  z.object({
+    style: TextStyleSchema.default({}),
+  })
+);
+
+export const UnstyledSubtitleSchema = z.object({
+  type: z.literal(ElementType.enum.Title).default(ElementType.enum.Title),
   text: z
     .string()
-    // .min(10, {
-    //   message: "Subtitle must be at least 10 characters.",
-    // })
     .max(160, {
-      message: "Subtitle must not be longer than 30 characters.",
+      message: "Title must not be longer than 160 characters.",
     })
     .default(""),
-  style: TextStyleSchema.default({}),
 });
 
-export const DescriptionSchema = z.object({
+export const SubtitleSchema = UnstyledSubtitleSchema.merge(
+  z.object({
+    style: TextStyleSchema.default({}),
+  })
+);
+
+export const UnstyledDescriptionSchema = z.object({
   type: z
     .literal(ElementType.enum.Description)
     .default(ElementType.enum.Description),
   text: z.string().default(""),
-  style: TextStyleSchema.default({}),
 });
+
+export const DescriptionSchema = UnstyledDescriptionSchema.merge(
+  z.object({
+    style: TextStyleSchema.default({}),
+  })
+);
 
 export const DEFAULT_TITLE: z.infer<typeof TitleSchema> = TitleSchema.parse({
   text: "YOUR TITLE",

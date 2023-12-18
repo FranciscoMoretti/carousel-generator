@@ -1,5 +1,5 @@
 import * as z from "zod";
-import { MultiSlideSchema } from "./slide-schema";
+import { MultiSlideSchema, UnstyledMultiSlideSchema } from "./slide-schema";
 import { ThemeSchema } from "./theme-schema";
 import { BrandSchema } from "./brand-schema";
 import { FontsSchema } from "./fonts-schema";
@@ -18,6 +18,6 @@ export const DocumentSchema = z.object({
   filename: z.string(),
 });
 
-export const DocumentContentSchema = DocumentSchema.omit({
-  config: true,
+export const UnstyledDocumentSchema = z.object({
+  slides: UnstyledMultiSlideSchema,
 });
