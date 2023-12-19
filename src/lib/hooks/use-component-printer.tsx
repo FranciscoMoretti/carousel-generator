@@ -117,6 +117,7 @@ export function useComponentPrinter() {
 
   const reactToPrintContent = React.useCallback(() => {
     const current = componentRef.current;
+
     if (current && typeof current === "object") {
       // @ts-ignore should type narrow more precisely
       const clone = current.cloneNode(true);
@@ -128,6 +129,7 @@ export function useComponentPrinter() {
       removeAllById(clone, "add-element-");
       removeAllById(clone, "element-menubar-");
       removeAllById(clone, "slide-menubar-");
+      insertFonts(clone);
 
       return clone;
     }
@@ -154,6 +156,7 @@ export function useComponentPrinter() {
         return;
       }
       const SCALE_TO_LINKEDIN_INTRINSIC_SIZE = 1.8;
+      // const fontEmbedCss = await getFontEmbedCSS(html);
       const options: HtmlToPdfOptions = {
         margin: [0, 0, 0, 0],
         filename: watch("filename"),
@@ -236,4 +239,28 @@ function removeClassnames(element: HTMLDivElement, classNames: string): string {
     .split(" ")
     .filter((el) => !classNames.split(" ").includes(el))
     .join(" ");
+}
+
+function insertFonts(element: HTMLElement) {
+  // Get all elements in the document
+  const allElements = Array.from(
+    element.getElementsByTagName(`textarea`)
+  ) as HTMLTextAreaElement[];
+
+  // Iterate through each element
+  allElements.forEach(function (element) {
+    let tailwindFonts = element.className
+      .split(" ")
+      .filter((cn) => cn.startsWith("font-"));
+
+    // Get the computed style of the element
+    tailwindFonts.forEach((font) => {
+      const fontFaceValue = getComputedStyle(
+        element.ownerDocument.body
+      ).getPropertyValue("--" + font); // Font var name convention is starts with `--font`
+      if (fontFaceValue) {
+        element.style.fontFamily = fontFaceValue;
+      }
+    });
+  });
 }
