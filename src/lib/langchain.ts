@@ -1,3 +1,4 @@
+"use server";
 import { ChatOpenAI } from "langchain/chat_models/openai";
 import { HumanMessage, SystemMessage } from "langchain/schema";
 import { z } from "zod";
@@ -25,10 +26,8 @@ const carouselFunctionSchema = {
   }),
 };
 
-console.log({ schema: carouselFunctionSchema.parameters });
-
 const model = new ChatOpenAI({
-  openAIApiKey: process.env.NEXT_PUBLIC_OPENAI_KEY,
+  openAIApiKey: process.env.OPENAI_KEY,
   modelName: "gpt-3.5-turbo-1106",
   temperature: 0,
 }).bind({

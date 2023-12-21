@@ -39,7 +39,6 @@ export function AIInputForm() {
   });
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log({ data });
     setIsLoading(true);
     const generatedSlides = await generateCarouselSlides(
       `A carousel with about "${data.prompt}"`

@@ -39,7 +39,6 @@ export function AITextAreaForm() {
   });
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log({ data });
     setIsLoading(true);
     const generatedSlides = await generateCarouselSlides(
       `Generate a carousel from this article: "${data.prompt}"`
