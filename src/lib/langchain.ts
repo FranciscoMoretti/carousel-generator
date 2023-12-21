@@ -1,5 +1,5 @@
 import { ChatOpenAI } from "langchain/chat_models/openai";
-import { HumanMessage } from "langchain/schema";
+import { HumanMessage, SystemMessage } from "langchain/schema";
 import { z } from "zod";
 import { zodToJsonSchema } from "zod-to-json-schema";
 import {
@@ -15,7 +15,7 @@ import {
 
 const carouselFunctionSchema = {
   name: "carouselCreator",
-  description: "Creates a carousel with multiple slides about a topic.",
+  description: "Creates a carousel with multiple slides for a given topic.",
   parameters: zodToJsonSchema(UnstyledDocumentSchema, {
     definitions: {
       UnstyledTitleSchema,
@@ -25,11 +25,14 @@ const carouselFunctionSchema = {
   }),
 };
 
+console.log({ schema: carouselFunctionSchema.parameters });
+
 const model = new ChatOpenAI({
   openAIApiKey: process.env.NEXT_PUBLIC_OPENAI_KEY,
   modelName: "gpt-3.5-turbo-1106",
   temperature: 0,
 }).bind({
+  // TODO Migrate to Tool and force to call the function with tool choice
   functions: [carouselFunctionSchema],
   function_call: { name: "carouselCreator" },
 });
@@ -38,7 +41,26 @@ export async function generateCarouselSlides(
   topicPrompt: string
 ): Promise<z.infer<typeof MultiSlideSchema> | null> {
   const result = await model.invoke([
-    new HumanMessage(`A carousel with about "${topicPrompt}"`),
+    new SystemMessage(
+      `
+      Create a Carousel of slides following these rules
+
+      Arguments Schema Instructions:
+       - Respect the argument schema and only use the allowed values for element type, which are 'Title', 'Subtitle' and 'Description'.
+       - Each slide can use the multiple elements and they can be of different type or not.
+       - Respect the 'maxLength' value which is the maximum number of characters in a given field. Write less than 70% of that number.
+
+      Guidelines:
+       - Create 8-15 slides.
+       - Each slide has 2-3 different elements. E.g. [Title, Description], or [Title, Subtitle], or [Subtitle, Description].
+       - Each slide All the elements in that slide are about that idea.
+       - Adapt, reorganize and rephrase the content to fit the slides format.
+       - Add Emojis to the text in Title, Subtitle and Description.
+       - Don't add slide numbers.
+       - Description element text should be short.
+       `
+    ),
+    new HumanMessage(topicPrompt),
   ]);
   const jsonParsed = JSON.parse(
     result.additional_kwargs.function_call?.arguments || ""
@@ -51,6 +73,7 @@ export async function generateCarouselSlides(
   } else {
     console.log("Error in carousel generation schema");
     console.error(unstyledDocumentParseResult.error);
+    console.log(jsonParsed);
     return null;
   }
 }

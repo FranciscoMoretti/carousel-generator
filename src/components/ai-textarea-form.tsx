@@ -14,13 +14,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { Sparkles } from "lucide-react";
 import { generateCarouselSlides } from "@/lib/langchain";
 import { DocumentFormReturn } from "@/lib/document-form-types";
 import { useState } from "react";
 import { LoadingSpinner } from "@/components/loading-spinner";
+import { Textarea } from "@/components/ui/textarea";
 
 const FormSchema = z.object({
   prompt: z.string().min(2, {
@@ -28,7 +28,7 @@ const FormSchema = z.object({
   }),
 });
 
-export function AIInputForm() {
+export function AITextAreaForm() {
   const { setValue }: DocumentFormReturn = useFormContext(); // retrieve those props
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -42,7 +42,7 @@ export function AIInputForm() {
     console.log({ data });
     setIsLoading(true);
     const generatedSlides = await generateCarouselSlides(
-      `A carousel with about "${data.prompt}"`
+      `Generate a carousel from this article: "${data.prompt}"`
     );
     if (generatedSlides) {
       setValue("slides", generatedSlides);
@@ -72,10 +72,10 @@ export function AIInputForm() {
               <FormLabel></FormLabel>
               <FormControl>
                 <div className="flex flex-row gap-2 items-center w-full">
-                  <Input
-                    placeholder="What's your carousel about"
-                    {...field}
+                  <Textarea
+                    placeholder="An article with content for your carousel"
                     className="flex-1"
+                    {...field}
                   />
                   <Button type="submit" className="flex-0">
                     {isLoading ? (

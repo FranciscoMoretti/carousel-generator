@@ -32,7 +32,7 @@ export const ElementSchema = z.discriminatedUnion("type", [
 ]);
 
 export const UnstyledSlideSchema = z.object({
-  elements: z.array(UnstyledElementSchema).default([]),
+  elements: z.array(UnstyledElementSchema).max(3),
 });
 
 // TODO: Convert into: elements prop with an array of discriminated union of types
