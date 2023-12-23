@@ -27,7 +27,7 @@ export default function SlideMenubarWrapper({
 
   // const { remove, swap, insert } = slidesFieldArray;
   return (
-    <div className="relative">
+    <div className="relative w-fit">
       <div
         id={`slide-menubar-${fieldName}`}
         className={cn(

@@ -47,8 +47,8 @@ export function SlidesEditor({}: SlidesEditorProps) {
 
   // Screen with larger than md side have smaller slides because the sidebar is present
   const mdWindowWidthPx = 770;
-  const screenToSlideMinRatio = windowWidth > mdWindowWidthPx ? 2.5 : 1.4;
-  const SCALE = Math.min(1, windowWidth / screenToSlideMinRatio / SIZE.width);
+  const screenToSlideMinRatio = windowWidth > mdWindowWidthPx ? 2.5 : 1.2;
+  const scale = Math.min(1, windowWidth / screenToSlideMinRatio / SIZE.width);
 
   return (
     <div
@@ -60,13 +60,13 @@ export function SlidesEditor({}: SlidesEditorProps) {
       }}
     >
       <div className=" flex flex-col p-4 w-full items-center justify-start gap-8 font-mono text-sm">
-        <div className="relative w-full px-4 py-10 overflow-clip">
+        <div className="w-full px-4 py-10">
           <Document
             document={document}
             slidesFieldArray={slidesFieldArray}
-            scale={SCALE}
+            scale={scale}
           />
-          <div className="absolute left-0 top-1/2 transform -translate-y-1/2 px-4 py-2 ">
+          {/* <div className="absolute left-0 top-1/2 transform -translate-y-1/2 px-4 py-2 ">
             <Button
               onClick={onPreviousClick}
               variant="outline"
@@ -87,7 +87,7 @@ export function SlidesEditor({}: SlidesEditorProps) {
             >
               <ChevronRight className="w-6 h-6" />
             </Button>
-          </div>
+          </div> */}
         </div>
         <AIPanel />
       </div>

@@ -9,11 +9,13 @@ export function PageBase({
   size,
   children,
   fieldName,
+  scale,
   className,
 }: {
   size: { width: number; height: number };
   children: React.ReactNode;
   fieldName: string;
+  scale: number;
   className?: string;
 }) {
   const { currentSelection } = useSelectionContext();
@@ -33,6 +35,8 @@ export function PageBase({
         height: `${size.height}px`,
         minWidth: `${size.width}px`,
         minHeight: `${size.height}px`,
+        transform: `scale(${scale})`,
+        transformOrigin: "center",
       }}
     >
       {children}
