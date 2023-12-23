@@ -14,6 +14,9 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useSelectionContext } from "@/lib/providers/selection-context";
 import { AIInputForm } from "@/components/ai-input-form";
 import { AITextAreaForm } from "@/components/ai-textarea-form";
+import { useKeys } from "@/lib/hooks/use-keys";
+import { NoApiKeysText } from "./no-api-keys-text";
+import { useKeysContext } from "@/lib/providers/keys-context";
 
 interface SlidesEditorProps {}
 
@@ -31,6 +34,7 @@ export function SlidesEditor({}: SlidesEditorProps) {
     name: "slides", // unique name for your Field Array
   });
   const { setCurrentSelection } = useSelectionContext();
+  const { apiKey } = useKeysContext();
 
   // TODO: Replace with better loading indicator (sized skeleton from shadcn/ui)
   if (isLoadingWidth) {
@@ -85,8 +89,14 @@ export function SlidesEditor({}: SlidesEditorProps) {
             </Button>
           </div>
         </div>
-        <AIInputForm />
-        <AITextAreaForm />
+        {apiKey ? (
+          <>
+            <AIInputForm />
+            <AITextAreaForm />
+          </>
+        ) : (
+          <NoApiKeysText />
+        )}
       </div>
     </div>
   );

@@ -6,9 +6,10 @@ import { cn } from "@/lib/utils";
 import { Icons } from "@/components/icons";
 import { Button, buttonVariants } from "./ui/button";
 import { EditorMenubar } from "./editor-menubar";
-import { Download, Loader2Icon } from "lucide-react";
+import { Download, Loader2Icon, Settings } from "lucide-react";
 import Pager from "./pager";
 import { FilenameForm } from "./forms/filename-form";
+import { BringYourKeysDialog } from "@/components/api-keys-dialog";
 
 export type NavItem = {
   title: string;
@@ -74,6 +75,15 @@ export function MainNav({ handlePrint, isPrinting, className }: MainNavProps) {
             <span className="sr-only">GitHub</span>
           </div>
         </Link>
+        <BringYourKeysDialog
+          triggerButton={
+            <Button variant="ghost" size={"icon"}>
+              <div className="flex flex-row gap-1 items-center">
+                <Settings />
+              </div>
+            </Button>
+          }
+        />
       </div>
     </div>
   );
