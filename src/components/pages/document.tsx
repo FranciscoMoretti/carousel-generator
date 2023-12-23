@@ -29,7 +29,7 @@ export function Document({
 }) {
   const docReference = useRefContext();
 
-  const { currentPage, setCurrentPage } = usePagerContext();
+  const { currentPage } = usePagerContext();
   const { numPages } = useFieldArrayValues("slides");
 
   const PAGE_GAP_PX = 8;
