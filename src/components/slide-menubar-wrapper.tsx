@@ -19,7 +19,6 @@ export default function SlideMenubarWrapper({
   // slidesFieldArray: SlidesFieldArrayReturn;
   fieldName: string;
   slidesFieldArray: SlidesFieldArrayReturn;
-
   children: React.ReactNode;
   className?: string;
 }) {
@@ -31,12 +30,15 @@ export default function SlideMenubarWrapper({
       <div
         id={`slide-menubar-${fieldName}`}
         className={cn(
-          "absolute -top-9 right-0 ",
+          "absolute -top-10 right-0 ",
           // currentSelection != fieldName && "hidden",
           className
         )}
       >
-        <SlideMenubar slidesFieldArray={slidesFieldArray} />
+        <SlideMenubar
+          slidesFieldArray={slidesFieldArray}
+          fieldName={fieldName}
+        />
       </div>
       {children}
     </div>

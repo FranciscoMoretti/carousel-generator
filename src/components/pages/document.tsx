@@ -61,7 +61,7 @@ export function Document({
         <CarouselContent
           ref={docReference}
           id="element-to-download-as-pdf"
-          className="-ml-2 md:-ml-4 flex-1"
+          className="-ml-2 md:-ml-4 flex-1 pt-14"
         >
           <CarouselItem
             // className="md:basis-[] lg:basis-1/4 pl-2 md:pl-4 w-fit"
@@ -89,7 +89,7 @@ export function Document({
             <CarouselItem
               key={fieldName + "." + index}
               // className="md:basis-[] lg:basis-1/4 pl-2 md:pl-4 w-fit"
-              className="pl-2 md:pl-4 "
+              className="pl-2 md:pl-4"
               // className="pl-2 md:pl-4 "
               style={{
                 flex: `0 0 ${scale * SIZE.width + PAGE_GAP_PX}px`,
