@@ -1,6 +1,6 @@
 "use client";
 import * as z from "zod";
-import React from "react";
+import React, { useEffect } from "react";
 import { DocumentSchema } from "@/lib/validation/document-schema";
 import { SIZE } from "@/lib/page-size";
 import { usePagerContext } from "@/lib/providers/pager-context";
@@ -18,7 +18,16 @@ import { useRefContext } from "@/lib/providers/reference-context";
 import { CommonPage } from "@/components/pages/common-page";
 import SlideMenubarWrapper from "@/components/slide-menubar-wrapper";
 
-export function ReactDocument({
+import {
+  Carousel,
+  CarouselApi,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+
+export function Document({
   document,
   slidesFieldArray,
   scale,
@@ -28,63 +37,116 @@ export function ReactDocument({
   scale: number;
 }) {
   const docReference = useRefContext();
+  const [api, setApi] = React.useState<CarouselApi>();
 
-  const { currentPage, setCurrentPage } = usePagerContext();
+  const { currentPage } = usePagerContext();
   const { numPages } = useFieldArrayValues("slides");
 
   const PAGE_GAP_PX = 8;
-  const { append } = slidesFieldArray;
+  const { append, prepend } = slidesFieldArray;
   const newPageAsSideButton = numPages > 0;
 
   const fieldName = "slides";
 
+  useEffect(() => {
+    if (api) {
+      api.scrollTo(currentPage);
+    }
+  }, [currentPage, api]);
+
   return (
-    <div
-      className={`relative transition-all`}
-      style={{
-        left: `calc(${50 * scale}% - ${
-          currentPage * (SIZE.width + PAGE_GAP_PX) * scale
-        }px - ${SIZE.width * 0.5 * scale}px)`,
-        transform: `scale(${scale})`,
-        transformOrigin: "top",
-        height: `${SIZE.height * scale}px`,
-      }}
-    >
-      <div className="flex flex-row gap-2">
-        <div
+    <div className=" flex flex-row gap-2 justify-center w-full">
+      <Carousel
+        setApi={setApi}
+        opts={{
+          align: "start",
+        }}
+        className="w-full sm:w-4/5 min-w-[400px]"
+        style={{
+          transform: `scale(${scale})`,
+        }}
+      >
+        <CarouselContent
           ref={docReference}
-          className="flex flex-row gap-2"
           id="element-to-download-as-pdf"
+          className="-ml-2 md:-ml-4 flex-1 pt-14"
         >
+          <CarouselItem
+            className="pl-2 md:pl-4 "
+            id={"add-slide-1"}
+            style={{
+              flex: `0 0 ${SIZE.width / 4 + PAGE_GAP_PX}px`,
+            }}
+          >
+            <NewPage
+              size={SIZE}
+              className=""
+              handleAddPage={(pageType: SlideType) => {
+                // TODO: Should add with index at different locations and set as current page the index
+                prepend(getDefaultSlideOfType(pageType));
+              }}
+              isSideButton={newPageAsSideButton}
+            />
+          </CarouselItem>
           {document.slides.map((slide, index) => (
-            <SlideMenubarWrapper
-              slidesFieldArray={slidesFieldArray}
-              fieldName={(fieldName + "." + index) as SlideFieldPath}
+            <CarouselItem
               key={fieldName + "." + index}
+              className="pl-2 md:pl-4"
+              id={`carousel-item-${index}`}
+              style={{
+                flex: `0 0 ${SIZE.width + PAGE_GAP_PX}px`,
+              }}
             >
-              <CommonPage
-                config={document.config}
-                slide={slide}
-                index={index}
-                size={SIZE}
+              <SlideMenubarWrapper
+                className="w-fit"
+                slidesFieldArray={slidesFieldArray}
                 fieldName={(fieldName + "." + index) as SlideFieldPath}
-                className={cn(
-                  currentPage != index &&
-                    "hover:brightness-90 hover:cursor-pointer"
-                )}
-              />
-            </SlideMenubarWrapper>
+              >
+                <CommonPage
+                  config={document.config}
+                  slide={slide}
+                  index={index}
+                  size={SIZE}
+                  fieldName={(fieldName + "." + index) as SlideFieldPath}
+                  className={cn(
+                    currentPage != index &&
+                      "hover:brightness-90 hover:cursor-pointer"
+                  )}
+                />
+              </SlideMenubarWrapper>
+            </CarouselItem>
           ))}
-        </div>
-        <NewPage
-          size={SIZE}
-          handleAddPage={(pageType: SlideType) => {
-            // TODO: Should add with index at different locations and set as current page the index
-            append(getDefaultSlideOfType(pageType));
+          <CarouselItem
+            className="pl-2 md:pl-4 "
+            id={"add-slide-2"}
+            style={{
+              flex: `0 0 ${SIZE.width / 4 + PAGE_GAP_PX}px`,
+            }}
+          >
+            <NewPage
+              size={SIZE}
+              className=""
+              handleAddPage={(pageType: SlideType) => {
+                // TODO: Should add with index at different locations and set as current page the index
+                append(getDefaultSlideOfType(pageType));
+              }}
+              isSideButton={newPageAsSideButton}
+            />
+          </CarouselItem>
+        </CarouselContent>
+        <CarouselPrevious
+          className="sm:-left-12 -left-4"
+          style={{
+            transform: `scale(${1 / scale})`,
           }}
-          isSideButton={newPageAsSideButton}
         />
-      </div>
+        <CarouselNext
+          className="sm:-right-12 -right-4"
+          style={{
+            transform: `scale(${1 / scale})`,
+          }}
+        />
+      </Carousel>
     </div>
   );
 }

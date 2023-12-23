@@ -126,6 +126,8 @@ export function useComponentPrinter() {
       proxyImgSources(clone);
       removeSelectionStyleById(clone, "page-base-");
       removeSelectionStyleById(clone, "content-image-");
+      removeMarginStyleById(clone, "carousel-item-");
+      removeAllById(clone, "add-slide-");
       removeAllById(clone, "add-element-");
       removeAllById(clone, "element-menubar-");
       removeAllById(clone, "slide-menubar-");
@@ -220,6 +222,17 @@ function removeAllById(html: HTMLElement, id: string) {
 
   elements.forEach((element) => {
     element.remove();
+  });
+}
+
+function removeMarginStyleById(html: HTMLElement, id: string) {
+  const elements = Array.from(
+    html.querySelectorAll(`[id^=${id}]`)
+  ) as HTMLDivElement[];
+
+  const classNames = "pl-2 md:pl-4";
+  elements.forEach((element) => {
+    element.className = removeClassnames(element, classNames);
   });
 }
 

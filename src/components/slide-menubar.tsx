@@ -17,20 +17,22 @@ import {
 } from "@/lib/document-form-types";
 import { useFieldArrayValues } from "@/lib/hooks/use-field-array-values";
 import { cn } from "@/lib/utils";
+import { getSlideNumber } from "@/lib/field-path";
 
 export default function SlideMenubar({
   slidesFieldArray,
+  fieldName,
   className = "",
 }: {
   slidesFieldArray: SlidesFieldArrayReturn;
+  fieldName: string;
   className?: string;
 }) {
-  const { currentPage, setCurrentPage } = usePagerContext();
+  const { setCurrentPage } = usePagerContext();
   const { numPages } = useFieldArrayValues("slides");
   const { watch }: DocumentFormReturn = useFormContext(); // retrieve those props
-
   const currentSlidesValues = watch("slides");
-
+  const currentPage = getSlideNumber(fieldName);
   const { remove, swap, insert } = slidesFieldArray;
 
   return (
