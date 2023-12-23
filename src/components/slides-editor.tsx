@@ -3,7 +3,7 @@ import {
   DocumentFormReturn,
   SlidesFieldArrayReturn,
 } from "@/lib/document-form-types";
-import { ReactDocument } from "./pages/document";
+import { Document } from "./pages/document";
 import useWindowDimensions from "@/lib/hooks/use-window-dimensions";
 import { SIZE } from "@/lib/page-size";
 import { LoadingSpinner } from "./loading-spinner";
@@ -61,7 +61,7 @@ export function SlidesEditor({}: SlidesEditorProps) {
     >
       <div className=" flex flex-col p-4 w-full items-center justify-start gap-8 font-mono text-sm">
         <div className="relative w-full px-4 py-10 overflow-clip">
-          <ReactDocument
+          <Document
             document={document}
             slidesFieldArray={slidesFieldArray}
             scale={SCALE}

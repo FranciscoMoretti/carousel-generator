@@ -18,7 +18,7 @@ import { useRefContext } from "@/lib/providers/reference-context";
 import { CommonPage } from "@/components/pages/common-page";
 import SlideMenubarWrapper from "@/components/slide-menubar-wrapper";
 
-export function ReactDocument({
+export function Document({
   document,
   slidesFieldArray,
   scale,
