@@ -30,7 +30,6 @@ export function CommonPage({
   slide,
   size,
   fieldName,
-  scale,
   className,
 }: {
   index: number;
@@ -38,7 +37,6 @@ export function CommonPage({
   slide: z.infer<typeof CommonSlideSchema>;
   size: { width: number; height: number };
   fieldName: SlideFieldPath;
-  scale: number;
   className?: string;
 }) {
   const LAYOUT_GAP = 8;
@@ -68,7 +66,7 @@ export function CommonPage({
     : 0;
 
   return (
-    <PageBase size={size} fieldName={backgroundImageField} scale={scale}>
+    <PageBase size={size} fieldName={backgroundImageField}>
       <BackgroundLayer background={config.theme.background} className="-z-20" />
       {slide.backgroundImage?.source.src ? (
         <BackgroundImageLayer image={slide.backgroundImage} className="-z-10" />

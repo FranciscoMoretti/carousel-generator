@@ -29,7 +29,7 @@ import {
 export function Document({
   document,
   slidesFieldArray,
-  scale: scaleOld,
+  scale,
 }: {
   document: z.infer<typeof DocumentSchema>;
   slidesFieldArray: SlidesFieldArrayReturn;
@@ -46,7 +46,6 @@ export function Document({
 
   const fieldName = "slides";
 
-  const scale = 1;
   return (
     <div className=" flex flex-row gap-2 justify-center w-full">
       <Carousel
@@ -55,7 +54,7 @@ export function Document({
         }}
         className="w-full sm:w-4/5 min-w-[400px]"
         style={{
-          transform: `scale(${scaleOld})`,
+          transform: `scale(${scale})`,
         }}
       >
         <CarouselContent
@@ -64,20 +63,14 @@ export function Document({
           className="-ml-2 md:-ml-4 flex-1 pt-14"
         >
           <CarouselItem
-            // className="md:basis-[] lg:basis-1/4 pl-2 md:pl-4 w-fit"
             className="pl-2 md:pl-4 "
             id={"add-slide-1"}
-            // className="pl-2 md:pl-4 "
             style={{
-              flex: `0 0 ${(scale * SIZE.width) / 4 + PAGE_GAP_PX}px`,
-              //   transform: `scale(${scale})`,
-              //   transformOrigin: "center",
-              // width: scale * SIZE.width,
+              flex: `0 0 ${SIZE.width / 4 + PAGE_GAP_PX}px`,
             }}
           >
             <NewPage
               size={SIZE}
-              scale={scale}
               className=""
               handleAddPage={(pageType: SlideType) => {
                 // TODO: Should add with index at different locations and set as current page the index
@@ -89,15 +82,10 @@ export function Document({
           {document.slides.map((slide, index) => (
             <CarouselItem
               key={fieldName + "." + index}
-              // className="md:basis-[] lg:basis-1/4 pl-2 md:pl-4 w-fit"
               className="pl-2 md:pl-4"
               id={`carousel-item-${index}`}
-              // className="pl-2 md:pl-4 "
               style={{
-                flex: `0 0 ${scale * SIZE.width + PAGE_GAP_PX}px`,
-                //   transform: `scale(${scale})`,
-                //   transformOrigin: "center",
-                // width: scale * SIZE.width,
+                flex: `0 0 ${SIZE.width + PAGE_GAP_PX}px`,
               }}
             >
               <SlideMenubarWrapper
@@ -111,7 +99,6 @@ export function Document({
                   index={index}
                   size={SIZE}
                   fieldName={(fieldName + "." + index) as SlideFieldPath}
-                  scale={scale}
                   className={cn(
                     currentPage != index &&
                       "hover:brightness-90 hover:cursor-pointer"
@@ -121,19 +108,14 @@ export function Document({
             </CarouselItem>
           ))}
           <CarouselItem
-            // className="md:basis-[] lg:basis-1/4 pl-2 md:pl-4 w-fit"
             className="pl-2 md:pl-4 "
             id={"add-slide-2"}
-            // className="pl-2 md:pl-4 "
             style={{
-              flex: `0 0 ${scale * (SIZE.width / 4) + PAGE_GAP_PX}px`,
-              //   transform: `scale(${scale})`,
-              //   transformOrigin: "center",
+              flex: `0 0 ${SIZE.width / 4 + PAGE_GAP_PX}px`,
             }}
           >
             <NewPage
               size={SIZE}
-              scale={scale}
               className=""
               handleAddPage={(pageType: SlideType) => {
                 // TODO: Should add with index at different locations and set as current page the index
@@ -146,13 +128,13 @@ export function Document({
         <CarouselPrevious
           className="sm:-left-12 -left-4"
           style={{
-            transform: `scale(${1 / scaleOld})`,
+            transform: `scale(${1 / scale})`,
           }}
         />
         <CarouselNext
           className="sm:-right-12 -right-4"
           style={{
-            transform: `scale(${1 / scaleOld})`,
+            transform: `scale(${1 / scale})`,
           }}
         />
       </Carousel>

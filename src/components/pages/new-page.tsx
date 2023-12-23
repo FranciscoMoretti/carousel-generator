@@ -11,13 +11,11 @@ export function NewPage({
   className = "",
   handleAddPage,
   isSideButton,
-  scale,
 }: {
   size: { width: number; height: number };
   className?: string;
   handleAddPage: (pageType: SlideType) => void;
   isSideButton: boolean;
-  scale: number;
 }) {
   return (
     <Dialog>
@@ -30,8 +28,6 @@ export function NewPage({
             height: `${size.height}px`,
             minWidth: `${isSideButton ? size.width / 4 : size.width}px`,
             minHeight: `${size.height}px`,
-            transform: `scale(${scale})`,
-            transformOrigin: "center",
           }}
         >
           <div className={`flex flex-col justify-center items-center`}>
