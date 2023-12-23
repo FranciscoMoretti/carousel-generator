@@ -35,6 +35,7 @@ function PalletteSelector({ form }: { form: DocumentFormReturn }) {
                 setValue("config.theme.primary", colors.primary);
                 setValue("config.theme.secondary", colors.secondary);
                 setValue("config.theme.background", colors.background);
+                setValue("config.theme.pallette", value);
               }}
               defaultValue={field.value}
               className="grid grid-cols-3 space-y-1"

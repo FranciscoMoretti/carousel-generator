@@ -140,6 +140,27 @@ export function TypographyInlineCode({
   );
 }
 
+export function TypographyExternalLink({
+  children,
+  href,
+  className = "",
+}: {
+  children: React.ReactNode;
+  href: string;
+  className?: string;
+}) {
+  return (
+    <a
+      className={cn("font-medium underline underline-offset-4", className)}
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+    >
+      {children}
+    </a>
+  );
+}
+
 export function TypographyLead({
   children,
   className = "",

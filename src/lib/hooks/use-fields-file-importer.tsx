@@ -7,7 +7,7 @@ import { MultiSlideSchema } from "@/lib/validation/slide-schema";
 import merge from "deepmerge";
 import { getDefaultSlideOfType } from "@/lib/default-slides";
 
-export function useFieldsFileImporter(fields: "config" | "slides") {
+export function useFieldsFileImporter(field: "config" | "slides") {
   const { setValue }: DocumentFormReturn = useFormContext(); // retrieve those props
   const [fileReader, setFileReader] = useState<FileReader | null>(null);
   const [fileReaderIsConfigured, setFileReaderIsConfigured] = useState(false);
@@ -27,17 +27,17 @@ export function useFieldsFileImporter(fields: "config" | "slides") {
       // @ts-ignore file has result
       const result = JSON.parse(e.target.result);
       // Validate input and add to form
-      if (fields == "config") {
+      if (field == "config") {
         const parsedValues = ConfigSchema.parse(result);
         if (parsedValues) {
-          setValue(fields, parsedValues);
+          setValue(field, parsedValues);
         }
-      } else if (fields == "slides") {
+      } else if (field == "slides") {
         const parsedValues = MultiSlideSchema.parse(result);
 
         if (parsedValues) {
           console.log({ parsedValues });
-          setValue(fields, parsedValues);
+          setValue(field, parsedValues);
         }
       } else {
         console.error("field provided is incorrect");

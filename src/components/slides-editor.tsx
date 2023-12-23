@@ -12,6 +12,12 @@ import { useFieldArrayValues } from "@/lib/hooks/use-field-array-values";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useSelectionContext } from "@/lib/providers/selection-context";
+import { AIInputForm } from "@/components/ai-input-form";
+import { AITextAreaForm } from "@/components/ai-textarea-form";
+import { useKeys } from "@/lib/hooks/use-keys";
+import { NoApiKeysText } from "./no-api-keys-text";
+import { useKeysContext } from "@/lib/providers/keys-context";
+import { AIPanel } from "@/components/ai-panel";
 
 interface SlidesEditorProps {}
 
@@ -53,7 +59,7 @@ export function SlidesEditor({}: SlidesEditorProps) {
         setCurrentSelection("", event);
       }}
     >
-      <div className=" flex flex-col p-4 w-full items-center justify-start gap-3 font-mono text-sm">
+      <div className=" flex flex-col p-4 w-full items-center justify-start gap-8 font-mono text-sm">
         <div className="relative w-full px-4 py-10 overflow-clip">
           <ReactDocument
             document={document}
@@ -83,6 +89,7 @@ export function SlidesEditor({}: SlidesEditorProps) {
             </Button>
           </div>
         </div>
+        <AIPanel />
       </div>
     </div>
   );

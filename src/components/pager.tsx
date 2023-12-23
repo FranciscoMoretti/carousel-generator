@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { useFieldArrayValues } from "@/lib/hooks/use-field-array-values";
 import { usePagerContext } from "@/lib/providers/pager-context";
@@ -7,6 +8,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
+import { PageCounter } from "./page-counter";
 
 interface Props extends React.HTMLAttributes<HTMLElement> {}
 
@@ -34,10 +36,7 @@ export default function Pager({}: Props) {
         >
           <ChevronLeft className="w-4 h-4" />
         </Button>
-        <p className="px-2 ">{`Slide ${Math.min(
-          currentPage + 1,
-          numPages
-        )} / ${numPages}`}</p>
+        <PageCounter></PageCounter>
         <Button
           onClick={onNextClick}
           variant="outline"

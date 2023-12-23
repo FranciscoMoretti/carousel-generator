@@ -12,38 +12,68 @@ export const TextStyleSchema = z.object({
   align: TextALignType.default(TextALignType.enum.Left),
 });
 
-export const TitleSchema = z.object({
-  type: z.literal(ElementType.enum.Title).default(ElementType.enum.Title),
+export const UnstyledTitleSchema = z.object({
+  type: z
+    .literal(ElementType.enum.Title)
+    .describe(`Indicates that this is a '${ElementType.enum.Description}'.`),
   text: z
     .string()
     .max(160, {
       message: "Title must not be longer than 160 characters.",
     })
+    .describe("A short title")
     .default(""),
-  style: TextStyleSchema.default({}),
 });
 
-export const SubtitleSchema = z.object({
-  type: z.literal(ElementType.enum.Subtitle).default(ElementType.enum.Subtitle),
+// TODO use zod merge to add style
+export const TitleSchema = UnstyledTitleSchema.merge(
+  z.object({
+    type: z.literal(ElementType.enum.Title).default(ElementType.enum.Title),
+    style: TextStyleSchema.default({}),
+  })
+);
+
+export const UnstyledSubtitleSchema = z.object({
+  type: z
+    .literal(ElementType.enum.Subtitle)
+    .describe(`Indicates that this is a '${ElementType.enum.Subtitle}'.`),
   text: z
     .string()
-    // .min(10, {
-    //   message: "Subtitle must be at least 10 characters.",
-    // })
     .max(160, {
-      message: "Subtitle must not be longer than 30 characters.",
+      message: "Subtitle must not be longer than 160 characters.",
     })
+    .describe("A short subtitle or secondary title")
     .default(""),
-  style: TextStyleSchema.default({}),
 });
 
-export const DescriptionSchema = z.object({
+export const SubtitleSchema = UnstyledSubtitleSchema.merge(
+  z.object({
+    type: z
+      .literal(ElementType.enum.Subtitle)
+      .default(ElementType.enum.Subtitle),
+    style: TextStyleSchema.default({}),
+  })
+);
+
+export const UnstyledDescriptionSchema = z.object({
   type: z
     .literal(ElementType.enum.Description)
-    .default(ElementType.enum.Description),
-  text: z.string().default(""),
-  style: TextStyleSchema.default({}),
+    .describe(`Indicates that this is a '${ElementType.enum.Description}'.`),
+  text: z
+    .string()
+    // .max(240)
+    .describe("A short description of less than 240 chars")
+    .default(""),
 });
+
+export const DescriptionSchema = UnstyledDescriptionSchema.merge(
+  z.object({
+    type: z
+      .literal(ElementType.enum.Description)
+      .default(ElementType.enum.Description),
+    style: TextStyleSchema.default({}),
+  })
+);
 
 export const DEFAULT_TITLE: z.infer<typeof TitleSchema> = TitleSchema.parse({
   text: "YOUR TITLE",

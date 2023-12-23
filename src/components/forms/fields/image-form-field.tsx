@@ -4,8 +4,6 @@ import {
   ImageStyleOpacityFieldPath,
 } from "@/lib/document-form-types";
 import { ImageSourceFormField } from "@/components/forms/fields/image-source-form-field";
-import { ObjectFitType } from "@/lib/validation/image-schema";
-import { Maximize2, Minimize2 } from "lucide-react";
 import { OpacityFormField } from "@/components/forms/fields/opacity-form-field";
 
 export function ImageFormField({

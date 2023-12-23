@@ -17,7 +17,7 @@ export const fontsMap: FontMap = {
     name: "DM Serif Display",
   },
   GeistSans: {
-    className: "geist-sans",
+    className: "font-geist-sans",
     name: "Geist Sans",
   },
   Montserrat: {
