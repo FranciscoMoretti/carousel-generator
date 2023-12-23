@@ -25,19 +25,12 @@ const carouselFunctionSchema = {
   }),
 };
 
-const model = new ChatOpenAI({
-  openAIApiKey: process.env.NEXT_PUBLIC_OPENAI_KEY,
-  modelName: "gpt-3.5-turbo-1106",
-  temperature: 0,
-}).bind({
-  // TODO Migrate to Tool and force to call the function with tool choice
-  functions: [carouselFunctionSchema],
-  function_call: { name: "carouselCreator" },
-});
-
 export async function generateCarouselSlides(
-  topicPrompt: string
+  topicPrompt: string,
+  apiKey: string
 ): Promise<z.infer<typeof MultiSlideSchema> | null> {
+  const model = startModelClient(apiKey);
+
   const result = await model.invoke([
     new SystemMessage(
       `
@@ -74,4 +67,16 @@ export async function generateCarouselSlides(
     console.log(jsonParsed);
     return null;
   }
+}
+
+function startModelClient(api_key: string) {
+  return new ChatOpenAI({
+    openAIApiKey: api_key,
+    modelName: "gpt-3.5-turbo-1106",
+    temperature: 0,
+  }).bind({
+    // TODO Migrate to Tool and force to call the function with tool choice
+    functions: [carouselFunctionSchema],
+    function_call: { name: "carouselCreator" },
+  });
 }
