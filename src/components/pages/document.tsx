@@ -1,6 +1,6 @@
 "use client";
 import * as z from "zod";
-import React from "react";
+import React, { useEffect } from "react";
 import { DocumentSchema } from "@/lib/validation/document-schema";
 import { SIZE } from "@/lib/page-size";
 import { usePagerContext } from "@/lib/providers/pager-context";
@@ -20,6 +20,7 @@ import SlideMenubarWrapper from "@/components/slide-menubar-wrapper";
 
 import {
   Carousel,
+  CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
@@ -36,6 +37,7 @@ export function Document({
   scale: number;
 }) {
   const docReference = useRefContext();
+  const [api, setApi] = React.useState<CarouselApi>();
 
   const { currentPage } = usePagerContext();
   const { numPages } = useFieldArrayValues("slides");
@@ -46,9 +48,16 @@ export function Document({
 
   const fieldName = "slides";
 
+  useEffect(() => {
+    if (api) {
+      api.scrollTo(currentPage);
+    }
+  }, [currentPage, api]);
+
   return (
     <div className=" flex flex-row gap-2 justify-center w-full">
       <Carousel
+        setApi={setApi}
         opts={{
           align: "start",
         }}
