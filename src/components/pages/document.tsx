@@ -66,6 +66,7 @@ export function Document({
           <CarouselItem
             // className="md:basis-[] lg:basis-1/4 pl-2 md:pl-4 w-fit"
             className="pl-2 md:pl-4 "
+            id={"add-slide-1"}
             // className="pl-2 md:pl-4 "
             style={{
               flex: `0 0 ${(scale * SIZE.width) / 4 + PAGE_GAP_PX}px`,
@@ -90,6 +91,7 @@ export function Document({
               key={fieldName + "." + index}
               // className="md:basis-[] lg:basis-1/4 pl-2 md:pl-4 w-fit"
               className="pl-2 md:pl-4"
+              id={`carousel-item-${index}`}
               // className="pl-2 md:pl-4 "
               style={{
                 flex: `0 0 ${scale * SIZE.width + PAGE_GAP_PX}px`,
@@ -121,6 +123,7 @@ export function Document({
           <CarouselItem
             // className="md:basis-[] lg:basis-1/4 pl-2 md:pl-4 w-fit"
             className="pl-2 md:pl-4 "
+            id={"add-slide-2"}
             // className="pl-2 md:pl-4 "
             style={{
               flex: `0 0 ${scale * (SIZE.width / 4) + PAGE_GAP_PX}px`,
