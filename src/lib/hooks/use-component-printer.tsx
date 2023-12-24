@@ -122,7 +122,6 @@ export function useComponentPrinter() {
       // @ts-ignore should type narrow more precisely
       const clone = current.cloneNode(true);
       // Change from horizontal to vertical for printing and remove gap
-      clone.className = "flex flex-col";
       proxyImgSources(clone);
       removeSelectionStyleById(clone, "page-base-");
       removeSelectionStyleById(clone, "content-image-");
@@ -132,6 +131,9 @@ export function useComponentPrinter() {
       removeAllById(clone, "element-menubar-");
       removeAllById(clone, "slide-menubar-");
       insertFonts(clone);
+      // Remove styling from container
+      clone.className = "flex flex-col";
+      clone.style = {};
 
       return clone;
     }
@@ -157,6 +159,7 @@ export function useComponentPrinter() {
         console.error("Couldn't find element to convert to PDF");
         return;
       }
+
       const SCALE_TO_LINKEDIN_INTRINSIC_SIZE = 1.8;
       // const fontEmbedCss = await getFontEmbedCSS(html);
       const options: HtmlToPdfOptions = {
