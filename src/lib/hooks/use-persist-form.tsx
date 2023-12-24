@@ -23,7 +23,7 @@ export function useRetrieveFormValues<T, DocumentSchema>(
         }
         const safeParseResult = schema.safeParse(parsedData);
         if (safeParseResult.success) {
-          return safeParseResult.data;
+          return safeParseResult.data as T;
         } else {
           console.error(safeParseResult.error);
           localStorage.clear();
