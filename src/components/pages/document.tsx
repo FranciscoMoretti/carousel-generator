@@ -43,6 +43,9 @@ export function Document({
   const { numPages } = useFieldArrayValues("slides");
 
   const PAGE_GAP_PX = 8;
+  const PADDING_TOP = 48;
+  const PADDING_BOTTOM = 8;
+
   const { append, prepend } = slidesFieldArray;
   const newPageAsSideButton = numPages > 0;
 
@@ -64,12 +67,18 @@ export function Document({
         className="w-full sm:w-4/5 min-w-[400px]"
         style={{
           transform: `scale(${scale})`,
+          transformOrigin: "top",
+          height: scale * (SIZE.height + PADDING_TOP + PADDING_BOTTOM),
         }}
       >
         <CarouselContent
           ref={docReference}
           id="element-to-download-as-pdf"
-          className="-ml-2 md:-ml-4 flex-1 pt-12 pb-2"
+          className="-ml-2 md:-ml-4 flex-1"
+          style={{
+            paddingTop: PADDING_TOP,
+            paddingBottom: PADDING_BOTTOM,
+          }}
         >
           <CarouselItem
             className="pl-2 md:pl-4 "
