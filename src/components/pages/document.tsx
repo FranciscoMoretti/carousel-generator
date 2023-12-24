@@ -44,7 +44,7 @@ export function Document({
 
   const PAGE_GAP_PX = 8;
   const PADDING_TOP = 48;
-  const PADDING_BOTTOM = 8;
+  const PADDING_BOTTOM = 48;
 
   const { append, prepend } = slidesFieldArray;
   const newPageAsSideButton = numPages > 0;
