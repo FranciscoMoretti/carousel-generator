@@ -21,7 +21,11 @@ import { useKeys } from "@/lib/hooks/use-keys";
 const FORM_DATA_KEY = "documentFormKey";
 
 export function DocumentProvider({ children }: { children: React.ReactNode }) {
-  const { getSavedData } = useRetrieveFormValues(FORM_DATA_KEY, defaultValues);
+  const { getSavedData } = useRetrieveFormValues(
+    FORM_DATA_KEY,
+    defaultValues,
+    DocumentSchema
+  );
   const documentForm: DocumentFormReturn = useForm<
     z.infer<typeof DocumentSchema>
   >({
