@@ -24,10 +24,10 @@ export const defaultValues = {
     },
     theme: {
       isCustom: false,
-      pallette: "pallette-1",
-      primary: "#b1e4cc",
-      secondary: "#9ac141",
-      background: "#202624",
+      pallette: "black",
+      primary: "#0d0d0d",
+      secondary: "#161616",
+      background: "#ffffff",
     },
     fonts: {
       font1: "DM_Serif_Display",

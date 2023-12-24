@@ -122,16 +122,19 @@ export function useComponentPrinter() {
       // @ts-ignore should type narrow more precisely
       const clone = current.cloneNode(true);
       // Change from horizontal to vertical for printing and remove gap
-      clone.className = "flex flex-col";
       proxyImgSources(clone);
       removeSelectionStyleById(clone, "page-base-");
       removeSelectionStyleById(clone, "content-image-");
-      removeMarginStyleById(clone, "carousel-item-");
+      removePaddingStyleById(clone, "carousel-item-");
+      removeStyleById(clone, "slide-wrapper-", "px-2");
       removeAllById(clone, "add-slide-");
       removeAllById(clone, "add-element-");
       removeAllById(clone, "element-menubar-");
       removeAllById(clone, "slide-menubar-");
       insertFonts(clone);
+      // Remove styling from container
+      clone.className = "flex flex-col";
+      clone.style = {};
 
       return clone;
     }
@@ -157,6 +160,7 @@ export function useComponentPrinter() {
         console.error("Couldn't find element to convert to PDF");
         return;
       }
+
       const SCALE_TO_LINKEDIN_INTRINSIC_SIZE = 1.8;
       // const fontEmbedCss = await getFontEmbedCSS(html);
       const options: HtmlToPdfOptions = {
@@ -225,23 +229,20 @@ function removeAllById(html: HTMLElement, id: string) {
   });
 }
 
-function removeMarginStyleById(html: HTMLElement, id: string) {
-  const elements = Array.from(
-    html.querySelectorAll(`[id^=${id}]`)
-  ) as HTMLDivElement[];
-
+function removePaddingStyleById(html: HTMLElement, id: string) {
   const classNames = "pl-2 md:pl-4";
-  elements.forEach((element) => {
-    element.className = removeClassnames(element, classNames);
-  });
+  removeStyleById(html, id, classNames);
 }
 
 function removeSelectionStyleById(html: HTMLElement, id: string) {
+  const classNames = "outline-input ring-2 ring-offset-2 ring-ring";
+  removeStyleById(html, id, classNames);
+}
+
+function removeStyleById(html: HTMLElement, id: string, classNames: string) {
   const elements = Array.from(
     html.querySelectorAll(`[id^=${id}]`)
   ) as HTMLDivElement[];
-
-  const classNames = "outline-input ring-2 ring-offset-2 ring-ring";
   elements.forEach((element) => {
     element.className = removeClassnames(element, classNames);
   });

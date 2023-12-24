@@ -6,7 +6,7 @@ import { Settings } from "lucide-react";
 
 export function NoApiKeysText() {
   return (
-    <p>
+    <p className="text-center">
       Please enter your{" "}
       <TypographyExternalLink href="https://openai.com/product">
         OpenAI API key

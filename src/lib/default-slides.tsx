@@ -18,7 +18,7 @@ export const COMMON_PAGE: z.infer<typeof CommonSlideSchema> = {
 };
 
 export const INTRO: z.infer<typeof CommonSlideSchema> = {
-  elements: [DEFAULT_CONTENT_IMAGE_INPUT, DEFAULT_TITLE],
+  elements: [DEFAULT_TITLE, DEFAULT_CONTENT_IMAGE_INPUT],
   backgroundImage: DEFAULT_BACKGROUND_IMAGE_INPUT,
 };
 

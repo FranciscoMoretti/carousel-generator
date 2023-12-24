@@ -43,6 +43,10 @@ export function Document({
   const { numPages } = useFieldArrayValues("slides");
 
   const PAGE_GAP_PX = 8;
+  const PADDING_TOP = 48;
+  const PADDING_BOTTOM = 48;
+  const SLIDE_PADDING_X = 8;
+
   const { append, prepend } = slidesFieldArray;
   const newPageAsSideButton = numPages > 0;
 
@@ -50,12 +54,13 @@ export function Document({
 
   useEffect(() => {
     if (api) {
-      api.scrollTo(currentPage);
+      const NEW_PAGE_BUTTON_OFFSET = 1;
+      api.scrollTo(currentPage + NEW_PAGE_BUTTON_OFFSET);
     }
   }, [currentPage, api]);
 
   return (
-    <div className=" flex flex-row gap-2 justify-center w-full">
+    <div className=" flex flex-row justify-center w-full">
       <Carousel
         setApi={setApi}
         opts={{
@@ -64,12 +69,19 @@ export function Document({
         className="w-full sm:w-4/5 min-w-[400px]"
         style={{
           transform: `scale(${scale})`,
+          transformOrigin: "top",
+          minWidth: `${400 + SLIDE_PADDING_X * 2}px`,
+          height: scale * (SIZE.height + PADDING_TOP + PADDING_BOTTOM),
         }}
       >
         <CarouselContent
           ref={docReference}
           id="element-to-download-as-pdf"
-          className="-ml-2 md:-ml-4 flex-1 pt-14"
+          className="-ml-2 md:-ml-4 flex-1"
+          style={{
+            paddingTop: PADDING_TOP,
+            paddingBottom: PADDING_BOTTOM,
+          }}
         >
           <CarouselItem
             className="pl-2 md:pl-4 "
@@ -80,7 +92,7 @@ export function Document({
           >
             <NewPage
               size={SIZE}
-              className=""
+              className="px-2"
               handleAddPage={(pageType: SlideType) => {
                 // TODO: Should add with index at different locations and set as current page the index
                 prepend(getDefaultSlideOfType(pageType));
@@ -125,7 +137,7 @@ export function Document({
           >
             <NewPage
               size={SIZE}
-              className=""
+              className="px-2"
               handleAddPage={(pageType: SlideType) => {
                 // TODO: Should add with index at different locations and set as current page the index
                 append(getDefaultSlideOfType(pageType));

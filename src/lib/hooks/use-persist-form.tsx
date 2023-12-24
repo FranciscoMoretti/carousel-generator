@@ -1,8 +1,11 @@
+import { DocumentSchema } from "@/lib/validation/document-schema";
 import { useCallback, useEffect } from "react";
+import { ZodType, z } from "zod";
 
-export function useRetrieveFormValues<T>(
+export function useRetrieveFormValues<T, DocumentSchema>(
   localStorageKey: string,
-  defaultValues: T
+  defaultValues: T,
+  schema: typeof DocumentSchema
 ) {
   const getSavedData: () => T | undefined = useCallback(() => {
     const localStorage =
@@ -15,13 +18,23 @@ export function useRetrieveFormValues<T>(
       // Parse it to a javaScript object
       try {
         const parsedData = JSON.parse(data) as T;
-        return parsedData;
+        if (!schema) {
+          return parsedData;
+        }
+        const safeParseResult = schema.safeParse(parsedData);
+        if (safeParseResult.success) {
+          return safeParseResult.data as T;
+        } else {
+          console.error(safeParseResult.error);
+          localStorage.clear();
+          return defaultValues;
+        }
       } catch (err) {
         console.log(err);
       }
     }
     return defaultValues;
-  }, [defaultValues, localStorageKey]);
+  }, [defaultValues, localStorageKey, schema]);
 
   return { getSavedData };
 }
