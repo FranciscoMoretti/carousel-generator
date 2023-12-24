@@ -53,7 +53,8 @@ export function Document({
 
   useEffect(() => {
     if (api) {
-      api.scrollTo(currentPage);
+      const NEW_PAGE_BUTTON_OFFSET = 1;
+      api.scrollTo(currentPage + NEW_PAGE_BUTTON_OFFSET);
     }
   }, [currentPage, api]);
 
