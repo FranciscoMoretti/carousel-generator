@@ -125,7 +125,8 @@ export function useComponentPrinter() {
       proxyImgSources(clone);
       removeSelectionStyleById(clone, "page-base-");
       removeSelectionStyleById(clone, "content-image-");
-      removeMarginStyleById(clone, "carousel-item-");
+      removePaddingStyleById(clone, "carousel-item-");
+      removeStyleById(clone, "slide-wrapper-", "px-2");
       removeAllById(clone, "add-slide-");
       removeAllById(clone, "add-element-");
       removeAllById(clone, "element-menubar-");
@@ -228,7 +229,7 @@ function removeAllById(html: HTMLElement, id: string) {
   });
 }
 
-function removeMarginStyleById(html: HTMLElement, id: string) {
+function removePaddingStyleById(html: HTMLElement, id: string) {
   const classNames = "pl-2 md:pl-4";
   removeStyleById(html, id, classNames);
 }

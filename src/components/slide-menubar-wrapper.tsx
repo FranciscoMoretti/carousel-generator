@@ -26,7 +26,7 @@ export default function SlideMenubarWrapper({
 
   // const { remove, swap, insert } = slidesFieldArray;
   return (
-    <div className="relative w-fit">
+    <div className="relative w-fit px-2" id={"slide-wrapper-" + fieldName}>
       <div
         id={`slide-menubar-${fieldName}`}
         className={cn(
@@ -38,6 +38,7 @@ export default function SlideMenubarWrapper({
         <SlideMenubar
           slidesFieldArray={slidesFieldArray}
           fieldName={fieldName}
+          className="mr-2"
         />
       </div>
       {children}

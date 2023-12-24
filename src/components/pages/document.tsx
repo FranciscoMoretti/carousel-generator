@@ -45,6 +45,7 @@ export function Document({
   const PAGE_GAP_PX = 8;
   const PADDING_TOP = 48;
   const PADDING_BOTTOM = 48;
+  const SLIDE_PADDING_X = 8;
 
   const { append, prepend } = slidesFieldArray;
   const newPageAsSideButton = numPages > 0;
@@ -59,7 +60,7 @@ export function Document({
   }, [currentPage, api]);
 
   return (
-    <div className=" flex flex-row gap-2 justify-center w-full">
+    <div className=" flex flex-row justify-center w-full">
       <Carousel
         setApi={setApi}
         opts={{
@@ -69,6 +70,7 @@ export function Document({
         style={{
           transform: `scale(${scale})`,
           transformOrigin: "top",
+          minWidth: `${400 + SLIDE_PADDING_X * 2}px`,
           height: scale * (SIZE.height + PADDING_TOP + PADDING_BOTTOM),
         }}
       >
@@ -90,7 +92,7 @@ export function Document({
           >
             <NewPage
               size={SIZE}
-              className=""
+              className="px-2"
               handleAddPage={(pageType: SlideType) => {
                 // TODO: Should add with index at different locations and set as current page the index
                 prepend(getDefaultSlideOfType(pageType));
@@ -135,7 +137,7 @@ export function Document({
           >
             <NewPage
               size={SIZE}
-              className=""
+              className="px-2"
               handleAddPage={(pageType: SlideType) => {
                 // TODO: Should add with index at different locations and set as current page the index
                 append(getDefaultSlideOfType(pageType));
