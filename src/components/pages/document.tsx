@@ -69,7 +69,7 @@ export function Document({
         <CarouselContent
           ref={docReference}
           id="element-to-download-as-pdf"
-          className="-ml-2 md:-ml-4 flex-1 pt-14"
+          className="-ml-2 md:-ml-4 flex-1 pt-12 pb-2"
         >
           <CarouselItem
             className="pl-2 md:pl-4 "
