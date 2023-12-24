@@ -229,22 +229,19 @@ function removeAllById(html: HTMLElement, id: string) {
 }
 
 function removeMarginStyleById(html: HTMLElement, id: string) {
-  const elements = Array.from(
-    html.querySelectorAll(`[id^=${id}]`)
-  ) as HTMLDivElement[];
-
   const classNames = "pl-2 md:pl-4";
-  elements.forEach((element) => {
-    element.className = removeClassnames(element, classNames);
-  });
+  removeStyleById(html, id, classNames);
 }
 
 function removeSelectionStyleById(html: HTMLElement, id: string) {
+  const classNames = "outline-input ring-2 ring-offset-2 ring-ring";
+  removeStyleById(html, id, classNames);
+}
+
+function removeStyleById(html: HTMLElement, id: string, classNames: string) {
   const elements = Array.from(
     html.querySelectorAll(`[id^=${id}]`)
   ) as HTMLDivElement[];
-
-  const classNames = "outline-input ring-2 ring-offset-2 ring-ring";
   elements.forEach((element) => {
     element.className = removeClassnames(element, classNames);
   });
