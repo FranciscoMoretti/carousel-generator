@@ -39,7 +39,7 @@ export function SlidesEditor({}: SlidesEditorProps) {
   // TODO: Replace with better loading indicator (sized skeleton from shadcn/ui)
   if (isLoadingWidth) {
     return (
-      <div className="w-full flex items-center justify-center h-full bg-muted/20">
+      <div className="w-full flex items-center justify-center h-full bg-muted/80">
         <LoadingSpinner />
       </div>
     );
