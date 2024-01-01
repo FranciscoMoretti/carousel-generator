@@ -10,6 +10,7 @@ import { Download, Loader2Icon, Settings } from "lucide-react";
 import Pager from "./pager";
 import { FilenameForm } from "./forms/filename-form";
 import { BringYourKeysDialog } from "@/components/api-keys-dialog";
+import { StarOnGithub } from "@/components/star-on-github";
 
 export type NavItem = {
   title: string;
@@ -58,7 +59,9 @@ export function MainNav({ handlePrint, isPrinting, className }: MainNavProps) {
             )}
           </div>
         </Button>
+        <StarOnGithub />
         <Link
+          className="block lg:hidden"
           href={"https://github.com/FranciscoMoretti/carousel-generator"}
           target="_blank"
           rel="noreferrer"
