@@ -59,7 +59,7 @@ export function SlidesEditor({}: SlidesEditorProps) {
         setCurrentSelection("", event);
       }}
     >
-      <div className=" flex flex-col p-4 w-full items-center justify-start gap-8 font-mono text-sm">
+      <div className=" flex flex-col p-4 w-full h-full items-center justify-start gap-8 font-mono text-sm bg-primary/10">
         <div className="w-full px-4 py-10">
           <Document
             document={document}
