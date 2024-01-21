@@ -18,6 +18,9 @@ import { useKeys } from "@/lib/hooks/use-keys";
 import { NoApiKeysText } from "./no-api-keys-text";
 import { useKeysContext } from "@/lib/providers/keys-context";
 import { AIPanel } from "@/components/ai-panel";
+import { useEffect, useState } from "react";
+import { useStatusContext } from "@/lib/providers/editor-status-context";
+import { DocumentSkeleton } from "@/components/editor-skeleton";
 
 interface SlidesEditorProps {}
 
@@ -25,7 +28,8 @@ export function SlidesEditor({}: SlidesEditorProps) {
   const form: DocumentFormReturn = useFormContext();
   const { control, watch } = form;
   const document = watch();
-  const { width: windowWidth } = useWindowDimensions();
+  const { width } = useWindowDimensions();
+  const windowWidth = width || 0;
   const isLoadingWidth = !windowWidth;
   const { currentPage, onPreviousClick, onNextClick, setCurrentPage } =
     usePagerContext();
@@ -35,15 +39,11 @@ export function SlidesEditor({}: SlidesEditorProps) {
     name: "slides", // unique name for your Field Array
   });
   const { setCurrentSelection } = useSelectionContext();
+  const { status, setStatus } = useStatusContext();
 
-  // TODO: Replace with better loading indicator (sized skeleton from shadcn/ui)
-  if (isLoadingWidth) {
-    return (
-      <div className="w-full flex items-center justify-center h-full bg-muted/80">
-        <LoadingSpinner />
-      </div>
-    );
-  }
+  useEffect(() => {
+    setStatus("ready");
+  }, [setStatus]);
 
   // Screen with larger than md side have smaller slides because the sidebar is present
   const mdWindowWidthPx = 770;
@@ -61,11 +61,15 @@ export function SlidesEditor({}: SlidesEditorProps) {
     >
       <div className=" flex flex-col p-4 w-full h-full items-center justify-start gap-8 font-mono text-sm bg-primary/10">
         <div className="w-full px-4 py-10">
-          <Document
-            document={document}
-            slidesFieldArray={slidesFieldArray}
-            scale={scale}
-          />
+          {isLoadingWidth || status == "loading" ? (
+            <DocumentSkeleton />
+          ) : (
+            <Document
+              document={document}
+              slidesFieldArray={slidesFieldArray}
+              scale={scale}
+            />
+          )}
           {/* <div className="absolute left-0 top-1/2 transform -translate-y-1/2 px-4 py-2 ">
             <Button
               onClick={onPreviousClick}

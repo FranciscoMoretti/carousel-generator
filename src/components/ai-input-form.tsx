@@ -23,6 +23,7 @@ import { useState } from "react";
 import { LoadingSpinner } from "@/components/loading-spinner";
 import { useKeys } from "@/lib/hooks/use-keys";
 import { useKeysContext } from "@/lib/providers/keys-context";
+import { useStatusContext } from "@/lib/providers/editor-status-context";
 
 const FormSchema = z.object({
   prompt: z.string().min(2, {
@@ -34,6 +35,8 @@ export function AIInputForm() {
   const { apiKey } = useKeysContext();
   const { setValue }: DocumentFormReturn = useFormContext(); // retrieve those props
   const [isLoading, setIsLoading] = useState(false);
+  const { status, setStatus } = useStatusContext();
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -43,6 +46,8 @@ export function AIInputForm() {
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     setIsLoading(true);
+    setStatus("loading");
+
     const generatedSlides = await generateCarouselSlides(
       `A carousel with about "${data.prompt}"`,
       apiKey
@@ -58,6 +63,7 @@ export function AIInputForm() {
         title: "Failed to generate carousel",
       });
     }
+    setStatus("ready");
     setIsLoading(false);
   }
 
