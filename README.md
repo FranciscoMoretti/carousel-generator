@@ -10,6 +10,7 @@
 
 Carousel Generator comes packed with a variety of features to help you create stunning carousels effortlessly:
 
+- 🪄 Generate carousels with AI
 - ✍️ Forms powered by [react-hook-form](https://react-hook-form.com/)
 - 🎨 Sleek UI components from [Shadcn/ui](https://ui.shadcn.com/)
 - ✅ Input validation using [ZOD](https://zod.dev/)
@@ -39,6 +40,7 @@ Carousel Generator comes packed with a variety of features to help you create st
 To get started with Carousel Generator, follow these simple installation steps:
 
 1. Create your environment file
+
    ```bash
    cp .env.example .env
    ```
