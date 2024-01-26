@@ -1,27 +1,42 @@
 import React from "react";
-import * as z from "zod";
-import { ConfigSchema } from "@/lib/validation/document-schema";
 import { cn } from "@/lib/utils";
 import { fontIdToClassName } from "@/lib/fonts-map";
-import { DescriptionSchema } from "@/lib/validation/text-schema";
-import { TitleSchema } from "@/lib/validation/text-schema";
 import { textStyleToClasses } from "@/lib/text-style-to-classes";
+import { useFormContext } from "react-hook-form";
+import { TextAreaFormField } from "@/components/forms/fields/text-area-form-field";
+import {
+  DocumentFormReturn,
+  TextFieldPath,
+  TextFieldStyle,
+  StyleFieldPath,
+  TextTextFieldPath,
+} from "@/lib/document-form-types";
 
 export function Description({
-  config,
-  description,
+  fieldName,
   className = "",
 }: {
-  config: z.infer<typeof ConfigSchema>;
-  description: z.infer<typeof DescriptionSchema>;
+  fieldName: TextFieldPath;
   className?: string;
 }) {
+  const form: DocumentFormReturn = useFormContext();
+  const { getValues } = form;
+  const config = getValues("config");
+  const style = getValues(
+    `${fieldName}.style` as StyleFieldPath
+  ) as TextFieldStyle;
+  const textFieldName = (fieldName + ".text") as TextTextFieldPath;
+
   return (
-    <p
+    <TextAreaFormField
+      fieldName={textFieldName}
+      form={form}
+      label={""}
+      placeholder={"Your description here"}
       className={cn(
-        `text-lg font-medium`,
+        `font-medium`,
         textStyleToClasses({
-          style: description.style,
+          style: style,
           sizes: ["text-xl", "text-lg", "text-base"],
         }),
         fontIdToClassName(config.fonts.font2),
@@ -30,8 +45,6 @@ export function Description({
       style={{
         color: config.theme.secondary,
       }}
-    >
-      {description.text}
-    </p>
+    />
   );
 }

@@ -5,23 +5,41 @@ import { cn } from "@/lib/utils";
 import { fontIdToClassName } from "@/lib/fonts-map";
 import { TitleSchema } from "@/lib/validation/text-schema";
 import { textStyleToClasses } from "@/lib/text-style-to-classes";
+import { useFormContext } from "react-hook-form";
+import {
+  DocumentFormReturn,
+  TextFieldPath,
+  TextFieldStyle,
+  StyleFieldPath,
+  TextTextFieldPath,
+} from "@/lib/document-form-types";
+import { TextAreaFormField } from "@/components/forms/fields/text-area-form-field";
 
 export function Title({
-  config,
-  title,
+  fieldName,
   className = "",
 }: {
-  config: z.infer<typeof ConfigSchema>;
-  title: z.infer<typeof TitleSchema>;
+  fieldName: TextFieldPath;
   className?: string;
 }) {
+  const form: DocumentFormReturn = useFormContext();
+  const { getValues } = form;
+  const config = getValues("config");
+  const style = getValues(
+    `${fieldName}.style` as StyleFieldPath
+  ) as TextFieldStyle;
+  const textFieldName = (fieldName + ".text") as TextTextFieldPath;
   return (
-    <h2
+    <TextAreaFormField
+      fieldName={textFieldName}
+      form={form}
+      label={""}
+      placeholder={"Your title here"}
       className={cn(
-        `font-black 
-         border-box border border-transparent hover:border-muted`,
+        // text-balance has some issues with text area
+        `font-black `,
         textStyleToClasses({
-          style: title.style,
+          style: style,
           sizes: ["text-7xl", "text-5xl", "text-3xl"],
         }),
         fontIdToClassName(config.fonts.font1),
@@ -30,8 +48,6 @@ export function Title({
       style={{
         color: config.theme.primary,
       }}
-    >
-      {title.text}
-    </h2>
+    />
   );
 }

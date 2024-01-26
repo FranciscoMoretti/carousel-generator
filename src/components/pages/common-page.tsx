@@ -7,9 +7,9 @@ import { CommonSlideSchema } from "@/lib/validation/slide-schema";
 import { BackgroundLayer } from "@/components/elements/background-layer";
 import { BackgroundImageLayer } from "@/components/elements/background-image-layer";
 import { PageBase } from "@/components/pages/page-base";
-import { Title2 } from "@/components/elements/title2";
-import { Subtitle2 } from "@/components/elements/subtitle2";
-import { Description2 } from "@/components/elements/description2";
+import { Title } from "@/components/elements/title";
+import { Subtitle } from "@/components/elements/subtitle";
+import { Description } from "@/components/elements/description";
 import {
   ElementArrayFieldPath,
   ElementFieldPath,
@@ -88,7 +88,7 @@ export function CommonPage({
                   el ? (inputRefs.current[index] = el) : null;
                 }}
               >
-                <Title2 fieldName={currentField as TextFieldPath} />
+                <Title fieldName={currentField as TextFieldPath} />
               </ElementMenubarWrapper>
             ) : element.type == ElementType.enum.Subtitle ? (
               <ElementMenubarWrapper
@@ -98,7 +98,7 @@ export function CommonPage({
                   el ? (inputRefs.current[index] = el) : null;
                 }}
               >
-                <Subtitle2 fieldName={currentField as TextFieldPath} />
+                <Subtitle fieldName={currentField as TextFieldPath} />
               </ElementMenubarWrapper>
             ) : element.type == ElementType.enum.Description ? (
               <ElementMenubarWrapper
@@ -108,7 +108,7 @@ export function CommonPage({
                   el ? (inputRefs.current[index] = el) : null;
                 }}
               >
-                <Description2 fieldName={currentField as TextFieldPath} />
+                <Description fieldName={currentField as TextFieldPath} />
               </ElementMenubarWrapper>
             ) : element.type == ElementType.enum.ContentImage ? (
               <ElementMenubarWrapper
