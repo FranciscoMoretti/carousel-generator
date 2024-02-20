@@ -16,7 +16,8 @@ export function AIPanel() {
       {apiKey ? (
         <>
           <AIInputForm />
-          <AITextAreaForm />
+          {/* // TODO: Improve article to carousel conversion */}
+          {/* <AITextAreaForm /> */}
         </>
       ) : (
         <NoApiKeysText />
