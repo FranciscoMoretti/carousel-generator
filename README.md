@@ -1,10 +1,12 @@
 # Carousel Generator
 
-![Carousel Preview](src/app/opengraph-image.png)
-
 **Carousel Generator** is an open-source carousel generator tool that allows you to easily create and customize carousels for your LinkedIn.
 
-🔗 Access the Carousel Generator at [carouselgenerator.vercel.app](https://carouselgenerator.vercel.app)
+🔗 [Website](https://carouselgenerator.vercel.app)
+
+## AI Demo
+
+https://github.com/FranciscoMoretti/carousel-generator/assets/16997807/50cb033d-84d5-4214-93aa-45c6f524d0b1
 
 ## Features
 
@@ -26,11 +28,6 @@ Carousel Generator comes packed with a variety of features to help you create st
 - 📥 Export and import slide content
 - 😃 Support for emojis to spark joy with your carousels
 - 📝 Select fonts for titles and content to match your style
-
-## AI Demo
-
-https://github.com/FranciscoMoretti/carousel-generator/assets/16997807/50cb033d-84d5-4214-93aa-45c6f524d0b1
-
 
 ## Usage
 
