@@ -31,7 +31,7 @@ const FormSchema = z.object({
 });
 
 export function AITextAreaForm() {
-  // const { apiKey } = useKeysContext();
+  const { apiKey } = useKeysContext();
   const { setValue }: DocumentFormReturn = useFormContext(); // retrieve those props
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof FormSchema>>({

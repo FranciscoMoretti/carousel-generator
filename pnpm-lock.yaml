@@ -77,6 +77,12 @@ dependencies:
   '@types/react-dom':
     specifier: 18.2.18
     version: 18.2.18
+  '@upstash/ratelimit':
+    specifier: ^1.0.1
+    version: 1.0.1
+  '@upstash/redis':
+    specifier: ^1.28.4
+    version: 1.28.4
   autoprefixer:
     specifier: 10.4.15
     version: 10.4.15(postcss@8.4.28)
@@ -121,7 +127,7 @@ dependencies:
     version: 2.5.1
   langchain:
     specifier: ^0.0.209
-    version: 0.0.209(encoding@0.1.13)
+    version: 0.0.209(@upstash/redis@1.28.4)(encoding@0.1.13)
   lucide-react:
     specifier: ^0.268.0
     version: 0.268.0(react@18.2.0)
@@ -549,7 +555,7 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: false
 
-  /@langchain/community@0.0.7(encoding@0.1.13):
+  /@langchain/community@0.0.7(@upstash/redis@1.28.4)(encoding@0.1.13):
     resolution: {integrity: sha512-4O41IF8Cirqbb/SC7xNecxUIjuHX7HZkOlEgj98Zex+UuBF4aggPawUAJnP7+ak30PfOxH7NymnIWcs4MqRfxg==}
     engines: {node: '>=18'}
     peerDependencies:
@@ -788,6 +794,7 @@ packages:
     dependencies:
       '@langchain/core': 0.1.2
       '@langchain/openai': 0.0.6(encoding@0.1.13)
+      '@upstash/redis': 1.28.4
       flat: 5.0.2
       langsmith: 0.0.51
       uuid: 9.0.1
@@ -2092,7 +2099,7 @@ packages:
       '@babel/runtime': 7.22.15
       '@react-pdf/png-js': 2.2.0
       browserify-zlib: 0.2.0
-      crypto-js: 4.1.1
+      crypto-js: 4.2.0
       fontkit: 2.0.2
       vite-compatible-readable-stream: 3.6.1
     dev: false
@@ -2420,6 +2427,25 @@ packages:
     dependencies:
       '@typescript-eslint/types': 6.14.0
       eslint-visitor-keys: 3.4.3
+    dev: false
+
+  /@upstash/core-analytics@0.0.7:
+    resolution: {integrity: sha512-lC2j5efqb1haX/fpTGaPUx1rue1WUkOZBVHDzCB7eMIVsRdFFp4xiHtyH/G9omiR1zj39fU5SCTWFiKJH3KOpw==}
+    engines: {node: '>=16.0.0'}
+    dependencies:
+      '@upstash/redis': 1.28.4
+    dev: false
+
+  /@upstash/ratelimit@1.0.1:
+    resolution: {integrity: sha512-G9LZ7idhlkuYknbUngCB3qzd7QnkK1xDkFG5jRtEJZuOUS5UKJ0UTKbhalCtp39eX2wu2Ubv8W7HCeaJQOWM0A==}
+    dependencies:
+      '@upstash/core-analytics': 0.0.7
+    dev: false
+
+  /@upstash/redis@1.28.4:
+    resolution: {integrity: sha512-UalkSAny/dz1m8giEhD3Y5ru1o+CPHI32wFyS3MyzDzj2TRvEN+lTw+mPwi20ojk0H2gs8TBW3qsrvwuLLy+pA==}
+    dependencies:
+      crypto-js: 4.2.0
     dev: false
 
   /@xobotyi/scrollbar-width@1.9.5:
@@ -2963,8 +2989,8 @@ packages:
     resolution: {integrity: sha512-mCxBlsHFYh9C+HVpiEacem8FEBnMXgU9gy4zmNC+SXAZNB/1idgp/aulFJ4FgCi7GPEVbfyng092GqL2k2rmow==}
     dev: false
 
-  /crypto-js@4.1.1:
-    resolution: {integrity: sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==}
+  /crypto-js@4.2.0:
+    resolution: {integrity: sha512-KALDyEYgpY+Rlob/iriUtjV6d5Eq+Y191A5g4UqLAi8CyGP9N1+FdVbkc1SxKc2r4YAYqG8JzO2KGL+AizD70Q==}
     dev: false
 
   /css-in-js-utils@3.1.0:
@@ -4419,7 +4445,7 @@ packages:
       json-buffer: 3.0.1
     dev: false
 
-  /langchain@0.0.209(encoding@0.1.13):
+  /langchain@0.0.209(@upstash/redis@1.28.4)(encoding@0.1.13):
     resolution: {integrity: sha512-5+ixk2z6XP7NiPqAinrolwd4LKA4b+gWDiFHGaMnk3AHeOnquUHEEqDXghuQrMpr93p8egwO9AgmpKpAIvznFg==}
     engines: {node: '>=18'}
     peerDependencies:
@@ -4579,7 +4605,7 @@ packages:
         optional: true
     dependencies:
       '@anthropic-ai/sdk': 0.9.1(encoding@0.1.13)
-      '@langchain/community': 0.0.7(encoding@0.1.13)
+      '@langchain/community': 0.0.7(@upstash/redis@1.28.4)(encoding@0.1.13)
       '@langchain/core': 0.1.2
       '@langchain/openai': 0.0.6(encoding@0.1.13)
       binary-extensions: 2.2.0
