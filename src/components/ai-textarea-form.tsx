@@ -22,6 +22,7 @@ import { useState } from "react";
 import { LoadingSpinner } from "@/components/loading-spinner";
 import { Textarea } from "@/components/ui/textarea";
 import { useKeysContext } from "@/lib/providers/keys-context";
+import { generateCarouselSlidesAction } from "@/app/actions";
 
 const FormSchema = z.object({
   prompt: z.string().min(2, {
@@ -30,7 +31,7 @@ const FormSchema = z.object({
 });
 
 export function AITextAreaForm() {
-  const { apiKey } = useKeysContext();
+  // const { apiKey } = useKeysContext();
   const { setValue }: DocumentFormReturn = useFormContext(); // retrieve those props
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -42,10 +43,18 @@ export function AITextAreaForm() {
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     setIsLoading(true);
-    const generatedSlides = await generateCarouselSlides(
-      `Generate a carousel from this article: "${data.prompt}"`,
-      apiKey
+
+    // Use server action here instead of the local function
+    const generatedSlides = await generateCarouselSlidesAction(
+      `Generate a carousel from this article: "${data.prompt}"`
     );
+
+    // TODO: Restore local function for going over limit
+    // const generatedSlides = await generateCarouselSlides(
+    //   `Generate a carousel from this article: "${data.prompt}"`,
+    //   apiKey
+    // );
+
     if (generatedSlides) {
       setValue("slides", generatedSlides);
       // TODO Fix toast not working

@@ -78,7 +78,8 @@ export function MainNav({ handlePrint, isPrinting, className }: MainNavProps) {
             <span className="sr-only">GitHub</span>
           </div>
         </Link>
-        <BringYourKeysDialog
+        {/* // TODO: Re-enable your own keys system  */}
+        {/* <BringYourKeysDialog
           triggerButton={
             <Button variant="ghost" size={"icon"}>
               <div className="flex flex-row gap-1 items-center">
@@ -86,7 +87,7 @@ export function MainNav({ handlePrint, isPrinting, className }: MainNavProps) {
               </div>
             </Button>
           }
-        />
+        /> */}
       </div>
     </div>
   );
