@@ -59,7 +59,19 @@ To get started with Carousel Generator, follow these simple installation steps:
    npm install
    ```
 
-3. Start the development server:
+3. Create the environment variables file:
+
+   ```bash
+   cp .env.example .env.local
+   ```
+
+   and update the values in the `.env.local` file.
+
+   To get an OpenaI API key, use [your OpenAI API key](https://platform.openai.com/account/api-keys)
+
+   Rate limiting is optional. To enable it, you'll need [Vercel KV credentials](https://vercel.com/docs/storage/vercel-kv/quickstart#quickstart)
+
+4. Start the development server:
 
    ```bash
    pnpm dev
