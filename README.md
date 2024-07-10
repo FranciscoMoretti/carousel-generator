@@ -71,6 +71,8 @@ To get started with Carousel Generator, follow these simple installation steps:
 
    Rate limiting is optional. To enable it, you'll need [Vercel KV credentials](https://vercel.com/docs/storage/vercel-kv/quickstart#quickstart)
 
+   NOTE: Remember to include these environment variables on your server if you are deploying this application.
+
 4. Start the development server:
 
    ```bash
