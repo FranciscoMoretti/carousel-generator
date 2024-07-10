@@ -9,12 +9,14 @@ export async function generateCarouselSlidesAction(userPrompt: string) {
     return null;
   }
 
-  const ip = headers().get("x-real-ip") ?? "local";
-  const rl = await messageRateLimit.limit(ip);
-
-  if (!rl.success) {
-    // TODO: Handle returning errors
-    return null;
+  if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {  
+    const ip = headers().get("x-real-ip") ?? "local";
+    const rl = await messageRateLimit.limit(ip);
+    
+    if (!rl.success) {
+      // TODO: Handle returning errors
+      return null;
+    }
   }
 
   const generatedSlides = await generateCarouselSlides(
