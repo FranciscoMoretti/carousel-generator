@@ -72,7 +72,7 @@ export async function generateCarouselSlides(
 function startModelClient(api_key: string) {
   return new ChatOpenAI({
     openAIApiKey: api_key,
-    modelName: "gpt-3.5-turbo-1106",
+    modelName: "gpt-4o-mini",
     temperature: 0,
   }).bind({
     // TODO Migrate to Tool and force to call the function with tool choice
