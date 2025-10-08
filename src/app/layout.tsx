@@ -9,6 +9,9 @@ import {
   Ultra,
   Archivo_Black,
   Montserrat,
+  Poppins,
+  Manrope,
+  Bebas_Neue,
 } from "next/font/google";
 import { GeistSans, GeistMono } from "geist/font";
 import { Toaster } from "@/components/ui/toaster";
@@ -85,6 +88,27 @@ const syne = Syne({
   weight: ["500", "700"],
 });
 
+const poppins = Poppins({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-poppins",
+  weight: ["400", "500", "600", "700"],
+});
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-manrope",
+  weight: ["400", "500", "600", "700"],
+});
+
+const bebasNeue = Bebas_Neue({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-bebas-neue",
+  weight: ["400"],
+});
+
 export const metadata: Metadata = {
   ...(process.env.NEXT_PUBLIC_APP_URL && {
     metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL),
@@ -101,7 +125,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${dm_sans.variable} ${dm_serif_display.variable} ${pt_serif.variable} ${roboto.variable} ${roboto_condensed.variable} ${ultra.variable} ${inter.variable} ${syne.variable} ${archivoBlack.variable}  ${montserrat.variable}  ${GeistSans.variable} flex flex-col min-h-screen items-stretch justify-between antialiased`}
+        className={`${dm_sans.variable} ${dm_serif_display.variable} ${pt_serif.variable} ${roboto.variable} ${roboto_condensed.variable} ${ultra.variable} ${inter.variable} ${syne.variable} ${archivoBlack.variable}  ${montserrat.variable} ${poppins.variable} ${manrope.variable} ${bebasNeue.variable} ${GeistSans.variable} flex flex-col min-h-screen items-stretch justify-between antialiased`}
       >
         <div className="flex-1 h-full flex flex-col justify-stretch ">
           {children}

@@ -6,7 +6,13 @@ import { cn } from "@/lib/utils";
 import { Icons } from "@/components/icons";
 import { Button, buttonVariants } from "./ui/button";
 import { EditorMenubar } from "./editor-menubar";
-import { Download, Loader2Icon, Settings } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Download, Loader2Icon, Settings, FileImage } from "lucide-react";
 import Pager from "./pager";
 import { FilenameForm } from "./forms/filename-form";
 import { BringYourKeysDialog } from "@/components/api-keys-dialog";
@@ -22,11 +28,12 @@ export type MainNavItem = NavItem;
 
 interface MainNavProps {
   handlePrint: () => void;
+  handleExportJPEG: (slideIndex?: number) => void;
   isPrinting: boolean;
   className?: string;
 }
 
-export function MainNav({ handlePrint, isPrinting, className }: MainNavProps) {
+export function MainNav({ handlePrint, handleExportJPEG, isPrinting, className }: MainNavProps) {
   return (
     <div
       className={cn(
@@ -50,15 +57,29 @@ export function MainNav({ handlePrint, isPrinting, className }: MainNavProps) {
         <div className="hidden md:block">
           <FilenameForm />
         </div>
-        <Button variant="ghost" size={"icon"} onClick={handlePrint}>
-          <div className="flex flex-row gap-1 items-center">
-            {isPrinting ? (
-              <Loader2Icon className="w-4 h-4 animate-spin" />
-            ) : (
-              <Download />
-            )}
-          </div>
-        </Button>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size={"icon"}>
+              <div className="flex flex-row gap-1 items-center">
+                {isPrinting ? (
+                  <Loader2Icon className="w-4 h-4 animate-spin" />
+                ) : (
+                  <Download />
+                )}
+              </div>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem onClick={handlePrint}>
+              <Download className="mr-2 h-4 w-4" />
+              Export as PDF
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => handleExportJPEG()}>
+              <FileImage className="mr-2 h-4 w-4" />
+              Export All as JPEG
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
         <StarOnGithub />
         <Link
           className="block lg:hidden"

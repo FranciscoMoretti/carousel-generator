@@ -4,7 +4,7 @@ import { SIZE } from "@/lib/page-size";
 import { useFieldArrayValues } from "@/lib/hooks/use-field-array-values";
 import { useFormContext } from "react-hook-form";
 import { DocumentFormReturn } from "@/lib/document-form-types";
-import { toCanvas } from "html-to-image";
+import { toCanvas, toJpeg } from "html-to-image";
 import { Options as HtmlToImageOptions } from "html-to-image/lib/types";
 import { jsPDF, jsPDFOptions } from "jspdf";
 
@@ -192,9 +192,110 @@ export function useComponentPrinter() {
     },
   });
 
+  const handleExportJPEG = React.useCallback(
+    async (slideIndex?: number) => {
+      setIsPrinting(true);
+
+      try {
+        const SCALE_TO_LINKEDIN_INTRINSIC_SIZE = 1.8;
+
+        // Helper function to prepare and export a single slide
+        const exportSlide = async (index: number) => {
+          const slideElement = document.getElementById(`page-base-${index}`);
+
+          if (!slideElement) {
+            console.error(`Slide ${index} not found in DOM`);
+            return null;
+          }
+
+          // Collect all UI elements that should be hidden during export
+          const uiElements = [
+            ...Array.from(document.querySelectorAll('[id^="add-element-"]')),
+            ...Array.from(document.querySelectorAll('[id^="element-menubar-"]')),
+            ...Array.from(document.querySelectorAll('[id^="slide-menubar-"]')),
+          ] as HTMLElement[];
+
+          // Store original display values
+          const originalDisplays = uiElements.map(el => el.style.display);
+
+          try {
+            // Hide UI elements before capture
+            uiElements.forEach(el => {
+              el.style.display = 'none';
+            });
+
+            const options: HtmlToImageOptions = {
+              height: SIZE.height,
+              width: SIZE.width,
+              canvasHeight: SIZE.height * SCALE_TO_LINKEDIN_INTRINSIC_SIZE,
+              canvasWidth: SIZE.width * SCALE_TO_LINKEDIN_INTRINSIC_SIZE,
+            };
+
+            // Use toCanvas (same as PDF export) then convert to JPEG
+            const canvas = await toCanvas(slideElement, options);
+
+            if (!canvas) {
+              console.error(`Failed to create canvas for slide ${index}`);
+              return null;
+            }
+
+            // Convert canvas to JPEG data URL
+            const dataUrl = canvas.toDataURL('image/jpeg', 0.95);
+
+            if (!dataUrl || dataUrl === 'data:,') {
+              console.error(`Failed to generate JPEG for slide ${index}`);
+              return null;
+            }
+
+            return dataUrl;
+          } catch (error) {
+            console.error(`Error exporting slide ${index}:`, error);
+            return null;
+          } finally {
+            // Always restore UI elements, even if there was an error
+            uiElements.forEach((el, i) => {
+              el.style.display = originalDisplays[i];
+            });
+          }
+        };
+
+        if (slideIndex !== undefined) {
+          // Export single slide
+          const dataUrl = await exportSlide(slideIndex);
+          if (dataUrl) {
+            const link = document.createElement("a");
+            link.download = `${watch("filename")}-slide-${slideIndex + 1}.jpg`;
+            link.href = dataUrl;
+            link.click();
+          }
+        } else {
+          // Export all slides
+          for (let i = 0; i < numPages; i++) {
+            const dataUrl = await exportSlide(i);
+            if (dataUrl) {
+              const link = document.createElement("a");
+              link.download = `${watch("filename")}-slide-${i + 1}.jpg`;
+              link.href = dataUrl;
+              link.click();
+
+              // Small delay between downloads
+              await new Promise(resolve => setTimeout(resolve, 300));
+            }
+          }
+        }
+      } catch (error) {
+        console.error("Failed to export JPEG:", error);
+      } finally {
+        setIsPrinting(false);
+      }
+    },
+    [numPages, watch]
+  );
+
   return {
     componentRef,
     handlePrint,
+    handleExportJPEG,
     isPrinting,
   };
 }

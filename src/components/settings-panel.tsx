@@ -6,6 +6,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { BrandForm } from "@/components/forms/brand-form";
 import { ThemeForm } from "@/components/forms/theme-form";
+import { BrandTemplateForm } from "@/components/forms/brand-template-form";
 import {
   VerticalTabs,
   VerticalTabsContent,
@@ -25,6 +26,7 @@ import {
   Palette,
   Plus,
   Type,
+  Sparkles,
 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { Drawer } from "vaul";
@@ -46,6 +48,11 @@ type TabInfo = {
 };
 
 const ALL_FORMS: Record<string, TabInfo> = {
+  templates: {
+    name: "Templates",
+    value: "templates",
+    icon: Sparkles,
+  },
   brand: {
     name: "Brand",
     value: "brand",
@@ -158,6 +165,7 @@ export function SidebarTabsPanel() {
       <div className="flex flex-row h-full w-full">
         <ScrollArea className="border-r h-full bg-muted">
           <VerticalTabsList className="grid grid-cols-1 gap-2 w-20 rounded-none">
+            <VerticalTabTriggerButton tabInfo={ALL_FORMS.templates} />
             <VerticalTabTriggerButton tabInfo={ALL_FORMS.brand} />
             <VerticalTabTriggerButton tabInfo={ALL_FORMS.theme} />
             <VerticalTabTriggerButton tabInfo={ALL_FORMS.fonts} />
@@ -170,6 +178,14 @@ export function SidebarTabsPanel() {
             <StyleMenu form={form} className={"m-4"} />
           ) : // TODO: Create consistent styles between tabs and StyleMenu
           null}
+          <VerticalTabsContent
+            value={ALL_FORMS.templates.value}
+            className="mt-0 border-0 p-0 m-4"
+          >
+            <h4 className="text-xl font-semibold">{ALL_FORMS.templates.name}</h4>
+            <Separator className="mt-2 mb-4"></Separator>
+            <BrandTemplateForm />
+          </VerticalTabsContent>
           <VerticalTabsContent
             value={ALL_FORMS.brand.value}
             className="mt-0 border-0 p-0 m-4"
@@ -228,7 +244,8 @@ export function DrawerFormsPanel({ className }: { className: string }) {
     >
       <div className="flex flex-col h-full ">
         <ScrollArea className=" border-b h-full bg-muted">
-          <TabsList className="grid grid-cols-4 gap-2 h-20 rounded-none">
+          <TabsList className="grid grid-cols-5 gap-2 h-20 rounded-none">
+            <HorizontalTabTriggerButton tabInfo={ALL_FORMS.templates} />
             <HorizontalTabTriggerButton tabInfo={ALL_FORMS.brand} />
             <HorizontalTabTriggerButton tabInfo={ALL_FORMS.theme} />
             <HorizontalTabTriggerButton tabInfo={ALL_FORMS.fonts} />
@@ -237,6 +254,14 @@ export function DrawerFormsPanel({ className }: { className: string }) {
         </ScrollArea>
         <div className="p-2 w-[320px] m-auto">
           {/* // TODO Should be in a ScrollArea but it does not scroll */}
+          <TabsContent
+            value={ALL_FORMS.templates.value}
+            className="mt-0 border-0 p-0 m-4 "
+          >
+            <h4 className="text-xl font-semibold">{ALL_FORMS.templates.name}</h4>
+            <Separator className="mt-2 mb-4"></Separator>
+            <BrandTemplateForm />
+          </TabsContent>
           <TabsContent
             value={ALL_FORMS.brand.value}
             className="mt-0 border-0 p-0 m-4 "

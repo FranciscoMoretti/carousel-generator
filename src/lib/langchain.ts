@@ -12,6 +12,7 @@ import {
   UnstyledDescriptionSchema,
   UnstyledSubtitleSchema,
 } from "@/lib/validation/text-schema";
+import { parseMarkdownToSlides } from "@/lib/markdown-parser";
 
 const carouselFunctionSchema = {
   name: "carouselCreator",
@@ -79,4 +80,106 @@ function startModelClient(api_key: string) {
     functions: [carouselFunctionSchema],
     function_call: { name: "carouselCreator" },
   });
+}
+
+/**
+ * Generate carousel slides from markdown content
+ * Uses AI to enhance and optimize the parsed markdown structure
+ */
+export async function generateCarouselFromMarkdown(
+  markdownContent: string,
+  apiKey: string
+): Promise<z.infer<typeof MultiSlideSchema> | null> {
+  // First, parse the markdown into structured slides
+  const parsedSlides = parseMarkdownToSlides(markdownContent);
+
+  // Then use AI to enhance and optimize the content
+  const model = startModelClient(apiKey);
+
+  const slidesDescription = parsedSlides.slides
+    .map((slide, idx) => {
+      const parts = [];
+      if (slide.title) parts.push(`Title: ${slide.title}`);
+      if (slide.subtitle) parts.push(`Subtitle: ${slide.subtitle}`);
+      if (slide.description) parts.push(`Description: ${slide.description}`);
+      return `Slide ${idx + 1} (${slide.type}):\n${parts.join("\n")}`;
+    })
+    .join("\n\n");
+
+  const result = await model.invoke([
+    new SystemMessage(
+      `
+      Create a Carousel from the provided markdown-based slides.
+
+      Arguments Schema Instructions:
+       - Respect the argument schema and only use the allowed values for element type: 'Title', 'Subtitle', 'Description'.
+       - Each slide can have multiple elements of different types.
+       - Respect the 'maxLength' value which is the maximum number of characters. Write less than 70% of that number.
+
+      Guidelines:
+       - Improve and refine the provided content while keeping the core message.
+       - Maintain the slide structure but feel free to reorganize elements for better flow.
+       - Add relevant Emojis to make the content engaging.
+       - Keep descriptions concise and impactful.
+       - Ensure text is well-formatted for visual presentation.
+       - Don't add slide numbers.
+       - Aim for ${parsedSlides.metadata.totalSlides} slides (but can adjust for better storytelling).
+       `
+    ),
+    new HumanMessage(
+      `Convert these markdown-based slides into an optimized carousel:\n\n${slidesDescription}`
+    ),
+  ]);
+
+  const jsonParsed = JSON.parse(
+    result.additional_kwargs.function_call?.arguments || ""
+  );
+
+  const unstyledDocumentParseResult =
+    UnstyledDocumentSchema.safeParse(jsonParsed);
+  if (unstyledDocumentParseResult.success) {
+    const generatedSlides = MultiSlideSchema.parse(unstyledDocumentParseResult.data.slides);
+
+    // Add images from parsed markdown to the generated slides
+    return generatedSlides.map((slide, idx) => {
+      const parsedSlide = parsedSlides.slides[idx];
+      if (!parsedSlide) return slide;
+
+      // Add background image if present
+      if (parsedSlide.backgroundImage) {
+        slide.backgroundImage = {
+          type: "Image" as const,
+          source: {
+            src: parsedSlide.backgroundImage,
+            type: "URL" as const,
+          },
+          style: {
+            opacity: 30, // Default background opacity
+          },
+        };
+      }
+
+      // Add content image if present
+      if (parsedSlide.contentImage) {
+        slide.elements.push({
+          type: "ContentImage" as const,
+          source: {
+            src: parsedSlide.contentImage,
+            type: "URL" as const,
+          },
+          style: {
+            opacity: 100,
+            objectFit: "Cover" as const,
+          },
+        });
+      }
+
+      return slide;
+    });
+  } else {
+    console.log("Error in markdown carousel generation schema");
+    console.error(unstyledDocumentParseResult.error);
+    console.log(jsonParsed);
+    return null;
+  }
 }
