@@ -9,6 +9,7 @@ import {
   Ultra,
   Archivo_Black,
   Montserrat,
+  Noto_Sans_KR,
 } from "next/font/google";
 import { GeistSans, GeistMono } from "geist/font";
 import { Toaster } from "@/components/ui/toaster";
@@ -85,12 +86,19 @@ const syne = Syne({
   weight: ["500", "700"],
 });
 
+const notoSansKR = Noto_Sans_KR({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-noto-sans-kr",
+  weight: ["400", "500", "700", "900"],
+});
+
 export const metadata: Metadata = {
   ...(process.env.NEXT_PUBLIC_APP_URL && {
     metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL),
   }),
-  title: "Carousel Generator",
-  description: "An open source carousel maker for LinkedIn",
+  title: "카드뉴스 생성기",
+  description: "블로그 URL을 입력하면 AI가 카드뉴스를 자동으로 만들어줍니다",
 };
 
 export default function RootLayout({
@@ -99,9 +107,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="ko">
       <body
-        className={`${dm_sans.variable} ${dm_serif_display.variable} ${pt_serif.variable} ${roboto.variable} ${roboto_condensed.variable} ${ultra.variable} ${inter.variable} ${syne.variable} ${archivoBlack.variable}  ${montserrat.variable}  ${GeistSans.variable} flex flex-col min-h-screen items-stretch justify-between antialiased`}
+        className={`${dm_sans.variable} ${dm_serif_display.variable} ${pt_serif.variable} ${roboto.variable} ${roboto_condensed.variable} ${ultra.variable} ${inter.variable} ${syne.variable} ${archivoBlack.variable}  ${montserrat.variable}  ${GeistSans.variable} ${notoSansKR.variable} flex flex-col min-h-screen items-stretch justify-between antialiased`}
       >
         <div className="flex-1 h-full flex flex-col justify-stretch ">
           {children}

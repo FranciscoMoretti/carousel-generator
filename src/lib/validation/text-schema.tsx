@@ -29,7 +29,7 @@ export const UnstyledTitleSchema = z.object({
 export const TitleSchema = UnstyledTitleSchema.merge(
   z.object({
     type: z.literal(ElementType.enum.Title).default(ElementType.enum.Title),
-    style: TextStyleSchema.default({}),
+    style: TextStyleSchema.default({ fontSize: FontSizeType.enum.Medium, align: TextALignType.enum.Left }),
   })
 );
 
@@ -51,7 +51,7 @@ export const SubtitleSchema = UnstyledSubtitleSchema.merge(
     type: z
       .literal(ElementType.enum.Subtitle)
       .default(ElementType.enum.Subtitle),
-    style: TextStyleSchema.default({}),
+    style: TextStyleSchema.default({ fontSize: FontSizeType.enum.Medium, align: TextALignType.enum.Left }),
   })
 );
 
@@ -71,7 +71,7 @@ export const DescriptionSchema = UnstyledDescriptionSchema.merge(
     type: z
       .literal(ElementType.enum.Description)
       .default(ElementType.enum.Description),
-    style: TextStyleSchema.default({}),
+    style: TextStyleSchema.default({ fontSize: FontSizeType.enum.Medium, align: TextALignType.enum.Left }),
   })
 );
 

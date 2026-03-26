@@ -52,6 +52,10 @@ export const fontsMap: FontMap = {
     className: "font-archivo-black",
     name: "Archivo Black",
   },
+  NotoSansKR: {
+    className: "font-noto-sans-kr",
+    name: "Noto Sans KR",
+  },
 };
 
 export function fontIdToClassName(fontId: string) {

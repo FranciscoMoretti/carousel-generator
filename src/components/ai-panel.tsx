@@ -1,27 +1,22 @@
 import { TypographyH3 } from "@/components/typography";
 import { Sparkles } from "lucide-react";
-import { NoApiKeysText } from "./no-api-keys-text";
-import { useKeysContext } from "@/lib/providers/keys-context";
 import { AIInputForm } from "@/components/ai-input-form";
-import { AITextAreaForm } from "@/components/ai-textarea-form";
+import { AIUrlForm } from "@/components/ai-url-form";
+import { Separator } from "@/components/ui/separator";
 
 export function AIPanel() {
-  // const { apiKey } = useKeysContext();
-  const apiKey = true; // TODO: Re-enable local keys
   return (
-    <div className="flex flex-col gap-2 w-full items-center">
+    <div className="flex flex-col gap-4 w-full items-center">
       <TypographyH3 className="flex flex-row items-center gap-2">
-        <Sparkles className="w-6 h-6" /> Generate with AI
+        <Sparkles className="w-6 h-6" /> AI 카드뉴스 생성
       </TypographyH3>
-      {apiKey ? (
-        <>
-          <AIInputForm />
-          {/* // TODO: Improve article to carousel conversion */}
-          {/* <AITextAreaForm /> */}
-        </>
-      ) : (
-        <NoApiKeysText />
-      )}
+      <AIUrlForm />
+      <div className="flex items-center gap-4 w-full max-w-lg">
+        <Separator className="flex-1" />
+        <span className="text-sm text-muted-foreground">또는</span>
+        <Separator className="flex-1" />
+      </div>
+      <AIInputForm />
     </div>
   );
 }

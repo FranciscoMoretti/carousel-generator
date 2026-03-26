@@ -1,82 +1,64 @@
-import { ChatOpenAI } from "langchain/chat_models/openai";
-import { HumanMessage, SystemMessage } from "langchain/schema";
+import { generateObject } from "ai";
+import { createOpenAI } from "@ai-sdk/openai";
+import { createAnthropic } from "@ai-sdk/anthropic";
 import { z } from "zod";
-import { zodToJsonSchema } from "zod-to-json-schema";
 import {
   MultiSlideSchema,
-  UnstyledMultiSlideSchema,
-} from "@/lib/validation/slide-schema"; // TODO: Keep only the slides for some prompt
+} from "@/lib/validation/slide-schema";
 import { UnstyledDocumentSchema } from "@/lib/validation/document-schema";
-import {
-  UnstyledTitleSchema,
-  UnstyledDescriptionSchema,
-  UnstyledSubtitleSchema,
-} from "@/lib/validation/text-schema";
 
-const carouselFunctionSchema = {
-  name: "carouselCreator",
-  description: "Creates a carousel with multiple slides for a given topic.",
-  parameters: zodToJsonSchema(UnstyledDocumentSchema, {
-    definitions: {
-      UnstyledTitleSchema,
-      UnstyledSubtitleSchema,
-      UnstyledDescriptionSchema,
-    },
-  }),
-};
+function createModel(apiKey: string) {
+  if (process.env.ANTHROPIC_API_KEY) {
+    const anthropic = createAnthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+    return anthropic("claude-sonnet-4-20250514");
+  }
+  const openai = createOpenAI({ apiKey });
+  return openai("gpt-4o-mini");
+}
+
+const SYSTEM_PROMPT = `당신은 블로그 글을 한국어 카드뉴스로 변환하는 전문가입니다.
+
+다음 규칙을 따라 카드뉴스 슬라이드를 만들어주세요:
+
+스키마 규칙:
+- 요소 타입은 'Title', 'Subtitle', 'Description'만 사용하세요.
+- 각 슬라이드는 2~3개의 요소를 포함합니다.
+- 'maxLength' 값의 70% 이하로 작성하세요.
+
+카드뉴스 작성 가이드:
+- 총 6~10장의 슬라이드를 만드세요.
+- 1장: 제목 슬라이드 (핵심 주제를 한 문장으로)
+- 2~N-1장: 본문 슬라이드 (핵심 내용을 카드별로 나눠서)
+- 마지막 장: 마무리/요약 슬라이드
+- 한 슬라이드에 한 가지 핵심 메시지만 담으세요.
+- 짧고 임팩트 있는 문장을 사용하세요.
+- 슬라이드 번호를 넣지 마세요.
+- 적절한 이모지를 활용하세요.
+- 모든 텍스트는 한국어로 작성하세요.`;
 
 export async function generateCarouselSlides(
   topicPrompt: string,
   apiKey: string
 ): Promise<z.infer<typeof MultiSlideSchema> | null> {
-  const model = startModelClient(apiKey);
+  try {
+    const model = createModel(apiKey);
 
-  const result = await model.invoke([
-    new SystemMessage(
-      `
-      Create a Carousel of slides following these rules
+    const { object } = await generateObject({
+      model,
+      schema: UnstyledDocumentSchema,
+      system: SYSTEM_PROMPT,
+      prompt: topicPrompt,
+    });
 
-      Arguments Schema Instructions:
-       - Respect the argument schema and only use the allowed values for element type, which are 'Title', 'Subtitle' and 'Description'.
-       - Each slide can use the multiple elements and they can be of different type or not.
-       - Respect the 'maxLength' value which is the maximum number of characters in a given field. Write less than 70% of that number.
+    const parseResult = UnstyledDocumentSchema.safeParse(object);
+    if (parseResult.success) {
+      return MultiSlideSchema.parse(parseResult.data.slides);
+    }
 
-      Guidelines:
-       - Create 8-15 slides.
-       - Each slide has 2-3 different elements. E.g. [Title, Description], or [Title, Subtitle], or [Subtitle, Description].
-       - Each slide All the elements in that slide are about that idea.
-       - Adapt, reorganize and rephrase the content to fit the slides format.
-       - Add Emojis to the text in Title, Subtitle and Description.
-       - Don't add slide numbers.
-       - Description element text should be short.
-       `
-    ),
-    new HumanMessage(topicPrompt),
-  ]);
-  const jsonParsed = JSON.parse(
-    result.additional_kwargs.function_call?.arguments || ""
-  );
-
-  const unstyledDocumentParseResult =
-    UnstyledDocumentSchema.safeParse(jsonParsed);
-  if (unstyledDocumentParseResult.success) {
-    return MultiSlideSchema.parse(unstyledDocumentParseResult.data.slides);
-  } else {
-    console.log("Error in carousel generation schema");
-    console.error(unstyledDocumentParseResult.error);
-    console.log(jsonParsed);
+    console.error("Error in carousel generation schema", parseResult.error);
+    return null;
+  } catch (error) {
+    console.error("Error generating carousel:", error);
     return null;
   }
-}
-
-function startModelClient(api_key: string) {
-  return new ChatOpenAI({
-    openAIApiKey: api_key,
-    modelName: "gpt-4o-mini",
-    temperature: 0,
-  }).bind({
-    // TODO Migrate to Tool and force to call the function with tool choice
-    functions: [carouselFunctionSchema],
-    function_call: { name: "carouselCreator" },
-  });
 }

@@ -9,7 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ai-sdk/anthropic": "^3.0.64",
+    "@ai-sdk/openai": "^3.0.48",
     "@hookform/resolvers": "^3.3.1",
+    "@mozilla/readability": "^0.6.0",
     "@radix-ui/react-checkbox": "^1.0.4",
     "@radix-ui/react-dialog": "^1.0.4",
     "@radix-ui/react-hover-card": "^1.0.6",
@@ -35,6 +38,7 @@
     "@types/react-dom": "18.2.18",
     "@upstash/ratelimit": "^1.0.1",
     "@upstash/redis": "^1.28.4",
+    "ai": "^6.0.138",
     "autoprefixer": "10.4.15",
     "browser-image-compression": "^2.0.2",
     "class-variance-authority": "^0.7.0",
@@ -46,11 +50,10 @@
     "encoding": "^0.1.13",
     "geist": "^1.0.0",
     "html-to-image": "^1.11.11",
+    "jsdom": "^29.0.1",
     "jspdf": "^2.5.1",
-    "langchain": "^0.0.209",
     "lucide-react": "^0.268.0",
     "next": "14.0.4",
-    "openai": "^4.20.1",
     "postcss": "8.4.28",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -67,8 +70,7 @@
     "typescript": "5.1.6",
     "usehooks-ts": "^2.9.1",
     "vaul": "^0.7.7",
-    "zod": "^3.22.2",
-    "zod-to-json-schema": "^3.22.3"
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.0.0",

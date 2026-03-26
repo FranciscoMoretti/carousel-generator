@@ -40,7 +40,7 @@ export const ImageSourceSchema = z.object({
 export const ImageSchema = z.object({
   type: z.literal(ElementType.enum.Image).default(ElementType.enum.Image),
   source: ImageSourceSchema.default(DEFAULT_IMAGE_SOURCE),
-  style: ImageStyleSchema.default({}),
+  style: ImageStyleSchema.default({ opacity: 100 }),
 });
 
 export const ContentImageSchema = z.object({
@@ -48,7 +48,7 @@ export const ContentImageSchema = z.object({
     .literal(ElementType.enum.ContentImage)
     .default(ElementType.enum.ContentImage),
   source: ImageSourceSchema.default(DEFAULT_IMAGE_SOURCE),
-  style: ContentImageStyleSchema.default({}),
+  style: ContentImageStyleSchema.default({ opacity: 100, objectFit: ObjectFitType.enum.Cover }),
 });
 
 export const DEFAULT_CONTENT_IMAGE_INPUT: z.infer<typeof ContentImageSchema> =

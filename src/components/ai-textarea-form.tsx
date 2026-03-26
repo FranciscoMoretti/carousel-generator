@@ -16,7 +16,6 @@ import {
 } from "@/components/ui/form";
 import { toast } from "@/components/ui/use-toast";
 import { Sparkles } from "lucide-react";
-import { generateCarouselSlides } from "@/lib/langchain";
 import { DocumentFormReturn } from "@/lib/document-form-types";
 import { useState } from "react";
 import { LoadingSpinner } from "@/components/loading-spinner";
