@@ -4,7 +4,7 @@ import { SIZE } from "@/lib/page-size";
 import { useFieldArrayValues } from "@/lib/hooks/use-field-array-values";
 import { useFormContext } from "react-hook-form";
 import { DocumentFormReturn } from "@/lib/document-form-types";
-import { toCanvas } from "html-to-image";
+import { toCanvas, toPng } from "html-to-image";
 import { Options as HtmlToImageOptions } from "html-to-image/lib/types";
 import { jsPDF, jsPDFOptions } from "jspdf";
 
@@ -192,9 +192,56 @@ export function useComponentPrinter() {
     },
   });
 
+  const handleDownloadPng = React.useCallback(async () => {
+    setIsPrinting(true);
+    try {
+      const content = reactToPrintContent();
+      if (!content) return;
+
+      // Temporarily add to DOM for rendering
+      const container = document.createElement("div");
+      container.style.position = "absolute";
+      container.style.left = "-9999px";
+      container.style.top = "0";
+      document.body.appendChild(container);
+      container.appendChild(content);
+
+      const slideElements = content.children;
+      const EXPORT_SCALE = 2.7; // ~1080px output
+
+      for (let i = 0; i < slideElements.length; i++) {
+        const slide = slideElements[i] as HTMLElement;
+        if (slide.id?.startsWith("add-slide")) continue;
+
+        const dataUrl = await toPng(slide, {
+          width: SIZE.width,
+          height: SIZE.height,
+          canvasWidth: Math.round(SIZE.width * EXPORT_SCALE),
+          canvasHeight: Math.round(SIZE.height * EXPORT_SCALE),
+          pixelRatio: 1,
+        });
+
+        const link = document.createElement("a");
+        link.download = `${watch("filename")}-${i}.png`;
+        link.href = dataUrl;
+        link.click();
+
+        // Small delay between downloads
+        await new Promise((r) => setTimeout(r, 300));
+      }
+
+      document.body.removeChild(container);
+    } catch (err) {
+      console.error("PNG export failed:", err);
+    } finally {
+      setIsPrinting(false);
+    }
+  }, [reactToPrintContent, watch]);
+
   return {
     componentRef,
     handlePrint,
+    handleDownloadPng,
     isPrinting,
   };
 }

@@ -6,7 +6,12 @@ import { cn } from "@/lib/utils";
 import { Icons } from "@/components/icons";
 import { Button, buttonVariants } from "./ui/button";
 import { EditorMenubar } from "./editor-menubar";
-import { Download, Loader2Icon, Settings } from "lucide-react";
+import { Download, FileImage, FileText, Loader2Icon, Settings } from "lucide-react";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import Pager from "./pager";
 import { FilenameForm } from "./forms/filename-form";
 import { BringYourKeysDialog } from "@/components/api-keys-dialog";
@@ -22,11 +27,12 @@ export type MainNavItem = NavItem;
 
 interface MainNavProps {
   handlePrint: () => void;
+  handleDownloadPng: () => void;
   isPrinting: boolean;
   className?: string;
 }
 
-export function MainNav({ handlePrint, isPrinting, className }: MainNavProps) {
+export function MainNav({ handlePrint, handleDownloadPng, isPrinting, className }: MainNavProps) {
   return (
     <div
       className={cn(
@@ -38,7 +44,7 @@ export function MainNav({ handlePrint, isPrinting, className }: MainNavProps) {
         <Link href="/" className="items-center space-x-2 flex">
           <Icons.logo />
           <span className="hidden font-bold md:inline-block">
-            Carousel Generator
+            카드뉴스 생성기
           </span>
         </Link>
         <EditorMenubar />
@@ -50,15 +56,27 @@ export function MainNav({ handlePrint, isPrinting, className }: MainNavProps) {
         <div className="hidden md:block">
           <FilenameForm />
         </div>
-        <Button variant="ghost" size={"icon"} onClick={handlePrint}>
-          <div className="flex flex-row gap-1 items-center">
-            {isPrinting ? (
-              <Loader2Icon className="w-4 h-4 animate-spin" />
-            ) : (
-              <Download />
-            )}
-          </div>
-        </Button>
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button variant="ghost" size={"icon"}>
+              {isPrinting ? (
+                <Loader2Icon className="w-4 h-4 animate-spin" />
+              ) : (
+                <Download />
+              )}
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent align="end" className="w-44 p-1">
+            <Button variant="ghost" className="w-full justify-start gap-2 h-9" onClick={handleDownloadPng}>
+              <FileImage className="w-4 h-4" />
+              PNG 다운로드
+            </Button>
+            <Button variant="ghost" className="w-full justify-start gap-2 h-9" onClick={handlePrint}>
+              <FileText className="w-4 h-4" />
+              PDF 다운로드
+            </Button>
+          </PopoverContent>
+        </Popover>
         <StarOnGithub />
         <Link
           className="block lg:hidden"
